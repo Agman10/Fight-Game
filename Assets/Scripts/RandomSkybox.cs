@@ -7,7 +7,11 @@ public class RandomSkybox : MonoBehaviour
     public bool randomSkybox = true;
     public bool randomStage = true;
     public Light directionalLight;
-    //private float numbb;
+
+    public bool rgbLightning = false;
+    private float numbb;
+
+
     [Space]
     public Material[] skyboxes;
     public int currentSkybox;
@@ -32,6 +36,7 @@ public class RandomSkybox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         if (this.randomSkybox)
             this.LoadRandomSkybox();
         else 
@@ -50,13 +55,16 @@ public class RandomSkybox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*this.numbb += Time.deltaTime * 0.5f;
-        if (this.numbb >= 1)
-            this.numbb = 0;
-        if (this.directionalLight != null)
-            this.directionalLight.color = Color.HSVToRGB(this.numbb, 0.16f, 1f);*/
+        if (this.rgbLightning)
+        {
+            this.numbb += Time.deltaTime * 0.5f;
+            if (this.numbb >= 1)
+                this.numbb = 0;
+            if (this.directionalLight != null)
+                this.directionalLight.color = Color.HSVToRGB(this.numbb, 0.16f, 1f);
 
-        //RenderSettings.ambientLight = Color.HSVToRGB(this.numbb, 0.01f, 0.71f);
+            //RenderSettings.ambientLight = Color.HSVToRGB(this.numbb, 0.01f, 0.71f);
+        }
     }
 
     public void LoadRandomSkybox()
@@ -358,6 +366,8 @@ public class RandomSkybox : MonoBehaviour
         else
             Physics.gravity = new Vector3(0, -19.81f, 0);
 
+        this.rgbLightning = false;
+
         if (this.currentStage == 13)
         {
             if (this.invisBounceWalls != null)
@@ -489,6 +499,17 @@ public class RandomSkybox : MonoBehaviour
             case 14:
                 this.SetMusic(13);
                 this.SetSkybox(15);
+                break;
+            case 15:
+                this.SetMusic(14);
+
+
+                this.SetSkybox(2);
+                if (this.moon != null)
+                    this.moon.SetActive(false);
+
+                this.rgbLightning = true;
+
                 break;
             default:
                 this.SetMusic(12);
