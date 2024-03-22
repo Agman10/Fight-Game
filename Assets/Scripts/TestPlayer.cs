@@ -64,6 +64,10 @@ public class TestPlayer : MonoBehaviour
             this.SetInput(this.input);
 
         this.OnHit += this.Hit;
+
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
     }
 
     private void OnDisable()
