@@ -707,6 +707,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "LoadPreviousStage",
+                    "type": "Button",
+                    "id": "4992e51a-8d3e-4ba4-bc93-e134f3bc01e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -773,6 +781,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "GiveP2FullSuper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54d6e304-374d-4100-9390-abe641f36706",
+                    "path": "<Keyboard>/minus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LoadPreviousStage",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

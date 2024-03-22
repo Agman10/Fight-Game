@@ -23,6 +23,10 @@ public class DebugInputs : MonoBehaviour
     [HideInInspector] public bool pastReloadSceneInput;
     public bool reloadingSceneInput;
 
+    public bool loadingPreviousStageInput;
+    public Action<bool> LoadPreviousStageInput;
+    [HideInInspector] public bool pastLoadPreviousStageInput;
+
 
     public int sceneIndex = 1;
 
@@ -31,12 +35,16 @@ public class DebugInputs : MonoBehaviour
         this.SwitchSkyboxInput += this.SwitchSkybox;
         this.SwitchStageInput += this.SwitchStage;
         this.ReloadSceneInput += this.ReloadScene;
+
+        this.LoadPreviousStageInput += this.LoadPreviousStage;
     }
     private void OnDisable()
     {
         this.SwitchSkyboxInput -= this.SwitchSkybox;
         this.SwitchStageInput -= this.SwitchStage;
         this.ReloadSceneInput -= this.ReloadScene;
+
+        this.LoadPreviousStageInput -= this.LoadPreviousStage;
     }
 
     public void Start()
@@ -96,6 +104,13 @@ public class DebugInputs : MonoBehaviour
             this.randomSkybox.LoadNextStage();
     }
 
+    public void LoadPreviousStage(bool boolean)
+    {
+        //Debug.Log(boolean);
+        if (boolean && this.randomSkybox != null)
+            this.randomSkybox.LoadNextStage(true);
+    }
+
     public void OnReloadSceneInput(InputAction.CallbackContext ctx)
     {
 
@@ -141,6 +156,28 @@ public class DebugInputs : MonoBehaviour
         if (giveFullSuper && this.player2 != null)
             this.player2.GiveSuperCharge(this.player2.maxSuperCharge);
         //Application.Quit();
+
+    }
+
+
+    public void OnLoadPreviousStageInput(InputAction.CallbackContext ctx)
+    {
+
+        bool boolean = ctx.ReadValueAsButton();
+
+        this.loadingPreviousStageInput = boolean;
+        if (this.pastLoadPreviousStageInput != boolean)
+        {
+            this.LoadPreviousStageInput?.Invoke(boolean);
+            /*Debug.Log(boolean);
+            if (this.randomSkybox != null)
+                this.randomSkybox.LoadNextStage();*/
+            this.pastLoadPreviousStageInput = boolean;
+        }
+        /*if (boolean && this.randomSkybox != null)
+        {
+            this.randomSkybox.LoadNextStage();
+        }*/
 
     }
 

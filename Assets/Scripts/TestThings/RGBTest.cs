@@ -5,6 +5,7 @@ using UnityEngine;
 public class RGBTest : MonoBehaviour
 {
     public Light light;
+    public Light[] lights;
     public float hue;
     public float speed = 0.1f;
 
@@ -19,6 +20,11 @@ public class RGBTest : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        this.hue = 0f;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -26,7 +32,13 @@ public class RGBTest : MonoBehaviour
         if (this.hue >= 1f)
             this.hue = 0f;
         if (this.light != null)
-            this.light.color = Color.HSVToRGB(this.hue, 1f, 1f);
+            this.light.color = Color.HSVToRGB(this.hue, this.baseColorSaturation, 1f);
+
+        foreach (Light lightt in this.lights)
+        {
+            if (lightt != null)
+                lightt.color = Color.HSVToRGB(this.hue, this.baseColorSaturation, 1f);
+        }
 
         //Debug.Log(this.hue * 360f);
 

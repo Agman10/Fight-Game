@@ -161,9 +161,22 @@ public class UppercutAttack : Attack
         }
 
 
-        
 
-        yield return new WaitForSeconds(0.3f + (0.3f -(animSpeed * 3)));
+
+
+
+        //yield return new WaitForSeconds(0.3f + (0.3f -(animSpeed * 3)));
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.kickHitbox != null)
+            this.kickHitbox.gameObject.SetActive(false);
+
+        //yield return new WaitForSeconds(0.3f -(animSpeed * 3));
+        yield return new WaitForSeconds(0.1f + (0.3f - (animSpeed * 3)));
+
+
+
         /*if (this.animations != null)
         {
             this.animations.SetKickUpercutEndAnim();

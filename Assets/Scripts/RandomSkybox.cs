@@ -342,22 +342,50 @@ public class RandomSkybox : MonoBehaviour
         }
     }
     [ContextMenu("LoadNextStage")]
-    public void LoadNextStage()
+    public void LoadNextStage(bool previous = false)
     {
         if (this.stages.Length > 0)
         {
-            if (this.currentStage >= this.stages.Length - 1)
+            if (!this.randomStage)
             {
-                this.stages[0].SetActive(true);
-                this.stages[this.currentStage].SetActive(false);
-                this.currentStage = 0;
+                foreach (GameObject stage in this.stages)
+                {
+                    stage.SetActive(false);
+                }
+            }
+
+            if (previous)
+            {
+                if (this.currentStage <= 0 /*this.stages.Length - 1*/)
+                {
+                    this.stages[this.stages.Length - 1].SetActive(true);
+                    this.stages[this.currentStage].SetActive(false);
+                    this.currentStage = this.stages.Length - 1;
+                }
+                else
+                {
+                    this.stages[this.currentStage - 1].SetActive(true);
+                    this.stages[this.currentStage].SetActive(false);
+                    this.currentStage = this.currentStage - 1;
+                }
             }
             else
             {
-                this.stages[this.currentStage + 1].SetActive(true);
-                this.stages[this.currentStage].SetActive(false);
-                this.currentStage = this.currentStage + 1;
+                if (this.currentStage >= this.stages.Length - 1)
+                {
+                    this.stages[0].SetActive(true);
+                    this.stages[this.currentStage].SetActive(false);
+                    this.currentStage = 0;
+                }
+                else
+                {
+                    this.stages[this.currentStage + 1].SetActive(true);
+                    this.stages[this.currentStage].SetActive(false);
+                    this.currentStage = this.currentStage + 1;
+                }
             }
+
+            
         }
         RenderSettings.ambientLight = new Color32(180, 180, 180, 255);
 
@@ -510,6 +538,9 @@ public class RandomSkybox : MonoBehaviour
 
                 this.rgbLightning = true;
 
+                //RenderSettings.ambientLight = new Color32(110, 110, 130, 255);
+                RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                this.numbb = 0f;
                 break;
             default:
                 this.SetMusic(12);
