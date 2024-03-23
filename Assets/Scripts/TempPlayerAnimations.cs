@@ -5943,7 +5943,7 @@ public class TempPlayerAnimations : MonoBehaviour
 
             this.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * 90f, -15f);
             //this.body.localEulerAngles = new Vector3(0f, 0f, 0f);
-            this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.09f, -0.19f);
+            this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.09f, this.transform.forward.z * -0.19f);
         }
 
         if (frowning)

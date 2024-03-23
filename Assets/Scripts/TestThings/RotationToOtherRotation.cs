@@ -43,10 +43,16 @@ public class RotationToOtherRotation : MonoBehaviour
 
         float newY = Mathf.Sin(Time.time * this.speed);
         //this.transform.localEulerAngles = new Vector3(this.startPos.x, this.startPos.y + (newY * this.height), this.startPos.z);
-        if (!this.yRotation)
+
+        /*if (!this.yRotation)
             this.transform.localEulerAngles = new Vector3(0f, 0f, this.startPos.z + (newY * this.height));
         else
-            this.transform.localEulerAngles = new Vector3(0f, this.startPos.z + (newY * this.height), 0f);
+            this.transform.localEulerAngles = new Vector3(0f, this.startPos.z + (newY * this.height), 0f);*/
+
+        if (!this.yRotation)
+            this.transform.localEulerAngles = new Vector3(this.transform.localEulerAngles.x, this.transform.localEulerAngles.y, this.startPos.z + (newY * this.height));
+        else
+            this.transform.localEulerAngles = new Vector3(this.transform.localEulerAngles.x, this.startPos.z + (newY * this.height), this.transform.localEulerAngles.z);
     }
 
     /*IEnumerator RotateWings()
