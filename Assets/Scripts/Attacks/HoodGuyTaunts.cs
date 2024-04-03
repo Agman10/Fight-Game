@@ -517,12 +517,12 @@ public class HoodGuyTaunts : Attack
         int amount = 10;
         float waitTime = 0.1f;
 
-        if (number == 1)
+        /*if (number == 1)
         {
             amount = 20;
 
             waitTime = 0.025f;
-        }
+        }*/
 
 
         int animationId = 1;

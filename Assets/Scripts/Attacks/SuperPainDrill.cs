@@ -38,6 +38,7 @@ public class SuperPainDrill : Attack
         {
             this.user.OnHit += OnHit;
             this.user.OnDeath += OnDeath;
+            this.user.OnReset += OnReset;
         }
 
         if (this.hitbox != null)
@@ -51,6 +52,7 @@ public class SuperPainDrill : Attack
         {
             this.user.OnHit -= OnHit;
             this.user.OnDeath -= OnDeath;
+            this.user.OnReset -= OnReset;
         }
 
         if (this.hitbox != null)

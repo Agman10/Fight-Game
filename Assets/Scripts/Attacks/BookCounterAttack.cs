@@ -96,7 +96,7 @@ public class BookCounterAttack : Attack
         yield return new WaitForSeconds(0.1f);
 
 
-        this.user.damageMitigation = -1f;
+        this.user.damageMitigation = -0.5f;
 
         if (this.animations != null)
             this.animations.BookStart(true);
@@ -146,7 +146,7 @@ public class BookCounterAttack : Attack
         //this.countering = false;
         this.SetCountering(false);
 
-        this.user.damageMitigation = -1f;
+        this.user.damageMitigation = -0.5f;
 
         yield return new WaitForSeconds(0.05f);
 
