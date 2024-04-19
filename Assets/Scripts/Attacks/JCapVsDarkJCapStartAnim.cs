@@ -132,8 +132,8 @@ public class JCapVsDarkJCapStartAnim : Attack
                 yield return null;
             }
 
-            if (this.animations != null)
-                this.animations.StartAnimationRagingBeastBlock2();
+            /*if (this.animations != null)
+                this.animations.StartAnimationRagingBeastBlock2();*/
 
             currentTime = 0;
             duration = 0.15f;

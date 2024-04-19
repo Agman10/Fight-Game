@@ -13,6 +13,11 @@ public class NinjaTeleport : Attack
     public TestHitbox hitbox;
 
     public bool shrink;
+
+    [Space]
+
+    public float stun1 = 0.2f;
+    public float stun2 = 0.4f;
     //public Transform cameraTransform;
 
     public override void OnHit()
@@ -48,7 +53,7 @@ public class NinjaTeleport : Attack
         if (this.user.rb != null)
             this.user.rb.isKinematic = true;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(this.stun1);
 
         /*if (this.teleportEffect != null)
         {
@@ -91,7 +96,7 @@ public class NinjaTeleport : Attack
         }
 
         //yield return new WaitForSeconds(1f);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(this.stun2);
         
         this.Teleport();
         yield return new WaitForSeconds(0.1f);
@@ -145,7 +150,7 @@ public class NinjaTeleport : Attack
         //yield return new WaitForSeconds(0.05f);
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(this.stun1);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();

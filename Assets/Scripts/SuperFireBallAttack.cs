@@ -14,7 +14,7 @@ public class SuperFireBallAttack : Attack
 
     public float cooldownTimer;
     //private float cooldown = 1.35f;
-    private float cooldown = 1.8f;
+    public float cooldown = 1.8f;
 
     public int animationId;
 

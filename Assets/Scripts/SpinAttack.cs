@@ -16,6 +16,14 @@ public class SpinAttack : Attack
     public bool spinning = false;
     public float dizzyMeter = 0f;
 
+    [Space]
+
+    public float dissyRemovalSpeed = 20f;
+    public float moveSpeed = 0.1f;
+
+    public float stunTime1 = 0.2f;
+    public float stunTime2 = 0.2f;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -32,7 +40,7 @@ public class SpinAttack : Attack
         if (!this.spinning)
         {
             if (this.dizzyMeter > 0f)
-                this.dizzyMeter -= Time.deltaTime * 20f;
+                this.dizzyMeter -= Time.deltaTime * this.dissyRemovalSpeed;
             else
                 this.dizzyMeter = 0f;
         }
@@ -108,7 +116,7 @@ public class SpinAttack : Attack
             time -= Time.deltaTime;
 
             if (this.user.movement != null)
-                this.user.movement.Move(this.user.movement.playerInput.moveInput * 0.1f);
+                this.user.movement.Move(this.user.movement.playerInput.moveInput * this.moveSpeed);
 
             this.user.rb.velocity = new Vector3(this.user.rb.velocity.x, this.user.rb.velocity.y * 0.5f, 0f);
 
@@ -123,7 +131,7 @@ public class SpinAttack : Attack
             this.hitbox2.gameObject.SetActive(true);
 
         float currentTime = 0;
-        float duration = 0.2f;
+        float duration = this.stunTime1;
         //float targetVolume = 0.1f;
         float targetRotation = 0f;
         float start = this.animations.body.transform.localEulerAngles.y;
@@ -169,7 +177,7 @@ public class SpinAttack : Attack
 
             while (this.dizzyMeter > 0)
             {
-
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
                 yield return null;
             }
 
@@ -185,12 +193,12 @@ public class SpinAttack : Attack
         }
         else
         {
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(this.stunTime1);
 
             if (this.animations != null)
                 this.animations.SetDefaultPose();
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(this.stunTime2);
 
             this.spinning = false;
 

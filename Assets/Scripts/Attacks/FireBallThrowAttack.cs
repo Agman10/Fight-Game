@@ -11,6 +11,14 @@ public class FireBallThrowAttack : Attack
     public float fireBallYForce;
     public int animationId;
 
+    [Space]
+
+    public float groundTime = 0.5f;
+    public float groundStunTime = 0.5f;
+
+    public float airTime = 0.5f;
+    public float airStunTime = 0f;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -45,13 +53,13 @@ public class FireBallThrowAttack : Attack
             {
                 //this.user.AddStun(1.1f, true);
                 this.user.AddStun(0.2f, true);
-                this.StartCoroutine(this.ThrowFireBallCorutine(0.5f, 0.5f));
+                this.StartCoroutine(this.ThrowFireBallCorutine(this.groundTime, this.groundStunTime));
             }
             else
             {
                 //this.user.AddStun(0.6f, false);
                 this.user.AddStun(0.2f, false);
-                this.StartCoroutine(this.ThrowFireBallCorutine(0.5f, 0f));
+                this.StartCoroutine(this.ThrowFireBallCorutine(this.airTime, this.airStunTime));
             }
             //this.user.AddStun(0.2f, true);
             //this.StartCoroutine(this.ThrowFireBallCorutine(1));

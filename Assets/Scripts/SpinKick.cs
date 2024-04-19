@@ -17,6 +17,10 @@ public class SpinKick : Attack
     public VisualEffect fire1;
     public VisualEffect fire2;
     public bool onGoing;
+
+    [Space]
+
+    public float endStun = 0.4f;
     //private bool ongoing;
 
     //public float stunLength = 0.6f;
@@ -172,7 +176,7 @@ public class SpinKick : Attack
 
         
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(this.endStun);
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -265,7 +269,7 @@ public class SpinKick : Attack
 
 
         
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(this.endStun);
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }

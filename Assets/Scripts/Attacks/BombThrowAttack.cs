@@ -23,6 +23,14 @@ public class BombThrowAttack : Attack
     public Bomb flashbang;
     public GameObject flashbangModel;
 
+    [Space]
+
+    public float groundTime = 0.5f;
+    public float groundStunTime = 0.4f;
+
+    public float airTime = 0.2f;
+    public float airStunTime = 0.3f;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -54,17 +62,17 @@ public class BombThrowAttack : Attack
         {
             //this.user.AddStun(0.2f, true);
             //this.StartCoroutine(this.ThrowBombCorutine());
-            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f) //On Air
             {
                 //this.user.AddStun(1f, true);
                 this.user.AddStun(0.2f, true);
-                this.StartCoroutine(this.ThrowBombCorutine(0.5f, 0.4f));
+                this.StartCoroutine(this.ThrowBombCorutine(this.groundTime, this.groundStunTime));
             }
             else
             {
                 //this.user.AddStun(0.6f, false);
                 this.user.AddStun(0.2f, false);
-                this.StartCoroutine(this.ThrowBombCorutine(0.2f, 0.3f));
+                this.StartCoroutine(this.ThrowBombCorutine(this.airTime, this.airStunTime));
             }
         }
     }

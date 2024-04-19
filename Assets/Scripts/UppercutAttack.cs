@@ -70,7 +70,7 @@ public class UppercutAttack : Attack
     {
         if(this.user != null)
         {
-            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            /*if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
             {
                 //this.user.AddStun(1.3f, true);
                 this.user.AddStun(0.2f, true);
@@ -83,13 +83,47 @@ public class UppercutAttack : Attack
                 else
                     this.StartCoroutine(this.KickUppercutCoroutine());
 
-                /*if (this.isPunch)
+                *//*if (this.isPunch)
                     this.StartCoroutine(this.PunchUppercutCoroutine());
                 else
-                    this.StartCoroutine(this.KickUppercutCoroutine());*/
+                    this.StartCoroutine(this.KickUppercutCoroutine());*//*
+                
+            }*/
+
+            if (this.uppercutId == 1)
+            {
+                if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                {
+                    this.StartCoroutine(this.PunchUppercutCoroutine());
+                    this.user.AddStun(0.2f, true);
+                }
+            }
+            else if (this.uppercutId == 2)
+            {
+                if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                {
+                    this.StartCoroutine(this.FlameKickCoroutine());
+                    this.user.AddStun(0.2f, true);
+                }
+            }
+            else if (this.uppercutId == 3)
+            {
+                if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                    this.StartCoroutine(this.PunchUppercutCoroutine2(1000f));
+                else
+                    this.StartCoroutine(this.PunchUppercutCoroutine2(1300f));
+
+                this.user.AddStun(0.2f, true);
+            }
+            else
+            {
+                if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                {
+                    this.StartCoroutine(this.KickUppercutCoroutine());
+                    this.user.AddStun(0.2f, true);
+                }
             }
 
-            
         }
     }
     IEnumerator KickUppercutCoroutine()
@@ -337,6 +371,55 @@ public class UppercutAttack : Attack
 
 
     }
+
+
+    IEnumerator PunchUppercutCoroutine2(float upForce = 1000f)
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        if (this.animations != null)
+            this.animations.SetPunchUppercutStartAnim1();
+        yield return new WaitForSeconds(0.05f);
+        if (this.animations != null)
+            this.animations.SetPunchUppercutStartAnim2();
+        yield return new WaitForSeconds(0.05f);
+        this.PlayFire(true);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 200, upForce, 0);
+
+        if (this.animations != null)
+        {
+            this.animations.SetPunchUpercutAnim();
+        }
+
+        if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+        if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(false);
+
+        if (this.punchHitbox2 != null)
+            this.punchHitbox2.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+        if (this.punchHitbox2 != null)
+            this.punchHitbox2.gameObject.SetActive(false);
+
+        this.PlayFire(false);
+
+        yield return new WaitForSeconds(0.05f);
+
+        this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
+        this.animations.SetDefaultPose();
+
+        //yield return new WaitForSeconds(0.1f);
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+
+
+    }
+
     public void PlayFire(bool playing)
     {
         if (this.fire != null)
