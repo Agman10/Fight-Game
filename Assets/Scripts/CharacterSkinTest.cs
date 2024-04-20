@@ -16,6 +16,10 @@ public class CharacterSkinTest : MonoBehaviour
     public bool useExtraEmission;
     public Renderer[] extraEmissionRenderers;
 
+    [Space]
+    public bool useMultiColorMats;
+    public MultiColorMaterials[] multiColoredMats;
+
 
     //public Renderer[] avoiding;
     // Start is called before the first frame update
@@ -126,5 +130,46 @@ public class CharacterSkinTest : MonoBehaviour
         {
 
         }*/
+        if (this.useMultiColorMats)
+            this.CheckMultiColorMats(skinData);
     }
+
+    public void CheckMultiColorMats(SO_Skin skinData)
+    {
+        if (this.multiColoredMats.Length > 0)
+        {
+            foreach (MultiColorMaterials multiColor in this.multiColoredMats)
+            {
+                /*if(multiColor.material != null)
+                {
+
+                }*/
+
+                if (multiColor.renderers.Length > 0)
+                {
+                    foreach (Renderer rend in multiColor.renderers)
+                    {
+                        foreach (Material mat in rend.materials)
+                        {
+                            mat.SetColor("Color_83cbc8d686554d0f9aced64306129077", skinData.colors[multiColor.colorIndex1]);
+                            mat.SetColor("Color_1", skinData.colors[multiColor.colorIndex2]);
+                            mat.SetColor("Color_42f013fb876e4189a051c4bba88d09bc", skinData.colors[multiColor.colorIndex3]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+[System.Serializable]
+public class MultiColorMaterials
+{
+    //public Material material;
+    public Renderer[] renderers;
+
+    public int colorIndex1;
+    public int colorIndex2;
+    public int colorIndex3;
 }
