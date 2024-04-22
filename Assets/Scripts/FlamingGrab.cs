@@ -20,10 +20,12 @@ public class FlamingGrab : Attack
     public VisualEffect dashFire1;
     public VisualEffect dashFire2;
 
-    private float dashSpeed = 16f;
+    public float dashSpeed = 16f;
     private float dashDuration = 1.4f;
 
     public bool hover;
+
+    public float damagePerTick = 5;
 
     public override void OnEnable()
     {
@@ -200,25 +202,25 @@ public class FlamingGrab : Attack
 
         float time = 0.1f;
         yield return new WaitForSeconds(time);
-        player.TakeDamage(this.user.transform.position, 5f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
-        player.TakeDamage(this.user.transform.position, 5f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
-        player.TakeDamage(this.user.transform.position, 5f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
-        player.TakeDamage(this.user.transform.position, 5f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
-        player.TakeDamage(this.user.transform.position, 5f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
-        player.TakeDamage(this.user.transform.position, 5f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
         this.animations.SetGrabbingHeadbutPose1();
-        player.TakeDamage(this.user.transform.position, 5f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
-        player.TakeDamage(this.user.transform.position, 5f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
         this.PlayFire(false);
-        player.TakeDamage(this.user.transform.position, 5f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(0.1f);
         this.animations.SetGrabbingHeadbutPose2();
 
@@ -232,7 +234,7 @@ public class FlamingGrab : Attack
         player.preventDeath = false;
         player.knockbackInvounrability = false;
         player.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-        player.TakeDamage(this.user.transform.position, 5f, 0.5f, this.user.transform.forward.z * 1000f, 1000f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick, 0.5f, this.user.transform.forward.z * 1000f, 1000f);
         player.attackStuns.Remove(this.gameObject);
 
 

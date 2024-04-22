@@ -402,6 +402,8 @@ public class UppercutAttack : Attack
         if (this.punchHitbox2 != null)
             this.punchHitbox2.gameObject.SetActive(true);
 
+        //this.PlayFire(false);
+
         yield return new WaitForSeconds(0.1f);
         if (this.punchHitbox2 != null)
             this.punchHitbox2.gameObject.SetActive(false);

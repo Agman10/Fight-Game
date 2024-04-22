@@ -10,6 +10,10 @@ public class LandmineAttack : Attack
     public LandMine landmine;
     public GameObject landmineModel;
 
+
+    public float stunTime = 0.4f;
+    public float stunTime2 = 0.3f;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -43,12 +47,12 @@ public class LandmineAttack : Attack
         if (this.animations != null)
             this.animations.SetStartThrowBombPose();
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(this.stunTime);
 
         if (this.landmineModel != null)
             this.landmineModel.SetActive(true);
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(this.stunTime);
 
         if (this.landmineModel != null)
             this.landmineModel.SetActive(false);
@@ -60,7 +64,7 @@ public class LandmineAttack : Attack
 
         this.PlaceLandmine();
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(this.stunTime2);
 
         /*if (this.animations != null)
             this.animations.SetDefaultPose();*/
