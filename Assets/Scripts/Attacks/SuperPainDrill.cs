@@ -349,6 +349,8 @@ public class SuperPainDrill : Attack
 
         player.attackStuns.Remove(this.gameObject);
 
+        this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
+
         if (!player.dead)
         {
             player.animations.SetDefaultPose();

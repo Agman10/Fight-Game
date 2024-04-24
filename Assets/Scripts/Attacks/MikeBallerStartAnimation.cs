@@ -43,7 +43,7 @@ public class MikeBallerStartAnimation : Attack
             //this.user.AddStun(0.2f, true);
             int number = Random.Range(0, 2);
             //Debug.Log(number);
-            if(this.vsJCap != null && this.user.characterId == 3 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 0 && this.user.tempBall == null)
+            if(this.vsJCap != null && this.user.characterId == 3 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 0 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
                 this.vsJCap.Initiate();
             }

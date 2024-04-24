@@ -13,6 +13,8 @@ public class GameCamera : MonoBehaviour
     public Vector3 center;
     public bool lockCamera = false;
 
+    public bool cameraIsLocked = false;
+
     private void Awake()
     {
         this.mainCamera = this.GetComponent<Camera>();
@@ -20,7 +22,7 @@ public class GameCamera : MonoBehaviour
 
     void Update()
     {
-        if (!this.lockCamera)
+        if (!this.lockCamera && !this.cameraIsLocked)
         {
             if (this.player1 != null && this.player2 != null)
             {

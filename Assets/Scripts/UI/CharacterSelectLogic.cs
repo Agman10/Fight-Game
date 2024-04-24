@@ -22,6 +22,11 @@ public class CharacterSelectLogic : MonoBehaviour
     public int randomLeft;
     public int randomUp;
     public int randomDown;
+
+    [Space]
+    public int gameModeId = 0;
+    public Material mainGameSkybox;
+    public Material fightBallSkybox;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -45,6 +50,17 @@ public class CharacterSelectLogic : MonoBehaviour
         if (this.p2Cursor != null)
         {
             this.p2Cursor.OnReady -= this.TryStarting;
+        }
+    }
+
+    private void Awake()
+    {
+        if (GameModeManager.Instance != null)
+        {
+            this.gameModeId = GameModeManager.Instance.gameModeId;
+
+            if (GameModeManager.Instance.gameModeId == 1)
+                RenderSettings.skybox = this.fightBallSkybox;
         }
     }
 
@@ -157,7 +173,16 @@ public class CharacterSelectLogic : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadSceneAsync("TestStage");
+        //SceneManager.LoadSceneAsync("TestStage");
+
+        if (GameModeManager.Instance != null && GameModeManager.Instance.gameModeId == 1)
+        {
+            SceneManager.LoadSceneAsync("TestFootBall");
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("TestStage");
+        }
     }
     private IEnumerator StartGameCoroutine()
     {

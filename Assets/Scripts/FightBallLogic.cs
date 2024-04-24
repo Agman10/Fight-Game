@@ -23,6 +23,36 @@ public class FightBallLogic : MonoBehaviour
     public AudioSource music;
     public AudioSource victoryBgm;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.player1 != null)
+            {
+                //TestPlayer p1 = CharacterManager.Instance.player1;
+
+                this.player1 = GameManager.Instance.player1;
+                //this.player1 = CharacterManager.Instance.player1;
+            }
+
+            if (GameManager.Instance.player2 != null)
+            {
+                this.player2 = GameManager.Instance.player2;
+            }
+        }
+
+        /*if (this.player1 != null && this.player2 != null)
+        {
+
+            if (this.ball != null)
+            {
+                this.player1.tempBall = this.ball.gameObject;
+                this.player2.tempBall = this.ball.gameObject;
+            }
+
+        }*/
+    }
     private void OnEnable()
     {
         if (this.ball != null)
@@ -36,6 +66,28 @@ public class FightBallLogic : MonoBehaviour
 
         if (this.music != null)
             this.music.Play();
+
+
+        if (this.player1 != null && this.player2 != null)
+        {
+            this.player1.maxHealth = 100000f;
+            this.player2.maxHealth = 100000f;
+
+            this.player1.health = 100000f;
+            this.player2.health = 100000f;
+
+            if (this.ball != null)
+            {
+                this.player1.tempBall = this.ball.gameObject;
+                this.player2.tempBall = this.ball.gameObject;
+
+                this.player1.tempLookAtBall = true;
+                this.player2.tempLookAtBall = true;
+            }
+
+        }
+
+        //this.StartCoroutine(this.SetBall());
     }
     private void OnDisable()
     {
@@ -108,7 +160,11 @@ public class FightBallLogic : MonoBehaviour
             if (isPlayer1)
             {
                 if (this.player2 != null)
+                {
                     this.player2.Suicide();
+                    this.player2.health = 0f;
+                }
+                    
 
                 if (this.player1 != null)
                     this.player1.tempLookAtBall = false;
@@ -116,7 +172,11 @@ public class FightBallLogic : MonoBehaviour
             else
             {
                 if (this.player1 != null)
+                {
                     this.player1.Suicide();
+                    this.player1.health = 0f;
+                }
+                    
 
                 if (this.player2 != null)
                     this.player2.tempLookAtBall = false;
@@ -148,5 +208,28 @@ public class FightBallLogic : MonoBehaviour
             this.player2.tempLookAtBall = true;
         if (this.ball != null)
             this.ball.gameObject.SetActive(true);
+    }
+
+    IEnumerator SetBall()
+    {
+        yield return new WaitForSeconds(0.05f);
+        if (this.player1 != null && this.player2 != null)
+        {
+
+            if (this.ball != null)
+            {
+                /*this.player1.tempBall = null;
+                this.player2.tempBall = null;*/
+
+                this.player1.tempBall = this.ball.gameObject;
+                this.player2.tempBall = this.ball.gameObject;
+
+                this.player1.tempLookAtBall = true;
+                this.player2.tempLookAtBall = true;
+            }
+            
+            Debug.Log("test");
+
+        }
     }
 }

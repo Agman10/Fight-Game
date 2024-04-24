@@ -74,6 +74,9 @@ public class FireBall : MonoBehaviour
         TestPlayer player = other.GetComponent<TestPlayer>();
         TestHitbox hitbox = other.GetComponent<TestHitbox>();
         HeadStandingPrevention headStandingPrevention = other.GetComponent<HeadStandingPrevention>();
+
+        Ball ball = other.GetComponent<Ball>();
+
         if (hitbox != null)
             return;
 
@@ -97,6 +100,11 @@ public class FireBall : MonoBehaviour
                 if (this.belongsTo != null)
                     firePrefab.SetOwner(this.belongsTo);
 
+            }
+
+            if (ball != null)
+            {
+                ball.KnockBack(new Vector3(this.transform.forward.z * 100f, 100f, 0f));
             }
         }
         else

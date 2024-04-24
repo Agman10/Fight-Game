@@ -32,9 +32,9 @@ public class DarkJCapStartAnimation : Attack
         if (this.user != null)
         {
             //this.user.AddStun(0.2f, true);
-            if (this.user.tempOpponent != null && this.user.tempOpponent.characterId == 1)
+            if (this.user.tempOpponent != null && this.user.tempOpponent.characterId == 1 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
                 this.StartCoroutine(this.RagingBeastStartAnimationCoroutine());
-            else if (this.vsJCap != null && this.user.characterId == 1 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 0 && this.user.tempBall == null)
+            else if (this.vsJCap != null && this.user.characterId == 1 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 0 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
                 this.vsJCap.Initiate();
             else
                 this.StartCoroutine(this.StartAnimationCoroutine());

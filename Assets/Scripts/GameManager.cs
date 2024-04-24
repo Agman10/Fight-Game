@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     public int randomNumber;
 
+    public int gameMode;
+
     [Space]
     public GameObject ragingBeastSkull;
     public LayerMask normalCameraLayers;
@@ -160,6 +162,15 @@ public class GameManager : MonoBehaviour
                 this.gameCamera.player1 = this.player1.transform;
                 this.gameCamera.player2 = this.player2.transform;
             }
+
+            /*if (this.gameMode == 1)
+            {
+                this.player1.maxHealth = 100000f;
+                this.player2.maxHealth = 100000f;
+
+                this.player1.health = 100000f;
+                this.player2.health = 100000f;
+            }*/
         }
     }
     private void OnDisable()
@@ -187,7 +198,7 @@ public class GameManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        if (!this.gameIsOver && !this.isStartingNewRound)
+        if (!this.gameIsOver && !this.isStartingNewRound && this.gameMode == 0)
         {
             this.isStartingNewRound = true;
             this.StartCoroutine(this.PlayerDeathCoroutine());

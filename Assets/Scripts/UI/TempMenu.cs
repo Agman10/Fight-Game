@@ -22,13 +22,25 @@ public class TempMenu : MonoBehaviour
         //SceneManager.LoadScene("TestStage");
 
         SceneManager.LoadSceneAsync("CharacterSelect");
+
+        if (GameModeManager.Instance != null)
+        {
+            GameModeManager.Instance.gameModeId = 0;
+        }
         //SceneManager.LoadSceneAsync("Loading");
         //SceneManager.LoadScene("Loading");
     }
 
     public void StartFightBall()
     {
-        SceneManager.LoadScene("TestFootBall");
+        //SceneManager.LoadScene("TestFootBall");
+
+        SceneManager.LoadSceneAsync("CharacterSelect");
+
+        if (GameModeManager.Instance != null)
+        {
+            GameModeManager.Instance.gameModeId = 1;
+        }
     }
 
     public void GoToOptions()

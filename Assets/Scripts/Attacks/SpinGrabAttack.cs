@@ -165,9 +165,16 @@ public class SpinGrabAttack : Attack
 
         }*/
 
+        float maxXPos = 12.5f;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+        {
+            maxXPos = 9.5f;
+        }
+
         if (this.user.movement.playerInput.moveInput.x + this.user.transform.forward.z == 0)
         {
-            if (this.user.transform.position.x > 12.5f && this.user.transform.forward.z < 0 || this.user.transform.position.x < -12.5f && this.user.transform.forward.z > 0)
+            if (this.user.transform.position.x > maxXPos && this.user.transform.forward.z < 0 || this.user.transform.position.x < -maxXPos && this.user.transform.forward.z > 0)
                 this.StopGrab(player, false);
             else
                 this.StopGrab(player, true);
@@ -314,8 +321,12 @@ public class SpinGrabAttack : Attack
 
             //player.TakeDamage(this.user.transform.position - new Vector3(this.transform.forward.z * 3, 0, 0), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
             //player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * -1), player.transform.position.y - 0.5f, 0f), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
-            this.user.LookAtTarget();
-            player.LookAtTarget();
+            /*this.user.LookAtTarget();
+            player.LookAtTarget();*/
+
+            this.user.lookAtPlayer();
+            player.lookAtPlayer();
+
             //player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 4), player.transform.position.y - 1f, 0f), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
             //player.TakeDamage(new Vector3(this.user.transform.position.x, player.transform.position.y - 0.5f, 0f), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
             player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 6), player.transform.position.y - 0.5f, 0f), 20f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);

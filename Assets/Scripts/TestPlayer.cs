@@ -478,6 +478,25 @@ public class TestPlayer : MonoBehaviour
             
     }
 
+    public void lookAtPlayer()
+    {
+        if (this.tempOpponent.transform.position.x > this.transform.position.x + 0.2f)
+        {
+            this.transform.eulerAngles = new Vector3(0, 0, 0);
+            if (this.ragdoll != null)
+                this.ragdoll.transform.localScale = new Vector3(1f, 1f, 1f);
+
+            /*if (this.ragdoll != null)
+                this.ragdoll.transform.localScale = new Vector3(this.ragdoll.transform.localScale.x, this.ragdoll.transform.localScale.y, 1f);*/
+        }
+        else if (this.tempOpponent.transform.position.x < this.transform.position.x - 0.2f)
+        {
+            this.transform.eulerAngles = new Vector3(0, 180, 0);
+            if (this.ragdoll != null)
+                this.ragdoll.transform.localScale = new Vector3(1f, 1f, -1f);
+        }
+    }
+
     public void SetInput(PlayerInput input)
     {
         if (input != null)

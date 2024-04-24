@@ -41,11 +41,11 @@ public class JCapStartAnimation : Attack
         if (this.user != null)
         {
             //this.user.AddStun(0.2f, true);
-            if(this.vsDarkJCap != null && this.user.characterId == 0 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 1 && this.user.tempBall == null)
+            if(this.vsDarkJCap != null && this.user.characterId == 0 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 1 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
                 this.vsDarkJCap.Initiate();
             }
-            else if (this.vsMikeBaller != null && this.user.characterId == 0 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 3 && this.user.tempBall == null)
+            else if (this.vsMikeBaller != null && this.user.characterId == 0 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 3 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
                 this.vsMikeBaller.Initiate();
             }

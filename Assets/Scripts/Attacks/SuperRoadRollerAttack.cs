@@ -124,16 +124,23 @@ public class SuperRoadRollerAttack : Attack
             GameManager.Instance.gameCamera.lockCamera = true;
         }*/
 
+        float maxRollerXPos = 11.65f;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+        {
+            maxRollerXPos = 8.65f;
+        }
+
         if (this.roadRoller != null && this.user.tempOpponent != null)
         {
             float summonPos = this.user.tempOpponent.transform.position.x;
             if (this.user.tempOpponent.dead && this.user.tempOpponent.ragdoll != null)
                 summonPos = this.user.tempOpponent.ragdoll.transform.position.x;
 
-            if (summonPos > 11.65f && this.user.transform.forward.z <= -1f)
-                summonPos = 11.65f;
-            else if (summonPos < -11.65f && this.user.transform.forward.z > -1f)
-                summonPos = -11.65f;
+            if (summonPos > maxRollerXPos && this.user.transform.forward.z <= -1f)
+                summonPos = maxRollerXPos;
+            else if (summonPos < -maxRollerXPos && this.user.transform.forward.z > -1f)
+                summonPos = -maxRollerXPos;
 
             RoadRoller roadRollerPrefab = this.roadRoller;
             roadRollerPrefab = Instantiate(roadRollerPrefab, new Vector3(summonPos, 17.4f, 0), this.transform.rotation);

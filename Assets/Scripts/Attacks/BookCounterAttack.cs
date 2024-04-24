@@ -225,10 +225,18 @@ public class BookCounterAttack : Attack
         this.SetCountering(false);
         this.user.rb.isKinematic = true;
 
-        if (player.transform.position.x > 12.5f && player.transform.forward.z <= -1f)
-            player.transform.position = new Vector3(12.5f, player.transform.position.y, 0f);
-        else if (player.transform.position.x < -12.5f && player.transform.forward.z > -1f)
-            player.transform.position = new Vector3(-12.5f, player.transform.position.y, 0f);
+        float maxXPos = 12.5f;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+        {
+            maxXPos = 9.5f;
+        }
+
+
+        if (player.transform.position.x > maxXPos && player.transform.forward.z <= -1f)
+            player.transform.position = new Vector3(maxXPos, player.transform.position.y, 0f);
+        else if (player.transform.position.x < -maxXPos && player.transform.forward.z > -1f)
+            player.transform.position = new Vector3(-maxXPos, player.transform.position.y, 0f);
 
         this.user.transform.position = new Vector3(player.transform.position.x + (player.transform.forward.z * -1.5f), player.transform.position.y, 0f);
         this.user.LookAtTarget();

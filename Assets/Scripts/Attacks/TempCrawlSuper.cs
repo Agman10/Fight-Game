@@ -75,7 +75,11 @@ public class TempCrawlSuper : Attack
             else
                 testFloat = 0.01f;
 
-            this.camDistance = Mathf.Abs(GameManager.Instance.gameCamera.transform.position.x) + 7.5f + testFloat;
+            if(GameManager.Instance.gameMode == 1)
+                this.camDistance = 11 + testFloat;
+            else
+                this.camDistance = Mathf.Abs(GameManager.Instance.gameCamera.transform.position.x) + 7.5f + testFloat;
+            
 
             //this.camDistance = Mathf.Abs(GameManager.Instance.gameCamera.transform.position.x) + 7.5f;
 
@@ -497,10 +501,15 @@ public class TempCrawlSuper : Attack
 
         yield return new WaitForSeconds(0.5f);
 
+        float cosmoYPos = 8f;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+            cosmoYPos = 10f;
+
         if (this.cosmoPortal != null)
         {
             GameObject cosmoPortalPrefab = this.cosmoPortal;
-            cosmoPortalPrefab = Instantiate(cosmoPortalPrefab, new Vector3(player.transform.position.x, 8f, 0f), Quaternion.Euler(0, 0, 0));
+            cosmoPortalPrefab = Instantiate(cosmoPortalPrefab, new Vector3(player.transform.position.x, cosmoYPos, 0f), Quaternion.Euler(0, 0, 0));
         }
 
         yield return new WaitForSeconds(0.5f);

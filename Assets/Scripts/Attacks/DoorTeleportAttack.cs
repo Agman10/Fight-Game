@@ -317,95 +317,104 @@ public class DoorTeleportAttack : Attack
 
     public void TeleportDoor()
     {
-        if (this.user.movement != null && GameManager.Instance != null && GameManager.Instance.gameCamera != null && this.currentDoor != null)
+        if(GameManager.Instance != null)
         {
-            GameCamera cameraa = GameManager.Instance.gameCamera;
+            float xMaxPos = 7f;
 
-            if (this.user.movement.playerInput.moveInput.x > 0) //forward
+            if (GameManager.Instance.gameMode == 1)
+                xMaxPos = 9f;
+
+            if (this.user.movement != null && GameManager.Instance.gameCamera != null && this.currentDoor != null)
             {
-                this.currentDoor.transform.position = new Vector3(cameraa.transform.position.x + 7f, 0f, 1.2f);
-                this.user.transform.position = new Vector3(cameraa.transform.position.x + 7f, 0f, 0f);
+                GameCamera cameraa = GameManager.Instance.gameCamera;
 
-
-
-                //this code below is to make it so the doors dont spawn at eachoter
-
-                if (this.user.tempOpponent != null &&
-                    this.user.tempOpponent.characterId == this.user.characterId &&
-                    this.user.tempOpponent.attacks.downSpecial is DoorTeleportAttack doorTeleport &&
-                    doorTeleport.currentDoor != null &&
-                    Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) < 3f &&
-                    Vector3.Distance(new Vector3(0f, this.user.transform.position.y, 0f), new Vector3(0f, this.user.tempOpponent.transform.position.y, 0f)) < 4.15f)
+                if (this.user.movement.playerInput.moveInput.x > 0) //forward
                 {
-                    //Debug.Log(Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)));
-
-                    this.currentDoor.transform.position = new Vector3(this.user.tempOpponent.transform.position.x - 3f, 0f, 1.2f);
-                    this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x - 3f, 0f, 0f);
-                }
-
-
-            }
-            else if (this.user.movement.playerInput.moveInput.x < 0) //backward
-            {
-                this.currentDoor.transform.position = new Vector3(cameraa.transform.position.x - 7f, 0f, 1.2f);
-                this.user.transform.position = new Vector3(cameraa.transform.position.x - 7f, 0f, 0f);
+                    this.currentDoor.transform.position = new Vector3(cameraa.transform.position.x + xMaxPos, 0f, 1.2f);
+                    this.user.transform.position = new Vector3(cameraa.transform.position.x + xMaxPos, 0f, 0f);
 
 
 
+                    //this code below is to make it so the doors dont spawn at eachoter
 
-
-
-                if (this.user.tempOpponent != null &&
-                    this.user.tempOpponent.characterId == this.user.characterId &&
-                    this.user.tempOpponent.attacks.downSpecial is DoorTeleportAttack doorTeleport &&
-                    doorTeleport.currentDoor != null && /*doorTeleport.currentDoor.gameObject.active &&*/
-                    Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) < 3f &&
-                    Vector3.Distance(new Vector3(0f, this.user.transform.position.y, 0f), new Vector3(0f, this.user.tempOpponent.transform.position.y, 0f)) < 4.15f)
-                {
-                    Debug.Log(Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)));
-
-                    this.currentDoor.transform.position = new Vector3(this.user.tempOpponent.transform.position.x + 3f, 0f, 1.2f);
-                    this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x + 3f, 0f, 0f);
-                }
-
-
-            }
-            else //neutral
-            {
-                this.currentDoor.transform.position = new Vector3(cameraa.transform.position.x, 0f, 1.2f);
-                this.user.transform.position = new Vector3(cameraa.transform.position.x, 0f, 0f);
-
-
-
-
-
-
-                if (this.user.tempOpponent != null &&
-                    this.user.tempOpponent.characterId == this.user.characterId &&
-                    this.user.tempOpponent.attacks.downSpecial is DoorTeleportAttack doorTeleport &&
-                    doorTeleport.currentDoor != null &&
-                    Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) < 3f &&
-                    Vector3.Distance(new Vector3(0f, this.user.transform.position.y, 0f), new Vector3(0f, this.user.tempOpponent.transform.position.y, 0f)) < 4.15f)
-                {
-                    //Debug.Log(Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)));
-
-
-                    /*if (Vector3.Distance(new Vector3(0f, this.user.transform.position.y, 0f), new Vector3(0f, this.user.tempOpponent.transform.position.y, 0f)) < 4.15f) 
-                    { 
-
-                    }*/
-
-                    float xOffset = 3f;
-
-                    if(this.user.transform.position.x > 0f)
+                    if (this.user.tempOpponent != null &&
+                        this.user.tempOpponent.characterId == this.user.characterId &&
+                        this.user.tempOpponent.attacks.downSpecial is DoorTeleportAttack doorTeleport &&
+                        doorTeleport.currentDoor != null &&
+                        Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) < 3f &&
+                        Vector3.Distance(new Vector3(0f, this.user.transform.position.y, 0f), new Vector3(0f, this.user.tempOpponent.transform.position.y, 0f)) < 4.15f)
                     {
-                        xOffset = -3f;
+                        //Debug.Log(Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)));
+
+                        this.currentDoor.transform.position = new Vector3(this.user.tempOpponent.transform.position.x - 3f, 0f, 1.2f);
+                        this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x - 3f, 0f, 0f);
                     }
 
-                    this.currentDoor.transform.position = new Vector3(this.user.tempOpponent.transform.position.x + xOffset, 0f, 1.2f);
-                    this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x + xOffset, 0f, 0f);
+
+                }
+                else if (this.user.movement.playerInput.moveInput.x < 0) //backward
+                {
+                    this.currentDoor.transform.position = new Vector3(cameraa.transform.position.x - xMaxPos, 0f, 1.2f);
+                    this.user.transform.position = new Vector3(cameraa.transform.position.x - xMaxPos, 0f, 0f);
+
+
+
+
+
+
+                    if (this.user.tempOpponent != null &&
+                        this.user.tempOpponent.characterId == this.user.characterId &&
+                        this.user.tempOpponent.attacks.downSpecial is DoorTeleportAttack doorTeleport &&
+                        doorTeleport.currentDoor != null && /*doorTeleport.currentDoor.gameObject.active &&*/
+                        Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) < 3f &&
+                        Vector3.Distance(new Vector3(0f, this.user.transform.position.y, 0f), new Vector3(0f, this.user.tempOpponent.transform.position.y, 0f)) < 4.15f)
+                    {
+                        Debug.Log(Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)));
+
+                        this.currentDoor.transform.position = new Vector3(this.user.tempOpponent.transform.position.x + 3f, 0f, 1.2f);
+                        this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x + 3f, 0f, 0f);
+                    }
+
+
+                }
+                else //neutral
+                {
+                    this.currentDoor.transform.position = new Vector3(cameraa.transform.position.x, 0f, 1.2f);
+                    this.user.transform.position = new Vector3(cameraa.transform.position.x, 0f, 0f);
+
+
+
+
+
+
+                    if (this.user.tempOpponent != null &&
+                        this.user.tempOpponent.characterId == this.user.characterId &&
+                        this.user.tempOpponent.attacks.downSpecial is DoorTeleportAttack doorTeleport &&
+                        doorTeleport.currentDoor != null &&
+                        Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) < 3f &&
+                        Vector3.Distance(new Vector3(0f, this.user.transform.position.y, 0f), new Vector3(0f, this.user.tempOpponent.transform.position.y, 0f)) < 4.15f)
+                    {
+                        //Debug.Log(Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)));
+
+
+                        /*if (Vector3.Distance(new Vector3(0f, this.user.transform.position.y, 0f), new Vector3(0f, this.user.tempOpponent.transform.position.y, 0f)) < 4.15f) 
+                        { 
+
+                        }*/
+
+                        float xOffset = 3f;
+
+                        if (this.user.transform.position.x > 0f)
+                        {
+                            xOffset = -3f;
+                        }
+
+                        this.currentDoor.transform.position = new Vector3(this.user.tempOpponent.transform.position.x + xOffset, 0f, 1.2f);
+                        this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x + xOffset, 0f, 0f);
+                    }
                 }
             }
         }
+        
     }
 }

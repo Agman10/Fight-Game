@@ -210,7 +210,7 @@ public class NinjaTeleport : Attack
     public void Teleport()
     {
         //this.user.transform.position = new Vector3(this.transform.position.x + 5f, this.transform.position.y, 0f);
-        if (this.user.movement != null && GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+        if (this.user.movement != null && GameManager.Instance != null && GameManager.Instance.gameCamera != null && GameManager.Instance.gameMode == 0)
         {
             GameCamera cameraa = GameManager.Instance.gameCamera;
 
@@ -272,7 +272,7 @@ public class NinjaTeleport : Attack
             }
             
         }
-        else if (this.user.movement != null && GameManager.Instance == null /*&& GameManager.Instance.gameCamera == null*/) //for fight ball, find better solution later
+        else if (this.user.movement != null && GameManager.Instance != null && GameManager.Instance.gameCamera != null && GameManager.Instance.gameMode == 1 /*&& GameManager.Instance == null*/ /*&& GameManager.Instance.gameCamera == null*/) //for fight ball, find better solution later
         {
             if (this.user.movement.playerInput.moveInput.x > 0)
             {

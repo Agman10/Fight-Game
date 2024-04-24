@@ -66,6 +66,9 @@ public class BigFireBall : MonoBehaviour
     {
         TestPlayer player = other.GetComponent<TestPlayer>();
         BigFireBall bigFireBall = other.GetComponent<BigFireBall>();
+
+        Ball ball = other.GetComponent<Ball>();
+
         if (player != null && !player.dead && !this.hasHitPlayer)
         {
             if (this.owner != player)
@@ -80,6 +83,12 @@ public class BigFireBall : MonoBehaviour
             this.Explode();
             bigFireBall.Explode();
         }
+
+        if (ball != null)
+        {
+            ball.KnockBack(new Vector3(this.transform.forward.z * 350f, 300f, 0f));
+        }
+
 
         if (other.tag == "Wall" || other.tag == "Ground")
         {
