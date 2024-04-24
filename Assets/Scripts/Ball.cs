@@ -15,10 +15,14 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         float number = UnityEngine.Random.Range(1, 101);
-        if (number <= 90)
+        if (number <= 70)
             this.SetMaterial(0);
-        else
+        else if (number > 70 && number <= 80)
             this.SetMaterial(1);
+        else if(number > 80 && number <= 90)
+            this.SetMaterial(2);
+        else
+            this.SetMaterial(3);
     }
     private void OnEnable()
     {
