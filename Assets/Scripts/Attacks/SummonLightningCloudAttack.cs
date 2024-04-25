@@ -101,7 +101,9 @@ public class SummonLightningCloudAttack : Attack
         /*if (this.animations != null)
             this.animations.SummonLightningCloud(1);*/
 
-        float pos = this.user.transform.position.x;
+        float lightningPos = this.LightningPos(this.user.transform.position.x);
+
+        /*float pos = this.user.transform.position.x;
         float lightningPos = pos + this.user.transform.forward.z * 6f;
 
         if (this.user.input != null && GameManager.Instance != null && GameManager.Instance.gameCamera != null)
@@ -138,7 +140,7 @@ public class SummonLightningCloudAttack : Attack
                 lightningPos = cameraPos + 7f;
             else if (lightningPos < cameraPos - 7)
                 lightningPos = cameraPos - 7f;
-        }
+        }*/
 
 
 
@@ -226,6 +228,96 @@ public class SummonLightningCloudAttack : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public float LightningPos(float pos)
+    {
+        //float pos = this.user.transform.position.x;
+        float lightningPos = pos + this.user.transform.forward.z * 6f;
+
+        if(GameManager.Instance != null && GameManager.Instance.gameMode == 0)
+        {
+            if (this.user.input != null && GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            {
+                float cameraPos = GameManager.Instance.gameCamera.transform.position.x;
+
+                //Debug.Log(Mathf.Abs(pos - (cameraPos + 7)));
+                //Debug.Log(pos + (((cameraPos + 7) - pos) / 2));
+
+                if (this.user.transform.forward.z >= 0.5f)
+                {
+                    if (this.user.input.moveInput.x > 0)
+                        lightningPos = cameraPos + 7f;
+                    else if (this.user.input.moveInput.x < 0)
+                        lightningPos = pos + this.user.transform.forward.z * 3f;
+                    else if (this.user.input.moveInput.y < 0)
+                        lightningPos = pos + this.user.transform.forward.z;
+                    else
+                        lightningPos = pos + this.user.transform.forward.z * 7f;
+                }
+                else if (this.user.transform.forward.z <= -0.5f)
+                {
+                    if (this.user.input.moveInput.x > 0)
+                        lightningPos = pos + this.user.transform.forward.z * 3f;
+                    else if (this.user.input.moveInput.x < 0)
+                        lightningPos = cameraPos - 7f;
+                    else if (this.user.input.moveInput.y < 0)
+                        lightningPos = pos + this.user.transform.forward.z;
+                    else
+                        lightningPos = pos + this.user.transform.forward.z * 7f;
+                }
+
+                if (lightningPos > cameraPos + 7)
+                    lightningPos = cameraPos + 7f;
+                else if (lightningPos < cameraPos - 7)
+                    lightningPos = cameraPos - 7f;
+            }
+        }
+        else
+        {
+            if (this.user.input != null && GameManager.Instance != null)
+            {
+                //float cameraPos = GameManager.Instance.gameCamera.transform.position.x;
+
+                //Debug.Log(Mathf.Abs(pos - (cameraPos + 7)));
+                //Debug.Log(pos + (((cameraPos + 7) - pos) / 2));
+
+                if (this.user.transform.forward.z >= 0.5f)
+                {
+                    if (this.user.input.moveInput.x > 0)
+                        lightningPos = 10f;
+                    else if (this.user.input.moveInput.x < 0)
+                        lightningPos = pos + this.user.transform.forward.z * 4f;
+                    else if (this.user.input.moveInput.y < 0)
+                        lightningPos = pos + this.user.transform.forward.z;
+                    else if (this.user.input.transform.position.x > -1f)
+                        lightningPos = (10f + pos) / 2f; //pos + this.user.transform.forward.z;
+                    else
+                        lightningPos = 0f;
+                }
+                else if (this.user.transform.forward.z <= -0.5f)
+                {
+                    if (this.user.input.moveInput.x > 0)
+                        lightningPos = pos + this.user.transform.forward.z * 4f;
+                    else if (this.user.input.moveInput.x < 0)
+                        lightningPos = -10f;
+                    else if (this.user.input.moveInput.y < 0)
+                        lightningPos = pos + this.user.transform.forward.z;
+                    else if (this.user.input.transform.position.x < 1f)
+                        lightningPos = (-10f + pos) / 2f; /*pos + this.user.transform.forward.z;*/
+                    else
+                        lightningPos = 0f;
+                }
+
+                if (lightningPos > 10f)
+                    lightningPos = 10f;
+                else if (lightningPos < -10f)
+                    lightningPos = -10f;
+            }
+        }
+        
+
+        return lightningPos;
     }
 
     /*public void LightningPos()
