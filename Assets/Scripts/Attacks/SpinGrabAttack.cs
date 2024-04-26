@@ -12,13 +12,18 @@ public class SpinGrabAttack : Attack
     public bool grabbing;
     public bool tryGrabbing;
     public TestPlayer grabbedPlayer;
+    public Ball grabbedBall;
 
     public override void OnEnable()
     {
         base.OnEnable();
 
         if (this.hitbox != null)
-            this.hitbox.OnPlayerCollision += Grab;
+        {
+            this.hitbox.OnPlayerCollision += this.Grab;
+            this.hitbox.OnBallCollision += this.GrabBall;
+        }
+            
     }
 
     public override void OnDisable()
@@ -26,7 +31,11 @@ public class SpinGrabAttack : Attack
         base.OnDisable();
 
         if (this.hitbox != null)
-            this.hitbox.OnPlayerCollision -= Grab;
+        {
+            this.hitbox.OnPlayerCollision -= this.Grab;
+            this.hitbox.OnBallCollision -= this.GrabBall;
+        }
+            
     }
 
     public override void OnHit()
@@ -395,8 +404,195 @@ public class SpinGrabAttack : Attack
 
         }
 
+        if (this.grabbedBall != null)
+        {
+            this.grabbedBall.rb.isKinematic = false;
+            this.grabbedBall.collision.enabled = true;
+
+            if (GameManager.Instance != null)
+                this.grabbedBall.transform.parent = GameManager.Instance.gameObject.transform.parent;
+
+            this.grabbedBall.transform.position = new Vector3(this.grabbedBall.transform.position.x, this.grabbedBall.transform.position.y, 0f);
+
+            this.grabbedBall = null;
+        }
+
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+
+    private IEnumerator GrabbingBallCoroutine(Ball ball)
+    {
+        float currentTime = 0;
+        float duration = 0.2f;
+        float targetPosition = 0f;
+        float start = this.user.transform.position.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0, 1500f * Time.deltaTime, 0));
+
+            this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
+            //player.transform.position = new Vector3(player.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
+
+            ball.rb.transform.localPosition = new Vector3(1.5f, 0.15f, 0);
+
+            //player.animations.SpinGrabbed();
+            /*if (player.characterId == 3 || player.characterId == 4)
+                player.ragdoll.transform.localPosition = new Vector3(2.7f, 0.15f, 0);
+            else
+                player.ragdoll.transform.localPosition = new Vector3(3.05f, 0.15f, 0);*/
+
+
+            yield return null;
+        }
+
+        float time = 1f;
+        while (time > 0f)
+        {
+            if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0, 1500f * Time.deltaTime, 0));
+
+            time -= Time.deltaTime;
+
+            yield return null;
+        }
+        //Debug.Log(this.user.transform.forward.z + this.user.movement.playerInput.moveInput.x);
+
+        /*if (this.user.movement.playerInput.moveInput.x > 0 && this.user.transform.forward.z < 0)
+        {
+            this.StopGrab(player, false);
+
+        }*/
+
+        float maxXPos = 12.5f;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+        {
+            maxXPos = 9.5f;
+        }
+
+        if (this.user.movement.playerInput.moveInput.x + this.user.transform.forward.z == 0)
+        {
+            /*if (this.user.transform.position.x > maxXPos && this.user.transform.forward.z < 0 || this.user.transform.position.x < -maxXPos && this.user.transform.forward.z > 0)
+                this.StopGrabBall(ball, false);
+            else
+                this.StopGrabBall(ball, true);*/
+
+
+            this.StopGrabBall(ball, true);
+        }
+        else
+        {
+            this.StopGrabBall(ball, false);
+        }
+
+        //this.StopGrab(player, false);
+
+        this.animations.SpinGrabEnd(0);
+        yield return new WaitForSeconds(0.05f);
+        this.animations.SpinGrabEnd(1);
+        yield return new WaitForSeconds(0.1f);
+
+        /*this.animations.SpinGrabEnd();
+        yield return new WaitForSeconds(0.1f);*/
+        this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.25f);
+        this.user.attackStuns.Remove(this.gameObject);
+        this.animations.SetDefaultPose();
+        this.onGoing = false;
+    }
+
+    public void GrabBall(Ball ball)
+    {
+        if (ball != null && this.grabbedPlayer == null && !this.grabbing)
+        {
+            this.tryGrabbing = false;
+            this.grabbedBall = ball;
+
+            this.user.rb.isKinematic = true;
+
+            if (ball.collision != null)
+                ball.collision.enabled = false;
+
+            ball.rb.isKinematic = true;
+
+            /*if (ball.collision != null)
+                ball.collision.enabled = false;*/
+
+
+            this.user.knockbackInvounrability = true;
+
+            //ball.gameObject.transform.position = new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * 1.2f), player.gameObject.transform.position.y, player.gameObject.transform.position.z);
+            ball.gameObject.transform.parent = this.user.ragdoll.transform;
+            ball.transform.localPosition = new Vector3(1.4f, 0.15f, 0);
+            //Debug.Log(ragdollPosY);
+
+            this.grabbing = true;
+
+
+            if (this.animations != null)
+                this.animations.SpinGrab();
+
+            this.StartCoroutine(this.GrabbingBallCoroutine(ball));
+        }
+    }
+
+    public void GrabBallDelay(Ball ball)
+    {
+        this.StartCoroutine(this.GrabBallDelayCoroutine(ball));
+    }
+
+    private IEnumerator GrabBallDelayCoroutine(Ball ball)
+    {
+        yield return new WaitForSeconds(0.01f);
+        this.GrabBall(ball);
+    }
+
+    public void StopGrabBall(Ball ball, bool back = false)
+    {
+        this.user.rb.isKinematic = false;
+
+        /*if (GameManager.Instance != null)
+            ball.transform.parent = GameManager.Instance.gameObject.transform.parent;*/
+
+        ball.rb.isKinematic = false;
+
+        if (ball.collision != null)
+            ball.collision.enabled = true;
+
+        if (GameManager.Instance != null)
+            ball.transform.parent = GameManager.Instance.gameObject.transform.parent;
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+
+        this.grabbing = false;
+        this.user.knockbackInvounrability = false;
+
+        if (back)
+        {
+            ball.gameObject.transform.position = new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * -1.5f), ball.gameObject.transform.position.y, 0f);
+
+            this.user.LookAtTarget();
+
+            //player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 6), player.transform.position.y - 0.5f, 0f), 20f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
+            ball.KnockBack(new Vector3(this.user.transform.forward.z * 600f, 400f, 0f));
+        }
+        else
+        {
+            ball.gameObject.transform.position = new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * 1.5f), ball.gameObject.transform.position.y, 0f);
+
+            ball.KnockBack(new Vector3(this.user.transform.forward.z * 600f, 400f, 0f));
+        }
+
+
+        this.grabbedBall = null;
+        this.onGoing = false;
     }
 }

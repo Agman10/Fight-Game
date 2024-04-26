@@ -9,8 +9,10 @@ public class Ball : MonoBehaviour
     public Material[] mats;
     public int currentBall;
 
-    private Rigidbody rb;
+    public Rigidbody rb;
     public Action<bool> OnGoal;
+
+    public Collider collision;
 
     private void Start()
     {
@@ -26,9 +28,11 @@ public class Ball : MonoBehaviour
     }
     private void OnEnable()
     {
-        this.rb = GetComponent<Rigidbody>();
+        this.rb = this.GetComponent<Rigidbody>();
         this.transform.eulerAngles = new Vector3(0, 0, 0);
         this.transform.position = new Vector3(0, 4, 0);
+
+        this.collision = this.GetComponent<Collider>();
     }
     private void OnDisable()
     {

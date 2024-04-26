@@ -1935,6 +1935,7 @@ MonoBehaviour:
   smoke: {fileID: 3115403492533551452, guid: a19e3ec5c2991114dbe154bd7bb26c6a, type: 3}
   confused: {fileID: 3474146404029508183}
   cooldownTimer: 0
+  cooldown: 1.8
   animationId: 0
 --- !u!1 &891789170148497915
 GameObject:
@@ -5658,7 +5659,7 @@ MonoBehaviour:
   stun: 0.3
   horizontalKnockback: 500
   verticalKnockback: -500
-  explosionKnockback: 1
+  explosionKnockback: 0
   continousDamage: 1
   damageDelay: 0.1
   players: []
@@ -6633,6 +6634,10 @@ MonoBehaviour:
   fireBallXForce: 600
   fireBallYForce: 200
   animationId: 0
+  groundTime: 0.5
+  groundStunTime: 0.5
+  airTime: 0.5
+  airStunTime: 0
 --- !u!1 &2644258869394255732
 GameObject:
   m_ObjectHideFlags: 0
@@ -6685,6 +6690,8 @@ MonoBehaviour:
   teleportEffeftYPos: 0
   hitbox: {fileID: 7141975216863783276}
   shrink: 0
+  stun1: 0.2
+  stun2: 0.4
 --- !u!1 &2651394989957068160
 GameObject:
   m_ObjectHideFlags: 0
@@ -7904,6 +7911,10 @@ MonoBehaviour:
   grenadeYForce: 450
   flashbang: {fileID: 1113805257601805682, guid: 1b438af4ecd6fc34c9e965d87907eb72, type: 3}
   flashbangModel: {fileID: 1190248667640433190}
+  groundTime: 0.5
+  groundStunTime: 0.4
+  airTime: 0.2
+  airStunTime: 0.3
 --- !u!1 &3140858081660478847
 GameObject:
   m_ObjectHideFlags: 0
@@ -16359,6 +16370,7 @@ MonoBehaviour:
   fire1: {fileID: 1280922845282019976}
   fire2: {fileID: 8096717793486255425}
   onGoing: 0
+  endStun: 0.4
 --- !u!1 &5177498775738453981
 GameObject:
   m_ObjectHideFlags: 0
@@ -21092,7 +21104,7 @@ MonoBehaviour:
   stun: 0.1
   horizontalKnockback: 500
   verticalKnockback: 100
-  explosionKnockback: 1
+  explosionKnockback: 0
   continousDamage: 1
   damageDelay: 0.1
   players: []
@@ -26827,6 +26839,8 @@ MonoBehaviour:
   onGoing: 0
   landmine: {fileID: 6093128466240812432, guid: e85bffa65247eff48a0298eac70a0ac5, type: 3}
   landmineModel: {fileID: 8807057591746283869}
+  stunTime: 0.4
+  stunTime2: 0.3
 --- !u!1 &8040148163126010320
 GameObject:
   m_ObjectHideFlags: 0
@@ -27414,6 +27428,8 @@ MonoBehaviour:
   glowingEyes: 0
   useExtraEmission: 0
   extraEmissionRenderers: []
+  useMultiColorMats: 0
+  multiColoredMats: []
 --- !u!1 &8111018654191559188
 GameObject:
   m_ObjectHideFlags: 0
@@ -32399,6 +32415,10 @@ MonoBehaviour:
   dizzyParticle: {fileID: 5577566748838652204}
   spinning: 0
   dizzyMeter: 0
+  dissyRemovalSpeed: 20
+  moveSpeed: 0.1
+  stunTime1: 0.2
+  stunTime2: 0.2
 --- !u!1 &9159648748002463663
 GameObject:
   m_ObjectHideFlags: 0

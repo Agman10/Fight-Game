@@ -55,6 +55,7 @@ public class LaserProjectile : MonoBehaviour
         FireBall fireBall = other.GetComponent<FireBall>();
         BigFireBall bigFireBall = other.GetComponent<BigFireBall>();
         KnifeProjectile knife = other.GetComponent<KnifeProjectile>();
+        Ball ball = other.GetComponent<Ball>();
 
         if (player != null)
         {
@@ -83,6 +84,12 @@ public class LaserProjectile : MonoBehaviour
         {
             this.Disable();
             fireBall.SpawnFire();
+        }
+
+        if(ball != null)
+        {
+            this.Disable();
+            ball.KnockBack(new Vector3(this.transform.forward.z * 100f, 100f, 0f));
         }
             
 

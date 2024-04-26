@@ -26,6 +26,7 @@ public class TestHitbox : MonoBehaviour
     public bool avoidDamagingPlayer;
 
     public Action<TestPlayer> OnPlayerCollision;
+    public Action<Ball> OnBallCollision;
 
     public bool fireProperty = false;
     public float physicsKnockbackMultiplier = 1f;
@@ -48,15 +49,18 @@ public class TestHitbox : MonoBehaviour
     private void OnEnable()
     {
         this.players.Clear();
-        this.OnPlayerCollision += PlayerCollisionInvoke;
+        this.OnPlayerCollision += this.PlayerCollisionInvoke;
+        this.OnBallCollision += this.BallCollisionInvoke;
     }
     private void OnDisable()
     {
-        this.OnPlayerCollision -= PlayerCollisionInvoke;
+        this.OnPlayerCollision -= this.PlayerCollisionInvoke;
         this.StopAllCoroutines();
         this.players.Clear();
         this.others.Clear();
-        
+
+        this.OnBallCollision -= this.BallCollisionInvoke;
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -164,6 +168,11 @@ public class TestHitbox : MonoBehaviour
             Ball ball = other.GetComponent<Ball>();
             if(ball != null)
             {
+                /*if (player == null)
+                    this.OnBallCollision?.Invoke(ball);*/
+
+                this.OnBallCollision?.Invoke(ball);
+
                 Vector3 dir = (ball.transform.position - this.transform.position).normalized;
                 float direction = 1f;
                 if (dir.x <= 0f)
@@ -296,6 +305,11 @@ public class TestHitbox : MonoBehaviour
     }
 
     public void PlayerCollisionInvoke(TestPlayer player)
+    {
+
+    }
+
+    public void BallCollisionInvoke(Ball ball)
     {
 
     }
