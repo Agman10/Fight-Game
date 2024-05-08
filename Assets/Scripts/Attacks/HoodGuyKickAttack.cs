@@ -99,6 +99,8 @@ public class HoodGuyKickAttack : Attack
 
         yield return new WaitForSeconds(0.05f);
 
+        //this.user.rb.AddForce(new Vector3(100f, 0f, 0f));
+
         if (this.animations != null)
             this.animations.HoodGuyKick(1);
 
