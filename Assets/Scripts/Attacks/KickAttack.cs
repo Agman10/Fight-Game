@@ -9,6 +9,8 @@ public class KickAttack : Attack
     public TestHitbox hitbox;
     public TestHitbox airHitbox;
 
+    public TestHitbox forwardHitbox;
+
     //private IEnumerator hitboxCoroutine;
     //private IEnumerator animationCoroutine;
 
@@ -73,8 +75,20 @@ public class KickAttack : Attack
             if (Mathf.Abs(this.user.transform.position.y) < 0.2f)
             {
                 //Debug.Log(Mathf.Abs(this.user.transform.position.y));
-                this.user.AddStun(0.2f, true);
-                this.StartCoroutine(this.KickCoroutine());
+                /*this.user.AddStun(0.2f, true);
+                this.StartCoroutine(this.KickCoroutine());*/
+
+                if (this.user.input.moveInput.x * this.user.transform.forward.z > 0f) //Forward
+                {
+                    this.user.AddStun(0.2f, true);
+                    this.StartCoroutine(this.ForwardKickCoroutine());
+                }
+                else
+                {
+                    this.user.AddStun(0.2f, true);
+                    this.StartCoroutine(this.KickCoroutine());
+                }
+
             }
             else
             {
@@ -205,6 +219,71 @@ public class KickAttack : Attack
     }
 
 
+    private IEnumerator ForwardKickCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        float animSpeed = 0.06f;
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(0);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(1, 0);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        this.user.rb.AddForce(new Vector3(this.user.transform.forward.z * 150f, 0f, 0f));
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(2, 0);
+
+        if (this.forwardHitbox != null)
+            this.forwardHitbox.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(animSpeed + 0.025f);
+
+
+        if (this.forwardHitbox != null)
+            this.forwardHitbox.gameObject.SetActive(false);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(3);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(4);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(5);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(6);
+
+        //yield return new WaitForSeconds(animSpeed);
+
+
+
+
+        yield return new WaitForSeconds(animSpeed);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.2f);
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
     public override void Stop()
     {
         base.Stop();
@@ -225,6 +304,9 @@ public class KickAttack : Attack
             this.StopCoroutine(this.animationCoroutine);
             this.animationCoroutine = null;
         }*/
+
+        if (this.forwardHitbox != null)
+            this.forwardHitbox.gameObject.SetActive(false);
 
 
         this.onGoing = false;

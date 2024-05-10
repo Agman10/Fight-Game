@@ -189,7 +189,7 @@ public class HoodGuyKickAttack : Attack
 
 
         if (this.animations != null)
-            this.animations.SexKick();
+            this.animations.SexKick2();
 
         if (this.airHitbox != null)
             this.airHitbox.gameObject.SetActive(true);

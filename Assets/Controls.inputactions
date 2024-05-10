@@ -715,6 +715,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ToggleLifeNumbers",
+                    "type": "Button",
+                    "id": "240f1073-b383-4d7a-b0b2-883277f32150",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -792,6 +800,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LoadPreviousStage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16b7ab7d-bc8f-4f4f-be1a-4e26b0d45aff",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleLifeNumbers",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

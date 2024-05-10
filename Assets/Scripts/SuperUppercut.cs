@@ -10,8 +10,12 @@ public class SuperUppercut : Attack
     public TestHitbox hitbox1;
     public TestHitbox hitbox2;
     public TestHitbox hitbox3;
+    public TestHitbox hitbox4;
     public VisualEffect fire;
     public GameObject startParticle;
+
+    public float endLag1 = 0.3f;
+    public float endLag2 = 0.25f;
 
     public override void OnHit()
     {
@@ -67,7 +71,7 @@ public class SuperUppercut : Attack
         yield return new WaitForSeconds(0.05f);
         this.PlayFire(true);
         if (this.user.rb != null)
-            this.user.rb.AddForce(this.user.transform.forward.z * 100, 500, 0);
+            this.user.rb.AddForce(this.user.transform.forward.z * 150, 500, 0);
 
         if (this.animations != null)
         {
@@ -79,9 +83,12 @@ public class SuperUppercut : Attack
         if (this.hitbox1 != null)
             this.hitbox1.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         if (this.hitbox1 != null)
             this.hitbox1.gameObject.SetActive(false);
+
+        if (this.hitbox4 != null)
+            this.hitbox4.gameObject.SetActive(true);
 
         /*if (this.hitbox2 != null)
             this.hitbox2.gameObject.SetActive(true);
@@ -91,6 +98,9 @@ public class SuperUppercut : Attack
             this.hitbox2.gameObject.SetActive(false);*/
 
         this.PlayFire(false);
+
+        if (this.user.rb != null)
+            this.user.rb.AddForce(0f, -200, 0);
 
         /*if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);*/
@@ -120,6 +130,9 @@ public class SuperUppercut : Attack
         this.user.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);*/
 
         yield return new WaitForSeconds(0.015f);
+        if (this.hitbox4 != null)
+            this.hitbox4.gameObject.SetActive(false);
+
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -90f, 0f);
         yield return new WaitForSeconds(0.015f);
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -125f, 0f);
@@ -137,7 +150,7 @@ public class SuperUppercut : Attack
         this.animations.body.localEulerAngles = new Vector3(0f, 0f, 0f);
 
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
 
         this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
 
@@ -151,8 +164,9 @@ public class SuperUppercut : Attack
             this.animations.SetPunchUppercutStartAnim2();
         yield return new WaitForSeconds(0.05f);
         this.PlayFire(true);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
         if (this.user.rb != null)
-            this.user.rb.AddForce(this.user.transform.forward.z * 200, 700, 0);
+            this.user.rb.AddForce(this.user.transform.forward.z * 150, 600, 0);
 
         if (this.animations != null)
         {
@@ -164,9 +178,12 @@ public class SuperUppercut : Attack
         if (this.hitbox1 != null)
             this.hitbox1.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         if (this.hitbox1 != null)
             this.hitbox1.gameObject.SetActive(false);
+
+        if (this.hitbox4 != null)
+            this.hitbox4.gameObject.SetActive(true);
 
         /*if (this.hitbox2 != null)
             this.hitbox2.gameObject.SetActive(true);
@@ -176,6 +193,9 @@ public class SuperUppercut : Attack
             this.hitbox2.gameObject.SetActive(false);*/
 
         this.PlayFire(false);
+
+        if (this.user.rb != null)
+            this.user.rb.AddForce(0f, -200, 0);
 
         /*if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);*/
@@ -204,6 +224,9 @@ public class SuperUppercut : Attack
         }
         this.user.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);*/
         yield return new WaitForSeconds(0.015f);
+        if (this.hitbox4 != null)
+            this.hitbox4.gameObject.SetActive(false);
+
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -90f, 0f);
         yield return new WaitForSeconds(0.015f);
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -125f, 0f);
@@ -220,7 +243,7 @@ public class SuperUppercut : Attack
         yield return new WaitForSeconds(0.015f);
         this.animations.body.localEulerAngles = new Vector3(0f, 0f, 0f);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.05f);
 
         this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
 
@@ -305,12 +328,12 @@ public class SuperUppercut : Attack
         yield return new WaitForSeconds(0.015f);
         this.animations.body.localEulerAngles = new Vector3(0f, 0f, 0f);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(this.endLag1);
 
         this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
 
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(this.endLag2);
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -341,6 +364,9 @@ public class SuperUppercut : Attack
             this.hitbox2.gameObject.SetActive(false);
         if (this.hitbox3 != null)
             this.hitbox3.gameObject.SetActive(false);
+
+        if (this.hitbox4 != null)
+            this.hitbox4.gameObject.SetActive(false);
         this.PlayFire(false);
         this.onGoing = false;
 

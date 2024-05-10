@@ -27,6 +27,15 @@ public class DebugInputs : MonoBehaviour
     public Action<bool> LoadPreviousStageInput;
     [HideInInspector] public bool pastLoadPreviousStageInput;
 
+    /*public bool togglingLifeNumbersInput;
+    public Action<bool> ToggleLifeNumbersInput;
+    [HideInInspector] public bool pastToggleLifeNumbersInput;*/
+
+    [Space]
+    public bool lifeNumbersEnabled = false;
+    public GameObject p1LifeNumbers;
+    public GameObject p2LifeNumbers;
+
 
     public int sceneIndex = 1;
 
@@ -174,6 +183,54 @@ public class DebugInputs : MonoBehaviour
                 this.randomSkybox.LoadNextStage();*/
             this.pastLoadPreviousStageInput = boolean;
         }
+        /*if (boolean && this.randomSkybox != null)
+        {
+            this.randomSkybox.LoadNextStage();
+        }*/
+
+    }
+
+    public void OnToggleLifeNumberInput(InputAction.CallbackContext ctx)
+    {
+        this.lifeNumbersEnabled = !this.lifeNumbersEnabled;
+        this.p1LifeNumbers.SetActive(this.lifeNumbersEnabled);
+        this.p2LifeNumbers.SetActive(this.lifeNumbersEnabled);
+        //bool boolean = ctx.ReadValueAsButton();
+
+        
+
+        /*this.togglingLifeNumbersInput = boolean;
+        if (this.pastToggleLifeNumbersInput != boolean && this.p1LifeNumbers != null && this.p2LifeNumbers != null)
+        {
+            this.ToggleLifeNumbersInput?.Invoke(boolean);
+            *//*Debug.Log(boolean);
+            if (this.randomSkybox != null)
+                this.randomSkybox.LoadNextStage();*//*
+            this.pastSwitchStageInput = boolean;
+
+            *//*if (!this.lifeNumbersEnabled)
+                this.lifeNumbersEnabled = true;
+            else if (lifeNumbersEnabled)
+                this.lifeNumbersEnabled = false;
+
+            this.p1LifeNumbers.SetActive(this.lifeNumbersEnabled);
+            this.p2LifeNumbers.SetActive(this.lifeNumbersEnabled);*//*
+
+            //this.lifeNumbersEnabled = !this.lifeNumbersEnabled;
+
+            *//*if (this.lifeNumbersEnabled)
+            {
+                this.lifeNumbersEnabled = false;
+                this.p1LifeNumbers.SetActive(false);
+                this.p2LifeNumbers.SetActive(false);
+            }
+            else if (!this.lifeNumbersEnabled)
+            {
+                this.lifeNumbersEnabled = true;
+                this.p1LifeNumbers.SetActive(true);
+                this.p2LifeNumbers.SetActive(true);
+            }*//*
+        }*/
         /*if (boolean && this.randomSkybox != null)
         {
             this.randomSkybox.LoadNextStage();

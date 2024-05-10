@@ -49,7 +49,13 @@ public class AttackAnimationTests : Attack
                 this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 22f, this.user.rb.velocity.y, 0f);
                 //this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 25f, this.user.rb.velocity.y, 0f);
             }
-                
+
+
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            {
+                //this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+                this.user.rb.velocity = new Vector3(this.user.rb.velocity.x / 1.5f, this.user.rb.velocity.y - 0.4f, 0);
+            }
         }
 
         /*if (this.onGoing && this.user != null)
@@ -72,8 +78,8 @@ public class AttackAnimationTests : Attack
 
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
             {
-                this.user.AddStun(0.2f, false);
-                this.StartCoroutine(this.AnimationTestCoroutine());
+                this.user.AddStun(0.2f, true);
+                this.StartCoroutine(this.AnimationTestCoroutine4());
             }
 
 
@@ -485,6 +491,63 @@ public class AttackAnimationTests : Attack
 
 
         //End
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+    private IEnumerator AnimationTestCoroutine4()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        float animSpeed = 0.06f;
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(0);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(1, 0);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        this.user.rb.AddForce(new Vector3(this.user.transform.forward.z * 150f, 0f, 0f));
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(2, 0);
+
+        yield return new WaitForSeconds(animSpeed + 0.025f);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(3);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(4);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(5);
+
+        yield return new WaitForSeconds(animSpeed);
+
+        if (this.animations != null)
+            this.animations.ForwardKickShippu(6);
+
+        yield return new WaitForSeconds(animSpeed);
+
+
+
+
+        yield return new WaitForSeconds(animSpeed);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
