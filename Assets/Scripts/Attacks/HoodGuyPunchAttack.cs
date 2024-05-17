@@ -297,7 +297,7 @@ public class HoodGuyPunchAttack : Attack
         if (this.backHitbox != null)
             this.backHitbox.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.25f);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
@@ -312,7 +312,7 @@ public class HoodGuyPunchAttack : Attack
         if (this.scyteTrail != null)
             this.scyteTrail.SetActive(false);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
@@ -381,7 +381,7 @@ public class HoodGuyPunchAttack : Attack
             this.forwardHitbox.gameObject.SetActive(false);
 
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
@@ -397,7 +397,7 @@ public class HoodGuyPunchAttack : Attack
         if (this.scyteTrail != null)
             this.scyteTrail.SetActive(false);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

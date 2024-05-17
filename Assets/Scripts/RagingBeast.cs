@@ -271,6 +271,18 @@ public class RagingBeast : Attack
         }
 
         /*yield return new WaitForSeconds(0.3f);
+        amount = 50;
+        while (amount > 0)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            this.PunchEffect(new Vector3(player.transform.position.x + this.RandomX(minXPos, maxXPos), this.RandomY(minYPos, maxYPos), 0));
+            player.TakeDamage(this.user.transform.position, 0.5f, 0f, 0f, 0f, false, ghost);
+            amount -= 1;
+            yield return null;
+        }*/
+
+        /*yield return new WaitForSeconds(0.3f);
         amount = 25;
         while (amount > 0)
         {

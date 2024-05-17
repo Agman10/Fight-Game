@@ -2255,7 +2255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eebe9763539c32b428c4751370eaf510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 7
   stun: 0.2
   horizontalKnockback: 300
   verticalKnockback: 300
@@ -6503,8 +6503,11 @@ MonoBehaviour:
   hitbox1: {fileID: 1892721842789644578}
   hitbox2: {fileID: 2400421456504047103}
   hitbox3: {fileID: 9098575006812606678}
+  hitbox4: {fileID: 0}
   fire: {fileID: 8167243606776186272}
   startParticle: {fileID: 6361277558043152479, guid: 27c1b62ce485c53419a060012d68c8c1, type: 3}
+  endLag1: 0.3
+  endLag2: 0.25
 --- !u!1 &2569820849179080956
 GameObject:
   m_ObjectHideFlags: 0
@@ -6637,7 +6640,7 @@ MonoBehaviour:
   fireBallYForce: 200
   animationId: 0
   groundTime: 0.5
-  groundStunTime: 0.5
+  groundStunTime: 0.3
   airTime: 0.5
   airStunTime: 0
 --- !u!1 &2644258869394255732

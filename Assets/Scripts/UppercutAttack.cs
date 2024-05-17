@@ -115,18 +115,27 @@ public class UppercutAttack : Attack
 
                 this.user.AddStun(0.2f, true);
             }
+            else if (this.uppercutId == 4)
+            {
+                if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                    this.StartCoroutine(this.KickUppercutCoroutine(this.kickYForce));
+                else
+                    this.StartCoroutine(this.KickUppercutCoroutine(this.kickYForce + 200f));
+
+                this.user.AddStun(0.2f, true);
+            }
             else
             {
                 if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                 {
-                    this.StartCoroutine(this.KickUppercutCoroutine());
+                    this.StartCoroutine(this.KickUppercutCoroutine(this.kickYForce));
                     this.user.AddStun(0.2f, true);
                 }
             }
 
         }
     }
-    IEnumerator KickUppercutCoroutine()
+    IEnumerator KickUppercutCoroutine(float yForce = 1000f)
     {
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
@@ -152,7 +161,7 @@ public class UppercutAttack : Attack
             this.user.rb.AddForce(this.user.transform.forward.z * 200, 1000, 0);*/
 
         if (this.user.rb != null)
-            this.user.rb.AddForce(this.user.transform.forward.z * this.kickXForce, this.kickYForce, 0);
+            this.user.rb.AddForce(this.user.transform.forward.z * this.kickXForce, yForce, 0);
 
         /*if (this.user.ragdoll != null)
             this.user.ragdoll.transform.localEulerAngles = new Vector3(0, this.user.transform.forward.z * 90, 50);*/

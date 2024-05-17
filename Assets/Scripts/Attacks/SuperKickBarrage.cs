@@ -372,7 +372,7 @@ public class SuperKickBarrage : Attack
             this.animations.SetSpinKickAnimPose2();
 
 
-        this.user.rb.AddForce(new Vector3(/*this.user.transform.forward.z * 100f*/ 0f, 1000, 0f));
+        this.user.rb.AddForce(new Vector3(/*this.user.transform.forward.z * 200f*/ 0f, 1000, 0f));
 
         if (this.hitboxSpinKick != null)
             this.hitboxSpinKick.gameObject.SetActive(true);

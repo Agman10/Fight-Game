@@ -20,6 +20,8 @@ public class TestGameObjectAnim : MonoBehaviour
             this.StartCoroutine(this.TestAnim3());
         else if (this.id == 3)
             this.StartCoroutine(this.TestAnim4());
+        else if (this.id == 4)
+            this.StartCoroutine(this.TestAnim5());
     }
     private void OnDisable()
     {
@@ -232,6 +234,32 @@ public class TestGameObjectAnim : MonoBehaviour
 
 
             this.StartCoroutine(this.TestAnim4());
+        }
+
+
+    }
+
+    private IEnumerator TestAnim5()
+    {
+        if (this.gameObjects.Length == 3)
+        {
+            this.gameObjects[0].SetActive(true);
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(false);
+
+            yield return new WaitForSeconds(0.8f);
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(true);
+
+            yield return new WaitForSeconds(0.05f);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(true);
+
+            yield return new WaitForSeconds(0.4f);
+
+            this.StartCoroutine(this.TestAnim5());
         }
 
 
