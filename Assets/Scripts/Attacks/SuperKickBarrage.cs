@@ -397,7 +397,7 @@ public class SuperKickBarrage : Attack
             this.hitboxSpinKickEnd.gameObject.SetActive(true);
 
         time = 0.3f;
-        while (time > 0)
+        while (Mathf.Abs(this.user.transform.position.y) > 0f && time > 0)
         {
             time -= Time.deltaTime;
             if (this.animations != null)

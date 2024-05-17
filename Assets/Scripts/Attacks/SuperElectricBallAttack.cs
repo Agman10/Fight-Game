@@ -8,7 +8,10 @@ public class SuperElectricBallAttack : Attack
     public bool onGoing;
     public GameObject startParticle;
     public ElectricBallProjectile electricBall;
+    public ElectricBallProjectile electricBallP2;
     public GameObject electricBallModel;
+    public GameObject electricBallModelP1;
+    public GameObject electricBallModelP2;
 
     public float ballMoveSpeed = 2f;
     public float ballWaveSpeed = 5f;
@@ -104,6 +107,21 @@ public class SuperElectricBallAttack : Attack
 
         if (this.electricBallModel != null)
         {
+            if (this.electricBallModelP2 != null && this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
+            {
+                if (this.electricBallModelP1 != null)
+                    this.electricBallModelP1.SetActive(false);
+                this.electricBallModelP2.SetActive(true);
+            }
+            else if (this.electricBallModelP1 != null)
+            {
+                this.electricBallModelP1.SetActive(true);
+
+                if (this.electricBallModelP2 != null)
+                    this.electricBallModelP2.SetActive(false);
+            }
+                
+
             this.electricBallModel.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             this.electricBallModel.SetActive(true);
         }
@@ -157,6 +175,10 @@ public class SuperElectricBallAttack : Attack
         if (this.electricBall != null)
         {
             ElectricBallProjectile electricBallPrefab = this.electricBall;
+
+            if (this.electricBallP2 != null && this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
+                electricBallPrefab = this.electricBallP2;
+
             electricBallPrefab = Instantiate(electricBallPrefab, new Vector3((this.transform.forward.z * 1.35f) + this.transform.position.x, this.transform.position.y + 1.75f, 0), this.transform.rotation);
             electricBallPrefab.SetOwner(this.user);
             electricBallPrefab.moveSpeed = this.ballMoveSpeed;

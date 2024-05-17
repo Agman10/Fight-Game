@@ -118,7 +118,7 @@ public class BookCounterAttack : Attack
         if (this.animations != null)
             this.animations.Book(0);
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.025f);
 
 
 
@@ -135,7 +135,7 @@ public class BookCounterAttack : Attack
 
 
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.35f);
 
         if (this.animations != null)
             this.animations.Book(0);
@@ -148,7 +148,7 @@ public class BookCounterAttack : Attack
 
         this.user.damageMitigation = -0.5f;
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.025f);
 
 
         if (this.book != null)

@@ -210,13 +210,27 @@ public class UppercutAttack : Attack
 
         //yield return new WaitForSeconds(0.3f + (0.3f -(animSpeed * 3)));
 
-        yield return new WaitForSeconds(0.2f);
+        float waitTime = 0.1f;
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.1f);
+
+        //yield return new WaitForSeconds(0.2f);
 
         if (this.kickHitbox != null)
             this.kickHitbox.gameObject.SetActive(false);
 
         //yield return new WaitForSeconds(0.3f -(animSpeed * 3));
-        yield return new WaitForSeconds(0.1f + (0.3f - (animSpeed * 3)));
+        waitTime = 0.1f + (0.3f - (animSpeed * 3));
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+        //yield return new WaitForSeconds(0.1f + (0.3f - (animSpeed * 3)));
 
 
 
@@ -233,7 +247,14 @@ public class UppercutAttack : Attack
             this.kickHitbox.gameObject.SetActive(false);
 
         //yield return new WaitForSeconds(0.4f);
-        yield return new WaitForSeconds(this.kickEndTime);
+        waitTime = this.kickEndTime;
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+        //yield return new WaitForSeconds(this.kickEndTime);
+
 
         /*if (this.user.ragdoll != null)
             this.user.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);*/
@@ -275,7 +296,17 @@ public class UppercutAttack : Attack
         if (this.punchHitbox1 != null)
             this.punchHitbox1.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
+        float waitTime = 0.4f;
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && /*Mathf.Abs(this.user.transform.position.y) > 0.05f &&*/ waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+        //Debug.Log(waitTime);
+
+        //yield return new WaitForSeconds(0.5f);
+
         if (this.punchHitbox1 != null)
             this.punchHitbox1.gameObject.SetActive(false);
 
@@ -370,7 +401,13 @@ public class UppercutAttack : Attack
         {
             this.animations.SetDefaultPose();
         }*/
-        yield return new WaitForSeconds(0.3f);
+        waitTime = 0.3f;
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+        //yield return new WaitForSeconds(0.3f);
         
         this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
 
@@ -404,7 +441,16 @@ public class UppercutAttack : Attack
         if (this.punchHitbox1 != null)
             this.punchHitbox1.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
+        float waitTime = 0.4f;
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && /*Mathf.Abs(this.user.transform.position.y) > 0.05f &&*/ waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+        Debug.Log(waitTime);
+
+        //yield return new WaitForSeconds(0.5f);
         if (this.punchHitbox1 != null)
             this.punchHitbox1.gameObject.SetActive(false);
 
@@ -519,9 +565,14 @@ public class UppercutAttack : Attack
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
-        
 
-        yield return new WaitForSeconds(0.5f);
+        float waitTime = 0.5f;
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+        //yield return new WaitForSeconds(0.5f);
 
         this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
 

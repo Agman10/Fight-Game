@@ -8051,7 +8051,7 @@ public class TempPlayerAnimations : MonoBehaviour
                 this.rightArm.localEulerAngles = new Vector3(0f, -15f, 150f);
                 this.leftArm.localEulerAngles = new Vector3(0f, 15f, 150f);
                 this.rightArmJoint.localEulerAngles = new Vector3(-30f, 0f, 0f);
-                this.leftArmJoint.localEulerAngles = new Vector3(-30f, 0f, 0f);
+                this.leftArmJoint.localEulerAngles = new Vector3(30f, 0f, 0f);
 
                 this.rightLeg.localEulerAngles = new Vector3(30f, 0f, -10f);
                 this.leftLeg.localEulerAngles = new Vector3(-30f, 0f, -10f);
@@ -8143,6 +8143,15 @@ public class TempPlayerAnimations : MonoBehaviour
             this.body.localPosition = new Vector3(0f, this.defaultYPos, 0f);*/
         }
 
-        this.SetEyes(0);
+        //this.SetEyes(0);
+
+        if (stageId == 0)
+            this.SetEyes(0 /*2*/);
+        else if (stageId == 1)
+            this.SetEyes(3);
+        else if (stageId == 2)
+            this.SetEyes(3);
+        else
+            this.SetEyes(0);
     }
 }

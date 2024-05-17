@@ -89,8 +89,8 @@ public class RollDownAttack : Attack
             this.hitbox.gameObject.SetActive(true);
 
         this.user.rb.AddForce(0f, -800f, 0f);
-
-        while (Mathf.Abs(this.user.rb.velocity.y) > 0f)
+        //while (Mathf.Abs(this.user.rb.velocity.y) > 0f)
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0.05f && Mathf.Abs(this.user.transform.position.y) > 0.05f)
         {
             //currentTime += Time.deltaTime;
             //this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 1000f * Time.deltaTime, 0f, 0f);

@@ -9,7 +9,11 @@ public class HammerAttack : Attack
 
     public GameObject hammer;
     public TestHitbox hitbox;
+    public TestHitbox backHitbox;
     public GameObject impactEffect;
+
+    private float baseDamage;
+    private float baseSuperCharge;
 
     public override void OnHit()
     {
@@ -19,6 +23,16 @@ public class HammerAttack : Attack
             this.Stop();
             if (this.animations != null)
                 this.animations.SetDefaultPose();
+        }
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (this.hitbox != null)
+        {
+            this.baseDamage = this.hitbox.damage;
+            this.baseSuperCharge = this.hitbox.superChargeAmount;
         }
     }
 
@@ -67,8 +81,8 @@ public class HammerAttack : Attack
 
         if (this.hitbox != null)
         {
-            this.hitbox.damage = 15f;
-            this.hitbox.superChargeAmount = 10f;
+            this.hitbox.damage = this.baseDamage;
+            this.hitbox.superChargeAmount = this.baseSuperCharge;
         }
 
 
@@ -103,7 +117,7 @@ public class HammerAttack : Attack
         if (waitTime < 0f)
             waitTime = 0f;
 
-        this.user.rb.isKinematic = true;
+        //this.user.rb.isKinematic = true;
 
         //yield return new WaitForSeconds(0.5f);
         yield return new WaitForSeconds(waitTime);
@@ -113,20 +127,42 @@ public class HammerAttack : Attack
         float startRightArmZRot = this.animations.rightArm.localEulerAngles.z;
         float startLeftArmZRot = this.animations.leftArm.localEulerAngles.z;
 
+        float duration = 2f;
+
         float extraDamage = 0f;
         float extraCharge = 0f;
 
-        while (this.user.input.special2 && testTime < 3f)
+        /*while (Mathf.Abs(this.user.rb.velocity.y) > 0f)
         {
+            testTime += Time.deltaTime;
+            Debug.Log(testTime);
+            yield return null;
+        }
+        if (testTime > duration)
+            testTime = duration;
+
+        extraDamage = this.baseDamage * Mathf.Lerp(0f, 1f, testTime / duration);
+        extraCharge = this.baseSuperCharge * Mathf.Lerp(0f, 1f, testTime / duration);*/
+
+        /*if (this.animations != null)
+            this.animations.SetEyes(2);*/
+
+        while (this.user.input.special2 && testTime < duration)
+        {
+            testTime += Time.deltaTime;
 
             if (this.hitbox != null)
             {
                 //this.hitbox.damage += Time.deltaTime * 2f;
-                extraDamage += Time.deltaTime * 5f;
-                extraCharge += Time.deltaTime * 2f;
+
+                extraDamage = this.baseDamage * Mathf.Lerp(0f, 1f, testTime / duration);
+                extraCharge = this.baseSuperCharge * Mathf.Lerp(0f, 1f, testTime / duration);
+
+                /*extraDamage += Time.deltaTime * 6.75f;
+                extraCharge += Time.deltaTime * 3.5f;*/
             }
 
-            testTime += Time.deltaTime;
+            
 
             float newY = Mathf.Sin(testTime * 100f);
             
@@ -146,6 +182,7 @@ public class HammerAttack : Attack
         //Debug.Log(extraDamage);
         //Debug.Log(extraCharge);
 
+
         if (this.animations != null)
             this.animations.HammerAttack(1);
 
@@ -156,7 +193,21 @@ public class HammerAttack : Attack
             this.hammer.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 162f);
         }
 
+        this.user.rb.isKinematic = true;
+
+        if (this.backHitbox != null)
+        {
+            this.backHitbox.gameObject.SetActive(true);
+        }
+
+
         yield return new WaitForSeconds(0.05f);
+
+        if (this.backHitbox != null)
+        {
+            this.backHitbox.gameObject.SetActive(false);
+        }
+
 
         if (this.animations != null)
             this.animations.HammerAttack(2);
@@ -176,21 +227,23 @@ public class HammerAttack : Attack
 
         if (this.hitbox != null)
         {
-            this.hitbox.damage = 15 + extraDamage;
-            this.hitbox.superChargeAmount = 10 + extraCharge;
+            this.hitbox.damage = this.baseDamage + extraDamage;
+            this.hitbox.superChargeAmount = this.baseSuperCharge + extraCharge;
+
+            this.hitbox.gameObject.SetActive(true);
             //extraDamage += Time.deltaTime * 2f;
         }
 
-        if (this.hitbox != null)
-            this.hitbox.gameObject.SetActive(true);
+        /*if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(true);*/
 
         yield return new WaitForSeconds(0.1f);
 
         if (this.hitbox != null)
         {
             this.hitbox.gameObject.SetActive(false);
-            this.hitbox.damage = 15f;
-            this.hitbox.superChargeAmount = 10f;
+            this.hitbox.damage = this.baseDamage;
+            this.hitbox.superChargeAmount = this.baseSuperCharge;
         }
 
         yield return new WaitForSeconds(0.4f);
@@ -220,8 +273,8 @@ public class HammerAttack : Attack
 
         if (this.hitbox != null)
         {
-            this.hitbox.damage = 15f;
-            this.hitbox.superChargeAmount = 10f;
+            this.hitbox.damage = this.baseDamage;
+            this.hitbox.superChargeAmount = this.baseSuperCharge;
             this.hitbox.gameObject.SetActive(false);
         }
 
@@ -230,6 +283,11 @@ public class HammerAttack : Attack
             this.hammer.gameObject.SetActive(false);
             this.hammer.gameObject.transform.localPosition = new Vector3(-1.2f, 0.205f, 0f);
             this.hammer.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 246f);
+        }
+
+        if(this.backHitbox != null)
+        {
+            this.backHitbox.gameObject.SetActive(false);
         }
 
         this.user.rb.isKinematic = false;
