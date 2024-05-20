@@ -15,6 +15,25 @@ public class Bomb : MonoBehaviour
     private Rigidbody rb;
 
     public Transform ropeTransform;
+
+    public bool effectOnly = false;
+
+    public Explosion explosion;
+
+    public float explosionSize = 1f;
+    [Space]
+    public float innerDamage = 15f;
+    public float innerKnockbackX = 900f;
+    public float innerKnockbackY = 900f;
+    public float innerSuperCharge = 3.75f;
+    public float innerStun = 0.2f;
+    public bool changePlayerDir = false;
+    [Space]
+    public float outerDamage = 5f;
+    public float outerKnockbackX = 300f;
+    public float outerKnockbackY = 300f;
+    public float outerSuperCharge = 1.25f;
+    public float outerStun = 0.2f;
     // Start is called before the first frame update
 
     private void OnEnable()
@@ -56,10 +75,11 @@ public class Bomb : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
-        
-    }
+        if (this.rb != null)
+            this.rb.velocity = new Vector3(this.rb.velocity.x, this.rb.velocity.y - 0.1f, 0f);
+    }*/
 
     IEnumerator ExplosionTimer()
     {
@@ -113,7 +133,36 @@ public class Bomb : MonoBehaviour
         if (this.rb != null)
             this.rb.isKinematic = true;
 
-        if (this.explosionHitbox != null)
+        if (!this.effectOnly)
+        {
+            if (this.explosion != null)
+            {
+                Explosion explosionPrefab = this.explosion;
+
+                explosionPrefab = Instantiate(explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
+
+                if (this.belongsTo != null)
+                    explosionPrefab.SetOwner(this.belongsTo);
+
+                explosionPrefab.SetDamage(this.innerDamage, this.outerDamage, this.innerKnockbackX, this.innerKnockbackY, this.outerKnockbackX, this.outerKnockbackY, this.innerSuperCharge, this.outerSuperCharge, this.innerStun, this.outerStun, true);
+
+                explosionPrefab.SetSize(this.explosionSize);
+
+            }
+        }
+        else
+        {
+            if (this.explosionEffect != null)
+            {
+                GameObject explosionPrefab = this.explosionEffect;
+                explosionPrefab = Instantiate(explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
+            }
+        }
+
+        this.gameObject.SetActive(false);
+
+
+        /*if (this.explosionHitbox != null)
             this.explosionHitbox.gameObject.SetActive(true);
 
         if (this.explosionEffect != null)
@@ -121,7 +170,7 @@ public class Bomb : MonoBehaviour
             GameObject explosionPrefab = this.explosionEffect;
             explosionPrefab = Instantiate(explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
         }
-        this.StartCoroutine(this.ExplosionDuration());
+        this.StartCoroutine(this.ExplosionDuration());*/
     }
 
     IEnumerator ExplosionDuration()
@@ -139,7 +188,7 @@ public class Bomb : MonoBehaviour
         if (this.rb != null && knockback.magnitude > 0f)
         {
             //Debug.Log(knockback.magnitude);
-            this.rb.AddForce(knockback);
+            this.rb.AddForce(knockback /** 0.75f*/);
             //this.rb.AddTorque(knockback);
             this.rb.AddTorque(new Vector3(1000, 1000, 1000));
         }

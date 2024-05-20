@@ -9,6 +9,8 @@ public class Fire : MonoBehaviour
     public TestHitbox hitbox;
     public VisualEffect flame;
     public float lifeTime = 1.5f;
+
+    public float moveSpeed = 0f;
     void OnEnable()
     {
         if (this.hitbox != null)
@@ -34,7 +36,42 @@ public class Fire : MonoBehaviour
 
     IEnumerator DisableTimerCoroutine()
     {
-        yield return new WaitForSeconds(this.lifeTime);
+        if (this.moveSpeed == 0f)
+        {
+            yield return new WaitForSeconds(this.lifeTime);
+        }
+        else
+        {
+            //WHEN THERE IS A DEDICATED FLOOR LAYER THIS WONT BE NEEDED THEN THE FIRE WILL USE RIGIDBODY AND ONLY COLIDE WITH FLOOR
+
+            float waitTime = this.lifeTime;
+            float fallSpeed = -5f;
+            while (waitTime > 0f)
+            {
+                waitTime -= Time.deltaTime;
+
+                //if (Mathf.Abs(this.transform.position.y) <= 0.5f)
+                if (this.transform.position.y > 0.4f && this.transform.position.y <= 0.5f)
+                {
+                    fallSpeed = 0f;
+                    this.transform.position = new Vector3(this.transform.position.x, 0.5f, 0f);
+                }
+                else
+                {
+                    fallSpeed = -5f;
+                }
+
+
+                this.transform.Translate(new Vector3(this.moveSpeed * Time.deltaTime, fallSpeed * Time.deltaTime, 0f));
+
+
+
+                yield return null;
+            }
+        }
+        
+
+        //yield return new WaitForSeconds(this.lifeTime);
         
         if (this.flame != null)
             this.flame.Stop();

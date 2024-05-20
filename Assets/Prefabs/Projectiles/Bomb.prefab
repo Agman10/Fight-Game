@@ -159,6 +159,8 @@ MonoBehaviour:
   fireProperty: 1
   physicsKnockbackMultiplier: 1
   changeTargetDir: 0
+  preventDeath: 0
+  ragdollForce: 1
   hitboxOrigin: {fileID: 0}
 --- !u!1 &6333042705926698290
 GameObject:
@@ -1030,6 +1032,19 @@ MonoBehaviour:
   explosionHitbox2: {fileID: 2942826439339650013}
   belongsTo: {fileID: 0}
   ropeTransform: {fileID: 4862300276661708136}
+  explosion: {fileID: 7578743896411387240, guid: 275d87eb656cd2743a13b8c9e2f0c637, type: 3}
+  explosionSize: 1
+  innerDamage: 15
+  innerKnockbackX: 900
+  innerKnockbackY: 900
+  innerSuperCharge: 3.75
+  innerStun: 0.2
+  changePlayerDir: 0
+  outerDamage: 5
+  outerKnockbackX: 300
+  outerKnockbackY: 300
+  outerSuperCharge: 1.25
+  outerStun: 0.2
 --- !u!135 &6333042707642427888
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1312,6 +1327,8 @@ MonoBehaviour:
   fireProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 0
+  preventDeath: 0
+  ragdollForce: 1
   hitboxOrigin: {fileID: 0}
 --- !u!1 &6333042707998753212
 GameObject:
@@ -1791,4 +1808,6 @@ MonoBehaviour:
   fireProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 0
+  preventDeath: 0
+  ragdollForce: 1
   hitboxOrigin: {fileID: 0}

@@ -8,6 +8,7 @@ public class FireBall : MonoBehaviour
     public Fire fire;
     public TestPlayer belongsTo;
     public float damage = 5f;
+    public float superChargeAmount = 5f;
 
     public VisualEffect flame;
     public GameObject model;
@@ -19,6 +20,8 @@ public class FireBall : MonoBehaviour
     public float stun = 0f;
     public float horizontalKnockack = 0f;
     public float verticalKnockack = 0f;
+
+    public float yVelocity = 0f;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -44,7 +47,8 @@ public class FireBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (this.rb != null && this.yVelocity != 0f)
+            this.rb.velocity = new Vector3(this.rb.velocity.x, this.rb.velocity.y + this.yVelocity, 0f);
     }
 
     public void KnockBack(Vector3 knockback)
@@ -120,8 +124,8 @@ public class FireBall : MonoBehaviour
                 player.OnHit?.Invoke();
                 if (this.belongsTo != null)
                 {
-                    this.belongsTo.GiveSuperCharge(5f);
-                    player.GiveSuperCharge(2.5f);
+                    this.belongsTo.GiveSuperCharge(this.superChargeAmount);
+                    player.GiveSuperCharge(this.superChargeAmount * 0.5f);
 
                     player.OnHitFromPlayer?.Invoke(this.belongsTo);
                 }
