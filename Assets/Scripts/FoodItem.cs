@@ -14,6 +14,8 @@ public class FoodItem : MonoBehaviour
     public bool hasCollided;
 
     public GameObject pickUpParticle;
+
+    public float spinSpeed = -500f;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,7 @@ public class FoodItem : MonoBehaviour
         if (!this.hasCollided)
         {
             if (this.model != null)
-                this.model.transform.Rotate(new Vector3(0f, 0f, -500f * Time.deltaTime));
+                this.model.transform.Rotate(new Vector3(0f, 0f, this.spinSpeed * Time.deltaTime));
         }
     }
     private void OnEnable()

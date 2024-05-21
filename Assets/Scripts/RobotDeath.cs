@@ -50,6 +50,7 @@ public class RobotDeath : MonoBehaviour
     private IEnumerator ExplodeCoroutine()
     {
         yield return new WaitForSeconds(3f);
+        //yield return new WaitForSeconds(0.01f);
 
         this.player.ragdoll.gameObject.SetActive(false);
 

@@ -21,6 +21,8 @@ public class FireBall : MonoBehaviour
     public float horizontalKnockack = 0f;
     public float verticalKnockack = 0f;
 
+    public float hitEffectYOffset = 0f;
+
     public float yVelocity = 0f;
     // Start is called before the first frame update
     void OnEnable()
@@ -87,7 +89,16 @@ public class FireBall : MonoBehaviour
         if (headStandingPrevention != null)
             return;
 
-        if(player == null /*|| this.belongsTo == null*/)
+        TestRagdoll ragdoll = other.GetComponent<TestRagdoll>();
+
+        if (ragdoll != null)
+            ragdoll.KnockBack(new Vector3(this.transform.forward.z * (this.horizontalKnockack * 100f), this.verticalKnockack * 100f, 0f));
+
+        Bomb bomb = other.GetComponent<Bomb>();
+        if (bomb != null)
+            bomb.KnockBack(new Vector3(this.transform.forward.z * this.horizontalKnockack, this.verticalKnockack, 0f));
+
+        if (player == null /*|| this.belongsTo == null*/)
         {
             //this.gameObject.SetActive(false);
             this.Disable();
@@ -110,6 +121,8 @@ public class FireBall : MonoBehaviour
             {
                 ball.KnockBack(new Vector3(this.transform.forward.z * 100f, 100f, 0f));
             }
+
+            
         }
         else
         {
@@ -164,7 +177,8 @@ public class FireBall : MonoBehaviour
         if (this.hitEffect != null)
         {
             GameObject hitEffectPrefab = this.hitEffect;
-            hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0f), Quaternion.Euler(0, 0, 0));
+            //hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x, this.transform.position.y + this.hitEffectYOffset, 0f), Quaternion.Euler(0, 0, 0));
+            hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x, this.transform.position.y + this.hitEffectYOffset, 0f), this.transform.rotation);
         }
 
         this.StartCoroutine(this.DisableCoroutine());

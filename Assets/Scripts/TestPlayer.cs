@@ -98,7 +98,7 @@ public class TestPlayer : MonoBehaviour
     }
 
 
-    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false/*, bool delayDeath = false*/)
+    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true/*, bool delayDeath = false*/)
     {
         if(this.damageMitigation != 0f && amount > 0f)
         {
@@ -124,7 +124,7 @@ public class TestPlayer : MonoBehaviour
             this.OnTakeDamage?.Invoke();
         if(stun > 0f)
         {
-            this.AddStun(stun);
+            this.AddStun(stun, stopMomentumOnStun);
         }
 
         if(Mathf.Abs(horizontalKnockback) > 0f || Mathf.Abs(verticalKnockback) > 0f)
