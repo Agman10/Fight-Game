@@ -122,8 +122,8 @@ public class Spring : MonoBehaviour
         if (this.triggerCollison != null)
             this.triggerCollison.SetActive(true);
 
-        float randomTime = Random.Range(1f, 4f);
-        Debug.Log(randomTime);
+        float randomTime = Random.Range(3f, 7f);
+        //Debug.Log(randomTime);
         yield return new WaitForSeconds(randomTime);
         this.activated = true;
 

@@ -547,7 +547,8 @@ public class TempCrawlSuper : Attack
 
         //this.user.rb.isKinematic = false;
 
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.41f);
 
         this.StopSuper(player);
     }
