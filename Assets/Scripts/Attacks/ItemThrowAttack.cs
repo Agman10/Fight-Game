@@ -314,8 +314,8 @@ public class ItemThrowAttack : Attack
         }
         else if (number > 3000 && number <= 3500)
         {
-            int pillNumber = Random.Range(1, 1001);
-            if (pillNumber <= 10)
+            int pillNumber = Random.Range(1, 101);
+            if (pillNumber <= 5)
                 foodPrefab = this.badPill;
             else
                 foodPrefab = this.pill;
@@ -332,7 +332,7 @@ public class ItemThrowAttack : Attack
             else
                 foodPrefab = this.chocolate;
 
-            Debug.Log(foodNumber);
+            //Debug.Log(foodNumber);
         }
         /*else if (number > 3800 && number <= 5500)
         {

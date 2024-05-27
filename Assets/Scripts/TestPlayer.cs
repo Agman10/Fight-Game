@@ -310,7 +310,12 @@ public class TestPlayer : MonoBehaviour
                     this.animations.InversePose();
 
                 this.ragdoll.EnableRagdoll();
-                
+
+                //backflip
+                //this.ragdoll.RagdollForce(new Vector3(this.transform.position.x + (this.transform.forward.z * 1f), this.transform.position.y - 1.5f, this.transform.position.z), 70000);
+
+                //this.ragdoll.RagdollForce(new Vector3(this.transform.position.x + (this.transform.forward.z * 1.5f), this.transform.position.y - 1.5f, this.transform.position.z), 5000);
+
             }
 
             /*if(this.ghost != null)
