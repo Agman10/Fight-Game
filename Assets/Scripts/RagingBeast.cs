@@ -109,6 +109,21 @@ public class RagingBeast : Attack
 
         yield return new WaitForSeconds(0.25f);
 
+        /*float testTime = 0f;
+        float time = 0.25f;
+        float startPosY = this.animations.body.localPosition.y;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            testTime += Time.deltaTime;
+
+            float newY = Mathf.Sin(testTime * 100f);
+            this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, startPosY + (newY * 0.01f), this.animations.body.localPosition.z);
+            yield return null;
+        }*/
+
+        
+
         if (this.animations != null)
             this.animations.RagingBeastDash();
         this.moving = true;

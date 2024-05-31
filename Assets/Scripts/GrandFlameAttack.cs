@@ -70,9 +70,25 @@ public class GrandFlameAttack : Attack
         }
 
 
-        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
+
+        float testTime = 0f;
+        float time = 0.2f;
+        float startPosY = this.animations.body.localPosition.y;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            testTime += Time.deltaTime;
+
+            float newY = Mathf.Sin(testTime * 100f);
+            this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, startPosY + (newY * 0.01f), this.animations.body.localPosition.z);
+            yield return null;
+        }
+
+
         if (this.animations != null)
             this.animations.GrandFlameMid();
+
         yield return new WaitForSeconds(0.05f);
 
         this.user.rb.constraints = RigidbodyConstraints.FreezeAll;

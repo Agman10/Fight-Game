@@ -27,6 +27,8 @@ public class ItemThrowAttack : Attack
 
     public Spring spring;
 
+    public ThrowPotion healingPotion;
+
     [Space]
     public FoodItem donut;
     public FoodItem donut2;
@@ -152,6 +154,7 @@ public class ItemThrowAttack : Attack
 
         //this.ThrowSpring();
 
+        //this.ThrowPotion();
 
         this.ThrowRandomItem();
 
@@ -528,6 +531,21 @@ public class ItemThrowAttack : Attack
         }
     }
 
+    //MAKE IT SO IT SUPPORTS MULTIPLE POTIONS
+    public void ThrowPotion()
+    {
+        if (this.healingPotion != null)
+        {
+            ThrowPotion fireBallPrefab = this.healingPotion;
+            float forward = this.transform.forward.z;
+            //ghostPrefab = Instantiate(ghostPrefab, this.transform.position, this.transform.rotation);
+            fireBallPrefab = Instantiate(fireBallPrefab, new Vector3(this.user.transform.position.x + (forward * 0.8f), this.user.transform.position.y + 3, 0), this.user.transform.rotation);
+            if (this.user != null)
+                fireBallPrefab.SetOwner(this.user);
+
+            fireBallPrefab.KnockBack(new Vector3(forward * 250f, 500f, 0));
+        }
+    }
 
     private IEnumerator SuperItemThrowCoroutine()
     {

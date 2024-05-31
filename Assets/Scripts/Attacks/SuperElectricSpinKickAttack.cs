@@ -23,6 +23,8 @@ public class SuperElectricSpinKickAttack : Attack
     public ParticleSystem electricity1;
     public ParticleSystem electricity2;
 
+    public GameObject windHitboxes;
+
     
     
     //private bool ongoing;
@@ -111,7 +113,20 @@ public class SuperElectricSpinKickAttack : Attack
         }
         this.user.rb.isKinematic = true;
 
-        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
+
+
+        yield return new WaitForSeconds(0.19f);
+
+        if (this.windHitboxes != null)
+            this.windHitboxes.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.01f);
+
+        if (this.windHitboxes != null)
+            this.windHitboxes.gameObject.SetActive(false);
+
+
 
         this.user.rb.isKinematic = false;
 
@@ -193,7 +208,19 @@ public class SuperElectricSpinKickAttack : Attack
 
         this.user.rb.isKinematic = true;
 
-        yield return new WaitForSeconds(0.3f);
+        //yield return new WaitForSeconds(0.2f);
+
+        yield return new WaitForSeconds(0.19f);
+
+        if (this.windHitboxes != null)
+            this.windHitboxes.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.01f);
+
+        if (this.windHitboxes != null)
+            this.windHitboxes.gameObject.SetActive(false);
+
+
 
         this.user.rb.isKinematic = false;
 
@@ -314,6 +341,9 @@ public class SuperElectricSpinKickAttack : Attack
 
         if (this.hitbox2 != null)
             this.hitbox2.gameObject.SetActive(false);
+
+        if (this.windHitboxes != null)
+            this.windHitboxes.gameObject.SetActive(false);
 
         this.user.rb.isKinematic = false;
 
