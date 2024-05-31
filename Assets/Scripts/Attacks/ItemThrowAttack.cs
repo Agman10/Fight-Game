@@ -41,6 +41,7 @@ public class ItemThrowAttack : Attack
     public FoodItem badPill;
     public FoodItem carrot;
     public FoodItem chocolate;
+    public FoodItem orange;
 
     public override void OnHit()
     {
@@ -322,15 +323,17 @@ public class ItemThrowAttack : Attack
         }
         else if(number > 3500 && number <= 7500)
         {
-            int foodNumber = Random.Range(1, 5);
+            int foodNumber = Random.Range(1, 6);
             if (foodNumber <= 1)
                 foodPrefab = this.melon;
             else if (foodNumber > 1 && foodNumber <= 2)
                 foodPrefab = this.cherry;
             else if (foodNumber > 2 && foodNumber <= 3)
                 foodPrefab = this.carrot;
-            else
+            else if (foodNumber > 3 && foodNumber <= 4)
                 foodPrefab = this.chocolate;
+            else
+                foodPrefab = this.orange;
 
             //Debug.Log(foodNumber);
         }

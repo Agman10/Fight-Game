@@ -111,6 +111,10 @@ public class FireBall : MonoBehaviour
                 if (this.transform.position.y < 0.5f)
                     yPos = 0.5f;
 
+                /*if (this.transform.position.y < 0.5f && this.transform.position.y > -0.1f)
+                    yPos = 0.5f;*/
+
+
                 firePrefab = Instantiate(firePrefab, new Vector3(this.transform.position.x, yPos, 0f), this.transform.rotation);
                 if (this.belongsTo != null)
                     firePrefab.SetOwner(this.belongsTo);
