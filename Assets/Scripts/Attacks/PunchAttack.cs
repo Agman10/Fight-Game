@@ -185,7 +185,7 @@ public class PunchAttack : Attack
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
