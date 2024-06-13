@@ -21,6 +21,9 @@ public class TempMenu : MonoBehaviour
     {
         //SceneManager.LoadScene("TestStage");
 
+        if (UserInputManager.Instance != null)
+            Destroy(UserInputManager.Instance.gameObject);
+
         SceneManager.LoadSceneAsync("CharacterSelect");
 
         if (GameModeManager.Instance != null)
@@ -34,6 +37,9 @@ public class TempMenu : MonoBehaviour
     public void StartFightBall()
     {
         //SceneManager.LoadScene("TestFootBall");
+
+        if (UserInputManager.Instance != null)
+            Destroy(UserInputManager.Instance.gameObject);
 
         SceneManager.LoadSceneAsync("CharacterSelect");
 

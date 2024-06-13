@@ -101,7 +101,24 @@ public class GameManager : MonoBehaviour
                     p2.SetInput(player2Input);
                 }
 
-                if(CharacterManager.Instance != null)
+                /*if (UserInputManager.Instance != null)
+                {
+                    if (UserInputManager.Instance.player1Input != null)
+                    {
+                        PlayerInput player1Input = UserInputManager.Instance.player1Input.GetComponent<PlayerInput>();
+                        p1.input = player1Input;
+                        p1.SetInput(player1Input);
+                    }
+
+                    if (UserInputManager.Instance.player2Input != null)
+                    {
+                        PlayerInput player2Input = UserInputManager.Instance.player2Input.GetComponent<PlayerInput>();
+                        p2.input = player2Input;
+                        p2.SetInput(player2Input);
+                    }
+                }*/
+
+                if (CharacterManager.Instance != null)
                 {
                     if (CharacterManager.Instance.player1Skin != null && p1.skin != null)
                         p1.skin.SetSkin(CharacterManager.Instance.player1Skin);
