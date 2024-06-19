@@ -28,6 +28,7 @@ public class ItemThrowAttack : Attack
     public Spring spring;
 
     public ThrowPotion healingPotion;
+    public ThrowPotion harmingPotion;
 
     [Space]
     public FoodItem donut;
@@ -212,6 +213,10 @@ public class ItemThrowAttack : Attack
             else if (fireBallNumber > 450 && fireBallNumber <= 600)
             {
                 this.ThrowSnowball();
+            }
+            else if (fireBallNumber > 600 && fireBallNumber <= 650)
+            {
+                this.ThrowPotion();
             }
             else
             {
@@ -532,18 +537,24 @@ public class ItemThrowAttack : Attack
     }
 
     //MAKE IT SO IT SUPPORTS MULTIPLE POTIONS
+    //IMPROVE CODE PLS
     public void ThrowPotion()
     {
         if (this.healingPotion != null)
         {
-            ThrowPotion fireBallPrefab = this.healingPotion;
+            int number = Random.Range(1, 1001);
+
+            ThrowPotion throwPotionPrefab = this.healingPotion;
+            if(number <= 500 && this.harmingPotion != null)
+                throwPotionPrefab = this.harmingPotion;
+            //ThrowPotion throwPotionPrefab = this.healingPotion;
             float forward = this.transform.forward.z;
             //ghostPrefab = Instantiate(ghostPrefab, this.transform.position, this.transform.rotation);
-            fireBallPrefab = Instantiate(fireBallPrefab, new Vector3(this.user.transform.position.x + (forward * 0.8f), this.user.transform.position.y + 3, 0), this.user.transform.rotation);
+            throwPotionPrefab = Instantiate(throwPotionPrefab, new Vector3(this.user.transform.position.x + (forward * 0.8f), this.user.transform.position.y + 3, 0), this.user.transform.rotation);
             if (this.user != null)
-                fireBallPrefab.SetOwner(this.user);
+                throwPotionPrefab.SetOwner(this.user);
 
-            fireBallPrefab.KnockBack(new Vector3(forward * 250f, 500f, 0));
+            throwPotionPrefab.KnockBack(new Vector3(forward * 250f, 500f, 0));
         }
     }
 

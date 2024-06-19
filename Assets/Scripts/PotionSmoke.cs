@@ -10,6 +10,8 @@ public class PotionSmoke : MonoBehaviour
 
     public TestHitbox hitSphere;
 
+    public float damage = -20f;
+
     //THIS WILL GIVE STATUS EFFECT
     //THE STATUS EFFECT LAST LONGER THE FURTHER IN THE HITBOX YOU ARE
     //WILL ALSO HAVE INSTANT HEALING, DAMAGE, SUPER METER
@@ -20,7 +22,7 @@ public class PotionSmoke : MonoBehaviour
         if (this.hitSphere != null)
         {
             //this.hitSphere.gameObject.SetActive(true);
-            this.hitSphere.damage = -20f;
+            this.hitSphere.damage = this.damage;
         }
 
         this.sphereCollider = this.GetComponent<SphereCollider>();
@@ -33,7 +35,7 @@ public class PotionSmoke : MonoBehaviour
         {
             this.hitSphere.gameObject.SetActive(false);
             this.hitSphere.transform.localScale = new Vector3(1f, 1f, 1f);
-            this.hitSphere.damage = -20f;
+            this.hitSphere.damage = this.damage;
         }
             
     }
@@ -80,7 +82,7 @@ public class PotionSmoke : MonoBehaviour
             if (this.hitSphere != null)
             {
                 this.hitSphere.transform.localScale = new Vector3(Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration));
-                this.hitSphere.damage = Mathf.Round(Mathf.Lerp(-20f, -5f, currentTime / duration));
+                this.hitSphere.damage = Mathf.Round(Mathf.Lerp(this.damage, this.damage * 0.25f, currentTime / duration));
                 Debug.Log(this.hitSphere.damage);
             }
             yield return null;
@@ -91,13 +93,17 @@ public class PotionSmoke : MonoBehaviour
         //float targetVolume = 0.1f;
         targetScale = 6f;
         startScale = 4f;
+
+        float minDamage = 1f;
+        if (this.damage < 0f)
+            minDamage = -1f;
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
             if (this.hitSphere != null)
             {
                 this.hitSphere.transform.localScale = new Vector3(Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration));
-                this.hitSphere.damage = Mathf.Round(Mathf.Lerp(-5f, -1f, currentTime / duration));
+                this.hitSphere.damage = Mathf.Round(Mathf.Lerp(this.damage * 0.25f, minDamage, currentTime / duration));
                 Debug.Log(this.hitSphere.damage);
             }
             yield return null;

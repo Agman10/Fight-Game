@@ -19,6 +19,8 @@ public class GunShootAttack : Attack
     public FireBall gunThrowProjectile;
     public Attack fireBallThrow;
 
+    public Attack shootSelf;
+
     [Space]
     private int bullets = 17;
     private int maxBullets = 17;
@@ -119,6 +121,20 @@ public class GunShootAttack : Attack
                 this.user.attackStuns.Remove(this.gameObject);
                 this.StartCoroutine(this.ThrowGunCorutine(0.5f, time));
                 yield return new WaitForSeconds(0.1f);
+            }
+            else if (/*this.user.input.moveInput == new Vector3(this.transform.forward.z * -1f, -1f, 0f)*/this.user.input.jumping && this.user.input.special && this.user.input.special2 && this.shootSelf != null)
+            //else if (this.user.input.moveInput == new Vector3(this.transform.forward.z * -1f, 0f, 0f)/*this.user.input.jumping*/ && this.user.input.special && this.user.input.special2 && this.shootSelf != null)
+            {
+                //Debug.Log("test");
+                //Debug.Log(Mathf.Abs(this.user.rb.velocity.y));
+                if (/*time == 0.5f*/Mathf.Abs(this.user.rb.velocity.y) <= 0.4f)
+                {
+                    //Debug.Log("test2");
+                    this.user.AddStun(0.2f, true);
+                    this.ShootSelf();
+                    yield return new WaitForSeconds(0.1f);
+                }
+                
             }
         }
 
@@ -270,6 +286,17 @@ public class GunShootAttack : Attack
             }
             this.reloading = false;
         }
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void ShootSelf()
+    {
+        this.StopAllCoroutines();
+        //this.Stop();
+
+        this.shootSelf.Initiate();
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
