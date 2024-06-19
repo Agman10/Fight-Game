@@ -15,6 +15,9 @@ public class ShootSelfAttack : Attack
 
     public bool canBeCanceled;
 
+    public AudioSource loadingSfx;
+    public AudioSource shootSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -73,9 +76,25 @@ public class ShootSelfAttack : Attack
 
         this.EnableGun(true);
 
+        if (this.loadingSfx != null)
+        {
+            this.loadingSfx.time = 0.04f;
+            this.loadingSfx.Play();
+        }
+
+
         yield return new WaitForSeconds(0.2f);
         this.EnableGun(true);
-        yield return new WaitForSeconds(0.3f);
+        //yield return new WaitForSeconds(0.3f);
+
+        yield return new WaitForSeconds(0.6f);
+
+        if (this.shootSfx != null)
+        {
+            this.shootSfx.Play();
+        }
+
+
         this.user.knockbackInvounrability = true;
         this.canBeCanceled = false;
         /*if (this.animations != null)
@@ -121,11 +140,13 @@ public class ShootSelfAttack : Attack
             if (enable)
             {
                 this.gun.transform.localEulerAngles = new Vector3(170f, -0.5f, 90f);
+                this.gun.transform.localPosition = new Vector3(0f, -0.46f, 0f);
                 this.gun.SetActive(true);
             }
             else
             {
                 this.gun.transform.localEulerAngles = new Vector3(90f, 0f, -90f);
+                this.gun.transform.localPosition = new Vector3(0f, -0.53f, 0f);
                 this.gun.SetActive(false);
             }
                 

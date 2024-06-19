@@ -12,6 +12,9 @@ public class SuperRazorKick : Attack
     public GameObject startParticle;
     public GameObject trail;
 
+    public AudioSource uppcutSfx;
+    public AudioSource kickDownSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -84,6 +87,12 @@ public class SuperRazorKick : Attack
 
         if (this.trail != null)
             this.trail.SetActive(true);
+
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.25f;
+            this.uppcutSfx.Play();
+        }
         yield return new WaitForSeconds(0.05f);
 
         if (this.user.rb != null)
@@ -115,6 +124,12 @@ public class SuperRazorKick : Attack
 
         yield return new WaitForSeconds(animSpeed);
         //SECOND
+
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.2f;
+            this.uppcutSfx.Play();
+        }
 
         if (this.trail != null)
             this.trail.SetActive(false);
@@ -162,6 +177,14 @@ public class SuperRazorKick : Attack
             this.trail.SetActive(false);
 
         //THIRD
+
+        if (this.kickDownSfx != null)
+        {
+            //this.kickDownSfx.time = 0.1f;
+            this.kickDownSfx.time = 0.2f;
+            this.kickDownSfx.Play();
+        }
+
         yield return new WaitForSeconds(animSpeed);
         if (this.trail != null)
             this.trail.SetActive(true);

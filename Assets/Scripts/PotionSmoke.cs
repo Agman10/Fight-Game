@@ -112,6 +112,9 @@ public class PotionSmoke : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         this.hitSphere.gameObject.SetActive(false);
 
+        yield return new WaitForSeconds(1f);
+        this.gameObject.SetActive(false);
+
     }
     /*private void OnTriggerEnter(Collider other)
     {

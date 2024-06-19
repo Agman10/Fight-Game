@@ -21,6 +21,11 @@ public class UppercutAttack : Attack
     public float kickEndTime = 0.4f;
     public float kickXForce = 200f;
     public float kickYForce = 1000f;
+
+    public AudioSource uppcutSfx;
+
+    private bool dontStopSfxOnHit;
+
     // Start is called before the first frame update
     public override void OnEnable()
     {
@@ -148,6 +153,16 @@ public class UppercutAttack : Attack
 
         /*if (this.trail != null)
             this.trail.SetActive(true);*/
+
+        this.dontStopSfxOnHit = false;
+
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.1f;
+            this.uppcutSfx.Play();
+        }
+            
+
         yield return new WaitForSeconds(0.05f);
 
         if (this.animations != null)
@@ -156,6 +171,11 @@ public class UppercutAttack : Attack
         if (this.trail != null)
             this.trail.SetActive(true);
         yield return new WaitForSeconds(0.05f);
+
+        this.dontStopSfxOnHit = true;
+
+        /*if (this.uppcutSfx != null)
+            this.uppcutSfx.Play();*/
 
         /*if (this.user.rb != null)
             this.user.rb.AddForce(this.user.transform.forward.z * 200, 1000, 0);*/
@@ -268,6 +288,8 @@ public class UppercutAttack : Attack
 
 
         yield return new WaitForSeconds(0.25f);
+
+        this.dontStopSfxOnHit = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -514,6 +536,9 @@ public class UppercutAttack : Attack
 
         this.PlayFire(false);
         this.onGoing = false;
+
+        if (this.uppcutSfx != null && !this.dontStopSfxOnHit)
+            this.uppcutSfx.Stop();
 
         this.user.attackStuns.Remove(this.gameObject);
     }
