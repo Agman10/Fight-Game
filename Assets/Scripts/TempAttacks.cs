@@ -72,6 +72,14 @@ public class TempAttacks : MonoBehaviour
             this.playerInput.SuicideInput += this.Suicide;
             this.playerInput.SuperInput += this.Super;
             this.playerInput.TauntInput += this.Taunt;
+
+
+            this.playerInput.StartInput += this.PauseGame;
+            /*if (GameManager.Instance != null)
+            {
+                //this.playerInput.StartInput += GameManager.Instance.PauseGame;
+                this.playerInput.StartInput += this.PauseGame;
+            }*/
         }
 
         if (this.startAnimation != null)
@@ -110,6 +118,24 @@ public class TempAttacks : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        
+    }
+
+    public void PauseGame(bool pause)
+    {
+        if (pause)
+        {
+            if (GameManager.Instance != null)
+            {
+                //GameManager.Instance.TogglePauseGame(true);
+                if (!GameManager.Instance.gameIsPaused)
+                    GameManager.Instance.PauseGame();
+                /*else
+                    GameManager.Instance.UnPauseGame();*/
+                //Debug.Log("pauseeplay");
+                //this.playerInput.StartInput += this.PauseGame;
+            }
+        }
         
     }
 

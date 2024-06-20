@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
 
     public int gameMode;
 
+    public bool gameIsPaused = false;
+    public PauseLogic pauseLogic;
+
     [Space]
     public GameObject ragingBeastSkull;
     public LayerMask normalCameraLayers;
@@ -85,7 +88,7 @@ public class GameManager : MonoBehaviour
                 p1 = Instantiate(p1, new Vector3(-7f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f));
                 p2 = Instantiate(p2, new Vector3(7f, 0f, 0f), Quaternion.Euler(0f, 0f, 0f));
 
-                if (this.p1Input != null)
+                /*if (this.p1Input != null)
                 {
                     PlayerInput player1Input = this.p1Input;
                     player1Input = Instantiate(player1Input, p1.transform);
@@ -99,9 +102,9 @@ public class GameManager : MonoBehaviour
                     player2Input = Instantiate(player2Input, p2.transform);
                     p2.input = player2Input;
                     p2.SetInput(player2Input);
-                }
+                }*/
 
-                /*if (UserInputManager.Instance != null)
+                if (UserInputManager.Instance != null)
                 {
                     if (UserInputManager.Instance.player1Input != null)
                     {
@@ -116,7 +119,7 @@ public class GameManager : MonoBehaviour
                         p2.input = player2Input;
                         p2.SetInput(player2Input);
                     }
-                }*/
+                }
 
                 if (CharacterManager.Instance != null)
                 {
@@ -211,6 +214,58 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    [ContextMenu("Pause")]
+    public void TogglePauseGame(bool pause)
+    {
+        if (pause)
+        {
+            if (!this.gameIsPaused)
+            {
+                Time.timeScale = 0f;
+                this.gameIsPaused = true;
+                if (this.pauseLogic != null)
+                {
+                    this.pauseLogic.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                Time.timeScale = 1f;
+                this.gameIsPaused = false;
+
+                if (this.pauseLogic != null)
+                {
+                    this.pauseLogic.gameObject.SetActive(false);
+                }
+            }
+        }
+        
+    }
+    public void PauseGame()
+    {
+        /*Time.timeScale = 0f;
+        this.gameIsPaused = true;*/
+
+        if (this.pauseLogic != null)
+        {
+            Time.timeScale = 0f;
+            this.gameIsPaused = true;
+            this.pauseLogic.gameObject.SetActive(true);
+        }
+    }
+    public void UnPauseGame()
+    {
+        /*Time.timeScale = 1f;
+        this.gameIsPaused = false;*/
+
+        if (this.pauseLogic != null)
+        {
+            Time.timeScale = 1f;
+            this.gameIsPaused = false;
+            this.pauseLogic.gameObject.SetActive(false);
+        }
     }
 
     public void OnPlayerDeath()

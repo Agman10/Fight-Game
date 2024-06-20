@@ -59,6 +59,8 @@ MonoBehaviour:
   pastSuperInput: 0
   taunting: 0
   pastTauntInput: 0
+  start: 0
+  pastStartInput: 0
 --- !u!114 &654738850460424533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +454,86 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 7a43cde3-4841-4b7d-a0b0-259094dc7f14
     m_ActionName: CharacterSelectP2/Back[/Keyboard/k,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 302976697454557202}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnStartInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 653208f1-539a-4401-a60b-b88b2247027e
+    m_ActionName: Player1/Start[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 302976697454557202}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnStartInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b5175e3f-2649-4a77-9348-a22574996a59
+    m_ActionName: Player2/Start[/XInputControllerWindows/start,/Keyboard/minus]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e268647-9908-46ee-b2a7-638bc0b51f0e
+    m_ActionName: PlayerInput/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a6d83ba1-4ad7-4640-86b9-1e950e807752
+    m_ActionName: PlayerInput/Jump[/Keyboard/upArrow,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/dpad/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 03f3bc94-f17e-4215-abe7-b6b129031df0
+    m_ActionName: PlayerInput/Punch[/Keyboard/a,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 931cbe1b-4875-468b-aeeb-0d721068ce35
+    m_ActionName: PlayerInput/Kick[/Keyboard/z,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 29d49023-c570-42a2-9362-6771af9f4e84
+    m_ActionName: PlayerInput/Special[/Keyboard/s,/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c300c737-0efa-438a-bf8f-b54fcbf488f8
+    m_ActionName: PlayerInput/Suicide[/Keyboard/1,/XInputControllerWindows/select]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c696fe2-614b-4c39-99a6-8883f4f8ef75
+    m_ActionName: PlayerInput/Special2[/Keyboard/x,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0913afb3-a58f-4256-a03e-7a2ee46b46f8
+    m_ActionName: PlayerInput/Super[/Keyboard/d,/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 42d788b9-9fa1-49a5-bb81-f0f1d0ee486a
+    m_ActionName: PlayerInput/Taunt[/Keyboard/c,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 664b6db6-2bee-4149-b28e-965723925469
+    m_ActionName: PlayerInput/Start[/Keyboard/enter,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4992e51a-8d3e-4ba4-bc93-e134f3bc01e3
+    m_ActionName: General/LoadPreviousStage[/Keyboard/minus]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 240f1073-b383-4d7a-b0b2-883277f32150
+    m_ActionName: General/ToggleLifeNumbers[/Keyboard/backquote]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player2

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4102274430388658737}
   - component: {fileID: 8489296815764480322}
   - component: {fileID: 2629266123277287952}
+  - component: {fileID: 7830757965827869350}
   m_Layer: 6
   m_Name: PlayerInput
   m_TagString: Untagged
@@ -59,6 +60,8 @@ MonoBehaviour:
   pastSuperInput: 0
   taunting: 0
   pastTauntInput: 0
+  start: 0
+  pastStartInput: 0
 --- !u!114 &2629266123277287952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +477,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7830757965827869350}
+        m_TargetAssemblyTypeName: CharacterSelectInput, Assembly-CSharp
+        m_MethodName: OnMoveInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6e268647-9908-46ee-b2a7-638bc0b51f0e
     m_ActionName: PlayerInput/Move[/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -522,6 +537,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7830757965827869350}
+        m_TargetAssemblyTypeName: CharacterSelectInput, Assembly-CSharp
+        m_MethodName: OnSelectInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 931cbe1b-4875-468b-aeeb-0d721068ce35
     m_ActionName: PlayerInput/Kick[/Keyboard/z]
   - m_PersistentCalls:
@@ -554,6 +581,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7830757965827869350}
+        m_TargetAssemblyTypeName: CharacterSelectInput, Assembly-CSharp
+        m_MethodName: OnQuitInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: c300c737-0efa-438a-bf8f-b54fcbf488f8
     m_ActionName: PlayerInput/Suicide[/Keyboard/1]
   - m_PersistentCalls:
@@ -561,6 +600,18 @@ MonoBehaviour:
       - m_Target: {fileID: 8489296815764480322}
         m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
         m_MethodName: OnSpecial2Input
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7830757965827869350}
+        m_TargetAssemblyTypeName: CharacterSelectInput, Assembly-CSharp
+        m_MethodName: OnBackInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -604,8 +655,44 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 42d788b9-9fa1-49a5-bb81-f0f1d0ee486a
     m_ActionName: PlayerInput/Taunt[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8489296815764480322}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: OnStartInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 664b6db6-2bee-4149-b28e-965723925469
+    m_ActionName: PlayerInput/Start[/Keyboard/enter,/XInputControllerWindows/start,/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerInput
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7830757965827869350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428810593079026549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00648ce8c9d1de84c835c243ab647208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveInput: {x: 0, y: 0, z: 0}
+  pastMoveInput: {x: 0, y: 0, z: 0}
+  selecting: 0
+  pastSelectInput: 0
+  backing: 0
+  pastBackInput: 0
+  quitting: 0
+  pastQuitInput: 0

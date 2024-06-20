@@ -40,6 +40,10 @@ public class PlayerInput : MonoBehaviour
 
     public Action<bool> SuicideInput;
 
+    public bool start;
+    public Action<bool> StartInput;
+    [HideInInspector] public bool pastStartInput;
+
     /*private void Awake()
     {
         this.JumpInput += this.Jump;
@@ -166,6 +170,19 @@ public class PlayerInput : MonoBehaviour
             this.KickInput?.Invoke(kick);
             this.pastKickInput = kick;
         }*/
+
+    }
+
+    public void OnStartInput(InputAction.CallbackContext ctx)
+    {
+
+        bool pressingStart = ctx.ReadValueAsButton();
+        this.start = pressingStart;
+        if (this.pastStartInput != pressingStart)
+        {
+            this.StartInput?.Invoke(pressingStart);
+            this.pastStartInput = pressingStart;
+        }
 
     }
 

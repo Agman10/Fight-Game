@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class UserInputManager : MonoBehaviour
 
     public UnityEngine.InputSystem.PlayerInput player1Input;
     public UnityEngine.InputSystem.PlayerInput player2Input;
+
+    public Action<int> PlayerJoined;
 
     public string testname;
     // Start is called before the first frame update
@@ -45,18 +48,32 @@ public class UserInputManager : MonoBehaviour
     public void Test(UnityEngine.InputSystem.PlayerInput playerInput)
     {
         Debug.Log(playerInput.playerIndex);
-        
+
+        this.PlayerJoined?.Invoke(playerInput.playerIndex);
 
         if (playerInput.playerIndex == 0)
         {
             this.player1Input = playerInput;
             playerInput.gameObject.transform.parent = this.transform;
+
+            if(CharacterSelectLogic.Instance != null)
+            {
+                CharacterSelectLogic.Instance.p1Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
+                CharacterSelectLogic.Instance.p1Cursor.gameObject.SetActive(true);
+            }
+
         }
             
         if (playerInput.playerIndex == 1)
         {
             this.player2Input = playerInput;
             playerInput.gameObject.transform.parent = this.transform;
+
+            if (CharacterSelectLogic.Instance != null)
+            {
+                CharacterSelectLogic.Instance.p2Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
+                CharacterSelectLogic.Instance.p2Cursor.gameObject.SetActive(true);
+            }
         }
             
         //Debug.Log("test");

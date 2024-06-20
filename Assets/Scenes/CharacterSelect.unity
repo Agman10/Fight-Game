@@ -3599,6 +3599,7 @@ MonoBehaviour:
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
+  boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
 --- !u!1 &102560658
@@ -7789,6 +7790,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224386635}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &230368765
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337906, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8180469146055337908, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
+      propertyPath: m_Name
+      value: PlayerInputManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 68462e34f5b068044a0857fafda1ed03, type: 3}
 --- !u!1 &234357947
 GameObject:
   m_ObjectHideFlags: 0
@@ -11483,6 +11541,7 @@ MonoBehaviour:
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
+  boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
 --- !u!1 &352403716
@@ -13464,7 +13523,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: a51a3aebb43ac044989270407476b208, type: 3}
-    m_FontSize: 40
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -13475,7 +13534,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: J-Cap
+  m_Text: Waiting for player...
 --- !u!222 &417573873
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17155,7 +17214,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545263810}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -24162,7 +24221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &780410111
 Transform:
   m_ObjectHideFlags: 0
@@ -25552,6 +25611,7 @@ MonoBehaviour:
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
+  boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
 --- !u!23 &842206381 stripped
@@ -26842,7 +26902,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869270969}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -34046,6 +34106,7 @@ MonoBehaviour:
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
+  boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
 --- !u!23 &1099571433 stripped
@@ -37118,7 +37179,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: a51a3aebb43ac044989270407476b208, type: 3}
-    m_FontSize: 40
+    m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -37129,7 +37190,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mike Baller
+  m_Text: Waiting for player...
 --- !u!222 &1200345534
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37473,11 +37534,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198925616831486750, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 289110703148751497, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 289110703148751497, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -37485,7 +37546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1118339766799913426, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1118339766799913426, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -37657,7 +37718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3030805827851429423, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3030805827851429423, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -37665,7 +37726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3935230507370489524, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3935230507370489524, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -38439,7 +38500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1235997420
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40248,6 +40309,7 @@ MonoBehaviour:
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
+  boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
 --- !u!23 &1303210061 stripped
@@ -41965,6 +42027,7 @@ MonoBehaviour:
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
+  boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
 --- !u!1 &1383468740
@@ -47122,7 +47185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1580543870
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49145,6 +49208,7 @@ MonoBehaviour:
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
+  boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
 --- !u!23 &1650347725 stripped
@@ -51034,7 +51098,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745475322}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -52974,7 +53038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1817565733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53007,6 +53071,7 @@ MonoBehaviour:
   - {fileID: 66445908}
   - {fileID: 1164648084}
   randomModel: {fileID: 732235916}
+  canMove: 0
   readyPanel: {fileID: 2081946044}
   skinSelectPanel: {fileID: 698846804}
   skinIndexText: {fileID: 46062286}
@@ -53177,7 +53242,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830668200}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -53382,7 +53447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1835231004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53415,6 +53480,7 @@ MonoBehaviour:
   - {fileID: 2104473105}
   - {fileID: 177360450}
   randomModel: {fileID: 962609919}
+  canMove: 0
   readyPanel: {fileID: 1323685849}
   skinSelectPanel: {fileID: 1661523877}
   skinIndexText: {fileID: 255004793}
@@ -56433,7 +56499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1993457875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57277,6 +57343,7 @@ MonoBehaviour:
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
+  boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
 --- !u!1 &2014581929
@@ -58311,7 +58378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2068889108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58551,6 +58618,58 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 62471f5c-87e7-4690-8925-4e259117d7bd
     m_ActionName: CharacterSelectP1/Quit[/Keyboard/backspace]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cb6eb62e-295b-4c07-8187-2a7a3060f7fa
+    m_ActionName: Player1/Taunt[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d32ea420-37b3-4b72-bc0b-386558867d33
+    m_ActionName: Player2/Taunt[/Keyboard/l,/XInputControllerWindows/rightTrigger,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e268647-9908-46ee-b2a7-638bc0b51f0e
+    m_ActionName: PlayerInput/Move[/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right,/XInputControllerWindows/dpad/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a6d83ba1-4ad7-4640-86b9-1e950e807752
+    m_ActionName: PlayerInput/Jump[/Keyboard/upArrow,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/leftStick/up,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 03f3bc94-f17e-4215-abe7-b6b129031df0
+    m_ActionName: PlayerInput/Punch[/Keyboard/a,/XInputControllerWindows/buttonWest,/XInputControllerWindows/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 931cbe1b-4875-468b-aeeb-0d721068ce35
+    m_ActionName: PlayerInput/Kick[/Keyboard/z,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 29d49023-c570-42a2-9362-6771af9f4e84
+    m_ActionName: PlayerInput/Special[/Keyboard/s,/XInputControllerWindows/buttonNorth,/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c300c737-0efa-438a-bf8f-b54fcbf488f8
+    m_ActionName: PlayerInput/Suicide[/Keyboard/1,/XInputControllerWindows/select,/XInputControllerWindows/select]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c696fe2-614b-4c39-99a6-8883f4f8ef75
+    m_ActionName: PlayerInput/Special2[/Keyboard/x,/XInputControllerWindows/buttonEast,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0913afb3-a58f-4256-a03e-7a2ee46b46f8
+    m_ActionName: PlayerInput/Super[/Keyboard/d,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 42d788b9-9fa1-49a5-bb81-f0f1d0ee486a
+    m_ActionName: PlayerInput/Taunt[/Keyboard/c,/XInputControllerWindows/rightTrigger,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4992e51a-8d3e-4ba4-bc93-e134f3bc01e3
+    m_ActionName: General/LoadPreviousStage[/Keyboard/minus]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 240f1073-b383-4d7a-b0b2-883277f32150
+    m_ActionName: General/ToggleLifeNumbers[/Keyboard/backquote]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterSelectP1

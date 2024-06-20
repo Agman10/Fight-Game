@@ -26,6 +26,8 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
     public GameObject randomModel;
 
+    public bool canMove;
+
     [Space]
     public GameObject readyPanel;
     public GameObject skinSelectPanel;
@@ -43,6 +45,12 @@ public class CharacterSelectCursorLogic : MonoBehaviour
             this.input.QuitInput += this.Quit;
         }
         this.SelectCharacter(this.currentCharacterId);
+
+        if (this.cursorPanelTransform != null)
+            this.cursorPanelTransform.SetActive(true);
+
+        this.canMove = false;
+        this.StartCoroutine(this.EnableInputting());
     }
 
     private void OnDisable()
@@ -120,7 +128,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
     {
         //Debug.Log(direction);
 
-        if (!this.ready)
+        if (!this.ready && this.canMove)
         {
             if (!this.selectingSkin)
             {
@@ -253,7 +261,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
     public void Select(bool selecting)
     {
-        if (selecting && !this.ready && this.characterSelectLogic != null)
+        if (selecting && !this.ready && this.characterSelectLogic != null && this.canMove)
         {
             if(this.currentCharacterId >= 0)
             {
@@ -311,7 +319,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
     public void Back(bool backing)
     {
-        if (backing && !this.lockedIn)
+        if (backing && !this.lockedIn && this.canMove)
         {
             if(this.currentCharacterId >= 0)
             {
@@ -353,7 +361,13 @@ public class CharacterSelectCursorLogic : MonoBehaviour
     }
     public void Quit(bool quitting)
     {
-        if (quitting && this.characterSelectLogic != null)
+        if (quitting && this.characterSelectLogic != null && this.canMove)
             this.characterSelectLogic.QuitToTitle();
+    }
+
+    private IEnumerator EnableInputting()
+    {
+        yield return new WaitForSeconds(0.1f);
+        this.canMove = true;
     }
 }

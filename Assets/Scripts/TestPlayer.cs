@@ -68,6 +68,16 @@ public class TestPlayer : MonoBehaviour
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
+
+
+        /*if (this.input != null)
+        {
+            if(GameManager.Instance != null)
+            {
+                this.input.StartInput += GameManager.Instance.PauseGame;
+            }
+        }*/
+            
     }
 
     private void OnDisable()

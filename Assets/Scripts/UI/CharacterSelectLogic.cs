@@ -16,6 +16,9 @@ public class CharacterSelectLogic : MonoBehaviour
     public AudioSource music;
     public Image fader;
 
+
+    public static CharacterSelectLogic Instance;
+
     [Space]
     public GameObject randomCanvasPanel;
     public int randomRight;
@@ -55,6 +58,9 @@ public class CharacterSelectLogic : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null) Destroy(this);
+        else Instance = this;
+
         if (GameModeManager.Instance != null)
         {
             this.gameModeId = GameModeManager.Instance.gameModeId;
