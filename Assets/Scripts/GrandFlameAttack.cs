@@ -128,23 +128,41 @@ public class GrandFlameAttack : Attack
         if (this.animations != null)
             this.animations.GrandFlame();
         //this.canBeCanceled = false;
-        
+
 
         float currentTime2 = 0;
         float duration2 = 3f;
 
+        startPosY = this.animations.body.localPosition.y;
+
         while (currentTime2 < duration2)
         {
             currentTime2 += Time.deltaTime;
-            float newY = Mathf.Sin(Time.time * 40);
-            this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, this.animations.body.localPosition.y + (newY * 0.05f), this.animations.body.localPosition.z);
+            //float newY = Mathf.Sin(Time.time * 40);
+            float newY = Mathf.Sin(currentTime2 * 40);
+            //this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, this.animations.body.localPosition.y + (newY * 0.05f), this.animations.body.localPosition.z);
+            this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, startPosY + (newY * 0.05f), this.animations.body.localPosition.z);
 
             //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
             yield return null;
         }
 
+
+        /*testTime = 0f;
+        time = 3f;
+        startPosY = this.animations.body.localPosition.y;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            testTime += Time.deltaTime;
+
+            float newY = Mathf.Sin(testTime * 40f);
+            this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, startPosY + (newY * 0.05f), this.animations.body.localPosition.z);
+            yield return null;
+        }*/
+
         //yield return new WaitForSeconds(3f);
-        
+
         if (this.currentGrandFlame != null)
         {
             this.currentGrandFlame.Stop();

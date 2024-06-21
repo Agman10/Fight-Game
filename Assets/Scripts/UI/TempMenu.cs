@@ -47,6 +47,7 @@ public class TempMenu : MonoBehaviour
         {
             GameModeManager.Instance.gameModeId = 1;
         }
+        //SceneManager.LoadScene("Loading");
     }
 
     public void GoToOptions()

@@ -38,7 +38,9 @@ public class PlayerInput : MonoBehaviour
     public Action<bool> TauntInput;
     [HideInInspector] public bool pastTauntInput;
 
+    public bool suicide;
     public Action<bool> SuicideInput;
+    [HideInInspector] public bool pastSuicideInput;
 
     public bool start;
     public Action<bool> StartInput;
@@ -162,14 +164,23 @@ public class PlayerInput : MonoBehaviour
     public void OnSuicideInput(InputAction.CallbackContext ctx)
     {
 
-        bool kick = ctx.ReadValueAsButton();
-        this.SuicideInput?.Invoke(kick);
+        /*bool kick = ctx.ReadValueAsButton();
+        this.SuicideInput?.Invoke(kick);*/
+
         /*this.kicking = kick;
         if (this.pastKickInput != kick)
         {
             this.KickInput?.Invoke(kick);
             this.pastKickInput = kick;
         }*/
+
+        bool suiciding = ctx.ReadValueAsButton();
+        this.suicide = suiciding;
+        if (this.pastSuicideInput != suiciding)
+        {
+            this.SuicideInput?.Invoke(suiciding);
+            this.pastSuicideInput = suiciding;
+        }
 
     }
 

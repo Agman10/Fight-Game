@@ -47,7 +47,7 @@ public class UserInputManager : MonoBehaviour
     }*/
     public void Test(UnityEngine.InputSystem.PlayerInput playerInput)
     {
-        Debug.Log(playerInput.playerIndex);
+        //Debug.Log(playerInput.playerIndex);
 
         this.PlayerJoined?.Invoke(playerInput.playerIndex);
 

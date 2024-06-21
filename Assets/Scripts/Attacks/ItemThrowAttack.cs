@@ -10,6 +10,8 @@ public class ItemThrowAttack : Attack
     public bool isSuper = false;
     public GameObject startParticle;
 
+    public bool cantBeCanceled = false;
+
     [Space]
     public Bomb bomb;
     public Bomb bigBomb;
@@ -49,7 +51,7 @@ public class ItemThrowAttack : Attack
     public override void OnHit()
     {
         base.OnHit();
-        if (!this.user.dead && this.onGoing)
+        if (!this.user.dead && this.onGoing && !this.cantBeCanceled)
         {
             this.Stop();
             if (this.animations != null)
@@ -112,17 +114,19 @@ public class ItemThrowAttack : Attack
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
 
+        float throwSpeed = 1f;
+
         this.user.animations.ItemThrow(0);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f * throwSpeed);
 
         this.user.animations.ItemThrow(1);
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.05f * throwSpeed);
 
         this.user.animations.ItemThrow(2);
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.05f * throwSpeed);
 
         this.user.animations.ItemThrow(3);
 
@@ -159,16 +163,16 @@ public class ItemThrowAttack : Attack
 
         this.ThrowRandomItem();
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.3f * throwSpeed);
 
         this.user.animations.ItemThrow(4);
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.05f * throwSpeed);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.3f * throwSpeed);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
@@ -206,15 +210,15 @@ public class ItemThrowAttack : Attack
             {
                 this.ThrowHolyWater();
             }
-            else if (fireBallNumber > 250 && fireBallNumber <= 450)
+            else if (fireBallNumber > 250 && fireBallNumber <= 400)
             {
                 this.ThrowPebble();
             }
-            else if (fireBallNumber > 450 && fireBallNumber <= 600)
+            else if (fireBallNumber > 400 && fireBallNumber <= 550)
             {
                 this.ThrowSnowball();
             }
-            else if (fireBallNumber > 600 && fireBallNumber <= 650)
+            else if (fireBallNumber > 550 && fireBallNumber <= 650)
             {
                 this.ThrowPotion();
             }
@@ -228,9 +232,13 @@ public class ItemThrowAttack : Attack
         {
             this.ThrowHammer();
         }
-        else if (number > 725 && number <= 850)
+        else if (number > 725 && number <= 800)
         {
             this.ThrowSpikeBall();
+        }
+        else if (number > 800 && number <= 850)
+        {
+            this.ThrowPotion();
         }
         else if (number > 850 && number <= 900)
         {
@@ -574,6 +582,9 @@ public class ItemThrowAttack : Attack
         this.user.animations.ItemThrow(0);
         yield return new WaitForSeconds(0.2f);
 
+        this.cantBeCanceled = true;
+        //this.user.knockbackInvounrability = true;
+
         this.user.damageMitigation = 0.75f;
 
         this.user.rb.isKinematic = false;
@@ -597,6 +608,7 @@ public class ItemThrowAttack : Attack
             this.user.animations.ItemThrow(3);
 
             this.ThrowRandomItem();
+            //this.ThrowRandomItemBombAndFire();
 
             yield return new WaitForSeconds(0.025f);
 
@@ -618,6 +630,9 @@ public class ItemThrowAttack : Attack
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
+        this.cantBeCanceled = false;
+        //this.user.knockbackInvounrability = false;
+
         yield return new WaitForSeconds(0.1f);
 
         this.onGoing = false;
@@ -635,6 +650,9 @@ public class ItemThrowAttack : Attack
             this.StartCoroutine(this.HitCoroutine());
         }
 
+        this.cantBeCanceled = false;
+        //this.user.knockbackInvounrability = false;
+
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
@@ -645,5 +663,29 @@ public class ItemThrowAttack : Attack
     {
         yield return new WaitForSeconds(0.001f);
         this.user.damageMitigation = 0f;
+    }
+
+
+    public void ThrowRandomItemBombAndFire()
+    {
+        int number = Random.Range(1, 1001);
+
+        if (number <= 500)
+        {
+            this.ThrowBigBomb();
+            /*int bombNumber = Random.Range(1, 1001);
+            if (bombNumber <= 550)
+            {
+                this.ThrowBomb();
+            }
+            else
+            {
+                this.ThrowBigBomb();
+            }*/
+        }
+        else
+        {
+            this.ThrowFireBall();
+        }
     }
 }

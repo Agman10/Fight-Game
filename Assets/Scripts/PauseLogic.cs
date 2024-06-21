@@ -11,6 +11,10 @@ public class PauseLogic : MonoBehaviour
     public Button nothingButton;
     public int sceneIndex = 1;
 
+    public bool lifeNumbersEnabled = false;
+    public GameObject p1LifeNumbers;
+    public GameObject p2LifeNumbers;
+
     private void OnEnable()
     {
         /*if (this.resumeButton != null)
@@ -54,5 +58,65 @@ public class PauseLogic : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.05f);
         if (this.resumeButton != null)
             this.resumeButton.Select();
+    }
+
+    public void NextStage()
+    {
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.tempSkyboxAndStageLogic != null)
+            {
+                GameManager.Instance.tempSkyboxAndStageLogic.LoadNextStage(false);
+            }
+        }
+    }
+
+    public void PreviousStage()
+    {
+        if (GameManager.Instance.tempSkyboxAndStageLogic != null)
+        {
+            GameManager.Instance.tempSkyboxAndStageLogic.LoadNextStage(true);
+        }
+    }
+
+    public void GiveFullSuper()
+    {
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.player1 != null)
+            {
+                GameManager.Instance.player1.GiveSuperCharge(GameManager.Instance.player1.maxSuperCharge);
+            }
+
+            if (GameManager.Instance.player2 != null)
+            {
+                GameManager.Instance.player2.GiveSuperCharge(GameManager.Instance.player2.maxSuperCharge);
+            }
+        }
+    }
+
+    public void ShowHealthNumbers()
+    {
+        this.lifeNumbersEnabled = !this.lifeNumbersEnabled;
+        if (this.p1LifeNumbers != null)
+            this.p1LifeNumbers.SetActive(this.lifeNumbersEnabled);
+
+        if (this.p2LifeNumbers != null)
+            this.p2LifeNumbers.SetActive(this.lifeNumbersEnabled);
+    }
+
+    public void NextSkybox()
+    {
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.tempSkyboxAndStageLogic != null)
+            {
+                GameManager.Instance.tempSkyboxAndStageLogic.LoadNextSkybox();
+            }
+        }
+    }
+    public void PreviousSkybox()
+    {
+
     }
 }

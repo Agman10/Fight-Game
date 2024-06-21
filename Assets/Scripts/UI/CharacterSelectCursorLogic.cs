@@ -28,6 +28,9 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
     public bool canMove;
 
+    public GameObject silhouette;
+    public GameObject joinText;
+
     [Space]
     public GameObject readyPanel;
     public GameObject skinSelectPanel;
@@ -51,6 +54,12 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
         this.canMove = false;
         this.StartCoroutine(this.EnableInputting());
+
+        if (this.silhouette != null)
+            this.silhouette.SetActive(false);
+
+        if (this.joinText != null)
+            this.joinText.SetActive(false);
     }
 
     private void OnDisable()
