@@ -83,7 +83,7 @@ public class PotionSmoke : MonoBehaviour
             {
                 this.hitSphere.transform.localScale = new Vector3(Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration));
                 this.hitSphere.damage = Mathf.Round(Mathf.Lerp(this.damage, this.damage * 0.25f, currentTime / duration));
-                Debug.Log(this.hitSphere.damage);
+                //Debug.Log(this.hitSphere.damage);
             }
             yield return null;
         }
@@ -104,7 +104,7 @@ public class PotionSmoke : MonoBehaviour
             {
                 this.hitSphere.transform.localScale = new Vector3(Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration));
                 this.hitSphere.damage = Mathf.Round(Mathf.Lerp(this.damage * 0.25f, minDamage, currentTime / duration));
-                Debug.Log(this.hitSphere.damage);
+                //Debug.Log(this.hitSphere.damage);
             }
             yield return null;
         }

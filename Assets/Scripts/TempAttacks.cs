@@ -141,346 +141,375 @@ public class TempAttacks : MonoBehaviour
 
     public void Punch(bool punching)
     {
-        if (punching && this.player != null && !this.player.dead)
-            this.player.OnAttack?.Invoke();
-
-        if (punching && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
+        if (Time.timeScale > 0f)
         {
-            if (this.punch != null)
-                this.punch.Initiate();
-            else
-                Debug.Log("Punch not assigned...");
+            if (punching && this.player != null && !this.player.dead)
+                this.player.OnAttack?.Invoke();
 
-
-            /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
-                this.player.AddStun(0.2f, true);
-            else
-                this.player.AddStun(0.2f, false);
-
-            if (this.punchHitbox != null)
+            if (punching && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
             {
-                this.StartCoroutine(this.PunchHitbox());
-                //this.StartCoroutine(this.TestPunchBarage());
-            }*/
+                if (this.punch != null)
+                    this.punch.Initiate();
+                else
+                    Debug.Log("Punch not assigned...");
+
+
+                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    this.player.AddStun(0.2f, true);
+                else
+                    this.player.AddStun(0.2f, false);
+
+                if (this.punchHitbox != null)
+                {
+                    this.StartCoroutine(this.PunchHitbox());
+                    //this.StartCoroutine(this.TestPunchBarage());
+                }*/
+            }
         }
+
+        
     }
 
     public void Kick(bool kicking)
     {
-        if (kicking && this.player != null && !this.player.dead)
-            this.player.OnAttack?.Invoke();
-
-        if (kicking && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
+        if (Time.timeScale > 0f)
         {
-            if (this.kick != null)
-                this.kick.Initiate();
-            else
-                Debug.Log("Kick not assigned...");
+            if (kicking && this.player != null && !this.player.dead)
+                this.player.OnAttack?.Invoke();
 
-
-            /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
-                this.player.AddStun(0.4f, true);
-            else
-                this.player.AddStun(0.4f, false);
-
-            if (this.kickHitbox != null)
+            if (kicking && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
             {
-                this.StartCoroutine(this.KickHitbox());
-            }*/
+                if (this.kick != null)
+                    this.kick.Initiate();
+                else
+                    Debug.Log("Kick not assigned...");
+
+
+                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    this.player.AddStun(0.4f, true);
+                else
+                    this.player.AddStun(0.4f, false);
+
+                if (this.kickHitbox != null)
+                {
+                    this.StartCoroutine(this.KickHitbox());
+                }*/
+            }
         }
+        
     }
 
     public void Special(bool special)
     {
-        if (special && this.player != null && !this.player.dead)
-            this.player.OnAttack?.Invoke();
-
-        if (special && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
+        if (Time.timeScale > 0f)
         {
+            if (special && this.player != null && !this.player.dead)
+                this.player.OnAttack?.Invoke();
 
-            //Debug.Log(this.playerInput.moveInput.x * this.transform.forward.z);
-            if (this.playerInput.moveInput.y < 0f/*this.playerInput.moveInput.x * this.transform.forward.z < 0f*/)
+            if (special && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
             {
-                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f) //on ground
+
+                //Debug.Log(this.playerInput.moveInput.x * this.transform.forward.z);
+                if (this.playerInput.moveInput.y < 0f/*this.playerInput.moveInput.x * this.transform.forward.z < 0f*/)
                 {
-                    this.player.AddStun(1.1f, true);
-                    this.StartCoroutine(this.PlaceLandMineCorutine(0.8f));
-                }*/
-
-                if (this.downSpecial != null)
-                    this.downSpecial.Initiate();
-                else
-                    Debug.Log("Down Special not assigned...");
-            }
-            else if (this.playerInput.moveInput.x * this.transform.forward.z > 0f)
-            {
-                if (this.forwardSpecial != null)
-                    this.forwardSpecial.Initiate();
-                else
-                    Debug.Log("Forward Special not assigned...");
-
-                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f) //on ground
-                {
-                    this.player.AddStun(1.1f, true);
-                    this.StartCoroutine(this.ThrowFireBallCorutine(0.5f));
-                }
-                else
-                {
-                    this.player.AddStun(0.6f, false);
-                    this.StartCoroutine(this.ThrowFireBallCorutine(0.5f));
-                }*/
-            }
-            else if (this.playerInput.moveInput.x * this.transform.forward.z < 0f)
-            {
-                //Debug.Log("Back Special not assigned...");
-                /*if (this.superSpinGrab != null)
-                    this.superSpinGrab.InitiateGrab(true);*/
-
-                /*if (this.spinKick != null)
-                    this.spinKick.InitiateSpinKick();*/
-
-                if (this.backwardSpecial != null)
-                    this.backwardSpecial.Initiate();
-                else
-                    Debug.Log("Backward Special not assigned...");
-
-                /*if (this.superSpinGrab != null)
-                    this.superSpinGrab.InitiateGrab(*//*true*//*);*/
-
-                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f) //on ground
-                {
-                    if (this.superSpinGrab != null)
-                        this.superSpinGrab.InitiateGrab(*//*true*//*);
-                }
-                else
-                {
-                    if (this.superSpinGrab != null)
+                    /*if (Mathf.Abs(this.rb.velocity.y) <= 0f) //on ground
                     {
-                        this.player.rb.AddForce(0, 300, 0);
-                        this.superSpinGrab.InitiateGrab(*//*true*//*);
-                    }
+                        this.player.AddStun(1.1f, true);
+                        this.StartCoroutine(this.PlaceLandMineCorutine(0.8f));
+                    }*/
 
-                }*/
-            }
-            else
-            {
-                if (this.neutralSpecial != null)
-                    this.neutralSpecial.Initiate();
-                else
-                    Debug.Log("Neutral Special not assigned...");
-
-                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f) //on ground
+                    if (this.downSpecial != null)
+                        this.downSpecial.Initiate();
+                    else
+                        Debug.Log("Down Special not assigned...");
+                }
+                else if (this.playerInput.moveInput.x * this.transform.forward.z > 0f)
                 {
-                    this.player.AddStun(1f, true);
-                    this.StartCoroutine(this.ThrowBombCorutine(0.5f));
+                    if (this.forwardSpecial != null)
+                        this.forwardSpecial.Initiate();
+                    else
+                        Debug.Log("Forward Special not assigned...");
+
+                    /*if (Mathf.Abs(this.rb.velocity.y) <= 0f) //on ground
+                    {
+                        this.player.AddStun(1.1f, true);
+                        this.StartCoroutine(this.ThrowFireBallCorutine(0.5f));
+                    }
+                    else
+                    {
+                        this.player.AddStun(0.6f, false);
+                        this.StartCoroutine(this.ThrowFireBallCorutine(0.5f));
+                    }*/
+                }
+                else if (this.playerInput.moveInput.x * this.transform.forward.z < 0f)
+                {
+                    //Debug.Log("Back Special not assigned...");
+                    /*if (this.superSpinGrab != null)
+                        this.superSpinGrab.InitiateGrab(true);*/
+
+                    /*if (this.spinKick != null)
+                        this.spinKick.InitiateSpinKick();*/
+
+                    if (this.backwardSpecial != null)
+                        this.backwardSpecial.Initiate();
+                    else
+                        Debug.Log("Backward Special not assigned...");
+
+                    /*if (this.superSpinGrab != null)
+                        this.superSpinGrab.InitiateGrab(*//*true*//*);*/
+
+                    /*if (Mathf.Abs(this.rb.velocity.y) <= 0f) //on ground
+                    {
+                        if (this.superSpinGrab != null)
+                            this.superSpinGrab.InitiateGrab(*//*true*//*);
+                    }
+                    else
+                    {
+                        if (this.superSpinGrab != null)
+                        {
+                            this.player.rb.AddForce(0, 300, 0);
+                            this.superSpinGrab.InitiateGrab(*//*true*//*);
+                        }
+
+                    }*/
                 }
                 else
                 {
-                    this.player.AddStun(0.6f, false);
-                    this.StartCoroutine(this.ThrowBombCorutine(0.2f));
-                }*/
+                    if (this.neutralSpecial != null)
+                        this.neutralSpecial.Initiate();
+                    else
+                        Debug.Log("Neutral Special not assigned...");
+
+                    /*if (Mathf.Abs(this.rb.velocity.y) <= 0f) //on ground
+                    {
+                        this.player.AddStun(1f, true);
+                        this.StartCoroutine(this.ThrowBombCorutine(0.5f));
+                    }
+                    else
+                    {
+                        this.player.AddStun(0.6f, false);
+                        this.StartCoroutine(this.ThrowBombCorutine(0.2f));
+                    }*/
+                }
             }
         }
+
+        
     }
     public void Special2(bool special)
     {
-        if (special && this.player != null && !this.player.dead)
-            this.player.OnAttack?.Invoke();
-
-        if (special && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
+        if (Time.timeScale > 0f)
         {
-            if (this.playerInput.moveInput.y < 0f/*this.playerInput.moveInput.x * this.transform.forward.z < 0f*/)
+            if (special && this.player != null && !this.player.dead)
+                this.player.OnAttack?.Invoke();
+
+            if (special && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
             {
-                if (this.downSpecial2 != null)
-                    this.downSpecial2.Initiate();
-                else
-                    Debug.Log("Down Special 2 not assigned...");
-                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                if (this.playerInput.moveInput.y < 0f/*this.playerInput.moveInput.x * this.transform.forward.z < 0f*/)
                 {
-                    
-                }*/
-                //Debug.Log("Down Special not assigned...");
-                /*if (this.reflector != null)
-                    this.reflector.InitiateReflector();*/
-            }
-            else if (this.playerInput.moveInput.x * this.transform.forward.z > 0f)
-            {
-                //Debug.Log("Forward Special not assigned...");
-                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    if (this.downSpecial2 != null)
+                        this.downSpecial2.Initiate();
+                    else
+                        Debug.Log("Down Special 2 not assigned...");
+                    /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    {
+
+                    }*/
+                    //Debug.Log("Down Special not assigned...");
+                    /*if (this.reflector != null)
+                        this.reflector.InitiateReflector();*/
+                }
+                else if (this.playerInput.moveInput.x * this.transform.forward.z > 0f)
                 {
-                    if (this.uppercut != null)
-                        this.uppercut.InitiateUppercut();
-                }*/
+                    //Debug.Log("Forward Special not assigned...");
+                    /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    {
+                        if (this.uppercut != null)
+                            this.uppercut.InitiateUppercut();
+                    }*/
 
-                if (this.forwardSpecial2 != null)
-                    this.forwardSpecial2.Initiate();
-                else
-                    Debug.Log("Forward Special 2 not assigned...");
+                    if (this.forwardSpecial2 != null)
+                        this.forwardSpecial2.Initiate();
+                    else
+                        Debug.Log("Forward Special 2 not assigned...");
 
-            }
-            else if (this.playerInput.moveInput.x * this.transform.forward.z < 0f)
-            {
-                //Debug.Log("Back Special not assigned...");
-                /*if (this.superSpinGrab != null)
-                    this.superSpinGrab.InitiateGrab(true);*/
-
-                /*if (this.spinKick != null)
-                    this.spinKick.InitiateSpinKick();*/
-
-                if (this.backwardSpecial2 != null)
-                    this.backwardSpecial2.Initiate();
-                else
-                    Debug.Log("Backward Special 2 not assigned...");
-            }
-            else
-            {
-                if (this.neutralSpecial2 != null)
-                    this.neutralSpecial2.Initiate();
-                else
-                    Debug.Log("Neutral Special 2 not assigned...");
-                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                }
+                else if (this.playerInput.moveInput.x * this.transform.forward.z < 0f)
                 {
-                    
-                }*/
-                //Debug.Log("Neutral Special not assigned...");
+                    //Debug.Log("Back Special not assigned...");
+                    /*if (this.superSpinGrab != null)
+                        this.superSpinGrab.InitiateGrab(true);*/
 
-                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    /*if (this.spinKick != null)
+                        this.spinKick.InitiateSpinKick();*/
+
+                    if (this.backwardSpecial2 != null)
+                        this.backwardSpecial2.Initiate();
+                    else
+                        Debug.Log("Backward Special 2 not assigned...");
+                }
+                else
                 {
-                    if (this.ragingBeast != null)
-                        this.ragingBeast.InitiateRagingBeast();
-                }*/
+                    if (this.neutralSpecial2 != null)
+                        this.neutralSpecial2.Initiate();
+                    else
+                        Debug.Log("Neutral Special 2 not assigned...");
+                    /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    {
+
+                    }*/
+                    //Debug.Log("Neutral Special not assigned...");
+
+                    /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    {
+                        if (this.ragingBeast != null)
+                            this.ragingBeast.InitiateRagingBeast();
+                    }*/
 
 
-                /*if (this.reflector != null)
-                    this.reflector.InitiateReflector();*/
+                    /*if (this.reflector != null)
+                        this.reflector.InitiateReflector();*/
+                }
             }
         }
+
+        
     }
     public void Super(bool super)
     {
-        if (super && this.player != null && !this.player.dead)
-            this.player.OnAttack?.Invoke();
-
-        if (super && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
+        if (Time.timeScale > 0f)
         {
-            if (this.playerInput.moveInput.y < 0f)
-            {
-                /*if (this.player.superCharge >= this.player.maxSuperCharge)
-                {
-                    if (Mathf.Abs(this.rb.velocity.y) <= 0f)
-                    {
-                        
-                    }
-                }*/
-                if (this.downSuper != null)
-                {
-                    //this.player.GiveSuperCharge(-this.player.maxSuperCharge);
-                    this.downSuper.Initiate();
-                }
-                else
-                {
-                    Debug.Log("Down Super not assigned...");
-                }
-            }
-            else if (this.playerInput.moveInput.x * this.transform.forward.z > 0f)
-            {
-                //Debug.Log("Forward Special not assigned...");
-                /*if (this.player.superCharge >= this.player.maxSuperCharge / 2)
-                {
-                    if (Mathf.Abs(this.rb.velocity.y) <= 0f)
-                    {
+            if (super && this.player != null && !this.player.dead)
+                this.player.OnAttack?.Invoke();
 
-                        
-                    }
-                }*/
-
-                if (this.forwardSuper != null)
-                {
-                    //this.player.GiveSuperCharge(-(this.player.maxSuperCharge / 2));
-                    this.forwardSuper.Initiate();
-
-                }
-                else
-                {
-                    Debug.Log("Forward Super not assigned...");
-                }
-            }
-            else if (this.playerInput.moveInput.x * this.transform.forward.z < 0f)
+            if (super && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
             {
-                /*if (this.player.superCharge >= this.player.maxSuperCharge / 2)
+                if (this.playerInput.moveInput.y < 0f)
                 {
-                    if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    /*if (this.player.superCharge >= this.player.maxSuperCharge)
                     {
-                        
-                    }
-                }*/
-                if (this.backwardSuper != null)
-                {
-                    //this.player.GiveSuperCharge(-(this.player.maxSuperCharge / 2));
-                    this.backwardSuper.Initiate();
-
-                }
-                else
-                {
-                    Debug.Log("Backward Super not assigned...");
-                }
-            }
-            else
-            {
-                if (this.neutralSuper != null)
-                {
-                    //this.player.GiveSuperCharge(-this.player.maxSuperCharge);
-                    this.neutralSuper.Initiate();
-                }
-                else
-                {
-                    Debug.Log("Neutral Super not assigned...");
-                }
-                /*if (this.player.superCharge >= this.player.maxSuperCharge)
-                {
-                    if (Mathf.Abs(this.rb.velocity.y) <= 0f)
-                    {
-                        if (this.neutralSuper != null)
+                        if (Mathf.Abs(this.rb.velocity.y) <= 0f)
                         {
-                            this.player.GiveSuperCharge(-this.player.maxSuperCharge);
-                            this.neutralSuper.Initiate();
-                        }
-                        else
-                        {
-                            Debug.Log("Neutral Super not assigned...");
-                        }
-                    }
-                }*/
-                
-            }
-            /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
-            {
-                this.player.superCharge = 0f;
-                if (this.ragingBeast != null)
-                    this.ragingBeast.InitiateRagingBeast();
 
-                if (this.flamingGrab != null)
-                    this.flamingGrab.Initiate();
-            }*/
+                        }
+                    }*/
+                    if (this.downSuper != null)
+                    {
+                        //this.player.GiveSuperCharge(-this.player.maxSuperCharge);
+                        this.downSuper.Initiate();
+                    }
+                    else
+                    {
+                        Debug.Log("Down Super not assigned...");
+                    }
+                }
+                else if (this.playerInput.moveInput.x * this.transform.forward.z > 0f)
+                {
+                    //Debug.Log("Forward Special not assigned...");
+                    /*if (this.player.superCharge >= this.player.maxSuperCharge / 2)
+                    {
+                        if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                        {
+
+
+                        }
+                    }*/
+
+                    if (this.forwardSuper != null)
+                    {
+                        //this.player.GiveSuperCharge(-(this.player.maxSuperCharge / 2));
+                        this.forwardSuper.Initiate();
+
+                    }
+                    else
+                    {
+                        Debug.Log("Forward Super not assigned...");
+                    }
+                }
+                else if (this.playerInput.moveInput.x * this.transform.forward.z < 0f)
+                {
+                    /*if (this.player.superCharge >= this.player.maxSuperCharge / 2)
+                    {
+                        if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                        {
+
+                        }
+                    }*/
+                    if (this.backwardSuper != null)
+                    {
+                        //this.player.GiveSuperCharge(-(this.player.maxSuperCharge / 2));
+                        this.backwardSuper.Initiate();
+
+                    }
+                    else
+                    {
+                        Debug.Log("Backward Super not assigned...");
+                    }
+                }
+                else
+                {
+                    if (this.neutralSuper != null)
+                    {
+                        //this.player.GiveSuperCharge(-this.player.maxSuperCharge);
+                        this.neutralSuper.Initiate();
+                    }
+                    else
+                    {
+                        Debug.Log("Neutral Super not assigned...");
+                    }
+                    /*if (this.player.superCharge >= this.player.maxSuperCharge)
+                    {
+                        if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                        {
+                            if (this.neutralSuper != null)
+                            {
+                                this.player.GiveSuperCharge(-this.player.maxSuperCharge);
+                                this.neutralSuper.Initiate();
+                            }
+                            else
+                            {
+                                Debug.Log("Neutral Super not assigned...");
+                            }
+                        }
+                    }*/
+
+                }
+                /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                {
+                    this.player.superCharge = 0f;
+                    if (this.ragingBeast != null)
+                        this.ragingBeast.InitiateRagingBeast();
+
+                    if (this.flamingGrab != null)
+                        this.flamingGrab.Initiate();
+                }*/
+            }
         }
+
+        
     }
 
     public void Taunt(bool taunt)
     {
-        if (taunt && this.player != null && !this.player.dead)
-            this.player.OnAttack?.Invoke();
-
-        if (taunt && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
+        if (Time.timeScale > 0f)
         {
-            if (this.Taunts != null)
+            if (taunt && this.player != null && !this.player.dead)
+                this.player.OnAttack?.Invoke();
+
+            if (taunt && this.player != null && !this.player.dead && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
             {
-                this.Taunts.Initiate();
-            }
-            else
-            {
-                Debug.Log("Taunt Not Assigned...");
+                if (this.Taunts != null)
+                {
+                    this.Taunts.Initiate();
+                }
+                else
+                {
+                    Debug.Log("Taunt Not Assigned...");
+                }
             }
         }
+
+        
     }
 
     /*public void ThrowBomb()

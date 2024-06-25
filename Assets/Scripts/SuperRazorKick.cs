@@ -14,6 +14,7 @@ public class SuperRazorKick : Attack
 
     public AudioSource uppcutSfx;
     public AudioSource kickDownSfx;
+    public AudioSource startSfx;
 
     public override void OnHit()
     {
@@ -62,6 +63,12 @@ public class SuperRazorKick : Attack
         {
             GameObject startParticlePrefab = this.startParticle;
             startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
+        }
+
+        if (this.startSfx != null)
+        {
+            //this.startSfx.time = 0.05f;
+            this.startSfx.Play();
         }
 
         //FIRST

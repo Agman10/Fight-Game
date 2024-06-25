@@ -31,6 +31,8 @@ public class TestPlayer : MonoBehaviour
     [HideInInspector] public Movement movement;
     [HideInInspector] public TempAttacks attacks;
     [HideInInspector] public CharacterSkinTest skin;
+    public CharacterSoundEffects soundEffects;
+
     public List<float> stuns = new List<float>();
     public List<GameObject> attackStuns = new List<GameObject>();
 

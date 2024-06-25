@@ -31,53 +31,56 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        
-        if (this.player != null && !this.player.dead)
+        if (Time.timeScale > 0f)
         {
-            if (this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0 && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+            if (this.player != null && !this.player.dead)
             {
-                if (this.playerInput != null && this.playerInput.moveInput.x != 0)
+                if (this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0 && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
                 {
-                    //this.testTime += Time.deltaTime;
-                    this.testTime += (this.player.transform.forward.z * this.playerInput.moveInput.x) * Time.deltaTime;
-
-                    float newY = Mathf.Sin(this.testTime * this.moveSpeed * 1.5f);
-
-                    if (this.player.animations != null)
+                    if (this.playerInput != null && this.playerInput.moveInput.x != 0)
                     {
+                        //this.testTime += Time.deltaTime;
+                        this.testTime += (this.player.transform.forward.z * this.playerInput.moveInput.x) * Time.deltaTime;
 
-                        this.player.animations.rightLeg.localEulerAngles = new Vector3(0f, 0f, newY * -40);
-                        this.player.animations.leftLeg.localEulerAngles = new Vector3(0f, 0f, newY * 40);
+                        float newY = Mathf.Sin(this.testTime * this.moveSpeed * 1.5f);
 
-                        this.player.animations.rightArm.localEulerAngles = new Vector3(20f, 0f, newY * 30);
-                        this.player.animations.leftArm.localEulerAngles = new Vector3(-20f, 0f, newY * -30);
+                        if (this.player.animations != null)
+                        {
 
-                        //this.player.animations.eyes.localEulerAngles = new Vector3(0f, newY * 5, 0f);
+                            this.player.animations.rightLeg.localEulerAngles = new Vector3(0f, 0f, newY * -40);
+                            this.player.animations.leftLeg.localEulerAngles = new Vector3(0f, 0f, newY * 40);
+
+                            this.player.animations.rightArm.localEulerAngles = new Vector3(20f, 0f, newY * 30);
+                            this.player.animations.leftArm.localEulerAngles = new Vector3(-20f, 0f, newY * -30);
+
+                            //this.player.animations.eyes.localEulerAngles = new Vector3(0f, newY * 5, 0f);
+                        }
+                        this.test = 1f;
                     }
-                    this.test = 1f;
-                }
-                else if (this.player.animations != null)
-                {
-                    this.test -= Time.deltaTime;
-                    if (this.test > 0.1f)
-                        this.player.animations.SetDefaultPose();
-
-                    this.testTime = 0f;
-
-                    /*if (this.test <= 0.1f)
+                    else if (this.player.animations != null)
                     {
-                        this.player.animations.SetDefaultPose();
-                        this.testTime = 0f;
-                    }*/
+                        this.test -= Time.deltaTime;
+                        if (this.test > 0.1f)
+                            this.player.animations.SetDefaultPose();
 
+                        this.testTime = 0f;
+
+                        /*if (this.test <= 0.1f)
+                        {
+                            this.player.animations.SetDefaultPose();
+                            this.testTime = 0f;
+                        }*/
+
+
+
+                    }
 
 
                 }
-
 
             }
-
         }
+        
     }
 
     // Update is called once per frame
@@ -85,64 +88,69 @@ public class Movement : MonoBehaviour
     {
         //Move();
 
-        if(this.player != null && !this.player.dead)
+        if (Time.timeScale > 0f)
         {
-            if (this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
+            if (this.player != null && !this.player.dead)
             {
-                this.Jump(this.playerInput.jumping);
-                if (this.rb != null)
+                if (this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
                 {
-                    if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                    this.Jump(this.playerInput.jumping);
+                    if (this.rb != null)
                     {
-                        this.Move(this.playerInput.moveInput);
-                    }
-                    else
-                    {
-                        this.rb.velocity = new Vector3(this.rb.velocity.x / 1.01f, this.rb.velocity.y - 0.4f, 0);
+                        if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                        {
+                            this.Move(this.playerInput.moveInput);
+                        }
+                        else
+                        {
+                            this.rb.velocity = new Vector3(this.rb.velocity.x / 1.01f, this.rb.velocity.y - 0.4f, 0);
+                        }
                     }
                 }
-            }
-            else
-            {
-                //this.Move(Vector3.zero);
-                //this.rb.velocity = Vector3.zero;
-                if (this.rb != null)
+                else
                 {
-                    //RIGHT NOW THIS SLOWS DOWN SOME ATTACKS BUT THIS SHOULD BE IMPLEMENTED SO STUNNED PLAYERS DONT GLIDE WHILE ON GROUND <-ignore this for now
-                    
-                    //implement a better way to do this!!
-                    if (Mathf.Abs(this.rb.velocity.y) <= 0f && this.player.attackStuns.Count <= 0)
+                    //this.Move(Vector3.zero);
+                    //this.rb.velocity = Vector3.zero;
+                    if (this.rb != null)
                     {
-                        this.rb.velocity = new Vector3(this.rb.velocity.x / 1.5f, this.rb.velocity.y - 0.4f, 0);
+                        //RIGHT NOW THIS SLOWS DOWN SOME ATTACKS BUT THIS SHOULD BE IMPLEMENTED SO STUNNED PLAYERS DONT GLIDE WHILE ON GROUND <-ignore this for now
+
+                        //implement a better way to do this!!
+                        if (Mathf.Abs(this.rb.velocity.y) <= 0f && this.player.attackStuns.Count <= 0)
+                        {
+                            this.rb.velocity = new Vector3(this.rb.velocity.x / 1.5f, this.rb.velocity.y - 0.4f, 0);
+                        }
+                        else
+                        {
+                            this.rb.velocity = new Vector3(this.rb.velocity.x / 1.01f, this.rb.velocity.y - 0.4f, 0);
+                        }
+
+
+                        //this.rb.velocity = new Vector3(this.rb.velocity.x / 1.01f, this.rb.velocity.y - 0.4f, 0);
+
+
+
+                        /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
+                            this.rb.velocity = new Vector3(0, 0, 0);
+                        else
+                            this.rb.velocity = new Vector3(this.rb.velocity.x / 1.01f, this.rb.velocity.y - 0.4f, 0);*/
                     }
-                    else
-                    {
-                        this.rb.velocity = new Vector3(this.rb.velocity.x / 1.01f, this.rb.velocity.y - 0.4f, 0);
-                    }
-
-
-                    //this.rb.velocity = new Vector3(this.rb.velocity.x / 1.01f, this.rb.velocity.y - 0.4f, 0);
-
-
-
-                    /*if (Mathf.Abs(this.rb.velocity.y) <= 0f)
-                        this.rb.velocity = new Vector3(0, 0, 0);
-                    else
-                        this.rb.velocity = new Vector3(this.rb.velocity.x / 1.01f, this.rb.velocity.y - 0.4f, 0);*/
                 }
+
+                //cappedYVelocity = Mathf.Min(Mathf.Abs(rb.velocity.y), 15) * Mathf.Sign(rb.velocity.y);
+                //Debug.Log(cappedYVelocity);
+                //Debug.Log(Mathf.Abs(this.rb.velocity.y));
+
+                //Debug.Log(this.rb.velocity.magnitude);
+                //Debug.Log(this.rb.velocity.normalized);
+                /*if (this.rb.velocity.magnitude > this.maxSpeed)
+                {
+                    this.rb.velocity = this.rb.velocity.normalized * this.maxSpeed;
+                }*/
             }
-
-            //cappedYVelocity = Mathf.Min(Mathf.Abs(rb.velocity.y), 15) * Mathf.Sign(rb.velocity.y);
-            //Debug.Log(cappedYVelocity);
-            //Debug.Log(Mathf.Abs(this.rb.velocity.y));
-
-            //Debug.Log(this.rb.velocity.magnitude);
-            //Debug.Log(this.rb.velocity.normalized);
-            /*if (this.rb.velocity.magnitude > this.maxSpeed)
-            {
-                this.rb.velocity = this.rb.velocity.normalized * this.maxSpeed;
-            }*/
         }
+
+        
 
 
     }

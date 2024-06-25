@@ -147,7 +147,7 @@ public class HammerAttack : Attack
         /*if (this.animations != null)
             this.animations.SetEyes(2);*/
 
-        while (this.user.input.special2 && testTime < duration)
+        while (this.user.input.special2 && testTime < duration || Time.timeScale <= 0)
         {
             testTime += Time.deltaTime;
 

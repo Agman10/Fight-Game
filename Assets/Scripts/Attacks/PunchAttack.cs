@@ -11,6 +11,7 @@ public class PunchAttack : Attack
     public TestHitbox airHitbox;
 
     public AudioSource punchSwooshSfx;
+    public AudioSource airPunchSwooshSfx;
 
     //private IEnumerator hitboxCoroutine;
     //private IEnumerator animationCoroutine;
@@ -216,6 +217,14 @@ public class PunchAttack : Attack
 
         if (this.animations != null)
             this.animations.AirPunch(0);
+
+        if (this.airPunchSwooshSfx != null)
+        {
+            //this.punchSwooshSfx.time = 0.125f;
+            //this.punchSwooshSfx.time = 0.1f;
+            this.airPunchSwooshSfx.time = 0.02f;
+            this.airPunchSwooshSfx.Play();
+        }
 
         yield return new WaitForSeconds(0.1f);
         //yield return new WaitForSeconds(0.05f);

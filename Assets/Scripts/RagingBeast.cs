@@ -27,6 +27,8 @@ public class RagingBeast : Attack
     public bool moving;
     public bool onGoing;
 
+    public AudioSource punchSfx;
+
     public override void OnEnable()
     {
         if (this.user != null)
@@ -262,6 +264,7 @@ public class RagingBeast : Attack
 
         //int amount = 18;
         int amount = 43;
+        int amount2 = 0;
         while (amount > 0)
         {
             /*float waitTime = 0.05f;
@@ -278,10 +281,19 @@ public class RagingBeast : Attack
 
             //yield return new WaitForSeconds(0.05f);
             yield return new WaitForSeconds(0.025f);
+            bool playSfx = false;
+            if (amount2 == 0)
+                playSfx = true;
+            else
+                playSfx = false;
 
-            this.PunchEffect(new Vector3(player.transform.position.x + this.RandomX(minXPos, maxXPos), this.RandomY(minYPos, maxYPos), 0));
+            this.PunchEffect(new Vector3(player.transform.position.x + this.RandomX(minXPos, maxXPos), this.RandomY(minYPos, maxYPos), 0), playSfx);
             player.TakeDamage(this.user.transform.position, damage, 0f, 0f, 0f, false, ghost);
+
             amount -= 1;
+            amount2++;
+            if (amount2 > 1)
+                amount2 = 0;
             yield return null;
         }
 
@@ -493,12 +505,22 @@ public class RagingBeast : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
-    public void PunchEffect(Vector3 position)
+    public void PunchEffect(Vector3 position, bool playSfx = true)
     {
         if (this.punchEffect != null)
         {
             GameObject punchEffectPrefab = this.punchEffect;
             punchEffectPrefab = Instantiate(punchEffectPrefab, position, Quaternion.Euler(0, 0, 0));
+        }
+
+        if (this.punchSfx != null && playSfx)
+        {
+            this.punchSfx.time = 0.01f;
+            //this.punchSfx.pitch = Random.Range(0.4f, 0.7f);
+            this.punchSfx.pitch = Random.Range(0.9f, 1.1f);
+            //this.punchSfx.pitch = Random.Range(0.7f, 0.9f);
+            //this.punchSfx.pitch = Random.Range(1.1f, 1.3f);
+            this.punchSfx.Play();
         }
     }
     private float RandomX(float min, float max)
