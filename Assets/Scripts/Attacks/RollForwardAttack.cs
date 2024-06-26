@@ -157,6 +157,12 @@ public class RollForwardAttack : Attack
                     player.GiveSuperCharge(this.superCharge);
                     player.GiveSuperCharge(this.superCharge / 2);
                     rollattack.RollBack(null);
+
+                    if (player.soundEffects != null)
+                        player.soundEffects.PlayHitSound();
+
+                    if (this.user.soundEffects != null)
+                        this.user.soundEffects.PlayHitSound();
                 }
                 else
                 {
@@ -165,6 +171,9 @@ public class RollForwardAttack : Attack
                     player.OnHitFromPlayer?.Invoke(this.user);
                     this.user.GiveSuperCharge(this.superCharge);
                     player.GiveSuperCharge(this.superCharge / 2);
+
+                    if (player.soundEffects != null)
+                        player.soundEffects.PlayHitSound();
                 }
 
                 

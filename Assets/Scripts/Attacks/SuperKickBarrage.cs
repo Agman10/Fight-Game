@@ -15,6 +15,9 @@ public class SuperKickBarrage : Attack
 
     public GameObject startParticle;
 
+    public AudioSource kickSfx;
+    public AudioSource spinSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -99,6 +102,8 @@ public class SuperKickBarrage : Attack
         if (this.hitboxLower != null)
             this.hitboxLower.gameObject.SetActive(true);
 
+        this.PlayKickSfx(1.1f);
+
         yield return new WaitForSeconds(animSpeed + 0.05f);
 
         if (this.hitboxLower != null)
@@ -147,6 +152,8 @@ public class SuperKickBarrage : Attack
         if (this.hitboxUpper != null)
             this.hitboxUpper.gameObject.SetActive(true);
 
+        this.PlayKickSfx(1.2f);
+
         yield return new WaitForSeconds(animSpeed + 0.05f);
 
         if (this.hitboxUpper != null)
@@ -193,6 +200,8 @@ public class SuperKickBarrage : Attack
 
         if (this.hitboxUpper != null)
             this.hitboxUpper.gameObject.SetActive(true);
+
+        this.PlayKickSfx(1.1f);
 
         yield return new WaitForSeconds(animSpeed + 0.05f);
 
@@ -242,6 +251,8 @@ public class SuperKickBarrage : Attack
         if (this.hitboxLower != null)
             this.hitboxLower.gameObject.SetActive(true);
 
+        this.PlayKickSfx(1.2f);
+
         yield return new WaitForSeconds(animSpeed + 0.05f);
 
         if (this.hitboxLower != null)
@@ -289,6 +300,8 @@ public class SuperKickBarrage : Attack
 
         if (this.hitboxLower != null)
             this.hitboxLower.gameObject.SetActive(true);
+
+        this.PlayKickSfx(1.1f);
 
         yield return new WaitForSeconds(animSpeed + 0.05f);
 
@@ -338,6 +351,8 @@ public class SuperKickBarrage : Attack
         if (this.hitboxEnd != null)
             this.hitboxEnd.gameObject.SetActive(true);
 
+        this.PlayKickSfx(1.2f);
+
         yield return new WaitForSeconds(animSpeed + 0.05f);
 
         if (this.hitboxEnd != null)
@@ -382,6 +397,9 @@ public class SuperKickBarrage : Attack
         if (this.hitboxSpinKick != null)
             this.hitboxSpinKick.gameObject.SetActive(true);
 
+        if (this.spinSfx != null)
+            this.spinSfx.Play();
+
         float time = 0.35f;
         while (time > 0)
         {
@@ -411,6 +429,9 @@ public class SuperKickBarrage : Attack
             yield return null;
         }
 
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
+
         if (this.hitboxSpinKickEnd != null)
             this.hitboxSpinKickEnd.gameObject.SetActive(false);
 
@@ -427,6 +448,17 @@ public class SuperKickBarrage : Attack
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
+
+    public void PlayKickSfx(float pitch = 1f)
+    {
+        if (this.kickSfx != null)
+        {
+            this.kickSfx.time = 0.05f;
+            this.kickSfx.pitch = pitch;
+            this.kickSfx.Play();
+        }
+    }
+
     public override void Stop()
     {
         base.Stop();
@@ -443,6 +475,9 @@ public class SuperKickBarrage : Attack
 
         if (this.hitboxSpinKickEnd != null)
             this.hitboxSpinKickEnd.gameObject.SetActive(false);
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

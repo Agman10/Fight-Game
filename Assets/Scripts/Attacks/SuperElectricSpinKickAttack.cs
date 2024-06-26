@@ -25,8 +25,10 @@ public class SuperElectricSpinKickAttack : Attack
 
     public GameObject windHitboxes;
 
-    
-    
+    public AudioSource spinSfx;
+
+
+
     //private bool ongoing;
 
     //public float stunLength = 0.6f;
@@ -145,6 +147,9 @@ public class SuperElectricSpinKickAttack : Attack
         this.PlayElectricity(true, 1);
         //this.user.rb.AddForce(1000, 1000, 0);
 
+        if (this.spinSfx != null)
+            this.spinSfx.Play();
+
         float time = this.duration;
         while (time > 0)
         {
@@ -157,6 +162,9 @@ public class SuperElectricSpinKickAttack : Attack
 
             yield return null;
         }
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
 
         //yield return new WaitForSeconds(0.9f);
         this.spinning = false;
@@ -240,6 +248,9 @@ public class SuperElectricSpinKickAttack : Attack
 
         this.PlayElectricity(true, 2);
 
+        if (this.spinSfx != null)
+            this.spinSfx.Play();
+
         float time = this.duration;
         while (time > 0)
         {
@@ -251,6 +262,9 @@ public class SuperElectricSpinKickAttack : Attack
 
             yield return null;
         }
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
 
         //yield return new WaitForSeconds(0.9f);
         if (this.hitbox != null)

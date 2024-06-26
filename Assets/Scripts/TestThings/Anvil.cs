@@ -19,6 +19,9 @@ public class Anvil : MonoBehaviour
     public GameObject alternateModel;
     //public GameObject breakEffect;
 
+    public AudioSource landSfx;
+    public AudioSource hitSfx;
+
     private void OnEnable()
     {
         if (this.hitbox != null)
@@ -143,6 +146,11 @@ public class Anvil : MonoBehaviour
             }
         }
             
+        if (this.victim == null && this.landSfx != null)
+        {
+            this.landSfx.time = 0.05f;
+            this.landSfx.Play();
+        }
 
         yield return new WaitForSeconds(0.5f);
         if (this.model != null)
@@ -189,6 +197,11 @@ public class Anvil : MonoBehaviour
 
         player.TakeDamage(this.transform.position, 32f);
 
+        if(this.hitSfx != null)
+        {
+            //this.hitSfx.time = 0.05f;
+            this.hitSfx.Play();
+        }
 
         if (player.hitboxes != null)
             player.hitboxes.gameObject.SetActive(false);

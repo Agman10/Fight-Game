@@ -18,6 +18,8 @@ public class SpinKick : Attack
     public VisualEffect fire2;
     public bool onGoing;
 
+    public AudioSource spinSfx;
+
     [Space]
 
     public float endStun = 0.4f;
@@ -123,6 +125,9 @@ public class SpinKick : Attack
 
         this.PlayFire(true, 2);
 
+        if (this.spinSfx != null)
+            this.spinSfx.Play();
+
         float time = 0.9f;
         while (time > 0)
         {
@@ -135,6 +140,9 @@ public class SpinKick : Attack
 
             yield return null;
         }
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
 
         //yield return new WaitForSeconds(0.9f);
         if (this.hitbox != null)
@@ -205,6 +213,9 @@ public class SpinKick : Attack
         this.PlayFire(true, 1);
         //this.user.rb.AddForce(1000, 1000, 0);
 
+        if (this.spinSfx != null)
+            this.spinSfx.Play();
+
         float time = 0.9f;
         while (time > 0)
         {
@@ -217,6 +228,9 @@ public class SpinKick : Attack
 
             yield return null;
         }
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
 
         /*time = 0.4f;
         while (time > 0)
@@ -320,6 +334,9 @@ public class SpinKick : Attack
 
         if (this.hitbox2 != null)
             this.hitbox2.gameObject.SetActive(false);
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
 
         this.PlayFire(false, 2);
         this.spinning = false;
