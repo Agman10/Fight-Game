@@ -77,7 +77,10 @@ public class PshychoFlamer : Attack
             else
                 this.animations.SetPshychoFlamerStartPose();
         }
-            
+
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
 
         if (this.startParticle != null)
         {

@@ -573,6 +573,9 @@ public class ItemThrowAttack : Attack
 
         this.user.rb.isKinematic = true;
 
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         if (this.startParticle != null)
         {
             GameObject startParticlePrefab = this.startParticle;

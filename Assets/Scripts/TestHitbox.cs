@@ -38,6 +38,10 @@ public class TestHitbox : MonoBehaviour
     public bool preventMomentumStop = false;
 
     public Transform hitboxOrigin;
+
+    public bool preventDeathSound = false;
+    public bool doHitSound = true;
+    public CharacterSoundEffect customHitSound;
     void Start()
     {
         
@@ -84,7 +88,7 @@ public class TestHitbox : MonoBehaviour
                         //this.OnPlayerCollision.Invoke(player);
 
                         if (this.instaKill)
-                            player.Die(this.transform.position, false, false);
+                            player.Die(this.transform.position, false, false, true, this.preventDeathSound);
 
                         this.players.Add(player);
                         if (!this.avoidOnHitInvoke)
@@ -94,8 +98,23 @@ public class TestHitbox : MonoBehaviour
                             if (this.belongsTo != null)
                                 player.OnHitFromPlayer?.Invoke(this.belongsTo);
                         }
-                            
 
+                        if (this.doHitSound && player.damageMitigation < 1f)
+                        {
+                            //player.TestSoundEffect();
+
+                            if (this.customHitSound.sound != null)
+                            {
+                                this.customHitSound.PlaySound();
+                            }
+                            else
+                            {
+                                if (player.soundEffects != null)
+                                {
+                                    player.soundEffects.PlayHitSound();
+                                }
+                            }
+                        }
 
                         //Debug.Log(player.transform.forward);
                         //float distance = Vector3.Distance(player.transform.position, this.transform.position);
@@ -114,9 +133,9 @@ public class TestHitbox : MonoBehaviour
                             posOrigin = this.hitboxOrigin.position;
 
                         if (!this.explosionKnockback)
-                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound);
                         else
-                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound);
 
                         if (this.belongsTo != null && this.superChargeAmount != 0f && this.belongsTo != player)
                         {
@@ -146,6 +165,21 @@ public class TestHitbox : MonoBehaviour
                     ragdoll.KnockBack(new Vector3(this.transform.forward.z * (this.horizontalKnockback * 150f), this.verticalKnockback * 150f, 0));
                 else
                     ragdoll.KnockBack(new Vector3(direction * (this.horizontalKnockback * 150f), this.verticalKnockback * 150f, 0));
+
+                /*if (ragdoll.owner != null && ragdoll.owner.soundEffects != null)
+                    ragdoll.owner.soundEffects.PlayHitSound();*/
+
+                if (this.doHitSound)
+                {
+                    if (this.customHitSound.sound != null)
+                    {
+                        this.customHitSound.PlaySound();
+                    }
+                    else if (ragdoll.owner != null && ragdoll.owner.soundEffects != null)
+                    {
+                        ragdoll.owner.soundEffects.PlayHitSound();
+                    }
+                }
             }
 
 
@@ -202,7 +236,7 @@ public class TestHitbox : MonoBehaviour
                 {
                     this.players.Add(player);
                     if (this.instaKill)
-                        player.Die(this.transform.position, false, false);
+                        player.Die(this.transform.position, false, false, true, this.preventDeathSound);
 
                     //player.TakeDamage(this.transform.position, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback);
                     if (!this.avoidOnHitInvoke)
@@ -212,7 +246,25 @@ public class TestHitbox : MonoBehaviour
                         if (this.belongsTo != null)
                             player.OnHitFromPlayer?.Invoke(this.belongsTo);
                     }
-                        
+
+                    if (this.doHitSound && player.damageMitigation < 1f)
+                    {
+                        //player.TestSoundEffect();
+
+                        if(this.customHitSound.sound != null)
+                        {
+                            this.customHitSound.PlaySound();
+                        }
+                        else
+                        {
+                            if (player.soundEffects != null)
+                            {
+                                player.soundEffects.PlayHitSound();
+                            }
+                        }
+                    }
+                    
+
                     //Debug.Log("collision: " + player);
                     float knockbackMultiplier = 1f;
                     if (player.stuns.Count > 0 || player.attackStuns.Count > 0 || player.rb.velocity.y > 0f)
@@ -228,9 +280,9 @@ public class TestHitbox : MonoBehaviour
                         posOrigin = this.hitboxOrigin.position;
 
                     if (!this.explosionKnockback)
-                        player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath);
+                        player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound);
                     else
-                        player.TakeDamage(posOrigin, this.damage, this.stun, direction * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath);
+                        player.TakeDamage(posOrigin, this.damage, this.stun, direction * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound);
 
 
                     if (this.belongsTo != null && this.superChargeAmount != 0f && this.belongsTo != player)
@@ -282,6 +334,18 @@ public class TestHitbox : MonoBehaviour
                     ragdoll.KnockBack(new Vector3(this.transform.forward.z * (this.horizontalKnockback * 150f * this.physicsKnockbackMultiplier), this.verticalKnockback * 150f * this.physicsKnockbackMultiplier, 0));
                 else
                     ragdoll.KnockBack(new Vector3(direction * (this.horizontalKnockback * 150f * this.physicsKnockbackMultiplier), this.verticalKnockback * 150f * this.physicsKnockbackMultiplier, 0));
+
+                if (this.doHitSound)
+                {
+                    if (this.customHitSound.sound != null)
+                    {
+                        this.customHitSound.PlaySound();
+                    }
+                    else if (ragdoll.owner != null && ragdoll.owner.soundEffects != null)
+                    {
+                        ragdoll.owner.soundEffects.PlayHitSound();
+                    }
+                }
 
                 this.StartCoroutine(this.RemoveGameObjectCoroutine(this.damageDelay, ragdoll.gameObject));
 

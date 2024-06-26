@@ -29,6 +29,10 @@ public class RagingBeast : Attack
 
     public AudioSource punchSfx;
 
+    public AudioSource swooshSfx;
+    public AudioSource startSfx;
+    public AudioSource killSfx;
+
     public override void OnEnable()
     {
         if (this.user != null)
@@ -109,7 +113,24 @@ public class RagingBeast : Attack
             startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
         }
 
+        /*if (this.startSfx != null)
+        {
+            //this.startSfx.time = 0.05f;
+            this.startSfx.Play();
+        }*/
+
+        if(this.user.soundEffects != null)
+        {
+            this.user.soundEffects.PlaySuperSfx();
+        }
+
         yield return new WaitForSeconds(0.25f);
+
+        if (this.swooshSfx != null)
+        {
+            this.swooshSfx.time = 0.06f;
+            this.swooshSfx.Play();
+        }
 
         /*float testTime = 0f;
         float time = 0.25f;
@@ -124,7 +145,7 @@ public class RagingBeast : Attack
             yield return null;
         }*/
 
-        
+
 
         if (this.animations != null)
             this.animations.RagingBeastDash();
@@ -397,6 +418,12 @@ public class RagingBeast : Attack
             if (this.backSkull != null)
                 this.backSkull.SetActive(true);
 
+            if (this.killSfx != null)
+            {
+                //this.startSfx.time = 0.05f;
+                this.killSfx.Play();
+            }
+
             yield return new WaitForSeconds(2f);
             /*if (this.mainCamera != null)
             {
@@ -419,7 +446,7 @@ public class RagingBeast : Attack
 
             this.user.preventDeath = false;
             player.preventDeath = false;
-            player.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, ghost);
+            player.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, ghost, false, false, true, true);
 
             this.user.knockbackInvounrability = false;
             player.knockbackInvounrability = false;

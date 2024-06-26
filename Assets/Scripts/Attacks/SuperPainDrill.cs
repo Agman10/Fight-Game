@@ -110,6 +110,9 @@ public class SuperPainDrill : Attack
         if (this.animations != null)
             this.animations.FlameGrabStartPose();
 
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         if (this.startParticle != null)
         {
             GameObject startParticlePrefab = this.startParticle;

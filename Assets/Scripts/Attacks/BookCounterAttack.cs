@@ -306,6 +306,10 @@ public class BookCounterAttack : Attack
                 this.StopAllCoroutines();
                 //this.SetCountering(false);
                 this.StartCoroutine(this.CounterCoroutine(player));
+                /*if (this.user.soundEffects != null)
+                {
+                    this.user.soundEffects.StopHitSound();
+                }*/
                 //player.OnHit?.Invoke();
             }
                 

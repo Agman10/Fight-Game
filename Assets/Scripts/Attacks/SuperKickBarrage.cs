@@ -72,6 +72,11 @@ public class SuperKickBarrage : Attack
         if (this.animations != null)
             this.animations.ForwardKickShippu(0);
 
+        if (this.user.soundEffects != null)
+        {
+            this.user.soundEffects.PlaySuperSfx();
+        }
+
         yield return new WaitForSeconds(0.05f);
 
         if (this.animations != null)

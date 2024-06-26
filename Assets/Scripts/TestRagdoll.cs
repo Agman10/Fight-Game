@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestRagdoll : MonoBehaviour
 {
+    public TestPlayer owner;
     public Rigidbody rb;
     public bool canBeAttacked = false;
     private Rigidbody[] rigRigidbodies;

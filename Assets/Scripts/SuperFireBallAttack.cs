@@ -88,6 +88,9 @@ public class SuperFireBallAttack : Attack
                 this.animations.SuperFireBallCharge();
         }
 
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         if (this.startParticle != null && !fail)
         {
             GameObject startParticlePrefab = this.startParticle;
@@ -199,6 +202,9 @@ public class SuperFireBallAttack : Attack
             else
                 this.animations.SuperFireBallCharge(true);
         }
+
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
 
         if (this.startParticle != null && !fail)
         {

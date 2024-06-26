@@ -10,6 +10,9 @@ public class MCapPunchAttacks : Attack
     public TestHitbox hitbox;
     public TestHitbox airHitbox;
 
+    public AudioSource punchSwooshSfx;
+    public AudioSource airPunchSwooshSfx;
+
 
     public override void OnHit()
     {
@@ -64,6 +67,14 @@ public class MCapPunchAttacks : Attack
         if (this.animations != null)
             this.animations.SetStartPunchPose();
 
+        if (this.punchSwooshSfx != null)
+        {
+            //this.punchSwooshSfx.time = 0.125f;
+            //this.punchSwooshSfx.time = 0.1f;
+            this.punchSwooshSfx.time = 0.01f;
+            this.punchSwooshSfx.Play();
+        }
+
         yield return new WaitForSeconds(0.04f);
 
         if (this.animations != null)
@@ -98,6 +109,14 @@ public class MCapPunchAttacks : Attack
 
         if (this.animations != null)
             this.animations.AirPunch(0);
+
+        if (this.airPunchSwooshSfx != null)
+        {
+            //this.punchSwooshSfx.time = 0.125f;
+            //this.punchSwooshSfx.time = 0.1f;
+            this.airPunchSwooshSfx.time = 0.02f;
+            this.airPunchSwooshSfx.Play();
+        }
 
         yield return new WaitForSeconds(0.05f);
         //yield return new WaitForSeconds(0.05f);

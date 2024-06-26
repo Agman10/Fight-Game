@@ -59,12 +59,16 @@ public class SuperUppercut : Attack
         if (this.animations != null)
             this.animations.SetPunchUppercutStartAnim1();
 
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         if (this.startParticle != null)
         {
             GameObject startParticlePrefab = this.startParticle;
             //startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
             startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * 0.35f), this.user.transform.position.y + 1.5f, -0.8f), Quaternion.Euler(0, 0, 0));
         }
+
         yield return new WaitForSeconds(0.25f);
         if (this.animations != null)
             this.animations.SetPunchUppercutStartAnim2();

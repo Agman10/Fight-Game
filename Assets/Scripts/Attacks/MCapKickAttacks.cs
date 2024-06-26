@@ -11,6 +11,10 @@ public class MCapKickAttacks : Attack
 
     public TestHitbox forwardHitbox;
 
+    public AudioSource kickSwooshSfx;
+    public AudioSource airKickSwooshSfx;
+    public AudioSource forwardKickSwooshSfx;
+
 
     public override void OnHit()
     {
@@ -89,6 +93,12 @@ public class MCapKickAttacks : Attack
         if (this.animations != null)
             this.animations.Kick(1);
 
+        if (this.kickSwooshSfx != null)
+        {
+            this.kickSwooshSfx.time = 0.01f;
+            this.kickSwooshSfx.Play();
+        }
+
         yield return new WaitForSeconds(0.025f);
 
         if (this.animations != null)
@@ -132,6 +142,12 @@ public class MCapKickAttacks : Attack
         yield return new WaitForSeconds(0.05f);*/
         if (this.animations != null)
             this.animations.SexKickStart();
+
+        if (this.airKickSwooshSfx != null)
+        {
+            this.airKickSwooshSfx.time = 0.02f;
+            this.airKickSwooshSfx.Play();
+        }
 
         yield return new WaitForSeconds(0.05f);
 
@@ -187,6 +203,12 @@ public class MCapKickAttacks : Attack
 
         if (this.animations != null)
             this.animations.ForwardKickShippu(1, 0);
+
+        if (this.forwardKickSwooshSfx != null)
+        {
+            this.forwardKickSwooshSfx.time = 0.02f;
+            this.forwardKickSwooshSfx.Play();
+        }
 
         yield return new WaitForSeconds(animSpeed);
 

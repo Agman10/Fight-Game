@@ -106,6 +106,9 @@ public class SuperElectricSpinKickAttack : Attack
         if (this.animations != null)
             this.animations.SetSpinKick2AnimPoseStart();
 
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         if (this.startParticle != null)
         {
             GameObject startParticlePrefab = this.startParticle;
@@ -194,6 +197,9 @@ public class SuperElectricSpinKickAttack : Attack
     {
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
+
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
 
         if (this.startParticle != null)
         {

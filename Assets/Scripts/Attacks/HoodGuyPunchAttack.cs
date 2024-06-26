@@ -19,6 +19,12 @@ public class HoodGuyPunchAttack : Attack
     public GameObject scyte;
     public GameObject scyteTrail;
 
+    public AudioSource punchSwooshSfx;
+    public AudioSource airPunchSwooshSfx;
+
+    public AudioSource forwardPunchSwooshSfx;
+    public AudioSource backPunchSwooshSfx;
+
     //private IEnumerator hitboxCoroutine;
     //private IEnumerator animationCoroutine;
 
@@ -176,6 +182,12 @@ public class HoodGuyPunchAttack : Attack
         if (this.animations != null)
             this.animations.TestHoodGuyPunch(1);
 
+        if (this.punchSwooshSfx != null)
+        {
+            this.punchSwooshSfx.time = 0.01f;
+            this.punchSwooshSfx.Play();
+        }
+
         yield return new WaitForSeconds(0.04f);
 
         if (this.animations != null)
@@ -221,6 +233,12 @@ public class HoodGuyPunchAttack : Attack
 
         if (this.animations != null)
             this.animations.AirPunch(0);
+
+        if (this.airPunchSwooshSfx != null)
+        {
+            this.airPunchSwooshSfx.time = 0.02f;
+            this.airPunchSwooshSfx.Play();
+        }
 
         yield return new WaitForSeconds(0.1f);
         //yield return new WaitForSeconds(0.05f);
@@ -273,6 +291,13 @@ public class HoodGuyPunchAttack : Attack
             this.animations.upperBody.localEulerAngles = new Vector3(0f, 55f, 0f);
 
         yield return new WaitForSeconds(0.15f);
+
+        if (this.backPunchSwooshSfx != null)
+        {
+            this.backPunchSwooshSfx.time = 0.01f;
+            this.backPunchSwooshSfx.Play();
+        }
+
 
         if (this.backHitbox != null)
             this.backHitbox.gameObject.SetActive(true);
@@ -334,6 +359,12 @@ public class HoodGuyPunchAttack : Attack
         }
 
         yield return new WaitForSeconds(0.1f);
+
+        if (this.forwardPunchSwooshSfx != null)
+        {
+            this.forwardPunchSwooshSfx.time = 0.02f;
+            this.forwardPunchSwooshSfx.Play();
+        }
 
         if (this.forwardHitbox2 != null)
             this.forwardHitbox2.gameObject.SetActive(true);

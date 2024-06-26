@@ -81,6 +81,9 @@ public class CowardRunAttack : Attack
         if (this.animations != null)
             this.animations.CowardStart();
 
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         if (this.startParticle != null)
         {
             GameObject startParticlePrefab = this.startParticle;

@@ -10,6 +10,9 @@ public class RobotDeath : MonoBehaviour
 
     public Renderer eyeLampOff;
     public Renderer eyeLampOn;
+
+    public AudioSource explodeSfx;
+    //public AudioSource explodeSfx2;
     private void OnEnable()
     {
         if (this.player != null)
@@ -51,6 +54,12 @@ public class RobotDeath : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         //yield return new WaitForSeconds(0.01f);
+
+        if (this.explodeSfx != null)
+            this.explodeSfx.Play();
+
+        /*if (this.explodeSfx2 != null)
+            this.explodeSfx2.Play();*/
 
         this.player.ragdoll.gameObject.SetActive(false);
 

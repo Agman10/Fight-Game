@@ -245,6 +245,11 @@ public class PunchAttack : Attack
             yield return null;
         }
 
+        /*if (this.airPunchSwooshSfx != null)
+        {
+            this.airPunchSwooshSfx.Stop();
+        }*/
+
         if (this.airHitbox != null)
             this.airHitbox.gameObject.SetActive(false);
 

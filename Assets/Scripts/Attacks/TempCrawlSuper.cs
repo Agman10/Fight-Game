@@ -148,12 +148,14 @@ public class TempCrawlSuper : Attack
             //this.animations.StupidDance(0);
         }
 
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         if (this.startParticle != null)
         {
             GameObject startParticlePrefab = this.startParticle;
             startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
         }
-
 
         //int amountt = 15;
         int amountt = 10;

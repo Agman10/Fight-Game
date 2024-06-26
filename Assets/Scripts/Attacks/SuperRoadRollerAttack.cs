@@ -77,6 +77,9 @@ public class SuperRoadRollerAttack : Attack
         if (this.animations != null)
             this.animations.Wry();
 
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         if (this.startParticle != null)
         {
             GameObject startParticlePrefab = this.startParticle;

@@ -12,6 +12,10 @@ public class HoodGuyKickAttack : Attack
 
     public GameObject scyte;
 
+    public AudioSource kickSwooshSfx;
+    public AudioSource airKickSwooshSfx;
+    public AudioSource forwardKickSwooshSfx;
+
 
     public override void OnHit()
     {
@@ -104,6 +108,12 @@ public class HoodGuyKickAttack : Attack
         if (this.animations != null)
             this.animations.HoodGuyKick(1);
 
+        if (this.kickSwooshSfx != null)
+        {
+            this.kickSwooshSfx.time = 0.01f;
+            this.kickSwooshSfx.Play();
+        }
+
         yield return new WaitForSeconds(0.025f);
 
         if (this.animations != null)
@@ -179,6 +189,12 @@ public class HoodGuyKickAttack : Attack
             this.animations.SetDefaultPose();
 
         //yield return new WaitForSeconds(0.1f);
+
+        if (this.airKickSwooshSfx != null)
+        {
+            this.airKickSwooshSfx.time = 0.02f;
+            this.airKickSwooshSfx.Play();
+        }
 
         yield return new WaitForSeconds(0.05f);
         if (this.animations != null)
@@ -296,6 +312,12 @@ public class HoodGuyKickAttack : Attack
 
         if (this.animations != null)
             this.animations.HoodGuyBackKick(1, 0);
+
+        if (this.forwardKickSwooshSfx != null)
+        {
+            this.forwardKickSwooshSfx.time = 0.02f;
+            this.forwardKickSwooshSfx.Play();
+        }
 
         yield return new WaitForSeconds(0.05f);
 

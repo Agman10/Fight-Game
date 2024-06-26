@@ -11,6 +11,10 @@ public class KickAttack : Attack
 
     public TestHitbox forwardHitbox;
 
+    public AudioSource kickSwooshSfx;
+    public AudioSource airKickSwooshSfx;
+    public AudioSource forwardKickSwooshSfx;
+
     //private IEnumerator hitboxCoroutine;
     //private IEnumerator animationCoroutine;
 
@@ -135,6 +139,12 @@ public class KickAttack : Attack
         if (this.animations != null)
             this.animations.Kick(1);
 
+        if (this.kickSwooshSfx != null)
+        {
+            this.kickSwooshSfx.time = 0.01f;
+            this.kickSwooshSfx.Play();
+        }
+
         yield return new WaitForSeconds(0.025f);
 
         if (this.animations != null)
@@ -173,14 +183,24 @@ public class KickAttack : Attack
 
         //yield return new WaitForSeconds(0.1f);
 
+        if (this.airKickSwooshSfx != null)
+        {
+            this.airKickSwooshSfx.time = 0.02f;
+            this.airKickSwooshSfx.Play();
+        }
 
         yield return new WaitForSeconds(0.05f);
+
         if (this.animations != null)
             this.animations.SexKickStart();
 
         yield return new WaitForSeconds(0.05f);
 
-
+        /*if (this.airKickSwooshSfx != null)
+        {
+            this.airKickSwooshSfx.time = 0.02f;
+            this.airKickSwooshSfx.Play();
+        }*/
 
         if (this.animations != null)
             this.animations.SexKick();
@@ -195,6 +215,12 @@ public class KickAttack : Attack
         {
             currentTime += Time.deltaTime;
             yield return null;
+        }
+
+        if (this.airKickSwooshSfx != null)
+        {
+            //this.airKickSwooshSfx.time = 0.02f;
+            this.airKickSwooshSfx.Stop();
         }
 
         if (this.airHitbox != null)
@@ -233,6 +259,12 @@ public class KickAttack : Attack
 
         if (this.animations != null)
             this.animations.ForwardKickShippu(1, 0);
+
+        if (this.forwardKickSwooshSfx != null)
+        {
+            this.forwardKickSwooshSfx.time = 0.02f;
+            this.forwardKickSwooshSfx.Play();
+        }
 
         yield return new WaitForSeconds(animSpeed);
 

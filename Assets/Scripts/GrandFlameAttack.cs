@@ -69,6 +69,10 @@ public class GrandFlameAttack : Attack
             startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
         }
 
+        if (this.user.soundEffects != null)
+        {
+            this.user.soundEffects.PlaySuperSfx();
+        }
 
         //yield return new WaitForSeconds(0.2f);
 

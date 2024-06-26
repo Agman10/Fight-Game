@@ -137,6 +137,9 @@ public class FireBall : MonoBehaviour
 
                 //player.TakeDamage(this.transform.position, this.damage);
                 player.TakeDamage(this.transform.position, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockack, this.verticalKnockack);
+
+                if (player.soundEffects != null)
+                    player.soundEffects.PlayHitSound();
                 //player.TakeDamage(this.transform.position, this.damage, 0.1f, this.transform.forward.z * 300f, 300f);
                 player.OnHit?.Invoke();
                 if (this.belongsTo != null)

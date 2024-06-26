@@ -34,6 +34,8 @@ public class SuperSpinGrab : Attack
     public GameObject rightArm;
     public GameObject leftArm;
 
+    public AudioSource explosionImpactSfx;
+
 
     // Start is called before the first frame update
     void Start()
@@ -171,6 +173,12 @@ public class SuperSpinGrab : Attack
             this.rightArm.transform.localEulerAngles = new Vector3(90f, 0f, 0f);
             this.leftArm.transform.localEulerAngles = new Vector3(-90f, 0f, 0f);
         }*/
+        if (this.explosionImpactSfx != null)
+        {
+            //this.explosionImpactSfx.PlaySound();
+            this.explosionImpactSfx.time = 0.08f;
+            this.explosionImpactSfx.Play();
+        }
 
         this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         player.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;

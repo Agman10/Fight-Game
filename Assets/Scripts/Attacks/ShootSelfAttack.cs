@@ -116,7 +116,7 @@ public class ShootSelfAttack : Attack
 
         yield return new WaitForSeconds(0.05f);
 
-        this.user.Die(new Vector3(this.user.transform.position.x + (this.transform.forward.z * -5), this.user.transform.position.y + 2f, 0f));
+        this.user.Die(new Vector3(this.user.transform.position.x + (this.transform.forward.z * -5), this.user.transform.position.y + 2f, 0f), true, true, true, true);
         //this.user.TakeDamage(new Vector3(this.user.transform.position.x + (this.transform.forward.z * -5), this.user.transform.position.y + 2f, 0f), 500);
         //this.user.TakeDamage(new Vector3(this.user.transform.position.x + (this.transform.forward.z * -4), this.user.transform.position.y + 1f, 0f), 500);
 

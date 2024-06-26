@@ -82,6 +82,9 @@ public class SuperElectricBallAttack : Attack
         /*if (this.animations != null)
             this.animations.SuperFireBallCharge();*/
 
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         this.user.rb.isKinematic = true;
 
         if (this.animations != null)

@@ -79,6 +79,10 @@ public class SummonAnvilAttack : Attack
 
         if (this.animations != null)
             this.animations.GrandFlameStart();
+
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
         if (this.startParticle != null)
         {
             GameObject startParticlePrefab = this.startParticle;

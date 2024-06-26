@@ -265,6 +265,7 @@ MonoBehaviour:
   hitbox: {fileID: 2767845505280251998}
   flame: {fileID: 2740710885510996205}
   lifeTime: 1.5
+  moveSpeed: 0
 --- !u!114 &2856788172235502083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,8 +419,15 @@ MonoBehaviour:
   fireProperty: 1
   physicsKnockbackMultiplier: 1
   changeTargetDir: 0
+  preventDeath: 0
   ragdollForce: 0
+  preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
+  doHitSound: 0
+  customHitSound:
+    sound: {fileID: 0}
+    pitch: {x: 1, y: 1}
+    startTime: 0
 --- !u!54 &1743743267460368865
 Rigidbody:
   m_ObjectHideFlags: 0

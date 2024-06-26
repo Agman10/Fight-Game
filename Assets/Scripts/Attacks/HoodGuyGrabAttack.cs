@@ -276,6 +276,8 @@ public class HoodGuyGrabAttack : Attack
             {
                 player.rb.isKinematic = false;
                 player.TakeDamage(new Vector3(this.user.transform.position.x - (this.user.transform.forward.z * 1.5f), player.transform.position.y - 0.5f, 0f), 5f, 1f, this.user.transform.forward.z * 700f, 900f);
+                if (player.soundEffects != null)
+                    player.soundEffects.PlayHitSound();
             }
 
             player.animations.SetDefaultPose();

@@ -1020,7 +1020,13 @@ MonoBehaviour:
   changeTargetDir: 0
   preventDeath: 0
   ragdollForce: 1
+  preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
+  doHitSound: 1
+  customHitSound:
+    sound: {fileID: 0}
+    pitch: {x: 1, y: 1}
+    startTime: 0
 --- !u!135 &3405295576483934565
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1199,7 +1205,13 @@ MonoBehaviour:
   changeTargetDir: 0
   preventDeath: 0
   ragdollForce: 0
+  preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
+  doHitSound: 0
+  customHitSound:
+    sound: {fileID: 0}
+    pitch: {x: 1, y: 1}
+    startTime: 0
 --- !u!135 &4782564587340218242
 SphereCollider:
   m_ObjectHideFlags: 0

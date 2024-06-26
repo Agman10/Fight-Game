@@ -71,7 +71,8 @@ public class TestPlayer : MonoBehaviour
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
-
+        if (this.ragdoll != null)
+            this.ragdoll.owner = this;
         /*if (this.input != null)
         {
             if(GameManager.Instance != null)
@@ -110,7 +111,7 @@ public class TestPlayer : MonoBehaviour
     }
 
 
-    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true/*, bool delayDeath = false*/)
+    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false/*, bool delayDeath = false*/)
     {
         if(this.damageMitigation != 0f && amount > 0f)
         {
@@ -162,7 +163,7 @@ public class TestPlayer : MonoBehaviour
         if(this.health <= 0f && !this.preventDeath /*&& !dontKill*/)
         {
             if (!dontKill)
-                this.Die(position, ragdollForce, ghost);
+                this.Die(position, ragdollForce, ghost, true, preventDeathSound);
 
             //this.Die(position, ragdollForce, ghost);
 
@@ -238,13 +239,16 @@ public class TestPlayer : MonoBehaviour
         }
     }
 
-    public void Die(Vector3 position, bool ragdollforce = true, bool ghost = true, bool ragdoll = true)
+    public void Die(Vector3 position, bool ragdollforce = true, bool ghost = true, bool ragdoll = true, bool preventDeathSound = false)
     {
         if (!this.dead)
         {
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
+
+            if (!preventDeathSound && this.soundEffects != null)
+                this.soundEffects.PlayDeathSound();
 
             /*if (this.ragdoll != null)
                 this.ragdoll.transform.localScale = new Vector3(1f, 1f, 1f);*/
@@ -299,6 +303,9 @@ public class TestPlayer : MonoBehaviour
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
+
+            if (this.soundEffects != null)
+                this.soundEffects.PlayDeathSound();
 
             if (this.hitboxes != null)
             {

@@ -23,6 +23,7 @@ public class UppercutAttack : Attack
     public float kickYForce = 1000f;
 
     public AudioSource uppcutSfx;
+    public AudioSource flameSfx;
 
     private bool dontStopSfxOnHit;
 
@@ -315,6 +316,20 @@ public class UppercutAttack : Attack
                 this.animations.rightLeg.localScale = new Vector3(1, 1.4f, 1);*/
         }
 
+        this.dontStopSfxOnHit = true;
+
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.02f;
+            this.uppcutSfx.Play();
+        }
+
+        if (this.flameSfx != null)
+        {
+            //this.flameSfx.time = 0.02f;
+            this.flameSfx.Play();
+        }
+
         if (this.punchHitbox1 != null)
             this.punchHitbox1.gameObject.SetActive(true);
 
@@ -460,6 +475,20 @@ public class UppercutAttack : Attack
             this.animations.SetPunchUpercutAnim();
         }
 
+        this.dontStopSfxOnHit = true;
+
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.02f;
+            this.uppcutSfx.Play();
+        }
+
+        if (this.flameSfx != null)
+        {
+            //this.flameSfx.time = 0.02f;
+            this.flameSfx.Play();
+        }
+
         if (this.punchHitbox1 != null)
             this.punchHitbox1.gameObject.SetActive(true);
 
@@ -563,6 +592,13 @@ public class UppercutAttack : Attack
 
         if (this.trail != null)
             this.trail.SetActive(true);
+
+        this.dontStopSfxOnHit = true;
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.02f;
+            this.uppcutSfx.Play();
+        }
 
         float currentTime = 0;
         float duration = 0.25f;
