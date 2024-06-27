@@ -12,6 +12,8 @@ public class RollForwardAttack : Attack
     public float damage = 13f;
     public float superCharge = 8f;
 
+    public AudioSource rollSfx;
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -94,6 +96,9 @@ public class RollForwardAttack : Attack
 
         this.rolling = true;
 
+        if (this.rollSfx != null)
+            this.rollSfx.Play();
+
         float currentTime = 0;
         float duration = 0.75f;
         while (currentTime < duration)
@@ -108,6 +113,9 @@ public class RollForwardAttack : Attack
         this.user.rb.velocity = new Vector3(0, 0, 0);
         if (this.animations != null)
             this.animations.SetDefaultPose();
+
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
@@ -237,6 +245,9 @@ public class RollForwardAttack : Attack
             this.hitbox.gameObject.SetActive(false);*/
         this.user.rb.velocity = new Vector3(0, 0, 0);
 
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
+
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
@@ -271,6 +282,9 @@ public class RollForwardAttack : Attack
             capsuleCollider.center = new Vector3(0f, 1.125f, 0f);
             //this.user.transform.position = new Vector3(this.user.transform.position.x, this.user.transform.position.y - 0.5f, 0f);
         }
+
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
 
         /*if (!this.user.dead)
             this.user.rb.isKinematic = false;*/

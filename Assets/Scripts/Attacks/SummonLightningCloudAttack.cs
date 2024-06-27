@@ -18,6 +18,8 @@ public class SummonLightningCloudAttack : Attack
     //public float cooldown = 5f;
     public float cooldownTimer;
 
+    //public AudioSource lightningSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -161,6 +163,11 @@ public class SummonLightningCloudAttack : Attack
 
         if (this.glowingEyes != null)
             this.glowingEyes.gameObject.SetActive(true);
+
+        /*if (this.lightningSfx != null)
+        {
+            this.lightningSfx.Play();
+        }*/
 
         yield return new WaitForSeconds(0.2f);
         if (this.glowingEyes != null)

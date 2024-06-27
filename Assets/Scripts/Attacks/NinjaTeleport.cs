@@ -12,6 +12,8 @@ public class NinjaTeleport : Attack
     private float teleportDistance = 7f;
     public TestHitbox hitbox;
 
+    public AudioSource teleportSfx;
+
     public bool shrink;
 
     [Space]
@@ -60,6 +62,9 @@ public class NinjaTeleport : Attack
             GameObject teleportEffectPrefab = this.teleportEffect;
             teleportEffectPrefab = Instantiate(teleportEffectPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
         }*/
+
+        if (this.teleportSfx != null)
+            this.teleportSfx.Play();
 
         float currentTime = 0;
         float duration = 0.05f;

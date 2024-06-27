@@ -7,10 +7,13 @@ public class StormCloud : MonoBehaviour
     /*public float lightinigTime;
     public float lightinigDuration;*/
 
+    public GameObject model;
     public GameObject lightning;
 
     public TestHitbox hitbox;
     public TestPlayer belongsTo;
+
+    public AudioSource lightningSfx;
     private void OnEnable()
     {
         this.StartCoroutine(this.LightningCloudCoroutine());
@@ -29,12 +32,23 @@ public class StormCloud : MonoBehaviour
         if (this.lightning != null)
             this.lightning.SetActive(true);
 
+        if (this.lightningSfx != null)
+        {
+            this.lightningSfx.Play();
+        }
+
         yield return new WaitForSeconds(0.2f);
 
         if (this.lightning != null)
             this.lightning.SetActive(false);
 
         yield return new WaitForSeconds(0.2f);
+
+        if (this.model != null)
+            this.model.gameObject.SetActive(false);
+
+
+        yield return new WaitForSeconds(1f);
         this.gameObject.SetActive(false);
     }
 

@@ -15,6 +15,8 @@ public class ExplosiveDetonationAttack : Attack
 
     public VisualEffect smoke;
 
+    public AudioSource explosionSfx;
+
     //public ParticleSystem particle;
 
     public override void OnHit()
@@ -106,7 +108,13 @@ public class ExplosiveDetonationAttack : Attack
 
             //explosionPrefab.SetSize(1.6f);
             explosionPrefab.SetSize(1.55f);
-            
+
+            if (this.explosionSfx != null)
+            {
+                //this.explosionSfx.time = 0.01f;
+                this.explosionSfx.Play();
+            }
+                
         }
 
         if (this.smoke != null)

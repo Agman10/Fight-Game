@@ -499,7 +499,7 @@ public class UppercutAttack : Attack
             waitTime -= Time.deltaTime;
             yield return null;
         }
-        Debug.Log(waitTime);
+        //Debug.Log(waitTime);
 
         //yield return new WaitForSeconds(0.5f);
         if (this.punchHitbox1 != null)

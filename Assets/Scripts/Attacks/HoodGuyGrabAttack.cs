@@ -166,6 +166,10 @@ public class HoodGuyGrabAttack : Attack
                 player.animations.HoodGuyGrabbed();
 
             player.TakeDamage(this.user.transform.position, 0.5f, 0f, 0f, 0f, false, true, false, true);
+
+            this.user.GiveSuperCharge(0.25f);
+            player.GiveSuperCharge(0.125f);
+
             amount -= 1;
 
             if (amount <= 1 && this.particle != null)
@@ -238,6 +242,9 @@ public class HoodGuyGrabAttack : Attack
 
             player.TakeDamage(this.user.transform.position, 5f, 0f, 0f, 0f, false, true, false, true);
 
+            this.user.GiveSuperCharge(3f);
+            player.GiveSuperCharge(1.5f);
+
             this.PlayBloodEffect(player.characterId);
 
             player.animations.HoodGuyGrabbed();
@@ -276,6 +283,10 @@ public class HoodGuyGrabAttack : Attack
             {
                 player.rb.isKinematic = false;
                 player.TakeDamage(new Vector3(this.user.transform.position.x - (this.user.transform.forward.z * 1.5f), player.transform.position.y - 0.5f, 0f), 5f, 1f, this.user.transform.forward.z * 700f, 900f);
+
+                this.user.GiveSuperCharge(3f);
+                player.GiveSuperCharge(1.5f);
+
                 if (player.soundEffects != null)
                     player.soundEffects.PlayHitSound();
             }

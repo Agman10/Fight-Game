@@ -15,6 +15,8 @@ public class RollUpAttack : Attack
     public float xForce = 300f;
     public float yForce = 1000f;
 
+    public AudioSource rollSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -81,6 +83,9 @@ public class RollUpAttack : Attack
         /*if (this.glowingEyes != null)
             this.glowingEyes.gameObject.SetActive(true);*/
 
+        if (this.rollSfx != null)
+            this.rollSfx.Play();
+
         float currentTime = 0;
         float duration = 0.6f;
         while (currentTime < duration)
@@ -94,6 +99,9 @@ public class RollUpAttack : Attack
         }
         if (this.electricity != null)
             this.electricity.Stop();
+
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
 
         /*if (this.glowingEyes != null)
             this.glowingEyes.gameObject.SetActive(false);*/
@@ -140,6 +148,9 @@ public class RollUpAttack : Attack
 
         if (this.electricity != null)
             this.electricity.Stop();
+
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
 
         /*if (this.glowingEyes != null)
             this.glowingEyes.gameObject.SetActive(false);*/

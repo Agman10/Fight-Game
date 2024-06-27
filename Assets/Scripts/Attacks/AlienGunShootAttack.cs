@@ -20,6 +20,8 @@ public class AlienGunShootAttack: Attack
     public float shootTime = 0.65f;
     public float airShootTime = 0.25f;
 
+    public AudioSource shootSfx;
+
     [Space]
     public GameObject shootEffectParticleP2;
     public LaserProjectile laserProjectileP2;
@@ -265,6 +267,11 @@ public class AlienGunShootAttack: Attack
 
 
             //shoootEffectPrefab = Instantiate(shoootEffectPrefab, this.shootEffectTransform.position, Quaternion.EulerAngles(this.shootEffectTransform.rotation.x, this.shootEffectTransform.rotation.y, this.shootEffectTransform.rotation.z));
+        }
+
+        if(this.shootSfx != null)
+        {
+            this.shootSfx.Play();
         }
     }
 

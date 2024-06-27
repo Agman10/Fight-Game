@@ -14,6 +14,8 @@ public class BookCounterAttack : Attack
 
     public TestPlayer grabbedPlayer;
 
+    public AudioSource teleportSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -219,6 +221,12 @@ public class BookCounterAttack : Attack
             GameObject fallenBookPrefab = this.fallenBook;
             fallenBookPrefab = Instantiate(fallenBookPrefab, new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * 0.45f), 0f, 0f), Quaternion.Euler(0, 0, 0));
             fallenBookPrefab.transform.localScale = new Vector3(this.transform.forward.z, 1f, 1f);
+        }
+
+        if (this.teleportSfx != null)
+        {
+            //this.teleportSfx.time = 0.01f;
+            this.teleportSfx.Play();
         }
 
         //player.rb.isKinematic = false;
