@@ -15,6 +15,8 @@ public class LandMine : MonoBehaviour
     public TestHitbox explosionHitbox;
     public GameObject explosionEffect;
     public TestPlayer belongsTo;
+
+    public CharacterSoundEffect explosionSfx;
     // Start is called before the first frame update
     void Awake()
     {
@@ -71,6 +73,9 @@ public class LandMine : MonoBehaviour
             GameObject explosionPrefab = this.explosionEffect;
             explosionPrefab = Instantiate(explosionPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
         }
+
+        this.explosionSfx.PlaySound();
+
         this.StartCoroutine(this.ExplosionDuration());
     }
 
@@ -102,6 +107,8 @@ public class LandMine : MonoBehaviour
         yield return new WaitForSeconds(this.explosionDuration);
         if (this.explosionHitbox != null)
             this.explosionHitbox.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1f);
         this.gameObject.SetActive(false);
     }
 

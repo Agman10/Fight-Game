@@ -365,6 +365,9 @@ public class SuperElectricSpinKickAttack : Attack
         if (this.windHitboxes != null)
             this.windHitboxes.gameObject.SetActive(false);
 
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
+
         this.user.rb.isKinematic = false;
 
         this.PlayElectricity(false, 2);

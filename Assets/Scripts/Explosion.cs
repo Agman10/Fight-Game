@@ -9,6 +9,9 @@ public class Explosion : MonoBehaviour
     public TestHitbox explosionHitbox2;
     public TestPlayer belongsTo;
 
+    public CharacterSoundEffect explosionSfx;
+    public bool preventExplosionSound = false;
+
     [Space]
     public float explosionSize = 1f;
     public Transform sizeTransform;
@@ -35,6 +38,8 @@ public class Explosion : MonoBehaviour
         this.SetOwner(this.belongsTo);
 
         this.StartCoroutine(this.ExplosionDuration());
+        /*if (!this.preventExplosionSound)
+            this.explosionSfx.PlaySound();*/
     }
     private void OnDisable()
     {

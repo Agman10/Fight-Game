@@ -9,8 +9,14 @@ public class CFour : MonoBehaviour
     public TestPlayer belongsTo;
     public CFourAttack cFourAttackOwner;
 
+    private Collider c4Collider;
+    private Rigidbody rb;
+
     public GameObject model;
     public bool isP2 = false;
+
+    public CharacterSoundEffect explosionSfx;
+    [Space]
 
     [Space]
     public MeshRenderer lamp;
@@ -39,8 +45,23 @@ public class CFour : MonoBehaviour
     public float outerSuperCharge = 1.25f;
     public float outerStun = 0.2f;
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        this.c4Collider = GetComponent<Collider>();
+        this.rb = GetComponent<Rigidbody>();
+    }
     private void OnEnable()
     {
+        if (this.model != null)
+            this.model.SetActive(true);
+
+        if (this.c4Collider != null)
+            this.c4Collider.enabled = true;
+
+        if (this.rb != null)
+            this.rb.isKinematic = false;
+
         this.SetPlayerColor(this.isP2);
         this.StartCoroutine(this.ActivateCoroutine());
     }
@@ -87,7 +108,20 @@ public class CFour : MonoBehaviour
             
         }
 
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
+
+        if (this.model != null)
+            this.model.SetActive(false);
+
+        if (this.c4Collider != null)
+            this.c4Collider.enabled = false;
+
+        if (this.rb != null)
+            this.rb.isKinematic = true;
+
+        this.explosionSfx.PlaySound();
+
+        this.StartCoroutine(this.DisableCoroutine());
     }
 
     IEnumerator ActivateCoroutine()
@@ -156,6 +190,12 @@ public class CFour : MonoBehaviour
                 this.lampP2.material = this.inactiveMaterialP2;
         }
 
+    }
+
+    private IEnumerator DisableCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        this.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -20,6 +20,9 @@ public class Bomb : MonoBehaviour
 
     public Explosion explosion;
 
+    public CharacterSoundEffect explosionSfx;
+    [Space]
+
     public float explosionSize = 1f;
     [Space]
     public float innerDamage = 15f;
@@ -159,7 +162,11 @@ public class Bomb : MonoBehaviour
             }
         }
 
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
+
+        this.explosionSfx.PlaySound();
+
+        this.StartCoroutine(this.DisableCoroutine());
 
 
         /*if (this.explosionHitbox != null)
@@ -180,6 +187,12 @@ public class Bomb : MonoBehaviour
             this.explosionHitbox.gameObject.SetActive(false);
 
         //yield return new WaitForSeconds(1f);
+        this.gameObject.SetActive(false);
+    }
+
+    private IEnumerator DisableCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
         this.gameObject.SetActive(false);
     }
 
