@@ -272,6 +272,11 @@ public class BookCounterAttack : Attack
 
         player.rb.isKinematic = false;
 
+
+        /*if (player.animations != null)
+            player.animations.SetDefaultPose();*/
+
+
         /*yield return new WaitForSeconds(0.3f);
         if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
         {

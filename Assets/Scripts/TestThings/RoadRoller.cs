@@ -19,6 +19,10 @@ public class RoadRoller : MonoBehaviour
 
     public CharacterSkinTest skin;
 
+    public AudioSource explosionSfx;
+
+    public bool exploded = false;
+
     private void OnEnable()
     {
         if (this.hitbox != null)
@@ -29,6 +33,8 @@ public class RoadRoller : MonoBehaviour
     }
     private void OnDisable()
     {
+        this.StopAllCoroutines();
+
         if (this.hitbox != null)
         {
             this.hitbox.gameObject.SetActive(true);
@@ -49,6 +55,8 @@ public class RoadRoller : MonoBehaviour
 
         if (this.collisions != null)
             this.collisions.gameObject.SetActive(true);
+
+        
     }
 
     public void HitPlayer(TestPlayer player)
@@ -130,31 +138,45 @@ public class RoadRoller : MonoBehaviour
 
     public void Explode()
     {
-        if (this.explosion != null)
-            this.explosion.SetActive(true);
-
-        if (this.model != null)
-            this.model.gameObject.SetActive(false);
-
-        if (this.collisions != null)
-            this.collisions.gameObject.SetActive(false);
-
-        if (this.hitbox != null)
-            this.hitbox.gameObject.SetActive(false);
-
-        if (this.victim != null)
+        if (!this.exploded)
         {
-            TestPlayer victimm = this.victim;
+            this.exploded = true;
 
-            this.StopRoadRoller(this.victim);
+            if (this.explosion != null)
+                this.explosion.SetActive(true);
 
-            
+            if (this.model != null)
+                this.model.gameObject.SetActive(false);
 
-            victimm.TakeDamage(new Vector3(this.transform.position.x, this.transform.position.y -1f, 0f), 15f, 1.35f, this.transform.forward.z * 1000f, 1200f, true, true, true, false);
+            if (this.collisions != null)
+                this.collisions.gameObject.SetActive(false);
 
-            if (!victimm.dead)
-                victimm.animations.SetDefaultPose();
+            if (this.hitbox != null)
+                this.hitbox.gameObject.SetActive(false);
+
+            if (this.victim != null)
+            {
+                TestPlayer victimm = this.victim;
+
+                this.StopRoadRoller(this.victim);
+
+
+
+                victimm.TakeDamage(new Vector3(this.transform.position.x, this.transform.position.y - 1f, 0f), 15f, 1.35f, this.transform.forward.z * 1000f, 1200f, true, true, true, false);
+
+                if (!victimm.dead)
+                    victimm.animations.SetDefaultPose();
+            }
+
+            if (this.explosionSfx != null)
+            {
+                //this.explosionSfx.time = 0.01f;
+                this.explosionSfx.Play();
+            }
+
+            this.StartCoroutine(this.DisableCoroutine());
         }
+        
     }
 
     public void LandEffect()
@@ -199,6 +221,12 @@ public class RoadRoller : MonoBehaviour
             this.hitbox.gameObject.SetActive(false);
 
         this.victim = null;
+    }
+
+    private IEnumerator DisableCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        this.gameObject.SetActive(false);
     }
 
     public void SetOwner(TestPlayer player)

@@ -16,7 +16,7 @@ public class SuperRoadRollerAttack : Attack
 
     public GameObject punchEffect;
 
-    
+    //public AudioSource explosionSfx;
 
     public override void OnHit()
     {
@@ -240,6 +240,10 @@ public class SuperRoadRollerAttack : Attack
                     {
                         //this.activeRoadRoller.victim.TakeDamage(this.user.transform.position, 0.5f, 0f, 0f, 0f, true, true, false, true);
                         this.activeRoadRoller.victim.TakeDamage(this.user.transform.position, 0.75f, 0f, 0f, 0f, true, true, false, true);
+
+                        if (this.activeRoadRoller.victim.soundEffects != null)
+                            this.activeRoadRoller.victim.soundEffects.hitSound.PlaySound();
+
                         /*if (this.activeRoadRoller.victim.animations != null)
                             this.activeRoadRoller.victim.animations.LayDown();*/
                     }

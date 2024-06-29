@@ -33,6 +33,8 @@ public class GunShootAttack : Attack
     /*public float gunThrowXForce;
     public float gunThrowYForce;*/
 
+    public AudioSource shootSound;
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -172,6 +174,9 @@ public class GunShootAttack : Attack
 
         //yield return new WaitForSeconds(0.25f);
         yield return new WaitForSeconds(time / 2f);
+
+        if (this.shootSound != null)
+            this.shootSound.Play();
 
         if (this.shootEffectParticle != null && this.shootEffectTransform != null)
         {
