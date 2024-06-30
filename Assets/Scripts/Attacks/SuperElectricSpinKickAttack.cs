@@ -60,7 +60,7 @@ public class SuperElectricSpinKickAttack : Attack
         {
             this.Stop();
             //Debug.Log("spinkick");
-            this.animations.SetDefaultPose();
+            //this.animations.SetDefaultPose();
         }
 
         /*if (this.user.ragdoll != null *//*&& !this.user.dead*//* && this.onGoing)

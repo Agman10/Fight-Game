@@ -46,8 +46,8 @@ public class SpinGrabAttack : Attack
             
 
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 
@@ -217,7 +217,7 @@ public class SpinGrabAttack : Attack
 
     public void Grab(TestPlayer player)
     {
-        if (player != null && !player.dead)
+        if (player != null && !player.dead && !player.countering)
         {
             this.tryGrabbing = false;
             player.OnHit?.Invoke();
@@ -278,6 +278,11 @@ public class SpinGrabAttack : Attack
             /*this.user.rb.AddForce(new Vector3(0f, 1000f, 0f));
             player.rb.AddForce(new Vector3(0f, 1000f, 0f));*/
             this.StartCoroutine(this.GrabbingCoroutine(player));
+        }
+        else
+        {
+            if (this.animations != null)
+                this.animations.SpinGrabStart(3);
         }
     }
 

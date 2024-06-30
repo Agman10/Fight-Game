@@ -24,8 +24,8 @@ public class SuperRoadRollerAttack : Attack
         if (!this.user.dead && this.onGoing && this.canBeCanceled)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 

@@ -14,6 +14,8 @@ public class TestPlayer : MonoBehaviour
     public bool dead = false;
     public bool knockbackInvounrability;
     public bool preventDeath = false;
+    public bool stopAnimationOnHit = false;
+    public bool countering = false;
     public int playerNumber;
 
     [Range(-1f, 1f)]
@@ -539,7 +541,7 @@ public class TestPlayer : MonoBehaviour
     {
         if (!this.knockbackInvounrability)
         {
-            if (this.animations != null)
+            if (this.animations != null && !this.stopAnimationOnHit)
             {
                 this.animations.SetDefaultPose();
                 //this.animations.ResetRigPos();

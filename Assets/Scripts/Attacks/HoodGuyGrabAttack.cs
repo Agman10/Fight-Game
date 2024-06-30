@@ -40,8 +40,8 @@ public class HoodGuyGrabAttack : Attack
         if (!this.user.dead && this.onGoing)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 
@@ -226,7 +226,7 @@ public class HoodGuyGrabAttack : Attack
 
     public void Grab(TestPlayer player)
     {
-        if (player != null && !player.dead)
+        if (player != null && !player.dead && !player.countering)
         {
             this.grabbing = true;
             this.grabbedPlayer = player;

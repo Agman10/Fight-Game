@@ -19,8 +19,8 @@ public class GrandFlameAttack : Attack
         {
             this.Stop();
             //Debug.Log("Test");
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
 
         /*if (this.user.ragdoll != null *//*&& !this.user.dead*//* && this.onGoing)

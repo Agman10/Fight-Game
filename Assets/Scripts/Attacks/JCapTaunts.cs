@@ -32,8 +32,8 @@ public class JCapTaunts : Attack
         if (!this.user.dead && this.onGoing)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 
@@ -98,6 +98,9 @@ public class JCapTaunts : Attack
     {
         base.Stop();
         //this.user.rb.isKinematic = false;
+
+        //DO SOMETING WITH THIS LATER
+
         if (this.animations != null && this.animations.neutralEyes != null && this.animations.happyEyes != null)
         {
             this.animations.happyEyes.gameObject.SetActive(false);

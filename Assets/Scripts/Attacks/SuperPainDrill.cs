@@ -65,8 +65,8 @@ public class SuperPainDrill : Attack
         {
             //Debug.Log("test");
             this.Stop();
-            if (this.animations != null && !this.user.dead)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null && !this.user.dead)
+                this.animations.SetDefaultPose();*/
         }
 
     }
@@ -155,35 +155,43 @@ public class SuperPainDrill : Attack
     }
     public void DoFlameGrab(TestPlayer player)
     {
-        this.PlayFire(false);
+        if (!player.countering)
+        {
+            this.PlayFire(false);
 
-        player.attackStuns.Add(this.gameObject);
-        player.OnHit.Invoke();
-        //player.transform.position = new Vector3(player.transform.position.x, 0f, 0f);
-        this.user.transform.position = new Vector3(player.transform.position.x - (this.user.transform.forward.z * 1.1f), 0f, 0f);
-        player.preventDeath = true;
-        this.user.preventDeath = true;
-        this.user.knockbackInvounrability = true;
-        player.knockbackInvounrability = true;
-        if (this.trail != null)
-            this.trail.SetActive(false);
+            player.attackStuns.Add(this.gameObject);
+            player.OnHit.Invoke();
+            //player.transform.position = new Vector3(player.transform.position.x, 0f, 0f);
+            this.user.transform.position = new Vector3(player.transform.position.x - (this.user.transform.forward.z * 1.1f), 0f, 0f);
+            player.preventDeath = true;
+            this.user.preventDeath = true;
+            this.user.knockbackInvounrability = true;
+            player.knockbackInvounrability = true;
+            if (this.trail != null)
+                this.trail.SetActive(false);
 
-        this.victim = player;
-        this.moving = false;
-        if (this.hitbox != null)
-            this.hitbox.gameObject.SetActive(false);
+            this.victim = player;
+            this.moving = false;
+            if (this.hitbox != null)
+                this.hitbox.gameObject.SetActive(false);
 
-        if (this.animations != null)
-            this.animations.SetGrabbingPose();
+            if (this.animations != null)
+                this.animations.SetGrabbingPose();
 
-        this.user.rb.constraints = RigidbodyConstraints.FreezeAll;
-        player.rb.constraints = RigidbodyConstraints.FreezeAll;
+            this.user.rb.constraints = RigidbodyConstraints.FreezeAll;
+            player.rb.constraints = RigidbodyConstraints.FreezeAll;
 
-        if (player.animations != null)
-            player.animations.body.localPosition = new Vector3(0f, 1.95f, 0f);
+            if (player.animations != null)
+                player.animations.body.localPosition = new Vector3(0f, 1.95f, 0f);
 
-        this.StartCoroutine(this.FlameGrabCoroutine(player));
-        //this.StartCoroutine(this.PunchBarageCoroutine(player));
+            this.StartCoroutine(this.FlameGrabCoroutine(player));
+            //this.StartCoroutine(this.PunchBarageCoroutine(player));
+        }
+        else
+        {
+            player.OnHitFromPlayer?.Invoke(this.user);
+        }
+
     }
 
     IEnumerator FlameGrabCoroutine(TestPlayer player)

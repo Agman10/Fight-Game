@@ -24,11 +24,11 @@ public class SuperUppercut : Attack
         {
             this.Stop();
             //Debug.Log("Test");
-            this.animations.SetDefaultPose();
+            //this.animations.SetDefaultPose();
         }
 
-        if (this.user.ragdoll != null /*&& !this.user.dead*/ && this.onGoing)
-            this.user.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);
+        /*if (this.user.ragdoll != null *//*&& !this.user.dead*//* && this.onGoing)
+            this.user.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);*/
     }
     [ContextMenu("Initiate")]
     public override void Initiate()

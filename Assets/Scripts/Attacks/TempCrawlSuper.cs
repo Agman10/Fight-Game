@@ -43,8 +43,8 @@ public class TempCrawlSuper : Attack
         if (!this.user.dead && this.onGoing)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 
@@ -339,29 +339,36 @@ public class TempCrawlSuper : Attack
         //this.Stop();
 
         //player.rb.velocity = Vector3.zero;
+        if (!player.countering)
+        {
+            this.moving = false;
 
-        this.moving = false;
+            this.victim = player;
 
-        this.victim = player;
-
-        player.attackStuns.Add(this.gameObject);
-        player.OnHit.Invoke();
-
-
-        this.user.rb.isKinematic = true;
-        player.rb.isKinematic = true;
-
-        player.gameObject.transform.position = new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * 1.2f), player.transform.position.y, 0f);
+            player.attackStuns.Add(this.gameObject);
+            player.OnHit?.Invoke();
 
 
-        if (this.animations != null)
-            this.animations.SetDefaultPose();
+            this.user.rb.isKinematic = true;
+            player.rb.isKinematic = true;
 
-        if (this.animations != null)
-            this.animations.SetGrabbingPose();
+            player.gameObject.transform.position = new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * 1.2f), player.transform.position.y, 0f);
 
 
-        this.StartCoroutine(this.HitSuperCoroutine(player));
+            if (this.animations != null)
+                this.animations.SetDefaultPose();
+
+            if (this.animations != null)
+                this.animations.SetGrabbingPose();
+
+
+            this.StartCoroutine(this.HitSuperCoroutine(player));
+        }
+        else
+        {
+            player.OnHitFromPlayer?.Invoke(this.user);
+        }
+        
     }
 
     public void StopSuper(TestPlayer player)

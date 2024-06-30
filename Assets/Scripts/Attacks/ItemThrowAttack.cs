@@ -54,8 +54,8 @@ public class ItemThrowAttack : Attack
         if (!this.user.dead && this.onGoing && !this.cantBeCanceled)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 

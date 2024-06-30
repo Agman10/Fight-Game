@@ -54,11 +54,11 @@ public class SpinKick : Attack
         {
             this.Stop();
             //Debug.Log("spinkick");
-            this.animations.SetDefaultPose();
+            //this.animations.SetDefaultPose();
         }
             
-        if (this.user.ragdoll != null /*&& !this.user.dead*/ && this.onGoing)
-            this.user.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);
+        /*if (this.user.ragdoll != null *//*&& !this.user.dead*//* && this.onGoing)
+            this.user.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);*/
 
         /*if (this.ongoing)
             this.user.RemoveStun(1.5f);*/

@@ -60,7 +60,7 @@ public class Movement : MonoBehaviour
                     else if (this.player.animations != null)
                     {
                         this.test -= Time.deltaTime;
-                        if (this.test > 0.1f)
+                        if (this.test > 0.1f && !this.player.stopAnimationOnHit)
                             this.player.animations.SetDefaultPose();
 
                         this.testTime = 0f;

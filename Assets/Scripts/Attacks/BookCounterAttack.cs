@@ -22,8 +22,8 @@ public class BookCounterAttack : Attack
         if (!this.user.dead && this.onGoing && !this.countering)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 
@@ -199,7 +199,7 @@ public class BookCounterAttack : Attack
         this.grabbedPlayer = player;
 
         //player.AddStun(0.2f, true);
-
+        player.stopAnimationOnHit = true;
         player.OnHit?.Invoke();
         //player.AddStun(1f, true);
         player.rb.isKinematic = true;
@@ -265,16 +265,23 @@ public class BookCounterAttack : Attack
         if (this.animations != null)
             this.animations.CounterPointing();*/
 
+        this.user.GiveSuperCharge(2f);
+        player.GiveSuperCharge(1f);
+
         yield return new WaitForSeconds(0.1f);
 
         if (this.animations != null)
             this.animations.body.gameObject.SetActive(true);
 
+        yield return new WaitForSeconds(0.2f);
+
         player.rb.isKinematic = false;
 
+        player.stopAnimationOnHit = false;
 
-        /*if (player.animations != null)
-            player.animations.SetDefaultPose();*/
+
+        if (player.animations != null && !player.knockbackInvounrability)
+            player.animations.SetDefaultPose();
 
 
         /*yield return new WaitForSeconds(0.3f);
@@ -286,8 +293,8 @@ public class BookCounterAttack : Attack
         yield return new WaitForSeconds(0.1f);*/
 
 
-        this.user.GiveSuperCharge(2f);
-        player.GiveSuperCharge(1f);
+        /*this.user.GiveSuperCharge(2f);
+        player.GiveSuperCharge(1f);*/
 
         yield return new WaitForSeconds(0.4f);
 
@@ -358,6 +365,7 @@ public class BookCounterAttack : Attack
             this.grabbedPlayer.rb.isKinematic = false;
 
             this.grabbedPlayer.attackStuns.Remove(this.gameObject);
+            this.grabbedPlayer.stopAnimationOnHit = false;
 
             this.grabbedPlayer = null;
         }
@@ -378,6 +386,7 @@ public class BookCounterAttack : Attack
             {
                 this.user.knockbackInvounrability = true;
                 this.user.damageMitigation = 1f;
+                this.user.countering = true;
                 this.user.rb.isKinematic = true;
             }
         }
@@ -388,6 +397,7 @@ public class BookCounterAttack : Attack
             {
                 this.user.knockbackInvounrability = false;
                 this.user.damageMitigation = 0f;
+                this.user.countering = false;
                 this.user.rb.isKinematic = false;
             }
         }

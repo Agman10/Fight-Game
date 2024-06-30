@@ -74,7 +74,7 @@ public class SuperSpinGrab : Attack
         if(this.animations != null && !this.user.dead && this.tryGrabbing)
         {
             this.Stop();
-            this.animations.SetDefaultPose();
+            //this.animations.SetDefaultPose();
         }
     }
     public override void OnDeath()
@@ -115,7 +115,7 @@ public class SuperSpinGrab : Attack
 
     public void Grab(TestPlayer player)
     {
-        if(player != null && !player.dead)
+        if(player != null && !player.dead && !player.countering)
         {
             this.tryGrabbing = false;
             /*if (this.hitbox != null)

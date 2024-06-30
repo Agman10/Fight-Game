@@ -32,8 +32,8 @@ public class RoboJCapTaunts : Attack
         if (!this.user.dead && this.onGoing)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 
@@ -89,6 +89,9 @@ public class RoboJCapTaunts : Attack
     {
         base.Stop();
         //this.user.rb.isKinematic = false;
+
+        //CHANGE THIS LATER!!!!!!!!
+
         if (this.animations != null)
         {
             this.animations.upperBody.localPosition = new Vector3(0f, 0f, 0f);

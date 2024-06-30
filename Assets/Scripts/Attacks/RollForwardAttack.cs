@@ -36,8 +36,8 @@ public class RollForwardAttack : Attack
             this.Stop();
             //this.StartCoroutine(this.HitCoroutine());
             //this.RollBack(this.user);
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 
@@ -144,77 +144,87 @@ public class RollForwardAttack : Attack
 
     public void RollBack(TestPlayer player)
     {
-        if (this.onGoing)
+        if (this.onGoing /*&& player.damageMitigation < 1f && !player.knockbackInvounrability*/)
         {
             this.StopAllCoroutines();
-            if (player != null)
+
+            if (!player.countering)
             {
-                
-                
-                if (/*player.characterId == 3 &&*/
-                    player.attacks.backwardSpecial2 != null &&
-                    player.attacks.backwardSpecial2 is RollForwardAttack rollattack &&
-                    rollattack.onGoing &&
-                    rollattack.rolling)
+                if (player != null)
                 {
-                    //rollattack.onGoing = true;
-                    player.TakeDamage(this.user.transform.position, this.damage, 0.2f);
-                    this.user.TakeDamage(this.user.transform.position, this.damage, 0.2f);
-                    this.user.GiveSuperCharge(this.superCharge);
-                    this.user.GiveSuperCharge(this.superCharge / 2);
-                    player.GiveSuperCharge(this.superCharge);
-                    player.GiveSuperCharge(this.superCharge / 2);
-                    rollattack.RollBack(null);
 
-                    if (player.soundEffects != null)
-                        player.soundEffects.PlayHitSound();
 
-                    if (this.user.soundEffects != null)
-                        this.user.soundEffects.PlayHitSound();
+                    if (/*player.characterId == 3 &&*/
+                        player.attacks.backwardSpecial2 != null &&
+                        player.attacks.backwardSpecial2 is RollForwardAttack rollattack &&
+                        rollattack.onGoing &&
+                        rollattack.rolling)
+                    {
+                        //rollattack.onGoing = true;
+                        player.TakeDamage(this.user.transform.position, this.damage, 0.2f);
+                        this.user.TakeDamage(this.user.transform.position, this.damage, 0.2f);
+                        this.user.GiveSuperCharge(this.superCharge);
+                        this.user.GiveSuperCharge(this.superCharge / 2);
+                        player.GiveSuperCharge(this.superCharge);
+                        player.GiveSuperCharge(this.superCharge / 2);
+                        rollattack.RollBack(null);
+
+                        if (player.soundEffects != null)
+                            player.soundEffects.PlayHitSound();
+
+                        if (this.user.soundEffects != null)
+                            this.user.soundEffects.PlayHitSound();
+                    }
+                    else
+                    {
+                        player.TakeDamage(this.user.transform.position, this.damage, 0.2f, this.transform.forward.z * 600, 900);
+                        player.OnHit?.Invoke();
+                        player.OnHitFromPlayer?.Invoke(this.user);
+                        this.user.GiveSuperCharge(this.superCharge);
+                        player.GiveSuperCharge(this.superCharge / 2);
+
+                        if (player.soundEffects != null)
+                            player.soundEffects.PlayHitSound();
+                    }
+
+
+                    //player.AddStun(0.2f);
                 }
-                else
+
+
+
+                //this.onGoing = false;
+                this.user.attackStuns.Remove(this.gameObject);
+                this.user.rb.velocity = new Vector3(0, 0, 0);
+
+                if (this.hitbox != null)
+                    this.hitbox.gameObject.SetActive(false);
+
+                if (this.animations != null)
+                    this.animations.RollAnimation();
+
+                if (this.user.collision != null && this.user.collision is CapsuleCollider capsuleCollider)
                 {
-                    player.TakeDamage(this.user.transform.position, this.damage, 0.2f, this.transform.forward.z * 600, 900);
-                    player.OnHit?.Invoke();
-                    player.OnHitFromPlayer?.Invoke(this.user);
-                    this.user.GiveSuperCharge(this.superCharge);
-                    player.GiveSuperCharge(this.superCharge / 2);
+                    capsuleCollider.radius = 0.65f;
+                    capsuleCollider.height = 2.25f;
 
-                    if (player.soundEffects != null)
-                        player.soundEffects.PlayHitSound();
+                    capsuleCollider.center = new Vector3(0f, 1.125f, 0f);
+                    //this.user.transform.position = new Vector3(this.user.transform.position.x, this.user.transform.position.y - 0.5f, 0f);
                 }
 
-                
-                //player.AddStun(0.2f);
+                this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+                this.user.AddKnockback(this.transform.forward.z * -300f, 900f);
+                //this.user.knockbackInvounrability = true;
+
+                this.StartCoroutine(this.RollBackCoroutine());
             }
+            else
+            {
+                player.OnHitFromPlayer?.Invoke(this.user);
+            }
+
             
-
-
-            //this.onGoing = false;
-            this.user.attackStuns.Remove(this.gameObject);
-            this.user.rb.velocity = new Vector3(0, 0, 0);
-
-            if (this.hitbox != null)
-                this.hitbox.gameObject.SetActive(false);
-
-            if (this.animations != null)
-                this.animations.RollAnimation();
-
-            if (this.user.collision != null && this.user.collision is CapsuleCollider capsuleCollider)
-            {
-                capsuleCollider.radius = 0.65f;
-                capsuleCollider.height = 2.25f;
-
-                capsuleCollider.center = new Vector3(0f, 1.125f, 0f);
-                //this.user.transform.position = new Vector3(this.user.transform.position.x, this.user.transform.position.y - 0.5f, 0f);
-            }
-
-            this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-
-            this.user.AddKnockback(this.transform.forward.z * -300f, 900f);
-            //this.user.knockbackInvounrability = true;
-
-            this.StartCoroutine(this.RollBackCoroutine());
         }
         
     }
@@ -345,8 +355,8 @@ public class RollForwardAttack : Attack
         yield return new WaitForSeconds(0.01f);
         //this.RollBack(this.user);
         //this.Stop();
-        if (this.animations != null)
-            this.animations.SetDefaultPose();
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
         /*if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);*/
     }
