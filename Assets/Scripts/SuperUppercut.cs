@@ -17,6 +17,9 @@ public class SuperUppercut : Attack
     public float endLag1 = 0.3f;
     public float endLag2 = 0.25f;
 
+    public AudioSource uppcutSfx;
+    public AudioSource flameSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -73,6 +76,20 @@ public class SuperUppercut : Attack
         if (this.animations != null)
             this.animations.SetPunchUppercutStartAnim2();
         yield return new WaitForSeconds(0.05f);
+
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.02f;
+            this.uppcutSfx.Play();
+        }
+
+        if (this.flameSfx != null)
+        {
+            //this.flameSfx.time = 0.02f;
+            this.flameSfx.Play();
+        }
+
+
         this.PlayFire(true);
         if (this.user.rb != null)
             this.user.rb.AddForce(this.user.transform.forward.z * 150, 500, 0);
@@ -167,6 +184,19 @@ public class SuperUppercut : Attack
         if (this.animations != null)
             this.animations.SetPunchUppercutStartAnim2();
         yield return new WaitForSeconds(0.05f);
+
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.02f;
+            this.uppcutSfx.Play();
+        }
+
+        if (this.flameSfx != null)
+        {
+            //this.flameSfx.time = 0.02f;
+            this.flameSfx.Play();
+        }
+
         this.PlayFire(true);
         this.user.rb.velocity = new Vector3(0f, 0f, 0f);
         if (this.user.rb != null)
@@ -261,6 +291,20 @@ public class SuperUppercut : Attack
         if (this.animations != null)
             this.animations.SetPunchUppercutStartAnim2();
         yield return new WaitForSeconds(0.05f);
+
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.02f;
+            this.uppcutSfx.Play();
+        }
+
+        if (this.flameSfx != null)
+        {
+            //this.flameSfx.time = 0.02f;
+            this.flameSfx.Play();
+        }
+
+
         this.PlayFire(true);
         if (this.user.rb != null)
             this.user.rb.AddForce(this.user.transform.forward.z * 300, 1000, 0);

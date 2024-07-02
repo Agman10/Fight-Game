@@ -44,6 +44,8 @@ public class TestPlayer : MonoBehaviour
     public Action OnReset;
     public Action OnAttack;
 
+    public Action OnDisableItems;
+
     public Action<TestPlayer> OnHitFromPlayer;
     private Vector3 startPos;
 

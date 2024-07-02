@@ -18,6 +18,9 @@ public class SuperFlameSpin : Attack
     public VisualEffect rightLegFlame;
     public VisualEffect leftLegFlame;
 
+    public AudioSource spinSfx;
+    public AudioSource flameSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -86,6 +89,12 @@ public class SuperFlameSpin : Attack
         if (this.hitbox1 != null)
             this.hitbox1.gameObject.SetActive(true);
 
+        if (this.spinSfx != null)
+            this.spinSfx.Play();
+
+        if (this.flameSfx != null)
+            this.flameSfx.Play();
+
         float time = 0.6f;
         while (time > 0)
         {
@@ -112,8 +121,9 @@ public class SuperFlameSpin : Attack
 
             yield return null;
         }
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
 
-        
 
         //yield return new WaitForSeconds(0.5f);
         if (this.hitbox1 != null)
@@ -166,6 +176,10 @@ public class SuperFlameSpin : Attack
             this.hitbox1.gameObject.SetActive(false);
         if (this.hitbox2 != null)
             this.hitbox2.gameObject.SetActive(false);
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
         

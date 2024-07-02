@@ -6,7 +6,7 @@ public class DarkJCapTaunts : Attack
 {
     public TempPlayerAnimations animations;
     public bool onGoing;
-    public GameObject bombJuggle;
+    public Spinner bombJuggle;
 
     public override void OnEnable()
     {
@@ -16,6 +16,9 @@ public class DarkJCapTaunts : Attack
         {
             this.user.OnAttack += this.Cancel;
         }
+
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
     }
 
     public override void OnDisable()
@@ -26,6 +29,9 @@ public class DarkJCapTaunts : Attack
         {
             this.user.OnAttack -= this.Cancel;
         }
+
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
     }
     public override void OnHit()
     {
@@ -97,13 +103,31 @@ public class DarkJCapTaunts : Attack
         }
 
         if (this.bombJuggle != null)
+            this.bombJuggle.speedMultiplier = 0f;
+
+        /*if (this.bombJuggle != null)
         {
             this.bombJuggle.SetActive(false);
             this.bombJuggle.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
         }
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        if (this.bombJuggle != null)
+        {
+            this.bombJuggle.gameObject.SetActive(false);
+            this.bombJuggle.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.bombJuggle.speedMultiplier = 1f;
+        }
     }
 
     private IEnumerator NeutralTauntCoroutine()
@@ -236,10 +260,11 @@ public class DarkJCapTaunts : Attack
 
         if (this.bombJuggle != null)
         {
-            this.bombJuggle.SetActive(true);
+            this.bombJuggle.gameObject.SetActive(true);
+            this.bombJuggle.speedMultiplier = 1f;
             //this.bombJuggle.transform.eulerAngles = new Vector3(this.bombJuggle.transform.rotation.x, 0f, this.bombJuggle.transform.rotation.z);
             //this.bombJuggle.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            this.bombJuggle.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.bombJuggle.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
         }
             
 
@@ -293,8 +318,8 @@ public class DarkJCapTaunts : Attack
 
         if (this.bombJuggle != null)
         {
-            this.bombJuggle.SetActive(false);
-            this.bombJuggle.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.bombJuggle.gameObject.SetActive(false);
+            this.bombJuggle.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
         }
             
 

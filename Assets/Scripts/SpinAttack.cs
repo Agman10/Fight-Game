@@ -16,6 +16,8 @@ public class SpinAttack : Attack
     public bool spinning = false;
     public float dizzyMeter = 0f;
 
+    public AudioSource spinSfx;
+
     [Space]
 
     public float dissyRemovalSpeed = 20f;
@@ -95,7 +97,9 @@ public class SpinAttack : Attack
             this.rightArmTrail.SetActive(true);
             this.leftArmTrail.SetActive(true);
         }
-            
+
+        if (this.spinSfx != null)
+            this.spinSfx.Play();
 
         float time = 1f;
         Vector3 eyeRotation = this.animations.eyes.transform.eulerAngles;
@@ -123,6 +127,9 @@ public class SpinAttack : Attack
             yield return null;
         }
 
+        /*if (this.spinSfx != null)
+            this.spinSfx.Stop();*/
+
         this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
 
         if (this.hitbox1 != null)
@@ -146,6 +153,10 @@ public class SpinAttack : Attack
             this.user.rb.velocity = new Vector3(this.user.rb.velocity.x, this.user.rb.velocity.y * 0.75f, 0f);
             yield return null;
         }
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
+
         if (this.animations != null)
             this.animations.body.localEulerAngles = new Vector3(0, 0, 0);
 
@@ -234,6 +245,9 @@ public class SpinAttack : Attack
         }
 
         this.spinning = false;
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
 
         if (this.dizzyParticle != null)
             this.dizzyParticle.gameObject.SetActive(false);

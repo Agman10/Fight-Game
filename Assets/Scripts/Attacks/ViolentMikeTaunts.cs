@@ -16,6 +16,9 @@ public class ViolentMikeTaunts : Attack
         {
             this.user.OnAttack += this.Cancel;
         }
+
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
     }
 
     public override void OnDisable()
@@ -26,6 +29,9 @@ public class ViolentMikeTaunts : Attack
         {
             this.user.OnAttack -= this.Cancel;
         }
+
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
     }
     public override void OnHit()
     {
@@ -124,11 +130,22 @@ public class ViolentMikeTaunts : Attack
         }
 
 
-        if (this.electricGuitar != null)
-            this.electricGuitar.SetActive(false);
+        /*if (this.electricGuitar != null)
+            this.electricGuitar.SetActive(false);*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
+        }
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        if (this.electricGuitar != null)
+            this.electricGuitar.SetActive(false);
     }
 
     private IEnumerator NeutralTauntCoroutine()

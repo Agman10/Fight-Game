@@ -78,6 +78,19 @@ public class HoodGuyPunchAttack : Attack
         }
     }
 
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
+    }
+
     [ContextMenu("Initiate")]
     public override void Initiate()
     {
@@ -459,11 +472,16 @@ public class HoodGuyPunchAttack : Attack
         if (this.forwardHitbox2 != null)
             this.forwardHitbox2.gameObject.SetActive(false);
 
-        if (this.scyte != null)
+        /*if (this.scyte != null)
         {
             this.scyte.gameObject.SetActive(false);
             this.scyte.gameObject.transform.localPosition = new Vector3(0.4f, -0.56f, 0f);
             this.scyte.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, -90f);
+        }*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
         }
 
 
@@ -480,6 +498,16 @@ public class HoodGuyPunchAttack : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        if (this.scyte != null)
+        {
+            this.scyte.gameObject.SetActive(false);
+            this.scyte.gameObject.transform.localPosition = new Vector3(0.4f, -0.56f, 0f);
+            this.scyte.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, -90f);
+        }
     }
 
 

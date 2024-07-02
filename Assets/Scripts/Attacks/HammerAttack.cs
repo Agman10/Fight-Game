@@ -15,6 +15,8 @@ public class HammerAttack : Attack
     private float baseDamage;
     private float baseSuperCharge;
 
+    public AudioSource slamSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -33,6 +35,20 @@ public class HammerAttack : Attack
         {
             this.baseDamage = this.hitbox.damage;
             this.baseSuperCharge = this.hitbox.superChargeAmount;
+        }
+
+        if (this.user != null)
+        {
+            this.user.OnDisableItems += this.DisableItem;
+        }
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+
+        if (this.user != null)
+        {
+            this.user.OnDisableItems -= this.DisableItem;
         }
     }
 
@@ -203,6 +219,12 @@ public class HammerAttack : Attack
 
         yield return new WaitForSeconds(0.05f);
 
+        if(this.slamSfx != null)
+        {
+            //this.slamSfx.time = 0.05f;
+            this.slamSfx.Play();
+        }
+
         if (this.backHitbox != null)
         {
             this.backHitbox.gameObject.SetActive(false);
@@ -278,11 +300,16 @@ public class HammerAttack : Attack
             this.hitbox.gameObject.SetActive(false);
         }
 
-        if (this.hammer != null)
+        /*if (this.hammer != null)
         {
             this.hammer.gameObject.SetActive(false);
             this.hammer.gameObject.transform.localPosition = new Vector3(-1.2f, 0.205f, 0f);
             this.hammer.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 246f);
+        }*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
         }
 
         if(this.backHitbox != null)
@@ -294,5 +321,15 @@ public class HammerAttack : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        if (this.hammer != null)
+        {
+            this.hammer.gameObject.SetActive(false);
+            this.hammer.gameObject.transform.localPosition = new Vector3(-1.2f, 0.205f, 0f);
+            this.hammer.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 246f);
+        }
     }
 }

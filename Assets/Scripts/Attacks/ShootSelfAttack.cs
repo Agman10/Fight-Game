@@ -24,8 +24,8 @@ public class ShootSelfAttack : Attack
         if (!this.user.dead && this.onGoing && this.canBeCanceled)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 
@@ -42,6 +42,19 @@ public class ShootSelfAttack : Attack
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                 this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
         }
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
     }
 
     [ContextMenu("Initiate")]
@@ -156,11 +169,22 @@ public class ShootSelfAttack : Attack
     {
         base.Stop();
 
-        this.EnableGun(false);
+        //this.EnableGun(false);
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
+        }
+
         this.canBeCanceled = false;
         this.user.knockbackInvounrability = false;
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        this.EnableGun(false);
     }
 }

@@ -39,15 +39,26 @@ public class GunShootAttack : Attack
     {
         base.OnEnable();
         this.hitboxLocalPosition = this.hitbox.transform.localPosition;
+
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
     }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
+    }
+
     public override void OnHit()
     {
         base.OnHit();
         if (!this.user.dead && this.onGoing)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
     private void Update()
@@ -266,8 +277,11 @@ public class GunShootAttack : Attack
         if (this.handHitbox != null)
             this.handHitbox.SetActive(false);
 
-        this.EnableGun(false);
         this.hitbox.transform.localPosition = this.hitboxLocalPosition;
+
+
+
+        /*this.EnableGun(false);
 
         if (this.magazineTransform != null)
         {
@@ -276,7 +290,7 @@ public class GunShootAttack : Attack
         }
 
         if (this.handMagazine != null)
-            this.handMagazine.gameObject.SetActive(false);
+            this.handMagazine.gameObject.SetActive(false);*/
 
         if (this.reloading)
         {
@@ -292,8 +306,27 @@ public class GunShootAttack : Attack
             this.reloading = false;
         }
 
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
+        }
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        this.EnableGun(false);
+
+        if (this.magazineTransform != null)
+        {
+            this.magazineTransform.transform.localPosition = new Vector3(0f, -0.1f, 0f);
+            this.magazineTransform.gameObject.SetActive(false);
+        }
+
+        if (this.handMagazine != null)
+            this.handMagazine.gameObject.SetActive(false);
     }
 
     public void ShootSelf()

@@ -36,6 +36,19 @@ public class ExplosiveDetonationAttack : Attack
             this.Stop();
     }
 
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
+    }
+
     /*private void Update()
     {
         if (this.onGoing)
@@ -176,16 +189,30 @@ public class ExplosiveDetonationAttack : Attack
 
         this.user.rb.isKinematic = false;
 
-        if (this.explosiveBox != null)
+        /*if (this.explosiveBox != null)
             this.explosiveBox.SetActive(false);
 
         if (this.handle != null)
-            this.handle.localPosition = new Vector3(0f, 1.7f, 0f);
+            this.handle.localPosition = new Vector3(0f, 1.7f, 0f);*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
+        }
 
         if (this.smoke != null)
             this.smoke.Stop();
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        if (this.explosiveBox != null)
+            this.explosiveBox.SetActive(false);
+
+        if (this.handle != null)
+            this.handle.localPosition = new Vector3(0f, 1.7f, 0f);
     }
 }

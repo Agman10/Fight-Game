@@ -19,6 +19,7 @@ public class SpinKick : Attack
     public bool onGoing;
 
     public AudioSource spinSfx;
+    public AudioSource flameSfx;
 
     [Space]
 
@@ -128,6 +129,9 @@ public class SpinKick : Attack
         if (this.spinSfx != null)
             this.spinSfx.Play();
 
+        if (this.flameSfx != null)
+            this.flameSfx.Play();
+
         float time = 0.9f;
         while (time > 0)
         {
@@ -215,6 +219,9 @@ public class SpinKick : Attack
 
         if (this.spinSfx != null)
             this.spinSfx.Play();
+
+        if (this.flameSfx != null)
+            this.flameSfx.Play();
 
         float time = 0.9f;
         while (time > 0)

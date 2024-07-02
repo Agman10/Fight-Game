@@ -25,8 +25,8 @@ public class CFourAttack : Attack
         if (!this.user.dead && this.onGoing)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
 
@@ -34,6 +34,19 @@ public class CFourAttack : Attack
     {
         if (this.onGoing)
             this.Stop();
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
     }
 
     private void Update()
@@ -221,12 +234,27 @@ public class CFourAttack : Attack
     {
         base.Stop();
 
+        /*if (this.cFourModel != null)
+            this.cFourModel.SetActive(false);
+
+        if (this.cFourDetonatior != null)
+            this.cFourDetonatior.SetActive(false);*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
+        }
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
         if (this.cFourModel != null)
             this.cFourModel.SetActive(false);
 
         if (this.cFourDetonatior != null)
             this.cFourDetonatior.SetActive(false);
-        this.onGoing = false;
-        this.user.attackStuns.Remove(this.gameObject);
     }
 }

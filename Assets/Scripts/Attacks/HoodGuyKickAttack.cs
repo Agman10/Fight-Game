@@ -47,6 +47,23 @@ public class HoodGuyKickAttack : Attack
         }
     }
 
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (this.user != null)
+        {
+            this.user.OnDisableItems += this.DisableItem;
+        }
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+        {
+            this.user.OnDisableItems -= this.DisableItem;
+        }
+    }
+
     [ContextMenu("Initiate")]
     public override void Initiate()
     {
@@ -383,11 +400,16 @@ public class HoodGuyKickAttack : Attack
         if (this.forwardHitbox != null)
             this.forwardHitbox.gameObject.SetActive(false);
 
-        if (this.scyte != null)
+        /*if (this.scyte != null)
         {
             this.scyte.SetActive(false);
             this.scyte.transform.localPosition = new Vector3(0.4f, -0.56f, 0f);
             this.scyte.transform.localEulerAngles = new Vector3(0f, 0f, -90f);
+        }*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
         }
 
         /*if (this.scyte != null)
@@ -411,6 +433,16 @@ public class HoodGuyKickAttack : Attack
 
         if (this.airHitbox != null)
             this.airHitbox.gameObject.SetActive(false);
+    }
+
+    public void DisableItem()
+    {
+        if (this.scyte != null)
+        {
+            this.scyte.SetActive(false);
+            this.scyte.transform.localPosition = new Vector3(0.4f, -0.56f, 0f);
+            this.scyte.transform.localEulerAngles = new Vector3(0f, 0f, -90f);
+        }
     }
 
     IEnumerator KickCoroutine2()

@@ -37,6 +37,14 @@ public class KnifeThrowAttack : Attack
     public override void OnEnable()
     {
         base.OnEnable();
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
     }
     public override void OnHit()
     {
@@ -44,8 +52,8 @@ public class KnifeThrowAttack : Attack
         if (!this.user.dead && this.onGoing)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
     private void Update()
@@ -273,20 +281,38 @@ public class KnifeThrowAttack : Attack
         if (this.handHitbox != null)
             this.handHitbox.SetActive(false);
 
-        this.EnableKnife(false);
+        
 
         this.user.rb.isKinematic = false;
+
+        /*this.EnableKnife(false);
 
         if (this.knife != null)
         {
             this.knife.transform.localPosition = new Vector3(0.15f, -0.64f, 0f);
             this.knife.transform.localEulerAngles = new Vector3(0f, 0f, 90f);
+        }*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
         }
 
         //this.LightTip(false);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        this.EnableKnife(false);
+
+        if (this.knife != null)
+        {
+            this.knife.transform.localPosition = new Vector3(0.15f, -0.64f, 0f);
+            this.knife.transform.localEulerAngles = new Vector3(0f, 0f, 90f);
+        }
     }
 
     private void EnableKnife(bool enable = false)

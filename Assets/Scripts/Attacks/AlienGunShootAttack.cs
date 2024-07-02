@@ -39,6 +39,14 @@ public class AlienGunShootAttack: Attack
     public override void OnEnable()
     {
         base.OnEnable();
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
     }
     public override void OnHit()
     {
@@ -46,8 +54,8 @@ public class AlienGunShootAttack: Attack
         if (!this.user.dead && this.onGoing)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
     }
     private void Update()
@@ -211,12 +219,23 @@ public class AlienGunShootAttack: Attack
         if (this.handHitbox != null)
             this.handHitbox.SetActive(false);
 
-        this.EnableGun(false);
+        //this.EnableGun(false);
 
         this.LightTip(false);
 
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
+        }
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        this.EnableGun(false);
+        //this.LightTip(false);
     }
 
     private void EnableGun(bool enable = false)

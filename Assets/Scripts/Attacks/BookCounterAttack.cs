@@ -280,8 +280,10 @@ public class BookCounterAttack : Attack
         player.stopAnimationOnHit = false;
 
 
-        if (player.animations != null && !player.knockbackInvounrability)
+        if (player.animations != null && !player.knockbackInvounrability && !player.dead)
             player.animations.SetDefaultPose();
+
+        player.OnDisableItems?.Invoke();
 
 
         /*yield return new WaitForSeconds(0.3f);
@@ -366,6 +368,13 @@ public class BookCounterAttack : Attack
 
             this.grabbedPlayer.attackStuns.Remove(this.gameObject);
             this.grabbedPlayer.stopAnimationOnHit = false;
+
+
+
+            this.grabbedPlayer.OnDisableItems?.Invoke();
+            if (this.grabbedPlayer.animations != null && !this.grabbedPlayer.knockbackInvounrability && !this.grabbedPlayer.dead /*&& this.grabbedPlayer.attackStuns.Count > 0 && this.grabbedPlayer.stuns.Count > 0*/)
+                this.grabbedPlayer.animations.SetDefaultPose();
+
 
             this.grabbedPlayer = null;
         }

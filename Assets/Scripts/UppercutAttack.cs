@@ -25,7 +25,7 @@ public class UppercutAttack : Attack
     public AudioSource uppcutSfx;
     public AudioSource flameSfx;
 
-    private bool dontStopSfxOnHit;
+    private bool stopSfxOnHit;
 
     // Start is called before the first frame update
     public override void OnEnable()
@@ -155,7 +155,7 @@ public class UppercutAttack : Attack
         /*if (this.trail != null)
             this.trail.SetActive(true);*/
 
-        this.dontStopSfxOnHit = false;
+        this.stopSfxOnHit = true;
 
         if (this.uppcutSfx != null)
         {
@@ -173,7 +173,7 @@ public class UppercutAttack : Attack
             this.trail.SetActive(true);
         yield return new WaitForSeconds(0.05f);
 
-        this.dontStopSfxOnHit = true;
+        this.stopSfxOnHit = false;
 
         /*if (this.uppcutSfx != null)
             this.uppcutSfx.Play();*/
@@ -197,6 +197,8 @@ public class UppercutAttack : Attack
         if (this.kickHitbox != null)
             this.kickHitbox.gameObject.SetActive(true);
         yield return new WaitForSeconds(animSpeed);
+
+        //this.stopSfxOnHit = false;
 
         if (this.animations != null)
         {
@@ -290,7 +292,7 @@ public class UppercutAttack : Attack
 
         yield return new WaitForSeconds(0.25f);
 
-        this.dontStopSfxOnHit = false;
+        //this.stopSfxOnHit = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -316,7 +318,7 @@ public class UppercutAttack : Attack
                 this.animations.rightLeg.localScale = new Vector3(1, 1.4f, 1);*/
         }
 
-        this.dontStopSfxOnHit = true;
+        //this.stopSfxOnHit = true;
 
         if (this.uppcutSfx != null)
         {
@@ -475,7 +477,7 @@ public class UppercutAttack : Attack
             this.animations.SetPunchUpercutAnim();
         }
 
-        this.dontStopSfxOnHit = true;
+        //this.stopSfxOnHit = true;
 
         if (this.uppcutSfx != null)
         {
@@ -566,8 +568,10 @@ public class UppercutAttack : Attack
         this.PlayFire(false);
         this.onGoing = false;
 
-        if (this.uppcutSfx != null && !this.dontStopSfxOnHit)
+        if (this.uppcutSfx != null && this.stopSfxOnHit)
             this.uppcutSfx.Stop();
+
+        this.stopSfxOnHit = false;
 
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -593,7 +597,7 @@ public class UppercutAttack : Attack
         if (this.trail != null)
             this.trail.SetActive(true);
 
-        this.dontStopSfxOnHit = true;
+        //this.stopSfxOnHit = true;
         if (this.uppcutSfx != null)
         {
             this.uppcutSfx.time = 0.02f;

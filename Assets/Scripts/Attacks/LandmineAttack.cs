@@ -20,9 +20,22 @@ public class LandmineAttack : Attack
         if (!this.user.dead && this.onGoing)
         {
             this.Stop();
-            if (this.animations != null)
-                this.animations.SetDefaultPose();
+            /*if (this.animations != null)
+                this.animations.SetDefaultPose();*/
         }
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
     }
 
     [ContextMenu("Initiate")]
@@ -88,9 +101,22 @@ public class LandmineAttack : Attack
     public override void Stop()
     {
         base.Stop();
-        if (this.landmineModel != null)
-            this.landmineModel.SetActive(false);
+
+        /*if (this.landmineModel != null)
+            this.landmineModel.SetActive(false);*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
+        }
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void DisableItem()
+    {
+        if (this.landmineModel != null)
+            this.landmineModel.SetActive(false);
     }
 }

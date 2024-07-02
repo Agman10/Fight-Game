@@ -12,6 +12,9 @@ public class DoorTeleportAttack : Attack
 
     public InterdimensionalDoor currentDoor;
 
+    public AudioSource openSfx;
+    public AudioSource closeSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -96,9 +99,13 @@ public class DoorTeleportAttack : Attack
             GameManager.Instance.gameCamera.lockCamera = true;
         }*/
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
 
-        if(this.currentDoor != null)
+        if (this.openSfx != null)
+            this.openSfx.Play();
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.currentDoor != null)
         {
             this.currentDoor.doorLid.transform.localEulerAngles = new Vector3(0f, 110f, 0f);
 
@@ -127,6 +134,9 @@ public class DoorTeleportAttack : Attack
 
 
         yield return new WaitForSeconds(0.1f);
+
+        /*if (this.closeSfx != null)
+            this.closeSfx.Play();*/
 
         if (this.currentDoor != null)
             this.currentDoor.doorLid.transform.localEulerAngles = new Vector3(0f, 38f, 0f);
@@ -174,7 +184,15 @@ public class DoorTeleportAttack : Attack
         }*/
 
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
+
+        /*if (this.openSfx != null)
+            this.openSfx.Play();*/
+
+        if (this.closeSfx != null)
+            this.closeSfx.Play();
+
+        yield return new WaitForSeconds(0.1f);
 
         if (this.currentDoor != null)
         {
@@ -220,6 +238,9 @@ public class DoorTeleportAttack : Attack
 
             this.animations.DoorWalk(2);
         }
+
+        /*if (this.closeSfx != null)
+            this.closeSfx.Play();*/
 
         yield return new WaitForSeconds(0.1f);
 

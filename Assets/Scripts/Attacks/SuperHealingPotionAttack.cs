@@ -39,6 +39,19 @@ public class SuperHealingPotionAttack : Attack
             this.user.damageMitigation = 0f;
     }
 
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (this.user != null)
+            this.user.OnDisableItems += this.DisableItem;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.user != null)
+            this.user.OnDisableItems -= this.DisableItem;
+    }
+
     [ContextMenu("Initiate")]
     public override void Initiate()
     {
@@ -208,7 +221,7 @@ public class SuperHealingPotionAttack : Attack
     {
         base.Stop();
 
-        if (this.potion != null)
+        /*if (this.potion != null)
             this.potion.SetActive(false);
 
         if (this.corc != null)
@@ -218,6 +231,11 @@ public class SuperHealingPotionAttack : Attack
         {
             this.liquid.SetActive(true);
             this.liquid.transform.localScale = new Vector3(1f, 1f, 1f);
+        }*/
+
+        if (this.user != null && !this.user.stopAnimationOnHit)
+        {
+            this.DisableItem();
         }
 
         if (this.confused != null)
@@ -233,7 +251,20 @@ public class SuperHealingPotionAttack : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
+    public void DisableItem()
+    {
+        if (this.potion != null)
+            this.potion.SetActive(false);
 
+        if (this.corc != null)
+            this.corc.SetActive(true);
+
+        if (this.liquid != null)
+        {
+            this.liquid.SetActive(true);
+            this.liquid.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+    }
 
 
     private IEnumerator RefuseDrinkCoroutine()
