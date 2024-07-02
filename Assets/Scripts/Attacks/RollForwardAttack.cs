@@ -148,17 +148,25 @@ public class RollForwardAttack : Attack
         {
             this.StopAllCoroutines();
 
-            if (!player.countering)
+            bool countered = false;
+
+            /*if (!player.countering)
             {
-                if (player != null)
+                
+            }
+            else
+            {
+                player.OnHitFromPlayer?.Invoke(this.user);
+            }*/
+            if (player != null)
+            {
+                if (!player.countering)
                 {
-
-
                     if (/*player.characterId == 3 &&*/
-                        player.attacks.backwardSpecial2 != null &&
-                        player.attacks.backwardSpecial2 is RollForwardAttack rollattack &&
-                        rollattack.onGoing &&
-                        rollattack.rolling)
+                    player.attacks.backwardSpecial2 != null &&
+                    player.attacks.backwardSpecial2 is RollForwardAttack rollattack &&
+                    rollattack.onGoing &&
+                    rollattack.rolling)
                     {
                         //rollattack.onGoing = true;
                         player.TakeDamage(this.user.transform.position, this.damage, 0.2f);
@@ -186,45 +194,53 @@ public class RollForwardAttack : Attack
                         if (player.soundEffects != null)
                             player.soundEffects.PlayHitSound();
                     }
-
-
-                    //player.AddStun(0.2f);
+                }
+                else
+                {
+                    player.OnHitFromPlayer?.Invoke(this.user);
+                    countered = true;
                 }
 
 
 
-                //this.onGoing = false;
-                this.user.attackStuns.Remove(this.gameObject);
-                this.user.rb.velocity = new Vector3(0, 0, 0);
 
-                if (this.hitbox != null)
-                    this.hitbox.gameObject.SetActive(false);
+                //player.AddStun(0.2f);
+            }
 
+
+
+            //this.onGoing = false;
+            this.user.attackStuns.Remove(this.gameObject);
+            this.user.rb.velocity = new Vector3(0, 0, 0);
+
+            if (this.hitbox != null)
+                this.hitbox.gameObject.SetActive(false);
+
+            /*if (this.animations != null)
+                this.animations.RollAnimation();*/
+
+            if (this.user.collision != null && this.user.collision is CapsuleCollider capsuleCollider)
+            {
+                capsuleCollider.radius = 0.65f;
+                capsuleCollider.height = 2.25f;
+
+                capsuleCollider.center = new Vector3(0f, 1.125f, 0f);
+                //this.user.transform.position = new Vector3(this.user.transform.position.x, this.user.transform.position.y - 0.5f, 0f);
+            }
+
+            this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            if (!countered)
+            {
                 if (this.animations != null)
                     this.animations.RollAnimation();
-
-                if (this.user.collision != null && this.user.collision is CapsuleCollider capsuleCollider)
-                {
-                    capsuleCollider.radius = 0.65f;
-                    capsuleCollider.height = 2.25f;
-
-                    capsuleCollider.center = new Vector3(0f, 1.125f, 0f);
-                    //this.user.transform.position = new Vector3(this.user.transform.position.x, this.user.transform.position.y - 0.5f, 0f);
-                }
-
-                this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 
                 this.user.AddKnockback(this.transform.forward.z * -300f, 900f);
                 //this.user.knockbackInvounrability = true;
 
                 this.StartCoroutine(this.RollBackCoroutine());
             }
-            else
-            {
-                player.OnHitFromPlayer?.Invoke(this.user);
-            }
-
             
+
         }
         
     }
