@@ -6,13 +6,21 @@ public class RGBTest : MonoBehaviour
 {
     public Light light;
     public Light[] lights;
+    public MeshRenderer[] meshRenderers;
     public float hue;
     public float speed = 0.1f;
 
+    [Space]
     public float baseColorSaturation = 0.1f;
-    public float emissionColorIntensity = 5f;
+    public float baseColorBrightness = 1f;
 
+    [Space]
+    public float emissionColorIntensity = 5f;
+    public float emissionColorSaturation = 1f;
+
+    [Space]
     public MeshRenderer meshRenderer;
+    
     //public ParticleSystem particleSystem;
     // Start is called before the first frame update
     void Start()
@@ -44,10 +52,17 @@ public class RGBTest : MonoBehaviour
 
         if (this.meshRenderer != null)
         {
-            this.meshRenderer.material.SetColor("_BaseColor", Color.HSVToRGB(this.hue, this.baseColorSaturation, 1f));
-            this.meshRenderer.material.SetColor("_EmissionColor", Color.HSVToRGB(this.hue, 1f, this.emissionColorIntensity, true));
+            this.meshRenderer.material.SetColor("_BaseColor", Color.HSVToRGB(this.hue, this.baseColorSaturation, this.baseColorBrightness));
+            this.meshRenderer.material.SetColor("_EmissionColor", Color.HSVToRGB(this.hue, this.emissionColorSaturation, this.emissionColorIntensity, true));
             //this.meshRenderer.material.SetColor("Color_7022ee03b5e44f1aaf226a0eb8093b59", Color.HSVToRGB(this.hue, 1f, 1f));
         }
+
+        foreach (MeshRenderer renderer in this.meshRenderers)
+        {
+            renderer.material.SetColor("_BaseColor", Color.HSVToRGB(this.hue, this.baseColorSaturation, this.baseColorBrightness));
+            renderer.material.SetColor("_EmissionColor", Color.HSVToRGB(this.hue, this.emissionColorSaturation, this.emissionColorIntensity, true));
+        }
+
         /*if (this.particleSystem != null)
         {
             this.particleSystem.startColor = Color.HSVToRGB(this.hue, 1f, 1f);
