@@ -562,6 +562,24 @@ public class RandomSkybox : MonoBehaviour
                 this.directionalLight.color = new Color32(242, 249, 255, 255);
                 //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
                 break;
+            case 17:
+                this.SetMusic(15);
+                this.SetSkybox(0);
+                this.directionalLight.color = new Color32(242, 249, 255, 255);
+                //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                break;
+            case 18:
+                this.SetMusic(15);
+                this.SetSkybox(0);
+                this.directionalLight.color = new Color32(242, 249, 255, 255);
+                //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                break;
+            case 19:
+                this.SetMusic(15);
+                this.SetSkybox(0);
+                this.directionalLight.color = new Color32(242, 249, 255, 255);
+                //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                break;
             default:
                 this.SetMusic(12);
                 break;

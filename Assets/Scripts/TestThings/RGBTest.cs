@@ -59,7 +59,9 @@ public class RGBTest : MonoBehaviour
 
         foreach (MeshRenderer renderer in this.meshRenderers)
         {
-            renderer.material.SetColor("_BaseColor", Color.HSVToRGB(this.hue, this.baseColorSaturation, this.baseColorBrightness));
+            Color color = Color.HSVToRGB(this.hue, this.baseColorSaturation, this.baseColorBrightness);
+            color.a = renderer.material.color.a;
+            renderer.material.SetColor("_BaseColor", color);
             renderer.material.SetColor("_EmissionColor", Color.HSVToRGB(this.hue, this.emissionColorSaturation, this.emissionColorIntensity, true));
         }
 
