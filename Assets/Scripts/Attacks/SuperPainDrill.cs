@@ -30,6 +30,7 @@ public class SuperPainDrill : Attack
     private float dashSpeed = 16f;
     private float dashDuration = 1.4f;
 
+    public AudioSource drillSfx;
     //public bool hover;
 
     public override void OnEnable()
@@ -223,6 +224,9 @@ public class SuperPainDrill : Attack
         }
         player.TakeDamage(this.user.transform.position, 2.5f);
 
+        if (player.soundEffects != null)
+            player.soundEffects.PlayHitSound();
+
         yield return new WaitForSeconds(0.05f);
         if (player.animations != null)
             player.animations.LayDown();
@@ -299,6 +303,8 @@ public class SuperPainDrill : Attack
         this.spinning = true;
         //this.user.transform.position = new Vector3(player.transform.position.x, 0.7f, 0f);
 
+        if (this.drillSfx != null)
+            this.drillSfx.Play();
 
         int amount = 9;
         while (amount > 0)
@@ -307,9 +313,16 @@ public class SuperPainDrill : Attack
                 this.animations.body.transform.Rotate(0f, -1500 * Time.deltaTime, 0f);*/
             yield return new WaitForSeconds(0.15f);
             player.TakeDamage(this.user.transform.position, 5f);
+
+            if (player.soundEffects != null)
+                player.soundEffects.PlayHitSound();
+
             amount -= 1;
             yield return null;
         }
+
+        if (this.drillSfx != null)
+            this.drillSfx.Stop();
 
         this.spinning = false;
 
@@ -359,6 +372,9 @@ public class SuperPainDrill : Attack
             player.TakeDamage(this.user.transform.position, 2.5f, 0.5f, this.user.transform.forward.z * 0f, 0f);
 
         player.attackStuns.Remove(this.gameObject);
+
+        if (player.soundEffects != null)
+            player.soundEffects.PlayHitSound();
 
         this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
 
@@ -431,6 +447,9 @@ public class SuperPainDrill : Attack
         this.PlayBlood(false);
 
         this.spinning = false;
+
+        if (this.drillSfx != null)
+            this.drillSfx.Stop();
 
         this.moving = false;
         this.user.preventDeath = false;

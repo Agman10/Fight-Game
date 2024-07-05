@@ -10,6 +10,8 @@ public class BombThrowAttack : Attack
     public bool holdingGrenade;
     public bool holdingFlashbang;
 
+    public AudioSource throwSfx;
+
     public Bomb bomb;
     public GameObject bombModel;
     public float bombXForce;
@@ -148,6 +150,11 @@ public class BombThrowAttack : Attack
             this.animations.SetPunchPose();
         //this.ThrowBomb();
 
+        if (this.throwSfx != null)
+        {
+            //this.throwSfx.time = 0.01f;
+            this.throwSfx.Play();
+        }
         yield return new WaitForSeconds(0.1f);
         if (this.animations != null)
             this.animations.SetDefaultPose();

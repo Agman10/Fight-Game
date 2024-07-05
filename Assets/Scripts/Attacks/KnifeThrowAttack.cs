@@ -17,6 +17,8 @@ public class KnifeThrowAttack : Attack
 
     public GameObject handHitbox;
 
+    public AudioSource throwSfx;
+
     /*public float shootTime = 0.65f;
     public float airShootTime = 0.25f;*/
 
@@ -136,7 +138,11 @@ public class KnifeThrowAttack : Attack
             this.knife.transform.localEulerAngles = new Vector3(0f, 0f, 90f);
         }
 
-
+        if (this.throwSfx != null)
+        {
+            //this.throwSfx.time = 0.01f;
+            this.throwSfx.Play();
+        }
         float currentTime = 0;
         float duration = 0.15f;
         //float targetRotation = -245f;
@@ -228,7 +234,12 @@ public class KnifeThrowAttack : Attack
         //this.user.rb.AddForce(0f, 300f, 0f);
         //this.user.AddStun(0.05f, true);
         this.user.AddKnockback(0f, 150f);
-        
+
+        if (this.throwSfx != null)
+        {
+            //this.throwSfx.time = 0.01f;
+            this.throwSfx.Play();
+        }
 
         float currentTime = 0;
         float duration = 0.15f;

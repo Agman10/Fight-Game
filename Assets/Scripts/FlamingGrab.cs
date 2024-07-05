@@ -27,6 +27,9 @@ public class FlamingGrab : Attack
 
     public float damagePerTick = 5;
 
+    public AudioSource explosionImpactSfx;
+    public AudioSource flameSfx;
+
     public override void OnEnable()
     {
         if (this.user != null)
@@ -209,9 +212,24 @@ public class FlamingGrab : Attack
 
         yield return new WaitForSeconds(0.5f);
         this.PlayFire(true);
+        if (this.flameSfx != null)
+            this.flameSfx.Play();
 
         float time = 0.1f;
-        yield return new WaitForSeconds(time);
+
+        int amount = 6;
+        while (amount > 0)
+        {
+            yield return new WaitForSeconds(time);
+            player.TakeDamage(this.user.transform.position, this.damagePerTick);
+            if (player.soundEffects != null)
+                player.soundEffects.PlayHitSound();
+
+            amount -= 1;
+            yield return null;
+        }
+
+        /*yield return new WaitForSeconds(time);
         player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
         player.TakeDamage(this.user.transform.position, this.damagePerTick);
@@ -222,15 +240,27 @@ public class FlamingGrab : Attack
         yield return new WaitForSeconds(time);
         player.TakeDamage(this.user.transform.position, this.damagePerTick);
         yield return new WaitForSeconds(time);
-        player.TakeDamage(this.user.transform.position, this.damagePerTick);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick);*/
         yield return new WaitForSeconds(time);
         this.animations.SetGrabbingHeadbutPose1();
         player.TakeDamage(this.user.transform.position, this.damagePerTick);
+
+        if (player.soundEffects != null)
+            player.soundEffects.PlayHitSound();
+
         yield return new WaitForSeconds(time);
         player.TakeDamage(this.user.transform.position, this.damagePerTick);
+
+        if (player.soundEffects != null)
+            player.soundEffects.PlayHitSound();
+
         yield return new WaitForSeconds(time);
         this.PlayFire(false);
         player.TakeDamage(this.user.transform.position, this.damagePerTick);
+
+        if (player.soundEffects != null)
+            player.soundEffects.PlayHitSound();
+
         yield return new WaitForSeconds(0.1f);
         this.animations.SetGrabbingHeadbutPose2();
 
@@ -245,6 +275,17 @@ public class FlamingGrab : Attack
         player.knockbackInvounrability = false;
         player.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         player.TakeDamage(this.user.transform.position, this.damagePerTick, 0.5f, this.user.transform.forward.z * 1000f, 1000f);
+
+        if (player.soundEffects != null)
+            player.soundEffects.PlayHitSound();
+
+        if (this.explosionImpactSfx != null)
+        {
+            //this.explosionImpactSfx.PlaySound();
+            this.explosionImpactSfx.time = 0.08f;
+            this.explosionImpactSfx.Play();
+        }
+
         player.attackStuns.Remove(this.gameObject);
 
 

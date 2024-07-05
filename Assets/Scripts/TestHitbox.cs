@@ -41,6 +41,7 @@ public class TestHitbox : MonoBehaviour
 
     public bool preventDeathSound = false;
     public bool doHitSound = true;
+    public float hitSoundCooldown = 0f;
     public CharacterSoundEffect customHitSound;
     void Start()
     {
@@ -259,7 +260,7 @@ public class TestHitbox : MonoBehaviour
                         {
                             if (player.soundEffects != null)
                             {
-                                player.soundEffects.PlayHitSound();
+                                player.soundEffects.PlayHitSound(this.hitSoundCooldown);
                             }
                         }
                     }
@@ -343,7 +344,7 @@ public class TestHitbox : MonoBehaviour
                     }
                     else if (ragdoll.owner != null && ragdoll.owner.soundEffects != null)
                     {
-                        ragdoll.owner.soundEffects.PlayHitSound();
+                        ragdoll.owner.soundEffects.PlayHitSound(this.hitSoundCooldown);
                     }
                 }
 

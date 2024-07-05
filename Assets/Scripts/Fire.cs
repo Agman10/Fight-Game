@@ -11,12 +11,17 @@ public class Fire : MonoBehaviour
     public float lifeTime = 1.5f;
 
     public float moveSpeed = 0f;
+
+    public AudioSource fireSfx;
     void OnEnable()
     {
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
 
         this.StartCoroutine(this.DisableTimerCoroutine());
+
+        if (this.fireSfx != null)
+            this.fireSfx.Play();
     }
     void OnDisable()
     {

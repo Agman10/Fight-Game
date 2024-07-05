@@ -167,6 +167,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -439,6 +440,133 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playrate: 2
+--- !u!1 &236918834595635012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5966898168216088006}
+  - component: {fileID: 5861101283869500353}
+  m_Layer: 0
+  m_Name: ThrowSfx
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5966898168216088006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236918834595635012}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6860035015387234192}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5861101283869500353
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236918834595635012}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -1460405899137335427, guid: 79c0043f542faba438078f323803e62e, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 7df9ee6e39057074f9bf1c22d9eb6e8e, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.2
+  m_Pitch: 0.8
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &263043093883840413
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +780,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 6301840493677343230}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -825,6 +954,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -1863,6 +1993,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 1097952631705808053}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -1903,6 +2034,7 @@ Transform:
   - {fileID: 4391764428083990764}
   - {fileID: 907110617399274589}
   - {fileID: 2607837617256463179}
+  - {fileID: 5966898168216088006}
   m_Father: {fileID: 6680171171879883500}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2038,6 +2170,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 7031687647519808617}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -2881,6 +3014,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 0
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -3463,6 +3597,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -3905,6 +4040,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 5057719025420573085}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -4606,6 +4742,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -5066,6 +5203,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 5057719025420573085}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -5733,6 +5871,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 1097952631705808053}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -5996,6 +6135,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -6662,6 +6802,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -6938,6 +7079,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 5057719025420573085}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -7595,6 +7737,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -7893,6 +8036,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 961869837859461895}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -8339,6 +8483,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 6301840493677343230}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -8855,6 +9000,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -9377,6 +9523,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 0
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -9913,6 +10060,7 @@ MonoBehaviour:
   fireBallXForce: 750
   fireBallYForce: 50
   animationId: 0
+  throwSfx: {fileID: 5861101283869500353}
   groundTime: 0.5
   groundStunTime: 0.3
   airTime: 0.5
@@ -10223,6 +10371,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 6301840493677343230}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -16061,6 +16210,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -16197,6 +16347,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 5057719025420573085}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -20600,6 +20751,8 @@ MonoBehaviour:
   dashSpeed: 16
   hover: 0
   damagePerTick: 5
+  explosionImpactSfx: {fileID: 5582397720804122542}
+  flameSfx: {fileID: 7089062893333932882}
 --- !u!1 &6156442420620181472
 GameObject:
   m_ObjectHideFlags: 0
@@ -21132,6 +21285,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 1097952631705808053}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -21597,6 +21751,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 6301840493677343230}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -21879,6 +22034,7 @@ MonoBehaviour:
     sound: {fileID: 8320044739775870483}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitSoundIsOnCooldown: 0
 --- !u!54 &204703980131978810
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27538,6 +27694,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -27969,6 +28126,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 6301840493677343230}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -28630,6 +28788,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -29624,6 +29783,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -29836,6 +29996,7 @@ MonoBehaviour:
   holdingBomb: 0
   holdingGrenade: 0
   holdingFlashbang: 0
+  throwSfx: {fileID: 5861101283869500353}
   bomb: {fileID: 5751517255276068381, guid: bbc35d0cfc19008469a8e5fd032a7d61, type: 3}
   bombModel: {fileID: 2208456562869705646}
   bombXForce: 0
@@ -30045,6 +30206,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 0}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -30622,6 +30784,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 7680896894469265129}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
@@ -30917,6 +31080,7 @@ MonoBehaviour:
   hitboxOrigin: {fileID: 6301840493677343230}
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}

@@ -8,14 +8,18 @@ public class FoodItem : MonoBehaviour
     public float chargeAmount;
 
     public GameObject model;
+    public GameObject collision;
 
     private Rigidbody rb;
+    private Collider coliderr;
 
     public bool hasCollided;
 
     public GameObject pickUpParticle;
 
     public float spinSpeed = -500f;
+
+    public AudioSource pickupSfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,21 @@ public class FoodItem : MonoBehaviour
     private void OnEnable()
     {
         this.rb = GetComponent<Rigidbody>();
+
+        this.coliderr = this.GetComponent<Collider>();
+
+        /*if (this.rb != null)
+            this.rb.isKinematic = false;
+
+        if (this.coliderr != null)
+            this.coliderr.enabled = true;
+
+        if (this.collision != null)
+            this.collision.SetActive(true);
+
+        this.hasCollided = false;
+        if (this.model != null)
+            this.model.SetActive(true);*/
 
         this.StartCoroutine(this.DiableTimer());
     }
@@ -80,6 +99,9 @@ public class FoodItem : MonoBehaviour
         {
             player.GiveSuperCharge(this.chargeAmount);
         }
+
+        if (this.pickupSfx != null)
+            this.pickupSfx.Play();
     }
 
 
@@ -127,6 +149,21 @@ public class FoodItem : MonoBehaviour
             pickUpPrefab = Instantiate(pickUpPrefab, new Vector3(transform.position.x, this.transform.position.y), Quaternion.Euler(0, 0, 0));
         }
 
+        /*this.StopAllCoroutines();
+        if (this.rb != null)
+            this.rb.isKinematic = true;
+
+        if (this.coliderr != null)
+            this.coliderr.enabled = false;
+
+        if (this.collision != null)
+            this.collision.SetActive(false);
+
+        this.hasCollided = true;
+        if (this.model != null)
+            this.model.SetActive(false);
+        this.StartCoroutine(this.DisableCoroutine());*/
+
         this.gameObject.SetActive(false);
     }
 
@@ -136,5 +173,11 @@ public class FoodItem : MonoBehaviour
         {
             this.rb.AddForce(knockback /** 0.75f*/);
         }
+    }
+
+    private IEnumerator DisableCoroutine()
+    {
+        yield return new WaitForSeconds(0.8f);
+        this.gameObject.SetActive(false);
     }
 }

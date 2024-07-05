@@ -23,6 +23,8 @@ public class ThrowPotion : MonoBehaviour
 
     public float yVelocity = 0f;
 
+    public CharacterSoundEffect destroySfx;
+
     //CLEAN THIS SCRIPT and improve it (of cource)!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -162,6 +164,8 @@ public class ThrowPotion : MonoBehaviour
             //hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x, this.transform.position.y + this.hitEffectYOffset, 0f), Quaternion.Euler(0, 0, 0));
             hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x, this.transform.position.y + this.hitEffectYOffset, 0f), this.transform.rotation);
         }
+
+        this.destroySfx.PlaySound();
 
         this.StartCoroutine(this.DisableCoroutine());
     }

@@ -24,6 +24,10 @@ public class FireBall : MonoBehaviour
     public float hitEffectYOffset = 0f;
 
     public float yVelocity = 0f;
+
+    [Space]
+    //public AudioSource destroySound;
+    public CharacterSoundEffect destroySfx;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -187,6 +191,11 @@ public class FireBall : MonoBehaviour
             //hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x, this.transform.position.y + this.hitEffectYOffset, 0f), Quaternion.Euler(0, 0, 0));
             hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x, this.transform.position.y + this.hitEffectYOffset, 0f), this.transform.rotation);
         }
+
+        /*if (this.destroySound != null)
+            this.destroySound.Play();*/
+
+        this.destroySfx.PlaySound();
 
         this.StartCoroutine(this.DisableCoroutine());
     }

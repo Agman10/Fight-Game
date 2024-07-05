@@ -21,6 +21,7 @@ public class Anvil : MonoBehaviour
 
     public AudioSource landSfx;
     public AudioSource hitSfx;
+    public AudioSource fallingSfx;
 
     private void OnEnable()
     {
@@ -65,6 +66,9 @@ public class Anvil : MonoBehaviour
         if (this.landingEffect != null)
             this.landingEffect.SetActive(false);
 
+        if (this.fallingSfx != null)
+            this.fallingSfx.Stop();
+
         this.StopAllCoroutines();
     }
 
@@ -108,6 +112,12 @@ public class Anvil : MonoBehaviour
 
     private IEnumerator FallDownCoroutine()
     {
+        if (this.fallingSfx != null)
+        {
+            //this.fallingSfx.time = 0.1f;
+            this.fallingSfx.Play();
+        }
+
         float currentTime = 0;
         float duration = 0.4f;
         //float targetVolume = 0.1f;
@@ -151,6 +161,9 @@ public class Anvil : MonoBehaviour
             this.landSfx.time = 0.05f;
             this.landSfx.Play();
         }
+
+        if (this.fallingSfx != null)
+            this.fallingSfx.Stop();
 
         yield return new WaitForSeconds(0.5f);
         if (this.model != null)

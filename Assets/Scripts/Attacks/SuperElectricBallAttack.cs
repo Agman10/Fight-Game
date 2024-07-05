@@ -20,6 +20,8 @@ public class SuperElectricBallAttack : Attack
 
     public int animationId;
 
+    public AudioSource electricitySfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -132,6 +134,8 @@ public class SuperElectricBallAttack : Attack
         if (this.glowingEyes != null)
             this.glowingEyes.gameObject.SetActive(true);
 
+        if (this.electricitySfx != null)
+            this.electricitySfx.Play();
 
         float currentTime = 0;
         float duration = 1.25f;
@@ -150,6 +154,9 @@ public class SuperElectricBallAttack : Attack
             currentTime += Time.deltaTime;
             yield return null;
         }
+
+        if (this.electricitySfx != null)
+            this.electricitySfx.Stop();
 
         if (this.glowingEyes != null)
             this.glowingEyes.gameObject.SetActive(false);
@@ -246,6 +253,9 @@ public class SuperElectricBallAttack : Attack
             this.electricBallModel.transform.localScale = new Vector3(1f, 1f, 1f);
             
         }
+
+        if (this.electricitySfx != null)
+            this.electricitySfx.Stop();
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

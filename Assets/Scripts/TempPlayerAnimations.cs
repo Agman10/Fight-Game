@@ -10,6 +10,7 @@ public class TempPlayerAnimations : MonoBehaviour
     public Transform upperBody;
     public Transform lowerBody;
     public Transform eyes;
+    //public Transform eyeHeight;
 
     [Space]
     public Transform body;
@@ -17,6 +18,7 @@ public class TempPlayerAnimations : MonoBehaviour
     [Space]
     public int characterId;
     public float defaultYPos = 1.95f;
+    //public float defaultEyeYHeight = 0.5f;
 
     [Space]
     public GameObject neutralEyes;

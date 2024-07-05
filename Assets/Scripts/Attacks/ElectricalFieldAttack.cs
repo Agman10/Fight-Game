@@ -12,6 +12,8 @@ public class ElectricalFieldAttack : Attack
     public GameObject glowingEyes;
     public int animationId;
 
+    public AudioSource electricitySfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -60,6 +62,9 @@ public class ElectricalFieldAttack : Attack
 
         yield return new WaitForSeconds(0.2f);
 
+        if (this.electricitySfx != null)
+            this.electricitySfx.Play();
+
         if (this.glowingEyes != null)
             this.glowingEyes.gameObject.SetActive(true);
 
@@ -94,6 +99,9 @@ public class ElectricalFieldAttack : Attack
 
         if (this.electricity != null)
             this.electricity.Stop();
+
+        if (this.electricitySfx != null)
+            this.electricitySfx.Stop();
 
         yield return new WaitForSeconds(0.1f);
 
@@ -130,6 +138,9 @@ public class ElectricalFieldAttack : Attack
 
         if (this.electricity != null)
             this.electricity.gameObject.SetActive(false);
+
+        if (this.electricitySfx != null)
+            this.electricitySfx.Stop();
 
         this.user.rb.isKinematic = false;
 

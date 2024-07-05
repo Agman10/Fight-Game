@@ -7,11 +7,39 @@ public class CharacterSoundEffects : MonoBehaviour
     public CharacterSoundEffect hitSound;
     public CharacterSoundEffect superStartSound;
     public CharacterSoundEffect deathSound;
+
+    public bool hitSoundIsOnCooldown = false;
     
 
-    public void PlayHitSound()
+    public void PlayHitSound(float hitSoundCooldown = 0f)
     {
-        this.hitSound.PlaySound();
+        //this.hitSound.PlaySound();
+
+        /*if(!this.hitSoundIsOnCooldown)
+        {
+            this.hitSound.PlaySound();
+
+            if (hitSoundCooldown > 0f)
+            {
+                this.hitSoundIsOnCooldown = true;
+                this.StartCoroutine(this.RemoveHitSoundCooldownCoroutine(hitSoundCooldown));
+            }
+        }*/
+
+        if (hitSoundCooldown > 0f /*&& !this.hitSoundIsOnCooldown*/)
+        {
+            if (!this.hitSoundIsOnCooldown)
+            {
+                this.hitSound.PlaySound();
+                this.hitSoundIsOnCooldown = true;
+                this.StartCoroutine(this.RemoveHitSoundCooldownCoroutine(hitSoundCooldown));
+            }
+        }
+        else
+        {
+            this.hitSound.PlaySound();
+        }
+
         /*if(this.hitSound.sound != null)
         {
             this.hitSound.sound.time = this.hitSound.startTime;
@@ -33,6 +61,12 @@ public class CharacterSoundEffects : MonoBehaviour
     public void PlaySuperSfx()
     {
         this.superStartSound.PlaySound();
+    }
+
+    private IEnumerator RemoveHitSoundCooldownCoroutine(float hitSoundCooldown)
+    {
+        yield return new WaitForSeconds(hitSoundCooldown);
+        this.hitSoundIsOnCooldown = false;
     }
 }
 

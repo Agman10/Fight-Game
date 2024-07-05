@@ -11,6 +11,8 @@ public class FireBallThrowAttack : Attack
     public float fireBallYForce;
     public int animationId;
 
+    public AudioSource throwSfx;
+
     [Space]
 
     public float groundTime = 0.5f;
@@ -81,6 +83,12 @@ public class FireBallThrowAttack : Attack
 
 
         yield return new WaitForSeconds(time);
+        if (this.throwSfx != null)
+        {
+            //this.throwSfx.time = 0.01f;
+            this.throwSfx.Play();
+        }
+
         if (this.animations != null)
             this.animations.SetPunchPose();
         this.ThrowFireBall();

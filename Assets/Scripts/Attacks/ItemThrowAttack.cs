@@ -48,6 +48,11 @@ public class ItemThrowAttack : Attack
     public FoodItem chocolate;
     public FoodItem orange;
 
+    [Space]
+    public AudioSource throwSfx;
+    public AudioSource nothingSfx;
+    public AudioSource switchPlaceSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -116,6 +121,10 @@ public class ItemThrowAttack : Attack
 
         float throwSpeed = 1f;
 
+        //MAKE SO THE RANDOM NUMBER IS HERE INSTEAD SO SOME THING CAN HAPPEN DURING THROW ON SPECIFIC NUMBER OR PLAY SFX EARLIER
+
+        //int number = Random.Range(1, 1001);
+
         this.user.animations.ItemThrow(0);
 
         yield return new WaitForSeconds(0.2f * throwSpeed);
@@ -125,6 +134,15 @@ public class ItemThrowAttack : Attack
         yield return new WaitForSeconds(0.05f * throwSpeed);
 
         this.user.animations.ItemThrow(2);
+
+        /*if (this.nothingSfx != null)
+            this.nothingSfx.Play();*/
+
+        if (this.throwSfx != null)
+        {
+            //this.throwSfx.time = 0.01f;
+            this.throwSfx.Play();
+        }
 
         yield return new WaitForSeconds(0.05f * throwSpeed);
 
@@ -255,7 +273,26 @@ public class ItemThrowAttack : Attack
         else
         {
             this.user.animations.SetEyes(4);
+
+            if (this.nothingSfx != null)
+                this.nothingSfx.Play();
         }
+
+        /*if (number <= 910)
+        {
+            if (this.throwSfx != null)
+                this.throwSfx.Play();
+        }
+        else if (number > 910 && number <= 950)
+        {
+            if (this.switchPlaceSfx != null)
+                this.switchPlaceSfx.Play();
+        }
+        else
+        {
+            if (this.nothingSfx != null)
+                this.nothingSfx.Play();
+        }*/
     }
 
 
@@ -461,7 +498,9 @@ public class ItemThrowAttack : Attack
             this.user.LookAtTarget();
         }
 
-        
+        if (this.switchPlaceSfx != null)
+            this.switchPlaceSfx.Play();
+
     }
 
 
@@ -605,6 +644,12 @@ public class ItemThrowAttack : Attack
             yield return new WaitForSeconds(0.025f);
 
             this.user.animations.ItemThrow(2);
+
+            if (this.throwSfx != null)
+            {
+                //this.throwSfx.time = 0.01f;
+                this.throwSfx.Play();
+            }
 
             yield return new WaitForSeconds(0.025f);
 
