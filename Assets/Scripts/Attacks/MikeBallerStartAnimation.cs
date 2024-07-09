@@ -14,6 +14,8 @@ public class MikeBallerStartAnimation : Attack
     /*public GameObject propeller;
     public GameObject propellerBlade;*/
 
+    public GameObject exclamationMark;
+
     //public Attack vsDarkJCap;
     public Attack vsJCap;
 
@@ -47,12 +49,18 @@ public class MikeBallerStartAnimation : Attack
             {
                 this.vsJCap.Initiate();
             }
+            else if (this.user.characterId == 3 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 4 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
+            {
+                this.StartCoroutine(this.VsViolentMikeStartAnimation());
+            }
             else
             {
                 if (number == 0)
                     this.StartCoroutine(this.TemplateCoroutine());
                 else
                     this.StartCoroutine(this.GroundRollCoroutine());
+
+                //this.StartCoroutine(this.VsViolentMikeStartAnimation());
             }
 
             
@@ -231,6 +239,159 @@ public class MikeBallerStartAnimation : Attack
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
+
+
+
+    private IEnumerator VsViolentMikeStartAnimation()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        this.user.rb.isKinematic = true;
+
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+
+        this.user.LookAtTarget();
+
+        yield return new WaitForSeconds(0.01f);
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+        //this.user.rb.isKinematic = false;
+
+        /*if (this.animations != null)
+            this.animations.RollAnimation();*/
+
+        /*if (this.animations != null)
+            this.animations.MikeBallerVsViolentStartPose();*/
+
+        yield return new WaitForSeconds(0.3f);
+        if (this.animations != null)
+            this.animations.MikeBallerVsViolentStartPose2();
+        /*if (this.animations != null)
+        {
+            if (this.animations.eyes != null)
+                this.animations.eyes.localEulerAngles = new Vector3(0f, 25f, 0f);
+
+            if (this.animations.upperBody != null *//*&& this.animations.lowerBody != null*//*)
+            {
+                this.animations.upperBody.localEulerAngles = new Vector3(0f, 50f, 0f);
+                //this.animations.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+        }*/
+            
+
+        if (this.exclamationMark != null)
+            this.exclamationMark.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.exclamationMark != null)
+            this.exclamationMark.SetActive(false);
+
+        //yield return new WaitForSeconds(0.3f);
+
+        if (this.animations != null)
+            this.animations.RollAnimation();
+
+        float currentTime = 0;
+        float duration = 0.3f;
+
+        float targetPosition = 4f;
+        float start = 0;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+
+
+            if (this.animations != null)
+            {
+                this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
+                this.animations.body.transform.Rotate(0f, 0f, -3000f * Time.deltaTime);
+            }
+
+
+            yield return null;
+        }
+
+        currentTime = 0;
+        duration = 0.3f;
+
+        targetPosition = 0f;
+        start = this.user.transform.position.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+
+
+            if (this.animations != null)
+            {
+                this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
+                this.animations.body.transform.Rotate(0f, 0f, -3000f * Time.deltaTime);
+            }
+
+
+            yield return null;
+        }
+
+
+        //yield return new WaitForSeconds(0.1f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        this.user.rb.isKinematic = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        //SYNCED HERE!!!
+
+        if (this.animations != null)
+            this.animations.MikeBallerAngry();
+
+        float time = 1f;
+        float time2 = 0f;
+        int laughId = 1;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+
+            time2 += Time.deltaTime;
+
+            if(time2 > 0.025f)
+            {
+                time2 = 0f;
+                if (this.animations != null)
+                    this.animations.MikeBallerAngry(laughId);
+
+                if (laughId == 0)
+                    laughId = 1;
+                else
+                    laughId = 0;
+            }
+
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(1f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, 3f, 0f);
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
+        yield return new WaitForSeconds(0.1f);
+
+        //this.user.rb.isKinematic = false;
+
+        //this.user.rb.isKinematic = false;
+        //Debug.Log("baller");
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
     /*public void PlayFire(bool playing)
     {
         if (this.fire != null)

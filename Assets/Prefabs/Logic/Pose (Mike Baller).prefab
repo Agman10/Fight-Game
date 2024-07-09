@@ -63,6 +63,9 @@ MonoBehaviour:
   duration: 0.2
   startRotation: -90
   targetRotation: 0
+  useVector3: 0
+  startRot: {x: 0, y: 0, z: 0}
+  targetRot: {x: 0, y: 0, z: 0}
 --- !u!1 &310153468144835982
 GameObject:
   m_ObjectHideFlags: 0
@@ -8813,11 +8816,14 @@ MonoBehaviour:
   body: {fileID: 1667305403807972638}
   characterId: 3
   defaultYPos: 1.6
+  armsDefaultYPos: 0.15
   neutralEyes: {fileID: 0}
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
+  boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
+  dress: {fileID: 0}
 --- !u!114 &7691140925516141206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8870,6 +8876,8 @@ MonoBehaviour:
   glowingEyes: 0
   useExtraEmission: 0
   extraEmissionRenderers: []
+  useMultiColorMats: 0
+  multiColoredMats: []
 --- !u!1 &2294634716472739901
 GameObject:
   m_ObjectHideFlags: 0

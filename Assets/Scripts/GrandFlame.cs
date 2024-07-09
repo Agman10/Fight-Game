@@ -11,10 +11,15 @@ public class GrandFlame : MonoBehaviour
     public MoveAndTeleportObject[] fireBalls;
     public TestHitbox[] fireBallHitboxes;
     public TestPlayer owner;
+
+    public AudioSource flameSfx;
     private void OnEnable()
     {
         if (this.hitBox != null)
             this.hitBox.gameObject.SetActive(true);
+
+        if (this.flameSfx != null)
+            this.flameSfx.Play();
     }
     private void OnDisable()
     {
@@ -38,6 +43,9 @@ public class GrandFlame : MonoBehaviour
                 fireBallHitbox.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
             }
         }
+
+        if (this.flameSfx != null)
+            this.flameSfx.Stop();
     }
 
     [ContextMenu("Stop")]
@@ -75,8 +83,26 @@ public class GrandFlame : MonoBehaviour
             }
         }
 
+        float currentTime = 0;
+        float duration = 0.2f;
+        float targetVolume = 0f;
+        float startVolume = 0.2f;
+        if (this.flameSfx != null)
+            startVolume = this.flameSfx.volume;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (this.flameSfx != null)
+                this.flameSfx.volume = Mathf.Lerp(startVolume, targetVolume, currentTime / duration);
+            yield return null;
+        }
+
+        if (this.flameSfx != null)
+            this.flameSfx.Stop();
         //yield return new WaitForSeconds(0.1f);
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.4f);
 
         if (this.hitBox2 != null)
             this.hitBox2.gameObject.SetActive(false);

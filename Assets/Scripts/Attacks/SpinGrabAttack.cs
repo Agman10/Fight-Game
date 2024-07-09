@@ -14,6 +14,9 @@ public class SpinGrabAttack : Attack
     public TestPlayer grabbedPlayer;
     public Ball grabbedBall;
 
+    public AudioSource spinSfx;
+    public AudioSource throwSfx;
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -131,6 +134,10 @@ public class SpinGrabAttack : Attack
         /*this.MidGrab(player);
         yield return new WaitForSeconds(0.3f);*/
         //yield return new WaitUntil(this.PlayerOnGround);
+
+        if (this.spinSfx != null)
+            this.spinSfx.Play();
+
         float currentTime = 0;
         float duration = 0.2f;
         float targetPosition = 0f;
@@ -290,6 +297,16 @@ public class SpinGrabAttack : Attack
     {
         //bool back = true;
 
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
+
+        /*if (this.throwSfx != null)
+        {
+            //this.throwSfx.time = 0.02f;
+            this.throwSfx.Play();
+        }*/
+            
+
         this.user.rb.isKinematic = false;
         player.rb.isKinematic = false;
 
@@ -355,6 +372,8 @@ public class SpinGrabAttack : Attack
 
             player.TakeDamage(new Vector3(this.user.transform.position.x, player.transform.position.y - 0.5f, 0f), 20f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
         }
+        if (player.soundEffects != null)
+            player.soundEffects.hitSound.PlaySound();
 
         /*if (this.impactEffect != null)
         {
@@ -381,6 +400,9 @@ public class SpinGrabAttack : Attack
         this.grabbing = false;
         this.user.knockbackInvounrability = false;
         this.tryGrabbing = false;
+
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
 
 
         if (this.grabbedPlayer != null)
@@ -430,6 +452,9 @@ public class SpinGrabAttack : Attack
 
     private IEnumerator GrabbingBallCoroutine(Ball ball)
     {
+        if (this.spinSfx != null)
+            this.spinSfx.Play();
+
         float currentTime = 0;
         float duration = 0.2f;
         float targetPosition = 0f;
@@ -560,6 +585,9 @@ public class SpinGrabAttack : Attack
 
     public void StopGrabBall(Ball ball, bool back = false)
     {
+        if (this.spinSfx != null)
+            this.spinSfx.Stop();
+
         this.user.rb.isKinematic = false;
 
         /*if (GameManager.Instance != null)

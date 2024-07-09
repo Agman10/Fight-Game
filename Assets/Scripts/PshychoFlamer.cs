@@ -19,6 +19,8 @@ public class PshychoFlamer : Attack
     public VisualEffect fire;
     public GameObject startParticle;
 
+    public AudioSource flameSfx;
+
 
     public override void OnHit()
     {
@@ -104,6 +106,9 @@ public class PshychoFlamer : Attack
         this.user.knockbackInvounrability = true;
         this.canBeCanceled = false;
         this.PlayFire(true);
+
+        if (this.flameSfx != null)
+            this.flameSfx.Play();
         yield return new WaitForSeconds(0.05f);
 
 

@@ -125,8 +125,8 @@ public class SuperSpinGrab : Attack
 
             this.grabbedPlayer = player;
 
-            /*if (player.animations != null)
-                player.animations.SetDefaultPose();*/
+            if (player.animations != null)
+                player.animations.SetDefaultPose();
 
             this.user.rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             player.rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;

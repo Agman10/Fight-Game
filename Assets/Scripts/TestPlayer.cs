@@ -415,6 +415,8 @@ public class TestPlayer : MonoBehaviour
         {
             this.rb.isKinematic = false;
             this.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+            this.rb.velocity = new Vector3(0f, 0f, 0f);
         }
 
         if (this.ragdoll != null)

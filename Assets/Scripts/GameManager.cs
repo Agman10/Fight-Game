@@ -138,6 +138,9 @@ public class GameManager : MonoBehaviour
                 p1.tempOpponent = p2;
                 p2.tempOpponent = p1;
 
+                /*p1.lookAtPlayer();
+                p2.lookAtPlayer();*/
+
                 if (this.healthBars != null)
                 {
                     this.healthBars.player1 = p1;

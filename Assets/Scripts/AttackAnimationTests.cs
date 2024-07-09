@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class AttackAnimationTests : Attack
 {
@@ -10,6 +11,11 @@ public class AttackAnimationTests : Attack
     public GameObject scyte;
 
     private bool moving = false;
+
+    public GameObject objectToEnable;
+    public GameObject objectToEnable2;
+
+    public VisualEffect fire;
 
     /*public GameObject objectToEnable;
 
@@ -79,7 +85,7 @@ public class AttackAnimationTests : Attack
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
             {
                 this.user.AddStun(0.2f, true);
-                this.StartCoroutine(this.AnimationTestCoroutine4());
+                this.StartCoroutine(this.TestShockwaveSuper());
             }
 
 
@@ -101,7 +107,54 @@ public class AttackAnimationTests : Attack
             }*/
         }
     }
+    private IEnumerator TestShockwaveSuper()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
 
+        if (this.animations != null)
+            this.animations.ShockwavePunchStart();
+
+        yield return new WaitForSeconds(0.3f);
+        if (this.objectToEnable != null)
+            this.objectToEnable.SetActive(true);
+
+        this.PlayFire(true);
+
+        if (this.animations != null)
+            this.animations.ShockwavePunch();
+
+        this.user.rb.isKinematic = true;
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (this.objectToEnable != null)
+            this.objectToEnable.SetActive(false);
+
+        this.PlayFire(false);
+
+        
+
+        if (this.objectToEnable2 != null)
+            this.objectToEnable2.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.user.rb.isKinematic = false;
+
+        if (this.objectToEnable2 != null)
+            this.objectToEnable2.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
     private IEnumerator AnimationTestCoroutine()
     {
         this.user.attackStuns.Add(this.gameObject);
@@ -277,6 +330,13 @@ public class AttackAnimationTests : Attack
         this.user.rb.isKinematic = false;
         this.ChangeCollision(false);
 
+        if (this.objectToEnable != null)
+            this.objectToEnable.SetActive(false);
+
+        if (this.objectToEnable2 != null)
+            this.objectToEnable2.SetActive(false);
+
+        this.PlayFire(false);
 
         /*if (this.particle != null)
             this.particle.Stop();*/
@@ -299,7 +359,16 @@ public class AttackAnimationTests : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
-
+    public void PlayFire(bool playing)
+    {
+        if (this.fire != null)
+        {
+            if (playing)
+                this.fire.Play();
+            else
+                this.fire.Stop();
+        }
+    }
 
 
     public void ChangeCollision(bool crawl = false)

@@ -119,6 +119,9 @@ public class CFour : MonoBehaviour
         if (this.rb != null)
             this.rb.isKinematic = true;
 
+        if (this.cFourAttackOwner != null)
+            this.cFourAttackOwner.activeCFour = null;
+
         this.explosionSfx.PlaySound();
 
         this.StartCoroutine(this.DisableCoroutine());

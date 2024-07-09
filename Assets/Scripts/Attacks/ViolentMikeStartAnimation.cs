@@ -41,8 +41,18 @@ public class ViolentMikeStartAnimation : Attack
         base.Initiate();
         if (this.user != null)
         {
-            this.user.AddStun(0.2f, true);
-            this.StartCoroutine(this.TemplateCoroutine());
+            //this.user.AddStun(0.2f, true);
+            if (this.user.characterId == 4 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 3 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
+            {
+                this.StartCoroutine(this.VsMikeBallerStartAnimation());
+            }
+            else
+            {
+                this.StartCoroutine(this.TemplateCoroutine());
+            }
+
+            
+            //this.StartCoroutine(this.VsMikeBallerStartAnimation());
         }
     }
 
@@ -112,6 +122,127 @@ public class ViolentMikeStartAnimation : Attack
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
+
+
+    private IEnumerator VsMikeBallerStartAnimation()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        this.user.rb.isKinematic = true;
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = true;
+
+        float startXPos = this.user.transform.position.x;
+
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 250f, 0f);
+
+        
+
+        //this.user.LookAtTarget();
+
+        yield return new WaitForSeconds(0.01f);
+        this.user.transform.position = new Vector3(startXPos * -2f, 0f, 0f);
+        this.user.LookAtTarget();
+
+        //this.user.transform.position = new Vector3(this.user.transform.position.x * 2, 0f, 0f);
+        //this.user.rb.isKinematic = false;
+
+        if (this.animations != null)
+            this.animations.RollAnimation();
+
+        yield return new WaitForSeconds(0.4f);
+
+        float currentTime = 0;
+        float duration = 0.9f;
+
+        float targetPosition = startXPos;
+        float start = this.user.transform.position.x;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+
+
+            if (this.animations != null)
+            {
+                this.user.transform.position = new Vector3(Mathf.Lerp(start, targetPosition, currentTime / duration), 0f, 0f);
+                this.animations.body.transform.Rotate(0f, 0f, -3000f * Time.deltaTime);
+            }
+
+
+            yield return null;
+        }
+
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = false;
+
+        //yield return new WaitForSeconds(0.1f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        this.user.rb.isKinematic = false;
+
+        yield return new WaitForSeconds(0.1f);
+        this.user.LookAtTarget();
+
+        yield return new WaitForSeconds(0.2f);
+
+        //SYNCED HERE!!!
+
+
+        /*if (this.animations != null)
+            this.animations.Laughing3(1);*/
+
+        if (this.animations != null)
+            this.animations.Laughing3(1);
+
+        float time = 1f;
+        float time2 = 0f;
+        int laughId = 0;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+
+            time2 += Time.deltaTime;
+
+            if (time2 > 0.05f)
+            {
+                time2 = 0f;
+                if (this.animations != null)
+                    this.animations.Laughing3(laughId);
+
+                if (laughId == 0)
+                    laughId = 1;
+                else
+                    laughId = 0;
+            }
+
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(1f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, 3f, 0f);
+
+        //yield return new WaitForSeconds(0.3f);
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
+        yield return new WaitForSeconds(0.1f);
+
+        /*if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = false;*/
+
+        //this.user.rb.isKinematic = false;
+        //Debug.Log("violent");
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
     public override void Stop()
     {
         base.Stop();
@@ -123,6 +254,10 @@ public class ViolentMikeStartAnimation : Attack
 
         if (this.animations != null)
             this.animations.body.gameObject.SetActive(true);
+
+
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = false;
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
