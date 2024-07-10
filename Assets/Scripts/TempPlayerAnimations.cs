@@ -8759,15 +8759,16 @@ public class TempPlayerAnimations : MonoBehaviour
             }
             else
             {
-                this.rightArm.localEulerAngles = new Vector3(20f, 0f, 0f);
-                this.leftArm.localEulerAngles = new Vector3(-20f, 0f, 0f);
-                this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
-                this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.rightArm.localEulerAngles = new Vector3(30f, 0f, 20f);
+                this.leftArm.localEulerAngles = new Vector3(-30f, 0f, 0f);
+                //this.leftArm.localEulerAngles = new Vector3(-10f, 0f, 0f);
+                this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 15f);
+                this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 30f);
 
-                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
-                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
-                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
-                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 7f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, -10f, 40f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, -21f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, -16f);
             }
 
             
@@ -8796,7 +8797,7 @@ public class TempPlayerAnimations : MonoBehaviour
             }
             else
             {
-                this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.eyes.localEulerAngles = new Vector3(0f, 20f, 0f);
             }
 
             
@@ -8811,8 +8812,8 @@ public class TempPlayerAnimations : MonoBehaviour
             }
             else
             {
-                this.body.localPosition = new Vector3(this.transform.forward.z * 0f, this.defaultYPos - 0.18f, 0f);
-                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 90f, 0f);
+                this.body.localPosition = new Vector3(0.2f, this.defaultYPos - 0.15f, this.transform.forward.z * -0.2f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * -5f, this.transform.forward.z * 20f, -25f);
             }
             
         }

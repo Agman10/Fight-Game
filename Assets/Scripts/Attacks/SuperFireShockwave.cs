@@ -158,9 +158,15 @@ public class SuperFireShockwave : Attack
         yield return new WaitForSeconds(0.25f);
 
         if (this.animations != null)
+            this.animations.ShockwavePunchMid(1);
+
+        yield return new WaitForSeconds(0.05f);
+
+        if (this.animations != null)
             this.animations.SetDefaultPose();
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
+        //yield return new WaitForSeconds(0.1f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
