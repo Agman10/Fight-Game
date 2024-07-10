@@ -14,6 +14,7 @@ public class SuperFireShockwave : Attack
 
     public TestHitbox hitbox1;
     public TestHitbox hitbox2;
+    public TestHitbox shockwaveHitbox;
 
     public VisualEffect fire;
 
@@ -88,9 +89,18 @@ public class SuperFireShockwave : Attack
             this.user.soundEffects.PlaySuperSfx();
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.25f);
+
+        if (this.animations != null)
+            this.animations.ShockwavePunchMid(0);
+
+        yield return new WaitForSeconds(0.05f);
+
         if (this.hitbox1 != null)
             this.hitbox1.gameObject.SetActive(true);
+
+        if (this.shockwaveHitbox != null)
+            this.shockwaveHitbox.gameObject.SetActive(true);
 
         if (this.shockwaveVfx != null)
             this.shockwaveVfx.Play();
@@ -116,7 +126,12 @@ public class SuperFireShockwave : Attack
 
         //this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
 
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.shockwaveHitbox != null)
+            this.shockwaveHitbox.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
 
         if (this.hitbox1 != null)
             this.hitbox1.gameObject.SetActive(false);
@@ -162,6 +177,9 @@ public class SuperFireShockwave : Attack
 
         if (this.hitbox2 != null)
             this.hitbox2.gameObject.SetActive(false);
+
+        if (this.shockwaveHitbox != null)
+            this.shockwaveHitbox.gameObject.SetActive(false);
 
         if (this.fireSfx != null)
             this.fireSfx.Stop();
