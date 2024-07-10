@@ -79,14 +79,14 @@ public class AttackAnimationTests : Attack
         {
             //this.user.AddStun(0.2f, true);
 
-            /*this.user.AddStun(0.2f, false);
-            this.StartCoroutine(this.AnimationTestCoroutine());*/
+            this.user.AddStun(0.2f, true);
+            this.StartCoroutine(this.TestButtAttack());
 
-            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            /*if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
             {
                 this.user.AddStun(0.2f, true);
                 this.StartCoroutine(this.TestShockwaveSuper());
-            }
+            }*/
 
 
             /*if (Mathf.Abs(this.user.transform.position.y) < 0.2f)
@@ -107,6 +107,89 @@ public class AttackAnimationTests : Attack
             }*/
         }
     }
+
+    private IEnumerator TestButtAttack()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        //this.user.rb.isKinematic = true;
+
+        this.user.rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+
+        if (this.animations != null)
+            this.animations.HoodGuyButtAttack();
+
+        yield return new WaitForSeconds(0.1f);
+
+        float maxSpeed = 1500f;
+
+        float currentTime = 0;
+        float duration = 0.05f;
+        float targetVelocity = maxSpeed;
+        float startVelocity = 500f;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+            
+            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * Mathf.Lerp(startVelocity, targetVelocity, currentTime / duration) * Time.deltaTime, 0f/*100f * Time.deltaTime*/, 0f);
+            //this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 1000f * Time.deltaTime, 0f, 0f);
+
+            yield return null;
+        }
+
+        currentTime = 0;
+        duration = 0.1f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+
+            //this.user.rb.velocity = new Vector3(this.user.transform.forward.z * Mathf.Lerp(startVelocity, targetVelocity, currentTime / duration) * Time.deltaTime, 0f, 0f);
+            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * maxSpeed * Time.deltaTime, 0f, 0f);
+
+            yield return null;
+        }
+
+        this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+        currentTime = 0;
+        duration = 0.15f;
+        targetVelocity = 500f;
+        startVelocity = maxSpeed;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+
+            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * Mathf.Lerp(startVelocity, targetVelocity, currentTime / duration) * Time.deltaTime, 0f, 0f);
+            //this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 1000f * Time.deltaTime, 0f, 0f);
+
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(0.5f);
+        this.user.rb.velocity = new Vector3(0, 0, 0);
+
+        yield return new WaitForSeconds(0.1f);
+
+
+        //this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+
+        this.user.rb.isKinematic = false;
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
     private IEnumerator TestShockwaveSuper()
     {
         this.user.attackStuns.Add(this.gameObject);
@@ -155,6 +238,9 @@ public class AttackAnimationTests : Attack
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
+
+
+    
     private IEnumerator AnimationTestCoroutine()
     {
         this.user.attackStuns.Add(this.gameObject);
@@ -328,7 +414,8 @@ public class AttackAnimationTests : Attack
 
         this.moving = false;
         this.user.rb.isKinematic = false;
-        this.ChangeCollision(false);
+        this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        //this.ChangeCollision(false);
 
         if (this.objectToEnable != null)
             this.objectToEnable.SetActive(false);

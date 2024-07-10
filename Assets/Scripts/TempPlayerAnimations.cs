@@ -10,6 +10,7 @@ public class TempPlayerAnimations : MonoBehaviour
     public Transform upperBody;
     public Transform lowerBody;
     public Transform eyes;
+    
     //public Transform eyeHeight;
 
     [Space]
@@ -19,7 +20,7 @@ public class TempPlayerAnimations : MonoBehaviour
     public int characterId;
     public float defaultYPos = 1.95f;
     public float armsDefaultYPos = 0.3f;
-    //public float defaultEyeYHeight = 0.5f;
+    public float defaultEyeYHeight = 0f;
 
     [Space]
     public GameObject neutralEyes;
@@ -33,6 +34,7 @@ public class TempPlayerAnimations : MonoBehaviour
 
     [Space]
     public Transform dress;
+    public Transform eyesPosTransform;
 
     // Start is called before the first frame update
     void Start()
@@ -120,7 +122,7 @@ public class TempPlayerAnimations : MonoBehaviour
         if (this.eyes != null)
         {
             this.eyes.localEulerAngles = Vector3.zero;
-            this.eyes.localPosition = Vector3.zero;
+            this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
         }
             
 
@@ -131,6 +133,12 @@ public class TempPlayerAnimations : MonoBehaviour
         }
 
         this.SetEyes(0);
+
+        if (this.eyesPosTransform != null)
+        {
+            this.eyesPosTransform.localPosition = new Vector3(0f, 0f, 0f);
+            this.eyesPosTransform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
 
         if (this.dress != null)
         {
@@ -3753,8 +3761,10 @@ public class TempPlayerAnimations : MonoBehaviour
         {
             if (animId == 1)
                 this.eyes.localEulerAngles = new Vector3(0f, -17f, 0f);
+            /*else if (animId == 2)
+                this.eyes.localEulerAngles = new Vector3(0f, -18f, 3f);*/
             else if (animId == 2)
-                this.eyes.localEulerAngles = new Vector3(0f, -18f, 3f);
+                this.eyes.localEulerAngles = new Vector3(0f, -18f, 5f);
             else if (animId == 3)
                 this.eyes.localEulerAngles = new Vector3(0f, -8f, 0f);
             else if (animId == 4)
@@ -5317,10 +5327,13 @@ public class TempPlayerAnimations : MonoBehaviour
 
             if (animId == 1)
             {
+                this.eyes.localPosition = new Vector3(0.03f, this.defaultEyeYHeight, 0f);
                 this.eyes.localEulerAngles = new Vector3(0f, 4f, -4f);
+                //this.eyes.localEulerAngles = new Vector3(0f, 4f, -5f);
             }
             else
             {
+                this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
                 this.eyes.localEulerAngles = new Vector3(0f, 4f, 0f);
             }
         }
@@ -5389,7 +5402,11 @@ public class TempPlayerAnimations : MonoBehaviour
         }
 
         if (this.eyes != null)
+        {
+            this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
             this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+            
 
         if (this.body != null)
         {
@@ -5441,7 +5458,10 @@ public class TempPlayerAnimations : MonoBehaviour
         {
             //this.eyes.localEulerAngles = new Vector3(0f, 0f, -4f);
             //this.eyes.localEulerAngles = new Vector3(0f, -5f, -4f);
-            this.eyes.localEulerAngles = new Vector3(0f, -2.5f, -4f);
+            
+            //this.eyes.localEulerAngles = new Vector3(0f, -2.5f, -4f);
+            this.eyes.localEulerAngles = new Vector3(0f, -2.5f, -6f);
+            this.eyes.localPosition = new Vector3(0.04f, this.defaultEyeYHeight, 0f);
         }
             
 
@@ -5872,9 +5892,18 @@ public class TempPlayerAnimations : MonoBehaviour
         if (this.eyes != null)
         {
             if (stageId == 1)
+            {
+                this.eyes.localPosition = new Vector3(0f,this.defaultEyeYHeight, 0f);
                 this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+                
             else
+            {
+                //this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+                this.eyes.localPosition = new Vector3(0.02f, this.defaultEyeYHeight, 0f);
                 this.eyes.localEulerAngles = new Vector3(0f, 0f, -4f);
+            }
+                
         }
             
 
@@ -5945,7 +5974,11 @@ public class TempPlayerAnimations : MonoBehaviour
         }
 
         if (this.eyes != null)
+        {
+            this.eyes.localPosition = new Vector3(0.02f, this.defaultEyeYHeight, 0f);
             this.eyes.localEulerAngles = new Vector3(0f, 0f, -4f);
+        }
+            
 
         if (this.body != null)
         {
@@ -5983,7 +6016,10 @@ public class TempPlayerAnimations : MonoBehaviour
         }
 
         if (this.eyes != null)
+        {
+            this.eyes.localPosition = new Vector3(0.02f, this.defaultEyeYHeight, 0f);
             this.eyes.localEulerAngles = new Vector3(0f, 0f, -4f);
+        }
 
         if (this.body != null)
         {
@@ -7442,7 +7478,8 @@ public class TempPlayerAnimations : MonoBehaviour
             //this.eyes.localEulerAngles = new Vector3(0f, 15f, 6f);
 
             this.eyes.localEulerAngles = new Vector3(0f, 0f, 6f);
-            this.eyes.localPosition = new Vector3(0.05f, 0f, 0f);
+            //this.eyes.localPosition = new Vector3(0.05f, this.defaultEyeYHeight, 0f);
+            this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
 
 
             /*this.eyes.localEulerAngles = new Vector3(0f, 0f, 3f);
@@ -7641,7 +7678,7 @@ public class TempPlayerAnimations : MonoBehaviour
             this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
             //this.eyes.localEulerAngles = new Vector3(0f, 180f, 0f);
 
-            this.eyes.localPosition = new Vector3(0f, 0f, 0f);
+            this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
         }
 
         if (this.body != null)
@@ -8692,7 +8729,11 @@ public class TempPlayerAnimations : MonoBehaviour
         }
 
         if (this.eyes != null)
-            this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+        {
+            //this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.eyes.localEulerAngles = new Vector3(0f, 0f, 10f);
+        }
+            
 
         if (this.body != null)
         {
@@ -8816,6 +8857,172 @@ public class TempPlayerAnimations : MonoBehaviour
                 this.body.localEulerAngles = new Vector3(this.transform.forward.z * -5f, this.transform.forward.z * 20f, -25f);
             }
             
+        }
+
+        this.SetEyes(0);
+    }
+
+    public void HoodGuyButtAttack(int stageId = 0)
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            if (stageId == 0)
+            {
+
+            }
+            else if (stageId == 1)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            this.rightArm.localEulerAngles = new Vector3(40f, 0f, 0f);
+            this.leftArm.localEulerAngles = new Vector3(-30f, 0f, 20f);
+            this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 88f);
+            this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 60f);
+
+            this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 83f);
+            this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 83f);
+            this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            if (stageId == 0)
+            {
+                this.upperBody.localEulerAngles = new Vector3(0f, -70f, 0f);
+                this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+            else
+            {
+                this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+
+        }
+
+        if (this.eyes != null)
+        {
+            if (stageId == 0)
+            {
+                this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+                this.eyes.localEulerAngles = new Vector3(0f, -16f, 0f);
+            }
+            else
+            {
+                this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+                this.eyes.localEulerAngles = new Vector3(0f, 20f, 0f);
+            }
+
+
+        }
+
+        if (this.body != null)
+        {
+            if (stageId == 0)
+            {
+                this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 180f, -50f);
+            }
+            else
+            {
+
+            }
+
+        }
+
+        if(this.eyesPosTransform != null)
+        {
+            this.eyesPosTransform.localPosition = new Vector3(0f, -0.04f, 0.04f);
+            this.eyesPosTransform.localEulerAngles = new Vector3(40f, 0f, 0f);
+        }
+
+        if (this.dress != null)
+        {
+            this.dress.localPosition = new Vector3(-0.05f, 0.1f, 0f);
+            this.dress.localEulerAngles = new Vector3(0f, 0f, 5f);
+        }
+
+        this.SetEyes(0);
+    }
+
+    public void AnimationTemplate(int stageId = 0)
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            if (stageId == 0)
+            {
+                
+            }
+            else if (stageId == 1)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            this.rightArm.localEulerAngles = new Vector3(20f, 0f, 0f);
+            this.leftArm.localEulerAngles = new Vector3(-20f, 0f, 0f);
+            this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+            this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            if (stageId == 0)
+            {
+                this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+            else
+            {
+                this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+
+        }
+
+        if (this.eyes != null)
+        {
+            if (stageId == 0)
+            {
+                this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+                this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+            else
+            {
+                this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+                this.eyes.localEulerAngles = new Vector3(0f, 20f, 0f);
+            }
+
+
+        }
+
+        if (this.body != null)
+        {
+            if (stageId == 0)
+            {
+                this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, 0f);
+            }
+            else
+            {
+
+            }
+
         }
 
         this.SetEyes(0);

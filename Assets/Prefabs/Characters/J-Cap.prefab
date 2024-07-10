@@ -3320,7 +3320,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566438705043941835}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 901724584652121181}
@@ -3465,6 +3465,7 @@ MonoBehaviour:
   flameTransform: {fileID: 0}
   fire: {fileID: 6576348477932226021}
   startParticle: {fileID: 4329289393352912245, guid: aed0a43d21e8d3e4c8156378f642bed4, type: 3}
+  flameSfx: {fileID: 0}
 --- !u!1 &1613343535179178241
 GameObject:
   m_ObjectHideFlags: 0
@@ -9059,7 +9060,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4267869121564761656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2277172940955540144}
@@ -16925,6 +16926,9 @@ MonoBehaviour:
   animations: {fileID: 3474424193929886022}
   onGoing: 0
   scyte: {fileID: 0}
+  objectToEnable: {fileID: 0}
+  objectToEnable2: {fileID: 0}
+  fire: {fileID: 0}
 --- !u!1 &6107136351074946311
 GameObject:
   m_ObjectHideFlags: 0
@@ -17238,7 +17242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6107136351203615300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6107136352422141791}
@@ -17676,7 +17680,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6107136351414268612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6107136352364578363}
@@ -18884,7 +18888,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6107136352364578362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6107136352029703089}
@@ -19483,7 +19487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6107136352711170372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6107136351223634729}
@@ -22003,6 +22007,8 @@ MonoBehaviour:
   body: {fileID: 6107136351469882879}
   characterId: 0
   defaultYPos: 1.95
+  armsDefaultYPos: 0.3
+  defaultEyeYHeight: 0.5
   neutralEyes: {fileID: 6107136352364578362}
   happyEyes: {fileID: 6107136351203615300}
   frowningEyes: {fileID: 4267869121564761656}
