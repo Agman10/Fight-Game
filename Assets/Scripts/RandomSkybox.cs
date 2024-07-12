@@ -63,7 +63,15 @@ public class RandomSkybox : MonoBehaviour
             if (this.directionalLight != null)
                 this.directionalLight.color = Color.HSVToRGB(this.numbb, 0.16f, 1f);
 
+            /*if (this.directionalLight != null)
+                this.directionalLight.color = Color.HSVToRGB(this.numbb, 0.26f, 1f);*/
+
             //RenderSettings.ambientLight = Color.HSVToRGB(this.numbb, 0.01f, 0.71f);
+
+            //RenderSettings.ambientLight = Color.HSVToRGB(this.numbb, 0.05f, 0.51f);
+            //RenderSettings.ambientLight = Color.HSVToRGB(this.numbb, 0.3f, 0.41f);
+
+            RenderSettings.ambientLight = Color.HSVToRGB(this.numbb, 0.1f, 0.51f);
         }
     }
 

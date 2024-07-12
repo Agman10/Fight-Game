@@ -9,6 +9,7 @@ public class RGBTest : MonoBehaviour
     public MeshRenderer[] meshRenderers;
     public float hue;
     public float speed = 0.1f;
+    public float startHue = 0f;
 
     [Space]
     public float baseColorSaturation = 0.1f;
@@ -30,7 +31,7 @@ public class RGBTest : MonoBehaviour
 
     private void OnEnable()
     {
-        this.hue = 0f;
+        this.hue = this.startHue;
     }
 
     // Update is called once per frame
@@ -39,6 +40,8 @@ public class RGBTest : MonoBehaviour
         this.hue += this.speed * Time.deltaTime;
         if (this.hue >= 1f)
             this.hue = 0f;
+        else if (this.hue < 0f)
+            this.hue = 1f;
         if (this.light != null)
             this.light.color = Color.HSVToRGB(this.hue, this.baseColorSaturation, 1f);
 
