@@ -8951,6 +8951,42 @@ public class TempPlayerAnimations : MonoBehaviour
         this.SetEyes(0);
     }
 
+    [ContextMenu("LayingDownSassy")]
+    public void LayingDownSassy()
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            this.rightArm.localEulerAngles = new Vector3(150f, 0f, 0f);
+            this.leftArm.localEulerAngles = new Vector3(-14f, 0f, 0f);
+            this.rightArmJoint.localEulerAngles = new Vector3(110f, 0f, 0f);
+            this.leftArmJoint.localEulerAngles = new Vector3(10f, 0f, 0f);
+
+            this.rightLeg.localEulerAngles = new Vector3(5f, 0f, 0f);
+            this.leftLeg.localEulerAngles = new Vector3(32f, 0f, 18f);
+            this.rightLegJoint.localEulerAngles = new Vector3(-14f, 0f, 0f);
+            this.leftLegJoint.localEulerAngles = new Vector3(25f, 0f, 0f);
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.eyes != null)
+            this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        if (this.body != null)
+        {
+
+            this.body.localEulerAngles = new Vector3(this.transform.forward.z * -80f, this.transform.forward.z * 90f, 0f);
+            //this.body.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.body.localPosition = new Vector3(0f, this.defaultYPos - 1.15f, 0f);
+        }
+
+        this.SetEyes(0);
+    }
+
     public void AnimationTemplate(int stageId = 0)
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)

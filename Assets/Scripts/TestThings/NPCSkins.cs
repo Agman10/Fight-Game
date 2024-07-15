@@ -8,6 +8,10 @@ public class NPCSkins : MonoBehaviour
     public Material[] materials;
     public Material mainBodyMaterial;
     public Renderer[] renderers;
+
+    [Space]
+    public bool useMultiColorMats;
+    public MultiColorMaterials[] multiColoredMats;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +21,7 @@ public class NPCSkins : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //this.ChangeSkin();
     }
 
     private void OnEnable()
@@ -67,10 +71,41 @@ public class NPCSkins : MonoBehaviour
                     }
                 }
             }
+
+
+            if (this.useMultiColorMats)
+                this.CheckMultiColorMats();
         }
         else
         {
             Debug.Log("Not in play mode");
+        }
+    }
+
+    public void CheckMultiColorMats()
+    {
+        if (this.multiColoredMats.Length > 0)
+        {
+            foreach (MultiColorMaterials multiColor in this.multiColoredMats)
+            {
+                /*if(multiColor.material != null)
+                {
+
+                }*/
+
+                if (multiColor.renderers.Length > 0)
+                {
+                    foreach (Renderer rend in multiColor.renderers)
+                    {
+                        foreach (Material mat in rend.materials)
+                        {
+                            mat.SetColor("Color_83cbc8d686554d0f9aced64306129077", colors[multiColor.colorIndex1]);
+                            mat.SetColor("Color_1", colors[multiColor.colorIndex2]);
+                            mat.SetColor("Color_42f013fb876e4189a051c4bba88d09bc", colors[multiColor.colorIndex3]);
+                        }
+                    }
+                }
+            }
         }
     }
 }
