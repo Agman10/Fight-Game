@@ -14,6 +14,8 @@ public class Ball : MonoBehaviour
 
     public Collider collision;
 
+    public CharacterSoundEffects soundEffects;
+
     private void Start()
     {
         float number = UnityEngine.Random.Range(1, 101);
@@ -53,6 +55,9 @@ public class Ball : MonoBehaviour
             this.rb.AddForce(knockback * 2f);
             //this.rb.AddTorque(knockback);
             this.rb.AddTorque(new Vector3(1000, 1000, 1000));
+
+            if (this.soundEffects != null)
+                this.soundEffects.PlayHitSound();
         }
     }
     private void OnCollisionEnter(Collision collision)

@@ -25,6 +25,14 @@ public class NPCDance : MonoBehaviour
         {
             this.StartCoroutine(this.SpinCoroutine());
         }
+        else if (this.danceId == 4)
+        {
+            this.StartCoroutine(this.HypeDanceCoroutine());
+        }
+        else if (this.danceId == 5)
+        {
+            this.StartCoroutine(this.RussianDanceCoroutine());
+        }
         else
         {
             Debug.Log("dance id does not exist");
@@ -135,6 +143,60 @@ public class NPCDance : MonoBehaviour
             yield return new WaitForSeconds(animSpeed);
 
             this.StartCoroutine(this.DJCoroutine());
+        }
+
+
+    }
+
+    private IEnumerator HypeDanceCoroutine()
+    {
+        if (this.animations != null)
+        {
+            float animSpeed = 0.2f;
+
+            if (this.animations != null)
+                this.animations.HypeDance(0);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            if (this.animations != null)
+                this.animations.HypeDance(1);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.StartCoroutine(this.HypeDanceCoroutine());
+        }
+
+
+    }
+
+    private IEnumerator RussianDanceCoroutine()
+    {
+        if (this.animations != null)
+        {
+            float animSpeed = 0.2f;
+
+            if (this.animations != null)
+                this.animations.RussianDance(0);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            if (this.animations != null)
+                this.animations.RussianDance(1);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            if (this.animations != null)
+                this.animations.RussianDance(0);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            if (this.animations != null)
+                this.animations.RussianDance(2);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.StartCoroutine(this.RussianDanceCoroutine());
         }
 
 

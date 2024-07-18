@@ -3606,6 +3606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9130622187966632495}
   - component: {fileID: 2865224059515054846}
+  - component: {fileID: 7409726769246377924}
   m_Layer: 0
   m_Name: NPC Ball Template
   m_TagString: Untagged
@@ -3685,3 +3686,41 @@ MonoBehaviour:
   - {fileID: 8557447246839033756}
   - {fileID: 8557447248382362840}
   - {fileID: 8557447247612273186}
+  useMultiColorMats: 0
+  multiColoredMats: []
+--- !u!114 &7409726769246377924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9130622187966632494}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9e41158a1132a41a3155afcd50294b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightArm: {fileID: 8557447247377715847}
+  rightArmJoint: {fileID: 8557447247484974132}
+  leftArm: {fileID: 8557447247789085562}
+  leftArmJoint: {fileID: 8557447247685589479}
+  rightLeg: {fileID: 8557447248510843798}
+  rightLegJoint: {fileID: 8557447246895539265}
+  leftLeg: {fileID: 8557447247913264716}
+  leftLegJoint: {fileID: 8557447247537905017}
+  upperBody: {fileID: 8557447247913293124}
+  lowerBody: {fileID: 8557447248172362147}
+  eyes: {fileID: 8557447247885087238}
+  body: {fileID: 8557447248089533756}
+  characterId: 3
+  defaultYPos: 1.6
+  armsDefaultYPos: 0.15
+  defaultEyeYHeight: 0
+  neutralEyes: {fileID: 8557447247227864825}
+  happyEyes: {fileID: 7643943421649640335}
+  frowningEyes: {fileID: 6676602764204229944}
+  angryEyes: {fileID: 8557447247653034375}
+  boredEyes: {fileID: 0}
+  bloodPuddle: {fileID: 0}
+  dress: {fileID: 0}
+  eyesPosTransform: {fileID: 0}

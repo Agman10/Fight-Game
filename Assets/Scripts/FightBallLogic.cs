@@ -22,6 +22,10 @@ public class FightBallLogic : MonoBehaviour
 
     public AudioSource music;
     public AudioSource victoryBgm;
+
+    public RandomSkybox tempRandomSkybox;
+
+    public AudioSource goalSfx;
     // Start is called before the first frame update
 
     private void Awake()
@@ -64,8 +68,8 @@ public class FightBallLogic : MonoBehaviour
         if (this.player2ScoreText != null)
             this.player2ScoreText.text = player2Score.ToString();
 
-        if (this.music != null)
-            this.music.Play();
+        /*if (this.music != null)
+            this.music.Play();*/
 
 
         if (this.player1 != null && this.player2 != null)
@@ -130,19 +134,40 @@ public class FightBallLogic : MonoBehaviour
             }
             if(this.player1Score >= this.maxScore - 1 || this.player2Score >= this.maxScore - 1)
             {
-                if (this.music != null)
-                    this.music.pitch = 1.1f;
+                /*if (this.music != null)
+                    this.music.pitch = 1.1f;*/
+
+                if (this.tempRandomSkybox != null)
+                {
+                    foreach (AudioSource song in this.tempRandomSkybox.songs)
+                    {
+                        if (song != null)
+                            song.pitch = 1.1f;
+                    }
+                }
             }
             if (this.player1Score >= this.maxScore - 1 && this.player2Score >= this.maxScore - 1)
             {
-                if (this.music != null)
-                    this.music.pitch = 1.3f;
+                /*if (this.music != null)
+                    this.music.pitch = 1.3f;*/
+
+                if (this.tempRandomSkybox != null)
+                {
+                    foreach (AudioSource song in this.tempRandomSkybox.songs)
+                    {
+                        if (song != null)
+                            song.pitch = 1.3f;
+                    }
+                }
             }
 
             if (this.player1 != null)
                 this.player1.tempLookAtBall = false;
             if (this.player2 != null)
                 this.player2.tempLookAtBall = false;
+
+            if (this.goalSfx != null)
+                this.goalSfx.Play();
         }
         
 
@@ -182,8 +207,17 @@ public class FightBallLogic : MonoBehaviour
                     this.player2.tempLookAtBall = false;
             }
 
-            if (this.music != null)
-                this.music.Stop();
+            /*if (this.music != null)
+                this.music.Stop();*/
+            if (this.tempRandomSkybox != null)
+            {
+                foreach (AudioSource song in this.tempRandomSkybox.songs)
+                {
+                    if (song != null)
+                        song.Stop();
+                }
+            }
+                
 
             if (this.victoryBgm != null)
                 this.victoryBgm.Play();
