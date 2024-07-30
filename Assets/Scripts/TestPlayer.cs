@@ -18,6 +18,8 @@ public class TestPlayer : MonoBehaviour
     public bool countering = false;
     public int playerNumber;
 
+    public bool hasBeenHit = false;
+
     [Range(-1f, 1f)]
     public float damageMitigation = 0f;
 
@@ -138,7 +140,16 @@ public class TestPlayer : MonoBehaviour
 
 
         if (amount > 0)
-            this.OnTakeDamage?.Invoke();
+        {
+            
+            if (this.damageMitigation < 1f)
+            {
+                this.OnTakeDamage?.Invoke();
+                this.hasBeenHit = true;
+            }
+                
+        }
+
         if(stun > 0f)
         {
             this.AddStun(stun, stopMomentumOnStun);
@@ -250,6 +261,7 @@ public class TestPlayer : MonoBehaviour
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
+            this.hasBeenHit = true;
 
             if (!preventDeathSound && this.soundEffects != null)
                 this.soundEffects.PlayDeathSound();
@@ -307,6 +319,7 @@ public class TestPlayer : MonoBehaviour
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
+            this.hasBeenHit = true;
 
             if (this.soundEffects != null)
                 this.soundEffects.PlayDeathSound();
@@ -399,6 +412,8 @@ public class TestPlayer : MonoBehaviour
         this.dead = false;
         this.health = this.maxHealth;
         this.preventDeath = false;
+
+        this.hasBeenHit = false;
             
 
         if (this.hitboxes != null)

@@ -236,6 +236,9 @@ public class MikeBallerStartAnimation : Attack
             this.user.rb.isKinematic = false;
         //this.PlayFire(false);
 
+        if (this.exclamationMark != null)
+            this.exclamationMark.SetActive(false);
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }

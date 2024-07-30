@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
     public bool gameIsPaused = false;
     public PauseLogic pauseLogic;
 
+    public KOUiLogic koUiLogic;
+
     [Space]
     public GameObject ragingBeastSkull;
     public LayerMask normalCameraLayers;
@@ -276,13 +278,34 @@ public class GameManager : MonoBehaviour
         if (!this.gameIsOver && !this.isStartingNewRound && this.gameMode == 0)
         {
             this.isStartingNewRound = true;
+
+            if (this.koUiLogic != null)
+                this.koUiLogic.KOText();
+
+            //Time.timeScale = 0.5f;
+
             this.StartCoroutine(this.PlayerDeathCoroutine());
         }
     }
 
     private IEnumerator PlayerDeathCoroutine()
     {
+        /*Time.timeScale = 0.1f;
+        yield return new WaitForSeconds(0.1f);
+        Time.timeScale = 1f;*/
+
+        /*if (TimeScaler.Instance != null)
+        {
+            TimeScaler.Instance.SetTimeScale(0.1f, 0.5f, true);
+
+            //TimeScaler.Instance.SetTimeScale(0.05f, 0.5f, true);
+
+            //TimeScaler.Instance.SetTimeScale(0.1f, 0.7f, true);
+        }*/
+
         yield return new WaitForSeconds(0.5f);
+
+        //Time.timeScale = 1f;
 
         if (this.player1.dead)
             this.GiveScore(2);
@@ -298,6 +321,23 @@ public class GameManager : MonoBehaviour
             this.EndTheGame(0);
         else
             this.StartNewRound();
+
+
+        if (this.koUiLogic != null)
+        {
+            if (this.player1.dead & this.player2.dead)
+            {
+                this.koUiLogic.DrawText();
+            }
+            else if (!this.player1.hasBeenHit)
+            {
+                this.koUiLogic.PerfectText(true);
+            }
+            else if (!this.player2.hasBeenHit)
+            {
+                this.koUiLogic.PerfectText(false);
+            }
+        }
 
         /*if (this.player1.dead)
             this.player2Score++;
@@ -384,6 +424,10 @@ public class GameManager : MonoBehaviour
     public void ResetRound()
     {
         this.OnRoundReset?.Invoke();
+
+        if (this.koUiLogic != null)
+            this.koUiLogic.RemoveAllText();
+
         this.isStartingNewRound = false;
         if (this.player1 != null)
             this.player1.ResetPlayer();

@@ -12,6 +12,8 @@ public class ObjectScaleLerp : MonoBehaviour
     public float duration = 0.1f;
 
     public bool preventOnEnable;
+
+    public bool unscaledTime = false;
     private void OnEnable()
     {
         if (!this.preventOnEnable)
@@ -51,7 +53,13 @@ public class ObjectScaleLerp : MonoBehaviour
         float start = this.transform.position.y;*/
         while (currentTime < durration)
         {
-            currentTime += Time.deltaTime;
+            //currentTime += Time.deltaTime;
+
+            if (this.unscaledTime)
+                currentTime += Time.unscaledDeltaTime;
+            else
+                currentTime += Time.deltaTime;
+
             this.objectToScale.localScale = new Vector3(
                 Mathf.Lerp(this.startScale.x, this.endScale.x, currentTime / this.duration),
                 Mathf.Lerp(this.startScale.y, this.endScale.y, currentTime / this.duration),

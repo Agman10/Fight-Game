@@ -9,6 +9,8 @@ public class HoodGuyStartAnimation : Attack
     public bool onGoing;
     public ObjectScaleLerp cosmos;
 
+    public VisualEffect smoke;
+
     //public float fallDuration = 0.2f;
     //public VisualEffect fire;
     //public GameObject landingParticle;
@@ -40,6 +42,7 @@ public class HoodGuyStartAnimation : Attack
         {
             //this.user.AddStun(0.2f, true);
             this.StartCoroutine(this.TemplateCoroutine2());
+            //this.StartCoroutine(this.SmokeStartAnimation());
         }
     }
 
@@ -168,6 +171,68 @@ public class HoodGuyStartAnimation : Attack
         if (this.cosmos != null)
             this.cosmos.gameObject.SetActive(false);
 
+        if (this.animations != null)
+            this.animations.body.gameObject.SetActive(true);
+
+        this.PlaySmoke(false);
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    private IEnumerator SmokeStartAnimation()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        this.user.rb.isKinematic = true;
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 250f, 0f);
+        //this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
+
+        this.user.LookAtTarget();
+
+        yield return new WaitForSeconds(0.01f);
+
+        if (this.animations != null)
+            this.animations.body.gameObject.SetActive(false);
+
+        this.user.transform.position = new Vector3(this.user.transform.position.x, -3f, 0f);
+        this.PlaySmoke(true);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        //this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
+
+        float currentTime = 0;
+        float duration = 0.5f;
+        float targetPosition = 0f;
+        float start = this.transform.position.y;
+        /*float targetPosition = this.user.animations.defaultYPos;
+        float start = this.user.animations.body.transform.localPosition.y;*/
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            //this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            yield return null;
+        }
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        this.user.rb.isKinematic = false;
+
+        yield return new WaitForSeconds(0.3f);
+
+        if (this.animations != null)
+            this.animations.body.gameObject.SetActive(true);
+
+        this.PlaySmoke(false);
+
+        yield return new WaitForSeconds(0.2f);
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -236,14 +301,14 @@ public class HoodGuyStartAnimation : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }*/
 
-    /*public void PlayFire(bool playing)
+    public void PlaySmoke(bool playing)
     {
-        if (this.fire != null)
+        if (this.smoke != null)
         {
             if (playing)
-                this.fire.Play();
+                this.smoke.Play();
             else
-                this.fire.Stop();
+                this.smoke.Stop();
         }
-    }*/
+    }
 }

@@ -96,6 +96,11 @@ public class TestHitbox : MonoBehaviour
                         {
                             player.OnHit?.Invoke();
 
+                            /*if (TimeScaler.Instance != null)
+                            {
+                                TimeScaler.Instance.SetTimeScale(0.05f, 0.025f);
+                            }*/
+
                             if (this.belongsTo != null)
                                 player.OnHitFromPlayer?.Invoke(this.belongsTo);
                         }
@@ -170,7 +175,7 @@ public class TestHitbox : MonoBehaviour
                 /*if (ragdoll.owner != null && ragdoll.owner.soundEffects != null)
                     ragdoll.owner.soundEffects.PlayHitSound();*/
 
-                if (this.doHitSound)
+                if (this.doHitSound && ragdoll.canBeAttacked)
                 {
                     if (this.customHitSound.sound != null)
                     {
@@ -243,6 +248,11 @@ public class TestHitbox : MonoBehaviour
                     if (!this.avoidOnHitInvoke)
                     {
                         player.OnHit?.Invoke();
+
+                        /*if (TimeScaler.Instance != null)
+                        {
+                            TimeScaler.Instance.SetTimeScale(0.05f, 0.025f);
+                        }*/
 
                         if (this.belongsTo != null)
                             player.OnHitFromPlayer?.Invoke(this.belongsTo);
@@ -336,7 +346,7 @@ public class TestHitbox : MonoBehaviour
                 else
                     ragdoll.KnockBack(new Vector3(direction * (this.horizontalKnockback * 150f * this.physicsKnockbackMultiplier), this.verticalKnockback * 150f * this.physicsKnockbackMultiplier, 0));
 
-                if (this.doHitSound)
+                if (this.doHitSound && ragdoll.canBeAttacked)
                 {
                     if (this.customHitSound.sound != null)
                     {
