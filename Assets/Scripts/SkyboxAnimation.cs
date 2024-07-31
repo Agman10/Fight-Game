@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SkyboxAnimation : MonoBehaviour
 {
-    float xDir;
-    float yDir;
+    /*float xDir;
+    float yDir;*/
     public Material skybox;
+    public float unscaledTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,10 +15,15 @@ public class SkyboxAnimation : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        this.unscaledTime = 0f;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        xDir += 0.05f * Time.deltaTime;
+        /*xDir += 0.05f * Time.deltaTime;
         yDir -= 0.05f * Time.deltaTime;
         if(this.skybox != null)
         {
@@ -27,7 +33,15 @@ public class SkyboxAnimation : MonoBehaviour
             skybox.SetTextureOffset("_RightTex", new Vector2(xDir, yDir));
             skybox.SetTextureOffset("_UpTex", new Vector2(xDir, yDir));
             skybox.SetTextureOffset("_DownTex", new Vector2(xDir, yDir));
+        }*/
+
+        //this.unscaledTime += Time.unscaledTime;
+        this.unscaledTime += Time.unscaledDeltaTime;
+
+        if (this.skybox != null)
+        {
+            //this.skybox.SetFloat("_UnscaledTime", Time.unscaledTime);
+            this.skybox.SetFloat("_UnscaledTime", this.unscaledTime);
         }
-        
     }
 }

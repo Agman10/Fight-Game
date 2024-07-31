@@ -283,12 +283,13 @@ public class Anvil : MonoBehaviour
             player.preventDeath = false;
             player.knockbackInvounrability = false;
             player.attackStuns.Remove(this.gameObject);
-            this.victim = null;
+            //this.victim = null;
             //player.animations.body.localScale = new Vector3(1.25f, 0.01f, player.animations.body.localScale.z * 1.25f);
             //player.animations.body.localPosition = new Vector3(player.animations.body.localPosition.x, player.animations.body.localPosition.y * 0.01f, player.animations.body.localPosition.z);
 
             //yield return new WaitForSeconds(0.2f);
             yield return new WaitForSeconds(1f);
+            this.victim = null;
             this.gameObject.SetActive(false);
         }
         else

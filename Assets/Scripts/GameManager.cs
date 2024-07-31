@@ -282,6 +282,9 @@ public class GameManager : MonoBehaviour
             if (this.koUiLogic != null)
                 this.koUiLogic.KOText();
 
+            /*if (this.koUiLogic != null)
+                this.koUiLogic.HyperKOText();*/
+
             //Time.timeScale = 0.5f;
 
             this.StartCoroutine(this.PlayerDeathCoroutine());
@@ -296,7 +299,8 @@ public class GameManager : MonoBehaviour
 
         /*if (TimeScaler.Instance != null)
         {
-            TimeScaler.Instance.SetTimeScale(0.1f, 0.5f, true);
+            //TimeScaler.Instance.SetTimeScale(0.1f, 0.5f, true);
+            TimeScaler.Instance.KoTimeScale(0.1f, 0.5f);
 
             //TimeScaler.Instance.SetTimeScale(0.05f, 0.5f, true);
 

@@ -43,6 +43,7 @@ public class TestPlayer : MonoBehaviour
     public Action OnHit;
     public Action OnTakeDamage;
     public Action OnDeath;
+    public Action<bool> OnKO;
     public Action OnReset;
     public Action OnAttack;
 

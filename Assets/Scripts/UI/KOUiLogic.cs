@@ -9,6 +9,9 @@ public class KOUiLogic : MonoBehaviour
     public GameObject perfect;
     public GameObject perfectP2;
     public GameObject draw;
+    public GameObject hyperKO;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,11 @@ public class KOUiLogic : MonoBehaviour
         this.StartCoroutine(this.PerfectCoroutine(isP1));
     }
 
+    public void HyperKOText()
+    {
+
+        this.StartCoroutine(this.HyperKOCoroutine());
+    }
 
     public void RemoveAllText()
     {
@@ -65,6 +73,9 @@ public class KOUiLogic : MonoBehaviour
 
         if (this.draw != null)
             this.draw.SetActive(false);
+
+        if (this.hyperKO != null)
+            this.hyperKO.SetActive(false);
     }
 
     private IEnumerator KOCoroutine()
@@ -197,6 +208,7 @@ public class KOUiLogic : MonoBehaviour
     }
 
 
+
     private IEnumerator DrawCoroutine()
     {
         if (this.draw != null)
@@ -234,5 +246,15 @@ public class KOUiLogic : MonoBehaviour
 
         if (this.perfect != null)
             this.perfect.SetActive(false);*/
+    }
+
+    private IEnumerator HyperKOCoroutine()
+    {
+        if (this.hyperKO != null)
+            this.hyperKO.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+
+        if (this.hyperKO != null)
+            this.hyperKO.SetActive(false);
     }
 }
