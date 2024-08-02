@@ -88,7 +88,7 @@ public class SuperFireBallAttack : Attack
                 this.animations.SuperFireBallCharge();
         }
 
-        if (this.user.soundEffects != null)
+        if (this.user.soundEffects != null && !fail)
             this.user.soundEffects.PlaySuperSfx();
 
         if (this.startParticle != null && !fail)
@@ -203,7 +203,7 @@ public class SuperFireBallAttack : Attack
                 this.animations.SuperFireBallCharge(true);
         }
 
-        if (this.user.soundEffects != null)
+        if (this.user.soundEffects != null && !fail)
             this.user.soundEffects.PlaySuperSfx();
 
         if (this.startParticle != null && !fail)

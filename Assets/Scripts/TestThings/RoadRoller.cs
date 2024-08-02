@@ -90,7 +90,7 @@ public class RoadRoller : MonoBehaviour
             }
             else
             {
-                player.TakeDamage(this.transform.position, 40f);
+                player.TakeDamage(this.transform.position, 40f, 0f, 0f, 0f, true, true, false, false, true, false, true);
                 player.OnHitFromPlayer?.Invoke(this.belongsTo);
             }
         }
@@ -162,7 +162,7 @@ public class RoadRoller : MonoBehaviour
 
 
 
-                victimm.TakeDamage(new Vector3(this.transform.position.x, this.transform.position.y - 1f, 0f), 15f, 1.35f, this.transform.forward.z * 1000f, 1200f, true, true, true, false);
+                victimm.TakeDamage(new Vector3(this.transform.position.x, this.transform.position.y - 1f, 0f), 15f, 1.35f, this.transform.forward.z * 1000f, 1200f, true, true, true, false, true, false, true);
 
                 if (!victimm.dead)
                     victimm.animations.SetDefaultPose();

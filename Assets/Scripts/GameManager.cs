@@ -166,8 +166,11 @@ public class GameManager : MonoBehaviour
             /*this.player1.OnDeath += this.OnPlayer1Death;
             this.player2.OnDeath += this.OnPlayer2Death;*/
 
-            this.player1.OnDeath += this.OnPlayerDeath;
-            this.player2.OnDeath += this.OnPlayerDeath;
+            /*this.player1.OnDeath += this.OnPlayerDeath;
+            this.player2.OnDeath += this.OnPlayerDeath;*/
+
+            this.player1.OnKO += this.OnPlayerDeath;
+            this.player2.OnKO += this.OnPlayerDeath;
 
 
             this.player1.tempOpponent = this.player2;
@@ -205,8 +208,11 @@ public class GameManager : MonoBehaviour
             /*this.player1.OnDeath -= this.OnPlayer1Death;
             this.player2.OnDeath -= this.OnPlayer2Death;*/
 
-            this.player1.OnDeath -= this.OnPlayerDeath;
-            this.player2.OnDeath -= this.OnPlayerDeath;
+            /*this.player1.OnDeath -= this.OnPlayerDeath;
+            this.player2.OnDeath -= this.OnPlayerDeath;*/
+
+            this.player1.OnKO -= this.OnPlayerDeath;
+            this.player2.OnKO -= this.OnPlayerDeath;
         }
     }
     // Start is called before the first frame update
@@ -273,14 +279,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnPlayerDeath()
+    public void OnPlayerDeath(bool super)
     {
         if (!this.gameIsOver && !this.isStartingNewRound && this.gameMode == 0)
         {
             this.isStartingNewRound = true;
 
-            if (this.koUiLogic != null)
-                this.koUiLogic.KOText();
+            if (super)
+            {
+                if (this.koUiLogic != null)
+                    this.koUiLogic.HyperKOText();
+            }
+            else
+            {
+                if (this.koUiLogic != null)
+                    this.koUiLogic.KOText();
+            }
+
+
+            /*if (this.koUiLogic != null)
+                this.koUiLogic.KOText();*/
 
             /*if (this.koUiLogic != null)
                 this.koUiLogic.HyperKOText();*/

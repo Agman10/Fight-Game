@@ -39,6 +39,8 @@ public class TestHitbox : MonoBehaviour
 
     public Transform hitboxOrigin;
 
+    public bool isSuper = false;
+
     public bool preventDeathSound = false;
     public bool doHitSound = true;
     public float hitSoundCooldown = 0f;
@@ -89,7 +91,7 @@ public class TestHitbox : MonoBehaviour
                         //this.OnPlayerCollision.Invoke(player);
 
                         if (this.instaKill)
-                            player.Die(this.transform.position, false, false, true, this.preventDeathSound);
+                            player.Die(this.transform.position, false, false, true, this.preventDeathSound, this.isSuper);
 
                         this.players.Add(player);
                         if (!this.avoidOnHitInvoke)
@@ -139,9 +141,9 @@ public class TestHitbox : MonoBehaviour
                             posOrigin = this.hitboxOrigin.position;
 
                         if (!this.explosionKnockback)
-                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper);
                         else
-                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper);
 
                         if (this.belongsTo != null && this.superChargeAmount != 0f && this.belongsTo != player)
                         {
@@ -242,7 +244,7 @@ public class TestHitbox : MonoBehaviour
                 {
                     this.players.Add(player);
                     if (this.instaKill)
-                        player.Die(this.transform.position, false, false, true, this.preventDeathSound);
+                        player.Die(this.transform.position, false, false, true, this.preventDeathSound, this.isSuper);
 
                     //player.TakeDamage(this.transform.position, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback);
                     if (!this.avoidOnHitInvoke)
@@ -291,9 +293,9 @@ public class TestHitbox : MonoBehaviour
                         posOrigin = this.hitboxOrigin.position;
 
                     if (!this.explosionKnockback)
-                        player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound);
+                        player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper);
                     else
-                        player.TakeDamage(posOrigin, this.damage, this.stun, direction * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound);
+                        player.TakeDamage(posOrigin, this.damage, this.stun, direction * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper);
 
 
                     if (this.belongsTo != null && this.superChargeAmount != 0f && this.belongsTo != player)

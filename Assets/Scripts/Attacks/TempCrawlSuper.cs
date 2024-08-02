@@ -541,7 +541,7 @@ public class TempCrawlSuper : Attack
         }*/
             
 
-        player.TakeDamage(this.user.transform.position, 0f, 0.35f, 0f, 0f, false, false, false, false);
+        player.TakeDamage(this.user.transform.position, 0f, 0.35f, 0f, 0f, false, false, false, false, true, true, true);
 
         if (player.dead)
         {

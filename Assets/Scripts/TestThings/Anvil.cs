@@ -102,7 +102,7 @@ public class Anvil : MonoBehaviour
             }
             else
             {
-                player.TakeDamage(this.transform.position, 32f);
+                player.TakeDamage(this.transform.position, 32f, 0f, 0f, 0f, true, true, false, false, true, false, true);
                 if (this.belongsTo != null)
                     player.OnHitFromPlayer?.Invoke(this.belongsTo);
             }
@@ -278,7 +278,7 @@ public class Anvil : MonoBehaviour
 
         if (player.health <= 0f)
         {
-            player.Die(player.transform.position, false, true, false);
+            player.Die(player.transform.position, false, true, false, false, true);
 
             player.preventDeath = false;
             player.knockbackInvounrability = false;

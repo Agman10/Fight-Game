@@ -104,6 +104,12 @@ public class RagingBeast : Attack
     IEnumerator TryRagingBeastCoroutine()
     {
         this.user.attackStuns.Add(this.gameObject);
+
+        /*if (this.animations != null)
+            this.animations.RagingBeastStartMidPose();
+
+        yield return new WaitForSeconds(0.05f);*/
+
         if (this.animations != null)
             this.animations.RagingBeastStartPose();
 
@@ -125,6 +131,7 @@ public class RagingBeast : Attack
         }
 
         yield return new WaitForSeconds(0.25f);
+        //yield return new WaitForSeconds(0.2f);
 
         if (this.swooshSfx != null)
         {
@@ -455,7 +462,7 @@ public class RagingBeast : Attack
 
             this.user.preventDeath = false;
             player.preventDeath = false;
-            player.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, ghost, false, false, true, true);
+            player.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, ghost, false, false, true, true, true);
 
             this.user.knockbackInvounrability = false;
             player.knockbackInvounrability = false;
@@ -528,7 +535,7 @@ public class RagingBeast : Attack
             this.victim.knockbackInvounrability = false;
             if(this.onGoing && this.victim.health <= 0f)
             {
-                this.victim.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, true);
+                this.victim.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, true, false, false, true, false, true);
             }
             else
             {

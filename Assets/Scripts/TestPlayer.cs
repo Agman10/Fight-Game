@@ -118,7 +118,7 @@ public class TestPlayer : MonoBehaviour
     }
 
 
-    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false/*, bool delayDeath = false*/)
+    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false, bool super = false/*, bool delayDeath = false*/)
     {
         if(this.damageMitigation != 0f && amount > 0f)
         {
@@ -179,7 +179,7 @@ public class TestPlayer : MonoBehaviour
         if(this.health <= 0f && !this.preventDeath /*&& !dontKill*/)
         {
             if (!dontKill)
-                this.Die(position, ragdollForce, ghost, true, preventDeathSound);
+                this.Die(position, ragdollForce, ghost, true, preventDeathSound, super);
 
             //this.Die(position, ragdollForce, ghost);
 
@@ -255,13 +255,14 @@ public class TestPlayer : MonoBehaviour
         }
     }
 
-    public void Die(Vector3 position, bool ragdollforce = true, bool ghost = true, bool ragdoll = true, bool preventDeathSound = false)
+    public void Die(Vector3 position, bool ragdollforce = true, bool ghost = true, bool ragdoll = true, bool preventDeathSound = false, bool super = false)
     {
         if (!this.dead)
         {
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
+            this.OnKO?.Invoke(super);
             this.hasBeenHit = true;
 
             if (!preventDeathSound && this.soundEffects != null)
@@ -320,6 +321,7 @@ public class TestPlayer : MonoBehaviour
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
+            this.OnKO?.Invoke(false);
             this.hasBeenHit = true;
 
             if (this.soundEffects != null)
@@ -375,6 +377,7 @@ public class TestPlayer : MonoBehaviour
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
+            this.OnKO?.Invoke(false);
 
             if (this.hitboxes != null)
             {

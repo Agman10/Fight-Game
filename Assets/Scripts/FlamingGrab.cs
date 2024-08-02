@@ -274,7 +274,7 @@ public class FlamingGrab : Attack
         player.preventDeath = false;
         player.knockbackInvounrability = false;
         player.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-        player.TakeDamage(this.user.transform.position, this.damagePerTick, 0.5f, this.user.transform.forward.z * 1000f, 1000f);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick, 0.5f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true);
 
         if (player.soundEffects != null)
             player.soundEffects.PlayHitSound();
@@ -288,14 +288,18 @@ public class FlamingGrab : Attack
 
         player.attackStuns.Remove(this.gameObject);
 
-
+        //this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
         //player.TakeDamage(this.user.transform.position, 0f);
 
         //this.user.knockbackInvounrability = false;
 
         yield return new WaitForSeconds(0.1f);
         this.user.animations.FlameGrabHitPose();
-        yield return new WaitForSeconds(0.75f);
+        //yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.70f);
+
+        this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
+        yield return new WaitForSeconds(0.05f);
         this.StopFlameGrab(player);
     }
 
@@ -389,7 +393,8 @@ public class FlamingGrab : Attack
             this.victim.knockbackInvounrability = false;
             if (this.onGoing && this.victim.health <= 0f)
             {
-                this.victim.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
+                //this.victim.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
+                this.victim.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false, false, false, true, false, true);
             }
             this.victim = null;
         }

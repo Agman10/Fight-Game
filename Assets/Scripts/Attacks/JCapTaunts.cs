@@ -190,6 +190,9 @@ public class JCapTaunts : Attack
             currentTime += Time.deltaTime;
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                 this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+
+            if (currentTime >= duration - 0.1f && this.user.input.taunting)
+                currentTime = duration - 0.1f;
             yield return null;
         }
 
@@ -216,8 +219,9 @@ public class JCapTaunts : Attack
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                 this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
 
-            
 
+            if (currentTime >= duration - 0.1f && this.user.input.taunting)
+                currentTime = duration - 0.1f;
             yield return null;
         }
 

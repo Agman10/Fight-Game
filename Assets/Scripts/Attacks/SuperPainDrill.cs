@@ -367,16 +367,16 @@ public class SuperPainDrill : Attack
         player.knockbackInvounrability = false;
         player.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         if (player.health > 0f)
-            player.TakeDamage(new Vector3(this.user.transform.position.x, -1f, 0), 2.5f, 0.5f, this.user.transform.forward.z * 1000f, 1000f);
+            player.TakeDamage(new Vector3(this.user.transform.position.x, -1f, 0), 2.5f, 0.5f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false , true);
         else
-            player.TakeDamage(this.user.transform.position, 2.5f, 0.5f, this.user.transform.forward.z * 0f, 0f);
+            player.TakeDamage(this.user.transform.position, 2.5f, 0.5f, this.user.transform.forward.z * 0f, 0f, true, true, false, false, true, false, true);
 
         player.attackStuns.Remove(this.gameObject);
 
         if (player.soundEffects != null)
             player.soundEffects.PlayHitSound();
 
-        this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
+        //this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
 
         if (!player.dead)
         {
@@ -393,7 +393,11 @@ public class SuperPainDrill : Attack
         yield return new WaitForSeconds(0.1f);
         this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         this.user.animations.FlameGrabHitPose();
-        yield return new WaitForSeconds(0.75f);
+        //yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.70f);
+
+        this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
+        yield return new WaitForSeconds(0.05f);
         this.StopFlameGrab(player);
     }
 
@@ -464,7 +468,8 @@ public class SuperPainDrill : Attack
             this.victim.knockbackInvounrability = false;
             if (this.onGoing && this.victim.health <= 0f)
             {
-                this.victim.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
+                //this.victim.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
+                this.victim.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false, false, false, true, false, true);
             }
             else
             {

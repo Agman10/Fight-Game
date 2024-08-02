@@ -77,7 +77,7 @@ public class BigFireBall : MonoBehaviour
             }
         }
 
-        if(bigFireBall != null)
+        if(bigFireBall != null && bigFireBall.owner != this.owner)
         {
             //this.StartCoroutine(this.ExplodeCoroutine());
             this.Explode();

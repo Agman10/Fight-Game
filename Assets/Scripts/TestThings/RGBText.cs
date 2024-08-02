@@ -35,17 +35,27 @@ public class RGBText : MonoBehaviour
         //this.hue += this.speed * Time.deltaTime;
         this.hue += this.speed * Time.unscaledDeltaTime;
 
-        if (this.hue >= 1f)
+        /*if (this.hue >= 1f)
             this.hue = 0f;
         else if (this.hue < 0f)
-            this.hue = 1f;
+            this.hue = 1f;*/
+
+        if (this.hue >= 1f)
+            this.hue -= 1f;
+        else if (this.hue < 0f)
+            this.hue += 1f;
 
         this.hue2 += this.speed * Time.unscaledDeltaTime;
 
-        if (this.hue2 >= 1f)
+        /*if (this.hue2 >= 1f)
             this.hue2 = 0f;
         else if (this.hue2 < 0f)
-            this.hue2 = 1f;
+            this.hue2 = 1f;*/
+
+        if (this.hue2 >= 1f)
+            this.hue2 -= 1f;
+        else if (this.hue2 < 0f)
+            this.hue2 += 1f;
 
 
         //this.text.color = Color.HSVToRGB(this.hue, this.saturation, this.brightness);
