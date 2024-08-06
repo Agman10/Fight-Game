@@ -195,8 +195,20 @@ public class SuperElectricBallAttack : Attack
             electricBallPrefab.waveSpeed = this.ballWaveSpeed;
         }
 
+        /*yield return new WaitForSeconds(0.5f);
 
-        
+        if (this.electricBall != null)
+        {
+            ElectricBallProjectile electricBallPrefab = this.electricBall;
+
+            if (this.electricBallP2 != null && this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
+                electricBallPrefab = this.electricBallP2;
+
+            electricBallPrefab = Instantiate(electricBallPrefab, new Vector3((this.transform.forward.z * 1.35f) + this.transform.position.x, this.transform.position.y + 1.75f, 0), this.transform.rotation);
+            electricBallPrefab.SetOwner(this.user);
+            electricBallPrefab.moveSpeed = this.ballMoveSpeed;
+            electricBallPrefab.waveSpeed = this.ballWaveSpeed;
+        }*/
 
 
         yield return new WaitForSeconds(0.8f);

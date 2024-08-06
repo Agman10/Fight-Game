@@ -12,6 +12,8 @@ public class DarkJCapStartAnimation : Attack
     public GameObject trail;
     public GameObject punchEffect;
 
+    //public GameObject ragingFlame;
+
     public Attack vsJCap;
 
     public override void OnHit()
@@ -49,6 +51,8 @@ public class DarkJCapStartAnimation : Attack
         this.user.transform.position = new Vector3(this.user.transform.position.x, 5f, 0f);
         this.PlayFire(true);
         this.user.LookAtTarget();
+        if (this.animations != null)
+            this.animations.DarkJCapStartAnimation();
         yield return new WaitForSeconds(0.01f);
         if (this.animations != null)
             this.animations.DarkJCapStartAnimation();
@@ -101,6 +105,9 @@ public class DarkJCapStartAnimation : Attack
         if (GameManager.Instance != null && this.onGoing)
             GameManager.Instance.RagingBeastEffect(0);
 
+        /*if (this.ragingFlame != null)
+            this.ragingFlame.SetActive(false);*/
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -113,6 +120,81 @@ public class DarkJCapStartAnimation : Attack
             else
                 this.fire.Stop();
         }
+    }
+
+
+    private IEnumerator StartAnimation2Coroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        this.user.rb.isKinematic = true;
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+        this.user.LookAtTarget();
+
+        if (this.animations != null)
+            this.animations.RagingBeastPose();
+
+        yield return new WaitForSeconds(0.01f);
+        if (this.animations != null)
+            this.animations.RagingBeastPose();
+
+
+        yield return new WaitForSeconds(0.25f);
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);*/
+
+        if (this.animations != null)
+            this.animations.RagingBeastStartMidPose();
+
+        yield return new WaitForSeconds(0.05f);
+
+        /*if (this.ragingFlame != null)
+            this.ragingFlame.SetActive(true);*/
+
+        if (this.animations != null)
+            this.animations.RagingBeastStartPose();
+
+        float currentTime = 0;
+        float duration = 0.6f;
+
+        float testTime = 0f;
+        float startPosY = this.animations.body.localPosition.y;
+        while (currentTime < duration)
+        {
+            testTime += Time.deltaTime;
+
+            currentTime += Time.deltaTime;
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+
+            float newY = Mathf.Sin(testTime * 100f);
+            this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, startPosY + (newY * 0.01f), this.animations.body.localPosition.z);
+
+
+            if (currentTime >= duration - 0.1f && this.user.input.taunting)
+                currentTime = duration - 0.1f;
+            yield return null;
+        }
+
+        /*if (this.ragingFlame != null)
+            this.ragingFlame.SetActive(false);*/
+
+        
+
+        //yield return new WaitForSeconds(0.5f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+
+        this.user.rb.isKinematic = false;
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
     }
 
     private IEnumerator RagingBeastStartAnimationCoroutine()

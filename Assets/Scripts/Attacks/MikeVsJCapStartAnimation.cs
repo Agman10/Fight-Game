@@ -50,7 +50,7 @@ public class MikeVsJCapStartAnimation : Attack
         this.onGoing = true;
         this.user.rb.isKinematic = true;
 
-        this.user.transform.position = new Vector3(this.user.transform.position.x, 50f, 0f);
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 250f, 0f);
 
         this.user.LookAtTarget();
 
@@ -67,6 +67,9 @@ public class MikeVsJCapStartAnimation : Attack
 
         float targetPosition = 0f;
         float start = 16;
+
+        /*float targetPosition = this.user.transform.position.x;
+        float start = this.user.transform.position.x + (this.transform.forward.z * 16);*/
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
@@ -76,12 +79,15 @@ public class MikeVsJCapStartAnimation : Attack
             if (this.animations != null)
             {
                 this.animations.body.transform.localPosition = new Vector3(Mathf.Lerp(start, targetPosition, currentTime / duration), this.animations.body.transform.localPosition.y, 0);
+                //this.user.transform.position = new Vector3(Mathf.Lerp(start, targetPosition, currentTime / duration), 0f, 0f);
                 this.animations.body.transform.Rotate(0f, -1500 * Time.deltaTime, 0f);
             }
                 
 
             yield return null;
         }
+
+        //this.user.rb.isKinematic = false;
 
         //yield return new WaitForSeconds(0.1f);
         if (this.animations != null)
