@@ -17,6 +17,14 @@ public class SpinGrabAttack : Attack
     public AudioSource spinSfx;
     public AudioSource throwSfx;
 
+    [Space]
+    public float damage = 20f;
+    public float superChargeAmount = 10f;
+    public float midGrabDuration = 0.1f;
+    public float midGrabMissDuration = 0.1f;
+    public float endLagMiss = 0.4f;
+    public float endLagThrow = 0.25f;
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -98,7 +106,7 @@ public class SpinGrabAttack : Attack
         //yield return new WaitForSeconds(time);
         yield return new WaitForSeconds(0.1f);
         this.animations.SpinGrabStart(1);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(this.midGrabDuration);
 
 
         if (this.hitbox != null)
@@ -112,13 +120,13 @@ public class SpinGrabAttack : Attack
 
         if (!this.grabbing && this.animations != null)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(this.midGrabMissDuration);
             //this.animations.SetGrabbingStartPose();
             this.animations.SpinGrabStart(3);
             yield return new WaitForSeconds(0.2f);
             this.animations.SetDefaultPose();
 
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(this.endLagMiss);
             this.tryGrabbing = false;
             this.user.attackStuns.Remove(this.gameObject);
             this.onGoing = false;
@@ -154,7 +162,7 @@ public class SpinGrabAttack : Attack
 
 
             player.animations.SpinGrabbed();
-            if (player.characterId == 3 || player.characterId == 4)
+            if (player.characterId == 3 || player.characterId == 4 || player.characterId == 7)
                 player.ragdoll.transform.localPosition = new Vector3(2.7f, 0.15f, 0);
             else
                 player.ragdoll.transform.localPosition = new Vector3(3.05f, 0.15f, 0);
@@ -212,7 +220,7 @@ public class SpinGrabAttack : Attack
         yield return new WaitForSeconds(0.1f);*/
         this.animations.SetDefaultPose();
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(this.endLagThrow);
         this.user.attackStuns.Remove(this.gameObject);
         this.animations.SetDefaultPose();
         this.onGoing = false;
@@ -261,7 +269,7 @@ public class SpinGrabAttack : Attack
             player.ragdoll.gameObject.transform.parent = this.user.ragdoll.transform;
 
             player.animations.SpinGrabbed();
-            if (player.characterId == 3 || player.characterId == 4)
+            if (player.characterId == 3 || player.characterId == 4 || player.characterId == 7)
                 player.ragdoll.transform.localPosition = new Vector3(2.7f, 0.15f, 0);
             else
                 player.ragdoll.transform.localPosition = new Vector3(3.05f, 0.15f, 0);
@@ -336,8 +344,8 @@ public class SpinGrabAttack : Attack
         //player.TakeDamage(this.belongsTo.transform.position, 20);
         player.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);
         //player.TakeDamage(this.user.transform.position, 10f, 1.1f, this.user.transform.forward.z * 1200f, 1200f);
-        this.user.GiveSuperCharge(10f);
-        player.GiveSuperCharge(5f);
+        this.user.GiveSuperCharge(this.superChargeAmount);
+        player.GiveSuperCharge(this.superChargeAmount / 2f);
 
         if (player.collision != null)
             player.collision.enabled = true;
@@ -360,7 +368,7 @@ public class SpinGrabAttack : Attack
 
             //player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 4), player.transform.position.y - 1f, 0f), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
             //player.TakeDamage(new Vector3(this.user.transform.position.x, player.transform.position.y - 0.5f, 0f), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
-            player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 6), player.transform.position.y - 0.5f, 0f), 20f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
+            player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 6), player.transform.position.y - 0.5f, 0f), this.damage, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
         }
         else
         {
@@ -370,7 +378,7 @@ public class SpinGrabAttack : Attack
 
             //player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 1), player.transform.position.y - 0.5f, 0f), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
 
-            player.TakeDamage(new Vector3(this.user.transform.position.x, player.transform.position.y - 0.5f, 0f), 20f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
+            player.TakeDamage(new Vector3(this.user.transform.position.x, player.transform.position.y - 0.5f, 0f), this.damage, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
         }
         if (player.soundEffects != null)
             player.soundEffects.hitSound.PlaySound();

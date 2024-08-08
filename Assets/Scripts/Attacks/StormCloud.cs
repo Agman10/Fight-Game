@@ -14,9 +14,12 @@ public class StormCloud : MonoBehaviour
     public TestPlayer belongsTo;
 
     public AudioSource lightningSfx;
+
+    [Space]
+    public float lightningDelay = 0.4f;
     private void OnEnable()
     {
-        this.StartCoroutine(this.LightningCloudCoroutine());
+        //this.StartCoroutine(this.LightningCloudCoroutine());
     }
     private void OnDisable()
     {
@@ -26,9 +29,13 @@ public class StormCloud : MonoBehaviour
         this.lightning.SetActive(false);
     }
 
-    private IEnumerator LightningCloudCoroutine()
+    private IEnumerator LightningCloudCoroutine(float delay = 0.4f, float dissapearDuration = 0.2f)
     {
-        yield return new WaitForSeconds(0.4f);
+        //yield return new WaitForSeconds(0.4f);
+        //yield return new WaitForSeconds(this.lightningDelay);
+        yield return new WaitForSeconds(delay);
+
+
         if (this.lightning != null)
             this.lightning.SetActive(true);
 
@@ -42,7 +49,8 @@ public class StormCloud : MonoBehaviour
         if (this.lightning != null)
             this.lightning.SetActive(false);
 
-        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(dissapearDuration);
 
         if (this.model != null)
             this.model.gameObject.SetActive(false);
@@ -50,6 +58,11 @@ public class StormCloud : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         this.gameObject.SetActive(false);
+    }
+
+    public void DoLightning(float delay = 0.4f, float dissapearDuration = 0.2f)
+    {
+        this.StartCoroutine(this.LightningCloudCoroutine(delay, dissapearDuration));
     }
 
     public void SetOwner(TestPlayer player)

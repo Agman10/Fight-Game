@@ -15,6 +15,9 @@ public class SuperHealingPotionAttack : Attack
 
     public GameObject confused;
 
+    public float healingTickAmount = 100f;
+    public float healingPerTick = 0.25f;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -148,7 +151,7 @@ public class SuperHealingPotionAttack : Attack
         //this.user.damageMitigation = 0.75f;
         this.user.damageMitigation = 0.5f;
 
-        float maxAmount = 100;
+        float maxAmount = this.healingTickAmount;
         float amount = 0;
         while (amount < maxAmount && this.user.health < this.user.maxHealth)
         {
@@ -156,7 +159,7 @@ public class SuperHealingPotionAttack : Attack
                 this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);*/
 
             yield return new WaitForSeconds(0.025f);
-            this.user.TakeDamage(this.transform.position, -0.25f);
+            this.user.TakeDamage(this.transform.position, -this.healingPerTick);
 
             if (this.liquid != null)
                 this.liquid.transform.localScale = new Vector3(1f, Mathf.Lerp(1f, 0f, amount / maxAmount), 1f);

@@ -14,6 +14,13 @@ public class RollForwardAttack : Attack
 
     public AudioSource rollSfx;
 
+    [Space]
+    public float startDelay = 0.2f;
+    public float rollDuration = 0.75f;
+    public float rollSpeed = 1000f;
+    public float missEndLag = 0.5f;
+    public float hitEndLag = 0.2f;
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -76,7 +83,7 @@ public class RollForwardAttack : Attack
             yield return null;
         }*/
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(this.startDelay);
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
@@ -100,11 +107,11 @@ public class RollForwardAttack : Attack
             this.rollSfx.Play();
 
         float currentTime = 0;
-        float duration = 0.75f;
+        float duration = this.rollDuration;
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 1000f * Time.deltaTime, 0f, 0f);
+            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * this.rollSpeed * Time.deltaTime, 0f, 0f);
             if (this.animations != null)
                 this.animations.body.transform.Rotate(new Vector3(0f, 0f, /*this.transform.forward.z * */-3000f * Time.deltaTime));
 
@@ -131,7 +138,7 @@ public class RollForwardAttack : Attack
             //this.user.transform.position = new Vector3(this.user.transform.position.x, this.user.transform.position.y - 0.5f, 0f);
         }
         this.rolling = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(this.missEndLag);
 
         
 
@@ -279,7 +286,7 @@ public class RollForwardAttack : Attack
 
         this.rolling = false;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(this.hitEndLag);
 
         //this.user.knockbackInvounrability = false;
         this.onGoing = false;

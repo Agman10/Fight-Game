@@ -19,6 +19,14 @@ public class CFourAttack : Attack
     public GameObject c4LampP1;
     public GameObject c4LampP2;
 
+    [Space]
+    public float groundedTime = 0.4f;
+    public float airTime = 0.2f;
+    public float endLag = 0.3f;
+    public bool instantDetonation = false;
+
+    public float c4ActivationTime = 0.3f;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -86,7 +94,12 @@ public class CFourAttack : Attack
             if (this.activeCFour != null)
             {
                 this.user.AddStun(0.2f, false);
-                this.StartCoroutine(this.DetonateCFourCorutine());
+                //this.StartCoroutine(this.DetonateCFourCorutine());
+
+                if (this.instantDetonation)
+                    this.StartCoroutine(this.DetonateCFourInstantlyCorutine());
+                else
+                    this.StartCoroutine(this.DetonateCFourCorutine());
             }
             else
             {
@@ -95,12 +108,12 @@ public class CFourAttack : Attack
                 if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                 {
                     this.user.AddStun(0.2f, false);
-                    this.StartCoroutine(this.PlaceCFourCorutine(0.4f));
+                    this.StartCoroutine(this.PlaceCFourCorutine(this.groundedTime));
                 }
                 else
                 {
                     this.user.AddStun(0.2f, false);
-                    this.StartCoroutine(this.PlaceCFourCorutine(0.2f));
+                    this.StartCoroutine(this.PlaceCFourCorutine(this.airTime));
                 }
 
             }
@@ -138,7 +151,7 @@ public class CFourAttack : Attack
 
         this.PlaceCFour();
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(this.endLag);
 
         /*if (this.animations != null)
             this.animations.SetDefaultPose();*/
@@ -215,12 +228,18 @@ public class CFourAttack : Attack
         {
             CFour cFourPrefab = this.cFour;
 
+            cFourPrefab = Instantiate(cFourPrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y, 0), this.user.transform.rotation);
+
             if (this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
                 cFourPrefab.isP2 = true;
             else
                 cFourPrefab.isP2 = false;
 
-            cFourPrefab = Instantiate(cFourPrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y, 0), this.user.transform.rotation);
+            cFourPrefab.activationTime = this.c4ActivationTime;
+
+            cFourPrefab.ActivateCFour();
+
+            //cFourPrefab = Instantiate(cFourPrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y, 0), this.user.transform.rotation);
 
             this.activeCFour = cFourPrefab;
             if (this.user != null)
@@ -256,5 +275,67 @@ public class CFourAttack : Attack
 
         if (this.cFourDetonatior != null)
             this.cFourDetonatior.SetActive(false);
+    }
+
+    private IEnumerator DetonateCFourInstantlyCorutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+
+
+        if (this.animations != null)
+            this.animations.C4Detonate(0);
+
+        //yield return new WaitForSeconds(0.1f);
+
+        if (this.cFourDetonatior != null)
+            this.cFourDetonatior.SetActive(true);
+
+        /*yield return new WaitForSeconds(0.1f);
+
+        if (this.animations != null)
+            this.animations.C4Detonate(1);*/
+
+        yield return new WaitForSeconds(0.04f);
+
+        if (this.animations != null)
+            this.animations.C4Detonate(2);
+        yield return new WaitForSeconds(0.01f);
+
+        if (this.activeCFour != null)
+            this.activeCFour.Detonate();
+
+        /*yield return new WaitForSeconds(0.1f);
+
+        if (this.animations != null)
+            this.animations.C4Detonate(1);*/
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.animations != null)
+            this.animations.C4Detonate(0);
+
+        yield return new WaitForSeconds(0.05f);
+
+        if (this.cFourDetonatior != null)
+            this.cFourDetonatior.SetActive(false);
+
+        yield return new WaitForSeconds(0.05f);
+
+
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+
+
+        yield return new WaitForSeconds(0.05f);
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
     }
 }

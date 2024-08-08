@@ -504,7 +504,7 @@ public class SuperPainDrill : Attack
 
                 if (this.bloodHole != null && this.user.tempOpponent != null)
                 {
-                    if (this.user.tempOpponent.characterId == 3 || this.user.tempOpponent.characterId == 4)
+                    if (this.user.tempOpponent.characterId == 3 || this.user.tempOpponent.characterId == 4 || this.user.tempOpponent.characterId == 7)
                         this.bloodHole.transform.localPosition = new Vector3(0f, 0.106f, 0f);
                     else
                         this.bloodHole.transform.localPosition = new Vector3(0f, -0.005f, 0f);

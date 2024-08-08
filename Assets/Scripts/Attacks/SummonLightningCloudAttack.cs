@@ -18,6 +18,12 @@ public class SummonLightningCloudAttack : Attack
     //public float cooldown = 5f;
     public float cooldownTimer;
 
+    [Space]
+    public float startDelay = 0.25f;
+    public float lightningDelay = 0.4f;
+    public float endLag = 0.2f;
+    public float cloudDissapearDuration = 0.2f;
+
     //public AudioSource lightningSfx;
 
     public override void OnHit()
@@ -99,7 +105,7 @@ public class SummonLightningCloudAttack : Attack
             startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
         }*/
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(this.startDelay);
         /*if (this.animations != null)
             this.animations.SummonLightningCloud(1);*/
 
@@ -154,8 +160,14 @@ public class SummonLightningCloudAttack : Attack
             //stormCloudPrefab = Instantiate(stormCloudPrefab, new Vector3(this.user.tempOpponent.transform.position.x, 6f, 0), Quaternion.Euler(0, 0, 0));
             stormCloudPrefab = Instantiate(stormCloudPrefab, new Vector3(lightningPos, 6f, 0), Quaternion.Euler(0, 0, 0));
             stormCloudPrefab.SetOwner(this.user);
+            stormCloudPrefab.DoLightning(this.lightningDelay, this.cloudDissapearDuration);
         }
-        yield return new WaitForSeconds(0.3f);
+
+        //yield return new WaitForSeconds(0.3f);
+
+        if (this.lightningDelay >= 0.1f)
+            yield return new WaitForSeconds(this.lightningDelay - 0.1f);
+
         if (this.animations != null)
             this.animations.SummonLightningCloud(1);
 
@@ -172,7 +184,7 @@ public class SummonLightningCloudAttack : Attack
         yield return new WaitForSeconds(0.2f);
         if (this.glowingEyes != null)
             this.glowingEyes.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(this.endLag / 2f);
         //yield return new WaitForSeconds(0.4f);
 
         //yield return new WaitForSeconds(0.5f);
@@ -180,7 +192,7 @@ public class SummonLightningCloudAttack : Attack
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(this.endLag / 2f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

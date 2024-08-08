@@ -2817,7 +2817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   stun: 0
-  horizontalKnockback: -500
+  horizontalKnockback: 500
   verticalKnockback: 0
   explosionKnockback: 0
   continousDamage: 0
@@ -12011,6 +12011,11 @@ MonoBehaviour:
   damage: 13
   superCharge: 6
   rollSfx: {fileID: 1443241138769093800}
+  startDelay: 0.2
+  rollDuration: 0.75
+  rollSpeed: 1000
+  missEndLag: 0.5
+  hitEndLag: 0.2
 --- !u!1 &3968197596592779777
 GameObject:
   m_ObjectHideFlags: 0
@@ -18396,6 +18401,7 @@ MonoBehaviour:
   ballWaveSpeed: 5
   glowingEyes: {fileID: 270932122468304220}
   animationId: 0
+  doubleElectricBall: 0
   electricitySfx: {fileID: 8144958480070852417}
 --- !u!1 &4401506644569274984
 GameObject:
@@ -20951,6 +20957,8 @@ MonoBehaviour:
   glowingEyes: {fileID: 270932122468304220}
   animationId: 0
   electricitySfx: {fileID: 595644364576553704}
+  startDelay: 0.2
+  endLag: 0.4
 --- !u!1 &5462480963015103274
 GameObject:
   m_ObjectHideFlags: 0
@@ -30661,6 +30669,8 @@ MonoBehaviour:
   corc: {fileID: 3985772134942960388}
   liquid: {fileID: 5987913623311763131}
   confused: {fileID: 7381477522709565441}
+  healingTickAmount: 100
+  healingPerTick: 0.25
 --- !u!1 &8246186926638249664
 GameObject:
   m_ObjectHideFlags: 0

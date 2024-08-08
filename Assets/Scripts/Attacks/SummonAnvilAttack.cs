@@ -16,6 +16,10 @@ public class SummonAnvilAttack : Attack
     public GameObject confused;
     public GameObject rope;
 
+    [Space]
+    public float cooldown = 1f;
+    public float summonSpeed = 0.3f;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -89,10 +93,10 @@ public class SummonAnvilAttack : Attack
             startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(this.summonSpeed);
 
         //this.cooldownTimer = 3f;
-        this.cooldownTimer = 1f;
+        this.cooldownTimer = this.cooldown;
 
         if (this.anvil != null && this.user.tempOpponent != null)
         {

@@ -19,6 +19,7 @@ public class AlienGunShootAttack: Attack
 
     public float shootTime = 0.65f;
     public float airShootTime = 0.25f;
+    public float endLag = 0.25f;
 
     public AudioSource shootSfx;
 
@@ -183,11 +184,11 @@ public class AlienGunShootAttack: Attack
         if (this.handHitbox != null)
             this.handHitbox.SetActive(false);
 
-        yield return new WaitForSeconds(0.125f);
+        yield return new WaitForSeconds(this.endLag / 2f);
 
         this.LightTip(false);
 
-        yield return new WaitForSeconds(0.125f);
+        yield return new WaitForSeconds(this.endLag / 2f);
 
         //yield return new WaitForSeconds(0.25f);
 

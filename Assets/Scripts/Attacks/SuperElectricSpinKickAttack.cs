@@ -19,6 +19,8 @@ public class SuperElectricSpinKickAttack : Attack
     public float forwardVelocity = 0f;
     public float duration = 0.9f;
 
+    public float startDelay = 0.19f;
+    public float endLag = 0.8f;
 
     public ParticleSystem electricity1;
     public ParticleSystem electricity2;
@@ -122,7 +124,7 @@ public class SuperElectricSpinKickAttack : Attack
         //yield return new WaitForSeconds(0.2f);
 
 
-        yield return new WaitForSeconds(0.19f);
+        yield return new WaitForSeconds(this.startDelay);
 
         if (this.windHitboxes != null)
             this.windHitboxes.gameObject.SetActive(true);
@@ -175,6 +177,9 @@ public class SuperElectricSpinKickAttack : Attack
 
         //yield return new WaitForSeconds(0.9f);
         this.spinning = false;
+
+        this.user.lookAtPlayer();
+
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
         if (this.hitbox2 != null)
@@ -202,7 +207,7 @@ public class SuperElectricSpinKickAttack : Attack
 
 
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(this.endLag);
         //Debug.Log("end 1");
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
@@ -231,7 +236,7 @@ public class SuperElectricSpinKickAttack : Attack
 
         //yield return new WaitForSeconds(0.2f);
 
-        yield return new WaitForSeconds(0.19f);
+        yield return new WaitForSeconds(this.startDelay);
 
         if (this.windHitboxes != null)
             this.windHitboxes.gameObject.SetActive(true);
@@ -279,6 +284,8 @@ public class SuperElectricSpinKickAttack : Attack
         if (this.electricitySfx != null)
             this.electricitySfx.Stop();
 
+        this.user.lookAtPlayer();
+
         //yield return new WaitForSeconds(0.9f);
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
@@ -319,7 +326,7 @@ public class SuperElectricSpinKickAttack : Attack
 
 
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(this.endLag);
         //Debug.Log("end 2");
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

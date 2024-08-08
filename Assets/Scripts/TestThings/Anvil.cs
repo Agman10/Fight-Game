@@ -23,6 +23,8 @@ public class Anvil : MonoBehaviour
     public AudioSource hitSfx;
     public AudioSource fallingSfx;
 
+    public float damage = 32f;
+
     private void OnEnable()
     {
         if (this.hitbox != null)
@@ -102,7 +104,7 @@ public class Anvil : MonoBehaviour
             }
             else
             {
-                player.TakeDamage(this.transform.position, 32f, 0f, 0f, 0f, true, true, false, false, true, false, true);
+                player.TakeDamage(this.transform.position, this.damage, 0f, 0f, 0f, true, true, false, false, true, false, true);
                 if (this.belongsTo != null)
                     player.OnHitFromPlayer?.Invoke(this.belongsTo);
             }
@@ -208,7 +210,7 @@ public class Anvil : MonoBehaviour
         if (player.collision != null)
             player.collision.enabled = false;
 
-        player.TakeDamage(this.transform.position, 32f);
+        player.TakeDamage(this.transform.position, this.damage);
 
         if(this.hitSfx != null)
         {

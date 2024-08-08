@@ -14,6 +14,10 @@ public class ElectricalFieldAttack : Attack
 
     public AudioSource electricitySfx;
 
+    [Space]
+    public float startDelay = 0.2f;
+    public float endLag = 0.4f;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -60,7 +64,7 @@ public class ElectricalFieldAttack : Attack
         if (this.electricity != null)
             this.electricity.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(this.startDelay);
 
         if (this.electricitySfx != null)
             this.electricitySfx.Play();
@@ -88,6 +92,24 @@ public class ElectricalFieldAttack : Attack
             yield return new WaitForSeconds(0.5f);
 
 
+        /*yield return new WaitForSeconds(0.25f);
+
+        if (this.user.input != null && this.user.input.special2)
+            yield return new WaitForSeconds(0.25f);
+        if (this.user.input != null && this.user.input.special2)
+            yield return new WaitForSeconds(0.25f);
+        if (this.user.input != null && this.user.input.special2)
+            yield return new WaitForSeconds(0.25f);
+        if (this.user.input != null && this.user.input.special2)
+            yield return new WaitForSeconds(0.25f);
+        if (this.user.input != null && this.user.input.special2)
+            yield return new WaitForSeconds(0.25f);
+        if (this.user.input != null && this.user.input.special2)
+            yield return new WaitForSeconds(0.25f);
+        if (this.user.input != null && this.user.input.special2)
+            yield return new WaitForSeconds(0.25f);*/
+
+
         if (this.glowingEyes != null)
             this.glowingEyes.gameObject.SetActive(false);
 
@@ -111,7 +133,7 @@ public class ElectricalFieldAttack : Attack
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(this.endLag);
 
         if (this.electricity != null)
             this.electricity.gameObject.SetActive(false);

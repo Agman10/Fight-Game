@@ -20,6 +20,8 @@ public class SuperElectricBallAttack : Attack
 
     public int animationId;
 
+    public bool doubleElectricBall = false;
+
     public AudioSource electricitySfx;
 
     public override void OnHit()
@@ -49,14 +51,23 @@ public class SuperElectricBallAttack : Attack
                 {
                     this.user.GiveSuperCharge(-(this.user.maxSuperCharge / 2));
                     this.user.AddStun(0.2f, true);
-                    this.StartCoroutine(this.SuperElectricBallCoroutine(false));
+                    //this.StartCoroutine(this.SuperElectricBallCoroutine(false));
 
+                    if (this.doubleElectricBall)
+                        this.StartCoroutine(this.SuperElectricBallDoubleCoroutine(false));
+                    else
+                        this.StartCoroutine(this.SuperElectricBallCoroutine(false));
                 }
                 else
                 {
                     this.user.GiveSuperCharge(-(this.user.maxSuperCharge / 2));
                     this.user.AddStun(0.2f, true);
-                    this.StartCoroutine(this.SuperElectricBallCoroutine(true));
+                    //this.StartCoroutine(this.SuperElectricBallCoroutine(true));
+
+                    if (this.doubleElectricBall)
+                        this.StartCoroutine(this.SuperElectricBallDoubleCoroutine(true));
+                    else
+                        this.StartCoroutine(this.SuperElectricBallCoroutine(true));
                 }
                 /*if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                 {
@@ -268,6 +279,229 @@ public class SuperElectricBallAttack : Attack
 
         if (this.electricitySfx != null)
             this.electricitySfx.Stop();
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+
+    private IEnumerator SuperElectricBallDoubleCoroutine(bool inAir = false)
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        /*if (this.animations != null)
+            this.animations.SuperFireBallCharge();*/
+
+        if (this.user.soundEffects != null)
+            this.user.soundEffects.PlaySuperSfx();
+
+        this.user.rb.isKinematic = true;
+
+        if (this.animations != null)
+        {
+            this.animations.ElectricSphereThrow(0, inAir);
+        }
+
+        if (this.startParticle != null)
+        {
+            GameObject startParticlePrefab = this.startParticle;
+            startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 1.8f, -0.8f), Quaternion.Euler(0, 0, 0));
+        }
+
+        if (this.electricBallModel != null)
+        {
+            if (this.electricBallModelP2 != null && this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
+            {
+                if (this.electricBallModelP1 != null)
+                    this.electricBallModelP1.SetActive(false);
+                this.electricBallModelP2.SetActive(true);
+            }
+            else if (this.electricBallModelP1 != null)
+            {
+                this.electricBallModelP1.SetActive(true);
+
+                if (this.electricBallModelP2 != null)
+                    this.electricBallModelP2.SetActive(false);
+            }
+
+
+            this.electricBallModel.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            this.electricBallModel.SetActive(true);
+        }
+
+        if (this.glowingEyes != null)
+            this.glowingEyes.gameObject.SetActive(true);
+
+        if (this.electricitySfx != null)
+            this.electricitySfx.Play();
+
+        float currentTime = 0;
+        float duration = 0.5f;
+        float targetScale = 1f;
+        float startScale = 0.1f;
+        while (currentTime < duration)
+        {
+
+            //this.transform.position = new Vector3(this.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
+            if (this.electricBallModel != null)
+                this.electricBallModel.transform.localScale = new Vector3(
+                    Mathf.Lerp(startScale, targetScale, currentTime / duration),
+                    Mathf.Lerp(startScale, targetScale, currentTime / duration),
+                    Mathf.Lerp(startScale, targetScale, currentTime / duration));
+
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        if (this.electricitySfx != null)
+            this.electricitySfx.Stop();
+
+        if (this.glowingEyes != null)
+            this.glowingEyes.gameObject.SetActive(false);
+
+        //yield return new WaitForSeconds(0.3f);
+        /*if (this.animations != null)
+            this.animations.SuperFireBallShoot();*/
+
+        if (this.electricBallModel != null)
+        {
+            this.electricBallModel.SetActive(false);
+            this.electricBallModel.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        }
+
+        if (this.animations != null)
+        {
+            this.animations.ElectricSphereThrow(1, inAir);
+
+            /*if (this.animationId == 1)
+                this.animations.ShootPoseCrouch2();
+            else
+                this.animations.SuperFireBallShoot();*/
+        }
+
+        if (this.electricBall != null)
+        {
+            ElectricBallProjectile electricBallPrefab = this.electricBall;
+
+            if (this.electricBallP2 != null && this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
+                electricBallPrefab = this.electricBallP2;
+
+            electricBallPrefab = Instantiate(electricBallPrefab, new Vector3((this.transform.forward.z * 1.35f) + this.transform.position.x, this.transform.position.y + 1.75f, 0), this.transform.rotation);
+            electricBallPrefab.SetOwner(this.user);
+            electricBallPrefab.moveSpeed = this.ballMoveSpeed;
+            electricBallPrefab.waveSpeed = this.ballWaveSpeed;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.animations != null)
+        {
+            this.animations.ElectricSphereThrow(0, inAir);
+        }
+
+
+        if (this.electricBallModel != null)
+        {
+            if (this.electricBallModelP2 != null && this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
+            {
+                if (this.electricBallModelP1 != null)
+                    this.electricBallModelP1.SetActive(false);
+                this.electricBallModelP2.SetActive(true);
+            }
+            else if (this.electricBallModelP1 != null)
+            {
+                this.electricBallModelP1.SetActive(true);
+
+                if (this.electricBallModelP2 != null)
+                    this.electricBallModelP2.SetActive(false);
+            }
+
+
+            this.electricBallModel.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            this.electricBallModel.SetActive(true);
+        }
+
+        if (this.glowingEyes != null)
+            this.glowingEyes.gameObject.SetActive(true);
+
+        if (this.electricitySfx != null)
+            this.electricitySfx.Play();
+
+        currentTime = 0;
+        duration = 0.3f;
+        targetScale = 1f;
+        startScale = 0.1f;
+        while (currentTime < duration)
+        {
+
+            //this.transform.position = new Vector3(this.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
+            if (this.electricBallModel != null)
+                this.electricBallModel.transform.localScale = new Vector3(
+                    Mathf.Lerp(startScale, targetScale, currentTime / duration),
+                    Mathf.Lerp(startScale, targetScale, currentTime / duration),
+                    Mathf.Lerp(startScale, targetScale, currentTime / duration));
+
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        if (this.electricitySfx != null)
+            this.electricitySfx.Stop();
+
+        if (this.glowingEyes != null)
+            this.glowingEyes.gameObject.SetActive(false);
+
+        //yield return new WaitForSeconds(0.3f);
+        /*if (this.animations != null)
+            this.animations.SuperFireBallShoot();*/
+
+        if (this.electricBallModel != null)
+        {
+            this.electricBallModel.SetActive(false);
+            this.electricBallModel.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        }
+
+        if (this.animations != null)
+        {
+            this.animations.ElectricSphereThrow(1, inAir);
+        }
+
+        if (this.electricBall != null)
+        {
+            ElectricBallProjectile electricBallPrefab = this.electricBall;
+
+            if (this.electricBallP2 != null && this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
+                electricBallPrefab = this.electricBallP2;
+
+            electricBallPrefab = Instantiate(electricBallPrefab, new Vector3((this.transform.forward.z * 1.35f) + this.transform.position.x, this.transform.position.y + 1.75f, 0), this.transform.rotation);
+            electricBallPrefab.SetOwner(this.user);
+            electricBallPrefab.moveSpeed = this.ballMoveSpeed;
+            electricBallPrefab.waveSpeed = this.ballWaveSpeed;
+        }
+
+
+        yield return new WaitForSeconds(0.8f);
+
+        this.user.rb.isKinematic = false;
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+
+        currentTime = 0;
+        duration = 0.5f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(0.5f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

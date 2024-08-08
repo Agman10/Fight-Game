@@ -17,6 +17,7 @@ public class SuperSpinGrab : Attack
 
     public bool turnUpsideDown;
     public float damage = 20f;
+    public float superChargeAmount = 10f;
     public float upwardForce = 1000f;
     public float downwardForce = 500f;
     public float grabStunLength = 0.6f;
@@ -204,8 +205,8 @@ public class SuperSpinGrab : Attack
         //player.TakeDamage(this.belongsTo.transform.position, 20);
         player.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);
         player.TakeDamage(this.user.transform.position, this.damage, 1.1f, this.user.transform.forward.z * 1000f, 1000f);
-        this.user.GiveSuperCharge(10f);
-        player.GiveSuperCharge(5f);
+        this.user.GiveSuperCharge(this.superChargeAmount);
+        player.GiveSuperCharge(this.superChargeAmount / 2f);
 
         if (this.impactEffect != null)
         {

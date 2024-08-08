@@ -15,6 +15,8 @@ public class CFour : MonoBehaviour
     public GameObject model;
     public bool isP2 = false;
 
+    public float activationTime = 0.3f;
+
     public CharacterSoundEffect explosionSfx;
     [Space]
 
@@ -62,20 +64,20 @@ public class CFour : MonoBehaviour
         if (this.rb != null)
             this.rb.isKinematic = false;
 
-        this.SetPlayerColor(this.isP2);
-        this.StartCoroutine(this.ActivateCoroutine());
+        /*this.SetPlayerColor(this.isP2);
+        this.StartCoroutine(this.ActivateCoroutine());*/
     }
     private void OnDisable()
     {
         this.StopAllCoroutines();
-        if (this.cFourAttackOwner != null)
+        if (this.cFourAttackOwner != null && this.cFourAttackOwner.activeCFour == this)
             this.cFourAttackOwner.activeCFour = null;
     }
 
     private void OnDestroy()
     {
         this.StopAllCoroutines();
-        if (this.cFourAttackOwner != null)
+        if (this.cFourAttackOwner != null && this.cFourAttackOwner.activeCFour == this)
             this.cFourAttackOwner.activeCFour = null;
     }
 
@@ -146,8 +148,14 @@ public class CFour : MonoBehaviour
         }*/
         
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(this.activationTime);
         this.MakeActive(true);
+    }
+
+    public void ActivateCFour()
+    {
+        this.SetPlayerColor(this.isP2);
+        this.StartCoroutine(this.ActivateCoroutine());
     }
 
     public void SetOwner(TestPlayer player, CFourAttack cFourAttack)
