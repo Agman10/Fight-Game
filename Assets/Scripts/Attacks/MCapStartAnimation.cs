@@ -14,8 +14,8 @@ public class MCapStartAnimation : Attack
     /*public GameObject propeller;
     public GameObject propellerBlade;*/
 
-    /*public Attack vsDarkJCap;
-    public Attack vsMikeBaller;*/
+    //public Attack vsDarkJCap;
+    public Attack vsMikeBaller;
 
     public override void OnHit()
     {
@@ -55,7 +55,17 @@ public class MCapStartAnimation : Attack
             }*/
 
             //this.StartCoroutine(this.TemplateCoroutine());
-            this.StartCoroutine(this.MasterJcapStart1());
+
+            //this.StartCoroutine(this.MasterJcapStart1());
+
+            if (this.vsMikeBaller != null && this.user.characterId == 6 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 7 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
+            {
+                this.vsMikeBaller.Initiate();
+            }
+            else
+            {
+                this.StartCoroutine(this.MasterJcapStart1());
+            }
         }
     }
 
