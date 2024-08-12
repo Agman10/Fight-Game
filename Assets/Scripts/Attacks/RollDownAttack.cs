@@ -174,6 +174,8 @@ public class RollDownAttack : Attack
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
 
+        this.user.lookAtPlayer();
+
         if (onGround)
         {
             this.user.rb.AddForce(0f, 600f, 0f);
@@ -234,7 +236,7 @@ public class RollDownAttack : Attack
         //this.user.rb.AddForce(xDir * 100f, yDir * 400f, 0f);
         this.user.rb.AddForce(dir.x * 800f, dir.y * 800f, 0f);
 
-        this.user.lookAtPlayer();
+        //this.user.lookAtPlayer();
         //while (Mathf.Abs(this.user.rb.velocity.y) > 0f)
 
         float currentTime = 0;

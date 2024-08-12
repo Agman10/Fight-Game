@@ -30,6 +30,9 @@ public class CharacterSelectLogic : MonoBehaviour
     public int gameModeId = 0;
     public Material mainGameSkybox;
     public Material fightBallSkybox;
+
+    [Space]
+    public int[] randomCharacterPool;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -127,6 +130,28 @@ public class CharacterSelectLogic : MonoBehaviour
             CharacterManager.Instance.player2 = this.characters[randomPlayerId].character;
             CharacterManager.Instance.player2Skin = this.characters[randomPlayerId].skins[randomPlayerSkinId];
             CharacterManager.Instance.player2Id = randomPlayerId;
+        }
+    }
+
+    public void SetFixedRandomCharacter(bool isPlayer1)
+    {
+        int fixedRandomPlayerId = this.randomCharacterPool[Random.Range(0, this.randomCharacterPool.Length)];
+
+        int randomPlayerId = Random.Range(0, this.characters.Length);
+        int randomPlayerSkinId = Random.Range(0, this.characters[fixedRandomPlayerId].skins.Length);
+
+        //Debug.Log(fixedRandomPlayerId);
+        if (isPlayer1)
+        {
+            CharacterManager.Instance.player1 = this.characters[fixedRandomPlayerId].character;
+            CharacterManager.Instance.player1Skin = this.characters[fixedRandomPlayerId].skins[randomPlayerSkinId];
+            CharacterManager.Instance.player1Id = fixedRandomPlayerId;
+        }
+        else
+        {
+            CharacterManager.Instance.player2 = this.characters[fixedRandomPlayerId].character;
+            CharacterManager.Instance.player2Skin = this.characters[fixedRandomPlayerId].skins[randomPlayerSkinId];
+            CharacterManager.Instance.player2Id = fixedRandomPlayerId;
         }
     }
 

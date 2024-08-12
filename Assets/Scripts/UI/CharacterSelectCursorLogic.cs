@@ -123,6 +123,10 @@ public class CharacterSelectCursorLogic : MonoBehaviour
                 {
                     this.characterNameText.text = "Random";
                     this.characterNameText.fontSize = 40;
+
+                    /*this.characterNameText.text = "Random   (Including secrets)";
+                    this.characterNameText.text = "Random      (Secrets only)";
+                    this.characterNameText.fontSize = 25;*/
                 }
                     
             }
@@ -313,7 +317,8 @@ public class CharacterSelectCursorLogic : MonoBehaviour
             else
             {
                 this.ready = true;
-                this.characterSelectLogic.SetRandomCharacter(this.isPlayer1);
+                //this.characterSelectLogic.SetRandomCharacter(this.isPlayer1);
+                this.characterSelectLogic.SetFixedRandomCharacter(this.isPlayer1);
                 if (this.readyPanel != null)
                     this.readyPanel.SetActive(true);
 
