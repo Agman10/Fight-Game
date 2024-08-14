@@ -14370,6 +14370,11 @@ MonoBehaviour:
   user: {fileID: 6680171171879883503}
   animations: {fileID: 3474424193929886022}
   onGoing: 0
+  alternate: 0
+  flame1: {fileID: 0}
+  flame2: {fileID: 0}
+  flame3: {fileID: 0}
+  electricity: {fileID: 0}
 --- !u!1 &4878535307767357560
 GameObject:
   m_ObjectHideFlags: 0
@@ -14551,6 +14556,7 @@ MonoBehaviour:
   grabbedPlayer: {fileID: 0}
   turnUpsideDown: 0
   damage: 30
+  superChargeAmount: 10
   upwardForce: 1000
   downwardForce: 1000
   grabStunLength: 1
@@ -32197,6 +32203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Unknown Entity
+  nameSize: 80
   characterId: 5
   health: 100
   maxHealth: 100

@@ -67,6 +67,19 @@ public class UppercutAttack : Attack
 
         //this.user.RemoveStun(1.3f);
     }
+
+    /*private void Update()
+    {
+        if (this.onGoing && this.user != null)
+        {
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            {
+                //this.user.rb.velocity = new Vector3(this.user.rb.velocity.x / 1.5f, this.user.rb.velocity.y - 0.4f, 0);
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y - 0.4f, 0);
+            }
+        }
+    }*/
+
     public override void OnDeath()
     {
         this.Stop();
@@ -114,21 +127,23 @@ public class UppercutAttack : Attack
             }
             else if (this.uppercutId == 3)
             {
-                if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                /*if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                     this.StartCoroutine(this.PunchUppercutCoroutine2(1000f));
                 else
-                    this.StartCoroutine(this.PunchUppercutCoroutine2(1300f));
+                    this.StartCoroutine(this.PunchUppercutCoroutine2(1300f));*/
 
                 this.user.AddStun(0.2f, true);
+                this.StartCoroutine(this.PunchUppercutCoroutine2(1000f));
             }
             else if (this.uppercutId == 4)
             {
-                if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                /*if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                     this.StartCoroutine(this.KickUppercutCoroutine(this.kickYForce));
                 else
-                    this.StartCoroutine(this.KickUppercutCoroutine(this.kickYForce + 200f));
+                    this.StartCoroutine(this.KickUppercutCoroutine(this.kickYForce + 200f));*/
 
                 this.user.AddStun(0.2f, true);
+                this.StartCoroutine(this.KickUppercutCoroutine(this.kickYForce));
             }
             else
             {
@@ -141,6 +156,9 @@ public class UppercutAttack : Attack
 
         }
     }
+
+    //NEED TO FIX RAZOR KICK AND ROBO KICK
+
     IEnumerator KickUppercutCoroutine(float yForce = 1000f)
     {
         this.user.attackStuns.Add(this.gameObject);
@@ -181,8 +199,12 @@ public class UppercutAttack : Attack
         /*if (this.user.rb != null)
             this.user.rb.AddForce(this.user.transform.forward.z * 200, 1000, 0);*/
 
+        /*if (this.kickHitbox != null)
+            this.kickHitbox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.001f);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
         if (this.user.rb != null)
-            this.user.rb.AddForce(this.user.transform.forward.z * this.kickXForce, yForce, 0);
+            this.user.rb.AddForce(this.user.transform.forward.z * this.kickXForce, yForce, 0);*/
 
         /*if (this.user.ragdoll != null)
             this.user.ragdoll.transform.localEulerAngles = new Vector3(0, this.user.transform.forward.z * 90, 50);*/
@@ -196,6 +218,13 @@ public class UppercutAttack : Attack
 
         if (this.kickHitbox != null)
             this.kickHitbox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.001f);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * this.kickXForce, yForce, 0);
+
+        /*if (this.kickHitbox != null)
+            this.kickHitbox.gameObject.SetActive(true);*/
         yield return new WaitForSeconds(animSpeed);
 
         //this.stopSfxOnHit = false;
@@ -308,8 +337,14 @@ public class UppercutAttack : Attack
             this.animations.SetPunchUppercutStartAnim2();
         yield return new WaitForSeconds(0.05f);
         this.PlayFire(true);
+
+        /*if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.001f);*/
+
+        /*this.user.rb.velocity = new Vector3(0f, 0f, 0f);
         if (this.user.rb != null)
-            this.user.rb.AddForce(this.user.transform.forward.z * 200, 1000, 0);
+            this.user.rb.AddForce(this.user.transform.forward.z * 200, 1000, 0);*/
 
         if (this.animations != null)
         {
@@ -317,6 +352,13 @@ public class UppercutAttack : Attack
             /*if (this.animations.rightLeg != null)
                 this.animations.rightLeg.localScale = new Vector3(1, 1.4f, 1);*/
         }
+
+        if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.001f);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 200, 1000, 0);
 
         //this.stopSfxOnHit = true;
 
@@ -332,8 +374,8 @@ public class UppercutAttack : Attack
             this.flameSfx.Play();
         }
 
-        if (this.punchHitbox1 != null)
-            this.punchHitbox1.gameObject.SetActive(true);
+        /*if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);*/
 
         yield return new WaitForSeconds(0.1f);
         float waitTime = 0.4f;
@@ -469,13 +511,25 @@ public class UppercutAttack : Attack
             this.animations.SetPunchUppercutStartAnim2();
         yield return new WaitForSeconds(0.05f);
         this.PlayFire(true);
+
+        /*if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.001f);*/
+        /*this.user.rb.velocity = new Vector3(0f, 0f, 0f);
         if (this.user.rb != null)
-            this.user.rb.AddForce(this.user.transform.forward.z * 200, upForce, 0);
+            this.user.rb.AddForce(this.user.transform.forward.z * 200, upForce, 0);*/
 
         if (this.animations != null)
         {
             this.animations.SetPunchUpercutAnim();
         }
+
+        if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.001f);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 200, upForce, 0);
 
         //this.stopSfxOnHit = true;
 
@@ -491,8 +545,8 @@ public class UppercutAttack : Attack
             this.flameSfx.Play();
         }
 
-        if (this.punchHitbox1 != null)
-            this.punchHitbox1.gameObject.SetActive(true);
+        /*if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);*/
 
         yield return new WaitForSeconds(0.1f);
         float waitTime = 0.4f;
@@ -585,14 +639,19 @@ public class UppercutAttack : Attack
             this.animations.SetPunchUppercutStartAnim1();
 
         yield return new WaitForSeconds(0.1f);
-        if (this.user.rb != null)
-            this.user.rb.AddForce(this.user.transform.forward.z * 300, 900, 0);
+        /*if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 300, 900, 0);*/
 
         if (this.animations != null)
             this.animations.SuperFlameSpin2();
 
         if (this.kickHitbox != null)
             this.kickHitbox.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.001f);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 300, 900, 0);
 
         if (this.trail != null)
             this.trail.SetActive(true);

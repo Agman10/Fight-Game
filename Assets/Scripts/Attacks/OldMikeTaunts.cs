@@ -17,6 +17,9 @@ public class OldMikeTaunts : Attack
 
     public ParticleSystem clubDanceElectricity;
 
+    public bool charingUpSuper = false;
+    public float charingUpSuperTimer = 0f;
+
     public override void OnEnable()
     {
         base.OnEnable();
@@ -64,6 +67,21 @@ public class OldMikeTaunts : Attack
         {
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                 this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+        }
+
+        if (this.onGoing && this.charingUpSuper && this.user != null)
+        {
+            this.charingUpSuperTimer += 3f * Time.deltaTime;
+
+            if (this.charingUpSuperTimer >= 0.25f)
+            {
+                this.user.GiveSuperCharge(0.25f / 1.5f);
+                this.charingUpSuperTimer = 0f;
+            }
+        }
+        else
+        {
+            this.charingUpSuperTimer = 0f;
         }
     }
 
@@ -140,6 +158,8 @@ public class OldMikeTaunts : Attack
 
         if (this.clubDanceElectricity != null)
             this.clubDanceElectricity.Stop();
+
+        this.charingUpSuper = false;
 
         /*if (this.electricGuitar != null)
             this.electricGuitar.SetActive(false);*/
@@ -384,6 +404,8 @@ public class OldMikeTaunts : Attack
 
         if (this.clubDanceElectricity != null)
             this.clubDanceElectricity.Play();
+
+        this.charingUpSuper = true;
 
         float speedMultiplier = 2f;
 
@@ -649,6 +671,8 @@ public class OldMikeTaunts : Attack
 
         if (this.clubDanceElectricity != null)
             this.clubDanceElectricity.Stop();
+
+        this.charingUpSuper = false;
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

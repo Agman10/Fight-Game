@@ -33667,6 +33667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: 
+  nameSize: 100
   characterId: 0
   health: 100
   maxHealth: 100
@@ -51233,12 +51234,12 @@ GameObject:
   - component: {fileID: 1084984842}
   - component: {fileID: 1084984843}
   m_Layer: 5
-  m_Name: KO UI Logic
+  m_Name: Goal UI Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1084984842
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51251,7 +51252,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1538069853}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -51267,15 +51268,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1084984841}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7dbda21b097a584ead3a8c692a3eb11, type: 3}
+  m_Script: {fileID: 11500000, guid: c207cfb067d6f2e44a2c0bb2e88be5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  k: {fileID: 1870683582}
-  o: {fileID: 1846017041}
-  perfect: {fileID: 410906422}
+  goalP1: {fileID: 1148714767}
+  goalP2: {fileID: 775751053}
+  winTextP1: {fileID: 356554115}
+  winTextP2: {fileID: 2035821414}
+  perfectP1: {fileID: 410906422}
   perfectP2: {fileID: 1873941986}
-  draw: {fileID: 348920891}
-  hyperKO: {fileID: 1683190889}
 --- !u!1 &1086726062
 GameObject:
   m_ObjectHideFlags: 0
@@ -60364,6 +60365,7 @@ MonoBehaviour:
   victoryBgm: {fileID: 389675562}
   tempRandomSkybox: {fileID: 1943167108}
   goalSfx: {fileID: 1738821941}
+  goalUiLogic: {fileID: 1084984843}
 --- !u!4 &1327057624
 Transform:
   m_ObjectHideFlags: 0
@@ -69380,9 +69382,9 @@ RectTransform:
   - {fileID: 1476505325}
   - {fileID: 364892911}
   - {fileID: 1532260996}
-  - {fileID: 1406941143}
   - {fileID: 2015908790}
   - {fileID: 1084984842}
+  - {fileID: 1406941143}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -86602,7 +86604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7364959451386070703, guid: 5f1f99b968328114c8b204d5b6e7c4e8, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7364959451386070703, guid: 5f1f99b968328114c8b204d5b6e7c4e8, type: 3}
       propertyPath: m_AnchorMax.x
@@ -94727,7 +94729,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2015908790
 RectTransform:
   m_ObjectHideFlags: 0
@@ -94754,7 +94756,7 @@ RectTransform:
   - {fileID: 1148714768}
   - {fileID: 775751054}
   m_Father: {fileID: 1538069853}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

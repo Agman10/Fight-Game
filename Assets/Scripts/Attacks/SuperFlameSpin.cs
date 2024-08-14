@@ -32,6 +32,19 @@ public class SuperFlameSpin : Attack
         }
     }
 
+    private void Update()
+    {
+        if (this.onGoing && this.user != null)
+        {
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            {
+                //this.user.rb.velocity = new Vector3(this.user.rb.velocity.x / 1.5f, this.user.rb.velocity.y - 0.4f, 0);
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y - 0.4f, 0);
+            }
+
+        }
+    }
+
     [ContextMenu("Initiate")]
     public override void Initiate()
     {
@@ -83,11 +96,15 @@ public class SuperFlameSpin : Attack
 
 
         this.PlayFire(true);
-        if (this.user.rb != null)
-            this.user.rb.AddForce(this.user.transform.forward.z * 400, 1200, 0);
+        /*if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 400, 1200, 0);*/
 
         if (this.hitbox1 != null)
             this.hitbox1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.001f);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 400, 1200, 0);
 
         if (this.spinSfx != null)
             this.spinSfx.Play();

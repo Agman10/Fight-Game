@@ -12,6 +12,11 @@ public class GrandFlameAttack : Attack
     public bool canBeCanceled;
 
     public GameObject startParticle;
+
+    [Space]
+    public float startDelay = 0.2f;
+    public float riseUpDelay = 0.05f;
+    public float riseUpDuration = 0.15f;
     public override void OnHit()
     {
         base.OnHit();
@@ -77,7 +82,7 @@ public class GrandFlameAttack : Attack
         //yield return new WaitForSeconds(0.2f);
 
         float testTime = 0f;
-        float time = 0.2f;
+        float time = this.startDelay;
         float startPosY = this.animations.body.localPosition.y;
         while (time > 0)
         {
@@ -93,7 +98,7 @@ public class GrandFlameAttack : Attack
         if (this.animations != null)
             this.animations.GrandFlameMid();
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(this.riseUpDelay);
 
         this.user.rb.constraints = RigidbodyConstraints.FreezeAll;
         this.user.knockbackInvounrability = true;
@@ -102,7 +107,7 @@ public class GrandFlameAttack : Attack
 
 
         float currentTime = 0;
-        float duration = 0.15f;
+        float duration = this.riseUpDuration;
         //float targetVolume = 0.1f;
         float targetPosition = 3.5f;
         float start = this.transform.position.y;

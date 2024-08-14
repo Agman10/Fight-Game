@@ -82,6 +82,11 @@ public class RollUpAttack : Attack
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
 
+        /*yield return new WaitForSeconds(0.001f);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * this.xForce, this.yForce, 0);*/
+
         this.ChangeCollision(true);
 
         if (this.electricity != null)

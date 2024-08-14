@@ -14,6 +14,8 @@ public class ElectricalFieldAttack : Attack
 
     public AudioSource electricitySfx;
 
+    public GameObject magneticHitboxes;
+
     [Space]
     public float startDelay = 0.2f;
     public float endLag = 0.4f;
@@ -78,7 +80,8 @@ public class ElectricalFieldAttack : Attack
         if (this.electricity != null)
             this.electricity.Play();
 
-        
+        if (this.magneticHitboxes != null)
+            this.magneticHitboxes.gameObject.SetActive(true);
 
         //yield return new WaitForSeconds(1f);
         yield return new WaitForSeconds(0.5f);
@@ -125,6 +128,9 @@ public class ElectricalFieldAttack : Attack
         if (this.electricitySfx != null)
             this.electricitySfx.Stop();
 
+        if (this.magneticHitboxes != null)
+            this.magneticHitboxes.gameObject.SetActive(false);
+
         yield return new WaitForSeconds(0.1f);
 
         if (this.hitbox2 != null)
@@ -163,6 +169,9 @@ public class ElectricalFieldAttack : Attack
 
         if (this.electricitySfx != null)
             this.electricitySfx.Stop();
+
+        if (this.magneticHitboxes != null)
+            this.magneticHitboxes.gameObject.SetActive(false);
 
         this.user.rb.isKinematic = false;
 

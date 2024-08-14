@@ -6,6 +6,7 @@ using UnityEngine;
 public class TestPlayer : MonoBehaviour
 {
     public string characterName;
+    public float nameSize = 100f;
     public int characterId;
     public float health = 100f;
     public float maxHealth = 100f;

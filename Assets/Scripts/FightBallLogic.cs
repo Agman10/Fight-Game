@@ -26,6 +26,8 @@ public class FightBallLogic : MonoBehaviour
     public RandomSkybox tempRandomSkybox;
 
     public AudioSource goalSfx;
+
+    public GoalUiLogic goalUiLogic;
     // Start is called before the first frame update
 
     private void Awake()
@@ -111,9 +113,15 @@ public class FightBallLogic : MonoBehaviour
                     this.player1ScoreText.text = player1Score.ToString();
 
                 if (this.player1Score >= this.maxScore)
+                {
                     this.EndGame(true);
+                }
                 else
+                {
                     this.StartCoroutine(this.RespawnBallCoroutine());
+                    if (this.goalUiLogic != null)
+                        this.goalUiLogic.GoalText(true);
+                }
 
                 if (this.p2GoalEffect != null)
                     this.p2GoalEffect.Play();
@@ -125,9 +133,16 @@ public class FightBallLogic : MonoBehaviour
                     this.player2ScoreText.text = player2Score.ToString();
 
                 if (this.player2Score >= this.maxScore)
+                {
                     this.EndGame(false);
+                }
                 else
+                {
                     this.StartCoroutine(this.RespawnBallCoroutine());
+
+                    if (this.goalUiLogic != null)
+                        this.goalUiLogic.GoalText(false);
+                }
 
                 if (this.p1GoalEffect != null)
                     this.p1GoalEffect.Play();
@@ -192,7 +207,20 @@ public class FightBallLogic : MonoBehaviour
                     
 
                 if (this.player1 != null)
+                {
                     this.player1.tempLookAtBall = false;
+
+                    if(this.goalUiLogic != null)
+                    {
+                        bool isPerfect = false;
+                        if (this.player2Score <= 0)
+                            isPerfect = true;
+
+                        float textSize = this.player1.nameSize;
+
+                        this.goalUiLogic.WinText(true, "<size=" + textSize + "%>" + this.player1.characterName, isPerfect);
+                    }
+                }
             }
             else
             {
@@ -204,7 +232,20 @@ public class FightBallLogic : MonoBehaviour
                     
 
                 if (this.player2 != null)
+                {
                     this.player2.tempLookAtBall = false;
+
+                    if (this.goalUiLogic != null)
+                    {
+                        bool isPerfect = false;
+                        if(this.player1Score <= 0)
+                            isPerfect = true;
+
+                        float textSize = this.player2.nameSize;
+
+                        this.goalUiLogic.WinText(false, "<size=" + textSize + "%>" + this.player2.characterName, isPerfect);
+                    }
+                }
             }
 
             /*if (this.music != null)
