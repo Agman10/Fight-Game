@@ -30,6 +30,19 @@ public class SuperRazorKick : Attack
         //this.user.RemoveStun(1.3f);
     }
 
+    private void Update()
+    {
+        if (this.onGoing && this.user != null)
+        {
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            {
+                //this.user.rb.velocity = new Vector3(this.user.rb.velocity.x / 1.5f, this.user.rb.velocity.y - 0.4f, 0);
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y - 0.4f, 0);
+            }
+
+        }
+    }
+
     [ContextMenu("Initiate")]
     public override void Initiate()
     {
@@ -107,8 +120,8 @@ public class SuperRazorKick : Attack
         }
         yield return new WaitForSeconds(0.05f);
 
-        if (this.user.rb != null)
-            this.user.rb.AddForce(this.user.transform.forward.z * 200, 750, 0);
+        /*if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 200, 750, 0);*/
         /*if (this.user.ragdoll != null)
             this.user.ragdoll.transform.localEulerAngles = new Vector3(0, this.user.transform.forward.z * 90, 50);*/
 
@@ -117,6 +130,12 @@ public class SuperRazorKick : Attack
 
         if (this.hitbox1 != null)
             this.hitbox1.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.001f);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 200, 750, 0);
+
         yield return new WaitForSeconds(animSpeed);
 
         if (this.animations != null)
