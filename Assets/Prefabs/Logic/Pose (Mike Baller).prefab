@@ -8817,6 +8817,7 @@ MonoBehaviour:
   characterId: 3
   defaultYPos: 1.6
   armsDefaultYPos: 0.15
+  defaultEyeYHeight: 0
   neutralEyes: {fileID: 0}
   happyEyes: {fileID: 0}
   frowningEyes: {fileID: 0}
@@ -8824,6 +8825,7 @@ MonoBehaviour:
   boredEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
+  eyesPosTransform: {fileID: 0}
 --- !u!114 &7691140925516141206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17948,6 +17950,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 8280793154218916582, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e10f19b1c0ded444d98439c70d2f0ad5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
 --- !u!4 &7078570146073485358 stripped

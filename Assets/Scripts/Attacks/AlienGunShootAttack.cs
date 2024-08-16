@@ -256,8 +256,8 @@ public class AlienGunShootAttack: Attack
         {
             LaserProjectile laserPrefab = this.laserProjectile;
 
-            if(this.laserProjectileP2 != null && this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
-                laserPrefab = this.laserProjectileP2;
+            /*if(this.laserProjectileP2 != null && this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
+                laserPrefab = this.laserProjectileP2;*/
 
             float forward = this.transform.forward.z;
             //ghostPrefab = Instantiate(ghostPrefab, this.transform.position, this.transform.rotation);
@@ -265,6 +265,10 @@ public class AlienGunShootAttack: Attack
 
             //laserPrefab = Instantiate(laserPrefab, new Vector3(this.user.transform.position.x + (forward * 1.35f), this.user.transform.position.y + 1.83f, -0.12f), this.user.transform.rotation);
             laserPrefab = Instantiate(laserPrefab, new Vector3(this.user.transform.position.x + (forward * 1.4f), this.user.transform.position.y + 1.83f, -0.12f), this.user.transform.rotation);
+
+            if (this.user != null && this.user.tempOpponent != null && this.user.tempOpponent.characterId == this.user.characterId && this.user.playerNumber == 2)
+                laserPrefab.SetP2(true);
+
             if (this.user != null)
                 laserPrefab.SetOwner(this.user);
 

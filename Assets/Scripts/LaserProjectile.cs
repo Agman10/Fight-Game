@@ -16,7 +16,12 @@ public class LaserProjectile : MonoBehaviour
     public float speed = 10f;
 
     private bool disabled;
-    
+
+    public bool isP2 = false;
+    public Material p1Material;
+    public Material p2Material;
+    public GameObject hitEffectP2;
+
     //public float damage = 5f;
 
     void OnEnable()
@@ -108,10 +113,21 @@ public class LaserProjectile : MonoBehaviour
         if (this.model != null)
             this.model.gameObject.SetActive(false);
 
-        if (this.hitEffect != null)
+        if (!this.isP2)
         {
-            GameObject hitEffectPrefab = this.hitEffect;
-            hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x + (this.transform.forward.z * 0.25f), this.transform.position.y, this.transform.position.z), Quaternion.Euler(0, 0, 0));
+            if (this.hitEffect != null)
+            {
+                GameObject hitEffectPrefab = this.hitEffect;
+                hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x + (this.transform.forward.z * 0.25f), this.transform.position.y, this.transform.position.z), Quaternion.Euler(0, 0, 0));
+            }
+        }
+        else
+        {
+            if (this.hitEffectP2 != null)
+            {
+                GameObject hitEffectPrefab = this.hitEffectP2;
+                hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x + (this.transform.forward.z * 0.25f), this.transform.position.y, this.transform.position.z), Quaternion.Euler(0, 0, 0));
+            }
         }
 
         //this.gameObject.SetActive(false);
@@ -145,5 +161,28 @@ public class LaserProjectile : MonoBehaviour
             if (this.hitbox != null)
                 this.hitbox.belongsTo = player;
         }
+    }
+
+    public void SetP2(bool p2 = true)
+    {
+        this.isP2 = p2;
+        if (p2)
+        {
+            if(this.p2Material != null)
+            {
+                if (this.trail != null)
+                    this.trail.material = p2Material;
+            }
+            
+        }
+        else
+        {
+            if (this.p1Material != null)
+            {
+                if (this.trail != null)
+                    this.trail.material = p1Material;
+            }
+        }
+        
     }
 }

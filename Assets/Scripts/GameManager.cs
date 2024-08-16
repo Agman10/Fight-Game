@@ -153,6 +153,12 @@ public class GameManager : MonoBehaviour
                 {
                     this.gameCamera.player1 = p1.transform;
                     this.gameCamera.player2 = p2.transform;
+
+                    /*if (p1.collision != null && p1.collision is CapsuleCollider capsuleCollider)
+                        this.gameCamera.p1ExtraWidth = capsuleCollider.radius - 0.5f;
+
+                    if (p2.collision != null && p2.collision is CapsuleCollider capsuleColliderP2)
+                        this.gameCamera.p2ExtraWidth = capsuleColliderP2.radius - 0.5f;*/
                 }
             }
         }
@@ -189,6 +195,13 @@ public class GameManager : MonoBehaviour
             {
                 this.gameCamera.player1 = this.player1.transform;
                 this.gameCamera.player2 = this.player2.transform;
+
+
+                if (this.player1.collision != null && this.player1.collision is CapsuleCollider capsuleCollider)
+                    this.gameCamera.p1ExtraWidth = capsuleCollider.radius - 0.5f;
+
+                if (this.player2.collision != null && this.player2.collision is CapsuleCollider capsuleColliderP2)
+                    this.gameCamera.p2ExtraWidth = capsuleColliderP2.radius - 0.5f;
             }
 
             /*if (this.gameMode == 1)

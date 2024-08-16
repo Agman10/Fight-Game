@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class JCapTaunts : Attack
 {
     public TempPlayerAnimations animations;
     public bool onGoing;
+
+    public VisualEffect handFlame;
 
     public override void OnEnable()
     {
@@ -59,12 +62,14 @@ public class JCapTaunts : Attack
                 else if (this.user.input.moveInput.x * this.user.transform.forward.z > 0f) //Forward
                 {
                     //this.user.AddStun(0.2f, true);
-                    this.StartCoroutine(this.ForwardTauntCoroutine());
+                    //this.StartCoroutine(this.ForwardTauntCoroutine());
+                    this.StartCoroutine(this.BackTauntCoroutine());
                 }
                 else if (this.user.input.moveInput.x * this.user.transform.forward.z < 0f) //Backward
                 {
                     //this.user.AddStun(0.2f, true);
-                    this.StartCoroutine(this.BackTauntCoroutine());
+                    //this.StartCoroutine(this.BackTauntCoroutine());
+                    this.StartCoroutine(this.HoldFlameTauntCoroutine());
                 }
                 else //Neutral
                 {
@@ -106,8 +111,22 @@ public class JCapTaunts : Attack
             this.animations.happyEyes.gameObject.SetActive(false);
             this.animations.neutralEyes.gameObject.SetActive(true);
         }
+
+        this.PlayHandFlame(false);
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void PlayHandFlame(bool playing)
+    {
+        if (this.handFlame != null)
+        {
+            if (playing)
+                this.handFlame.Play();
+            else
+                this.handFlame.Stop();
+        }
     }
 
     private IEnumerator NeutralTauntCoroutine()
@@ -232,6 +251,58 @@ public class JCapTaunts : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
+    private IEnumerator HoldFlameTauntCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        if (this.animations != null)
+            this.animations.HoldingOneFlame();
+
+        float currentTime = 0;
+        float duration = 0.1f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+            yield return null;
+        }
+
+        this.PlayHandFlame(true);
+
+        currentTime = 0;
+        duration = 1f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+
+
+            if (currentTime >= duration - 0.1f && this.user.input.taunting)
+                currentTime = duration - 0.1f;
+            yield return null;
+        }
+
+        this.PlayHandFlame(false);
+
+        currentTime = 0;
+        duration = 0.5f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+            yield return null;
+        }
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
 
     private IEnumerator NeutralTaunt2Coroutine()
     {

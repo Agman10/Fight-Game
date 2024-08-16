@@ -434,7 +434,16 @@ MonoBehaviour:
   changeTargetDir: 0
   preventDeath: 0
   ragdollForce: 1
+  preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
+  isSuper: 0
+  preventDeathSound: 0
+  doHitSound: 1
+  hitSoundCooldown: 0
+  customHitSound:
+    sound: {fileID: 0}
+    pitch: {x: 1, y: 1}
+    startTime: 0
 --- !u!1 &3129940337305283159
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +500,10 @@ MonoBehaviour:
   hitEffect: {fileID: 1757357220341972996, guid: 49f2d06a14a9483438f642cda80a9ba7, type: 3}
   trail: {fileID: 8525061847854933771}
   speed: 10
+  isP2: 0
+  p1Material: {fileID: 2100000, guid: 7ef9356fd086f6c4d9ac77e0814898c4, type: 2}
+  p2Material: {fileID: 2100000, guid: e10f19b1c0ded444d98439c70d2f0ad5, type: 2}
+  hitEffectP2: {fileID: 104549037688348794, guid: 21d924fc97f20374d92c8d4c9ee11582, type: 3}
 --- !u!65 &3129940337305283156
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -536,7 +549,16 @@ MonoBehaviour:
   changeTargetDir: 0
   preventDeath: 0
   ragdollForce: 1
+  preventMomentumStop: 0
   hitboxOrigin: {fileID: 561558263688509409}
+  isSuper: 0
+  preventDeathSound: 0
+  doHitSound: 1
+  hitSoundCooldown: 0
+  customHitSound:
+    sound: {fileID: 0}
+    pitch: {x: 1, y: 1}
+    startTime: 0
 --- !u!54 &2456719410230249878
 Rigidbody:
   m_ObjectHideFlags: 0
