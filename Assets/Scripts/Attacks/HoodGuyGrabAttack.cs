@@ -155,6 +155,7 @@ public class HoodGuyGrabAttack : Attack
         yield return new WaitForSeconds(0.1f);
 
         int amount = 30;
+        //int amount = 180; kill the opponent
         while (amount > 0)
         {
             /*if (this.animations != null)

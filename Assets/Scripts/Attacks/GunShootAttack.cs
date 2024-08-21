@@ -168,7 +168,7 @@ public class GunShootAttack : Attack
 
         if (this.user.tempOpponent != null && this.hitbox != null)
         {
-            if (this.user.tempOpponent.characterId == 3 || this.user.tempOpponent.characterId == 4)
+            if (this.user.tempOpponent.characterId == 3 || this.user.tempOpponent.characterId == 4 || this.user.tempOpponent.characterId == 7)
                 this.hitbox.transform.localEulerAngles = new Vector3(0f, 0f, -2f);
             else
                 this.hitbox.transform.localEulerAngles = new Vector3(0f, 0f, 0f);

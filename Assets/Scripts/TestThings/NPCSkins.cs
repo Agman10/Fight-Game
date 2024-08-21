@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NPCSkins : MonoBehaviour
 {
+    public bool changeSkinOnUpdate = false;
+
     public Color[] colors;
     public Material[] materials;
     public Material mainBodyMaterial;
@@ -21,7 +23,8 @@ public class NPCSkins : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //this.ChangeSkin();
+        if (this.changeSkinOnUpdate)
+            this.ChangeSkin();
     }
 
     private void OnEnable()

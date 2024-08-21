@@ -1182,6 +1182,7 @@ MonoBehaviour:
   hitbox: {fileID: 28035579223762041}
   belongsTo: {fileID: 0}
   lightningSfx: {fileID: 1757753737236825579}
+  lightningDelay: 0.4
 --- !u!114 &7757696130475698832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1621,14 +1622,17 @@ MonoBehaviour:
   avoidOnHitInvoke: 0
   avoidDamagingPlayer: 0
   fireProperty: 1
+  electricProperty: 1
   physicsKnockbackMultiplier: 1
   changeTargetDir: 1
   preventDeath: 0
   ragdollForce: 1
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
+  isSuper: 0
   preventDeathSound: 0
   doHitSound: 1
+  hitSoundCooldown: 0
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}

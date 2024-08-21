@@ -58,6 +58,7 @@ public class TestPlayer : MonoBehaviour
     public GameObject tempBall;
     public bool tempLookAtBall = false;
     public GameObject iceCube;
+    public SkelletonBody skelletonBody;
     
     void Awake()
     {

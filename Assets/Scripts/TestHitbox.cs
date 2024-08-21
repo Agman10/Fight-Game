@@ -29,6 +29,7 @@ public class TestHitbox : MonoBehaviour
     public Action<Ball> OnBallCollision;
 
     public bool fireProperty = false;
+    public bool electricProperty = false;
     public float physicsKnockbackMultiplier = 1f;
     public bool changeTargetDir;
     public bool preventDeath = false;
@@ -124,6 +125,12 @@ public class TestHitbox : MonoBehaviour
                             }
                         }
 
+                        if (this.electricProperty)
+                        {
+                            if (player.skelletonBody != null /*&& player.skelletonBody.enabled*/)
+                                player.skelletonBody.EnableAndDisableSkelleton();
+                        }
+
                         //Debug.Log(player.transform.forward);
                         //float distance = Vector3.Distance(player.transform.position, this.transform.position);
                         Vector3 dir = (player.transform.position - this.transform.position).normalized;
@@ -188,6 +195,15 @@ public class TestHitbox : MonoBehaviour
                         ragdoll.owner.soundEffects.PlayHitSound();
                     }
                 }
+
+                if (this.electricProperty)
+                {
+                    if (ragdoll.owner != null && ragdoll.owner.skelletonBody != null /*&& ragdoll.owner.skelletonBody.enabled*/)
+                    {
+                        ragdoll.owner.skelletonBody.EnableAndDisableSkelleton();
+                    }
+                }
+
             }
 
 
@@ -276,7 +292,12 @@ public class TestHitbox : MonoBehaviour
                             }
                         }
                     }
-                    
+
+                    if (this.electricProperty)
+                    {
+                        if (player.skelletonBody != null /*&& player.skelletonBody.enabled*/)
+                            player.skelletonBody.EnableAndDisableSkelleton();
+                    }
 
                     //Debug.Log("collision: " + player);
                     float knockbackMultiplier = 1f;
@@ -359,6 +380,15 @@ public class TestHitbox : MonoBehaviour
                         ragdoll.owner.soundEffects.PlayHitSound(this.hitSoundCooldown);
                     }
                 }
+
+                if (this.electricProperty)
+                {
+                    if (ragdoll.owner != null && ragdoll.owner.skelletonBody != null /*&& ragdoll.owner.skelletonBody.enabled*/)
+                    {
+                        ragdoll.owner.skelletonBody.EnableAndDisableSkelleton();
+                    }
+                }
+
 
                 this.StartCoroutine(this.RemoveGameObjectCoroutine(this.damageDelay, ragdoll.gameObject));
 
