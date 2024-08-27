@@ -343,8 +343,19 @@ public class RandomSkybox : MonoBehaviour
             /*if (this.songs.Length >= currentMusic + 1 && this.songs[this.currentMusic] != null)
                 this.songs[this.currentMusic].Stop();*/
 
-            this.songs[musicId].Play();
-            this.currentMusic = musicId;
+            /*this.songs[musicId].Play();
+            this.currentMusic = musicId;*/
+
+            if (CharacterManager.Instance != null && CharacterManager.Instance.musicTypeId > 0 && this.gameMode == 0)
+            {
+
+            }
+            else
+            {
+                this.songs[musicId].Play();
+                this.currentMusic = musicId;
+            }
+            
 
         }
     }

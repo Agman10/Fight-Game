@@ -16,6 +16,8 @@ public class CharacterSelectLogic : MonoBehaviour
     public AudioSource music;
     public Image fader;
 
+    public bool starting;
+    public MusicTypeSelecter musicTypeSelecter;
 
     public static CharacterSelectLogic Instance;
 
@@ -45,6 +47,9 @@ public class CharacterSelectLogic : MonoBehaviour
         {
             this.p2Cursor.OnReady += this.TryStarting;
         }
+
+        if (this.gameModeId != 0 && this.musicTypeSelecter != null)
+            this.musicTypeSelecter.gameObject.SetActive(false);
     }
     private void OnDisable()
     {
@@ -198,6 +203,8 @@ public class CharacterSelectLogic : MonoBehaviour
 
             this.StartCoroutine(this.StartGameCoroutine());
 
+            if (this.gameModeId == 0 && CharacterManager.Instance != null && this.musicTypeSelecter != null)
+                CharacterManager.Instance.musicTypeId = this.musicTypeSelecter.currentId;
             //this.StartGame();
         }
     }
@@ -217,6 +224,7 @@ public class CharacterSelectLogic : MonoBehaviour
     }
     private IEnumerator StartGameCoroutine()
     {
+        this.starting = true;
         yield return new WaitForSeconds(0.2f);
 
         if (this.characterModelsP1 != null)

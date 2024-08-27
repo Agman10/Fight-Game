@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     public KOUiLogic koUiLogic;
 
+    public CharacterThemePlayer characterThemePlayer;
+
     [Space]
     public GameObject ragingBeastSkull;
     public LayerMask normalCameraLayers;
@@ -202,6 +204,22 @@ public class GameManager : MonoBehaviour
 
                 if (this.player2.collision != null && this.player2.collision is CapsuleCollider capsuleColliderP2)
                     this.gameCamera.p2ExtraWidth = capsuleColliderP2.radius - 0.5f;
+            }
+
+            if (CharacterManager.Instance != null && this.characterThemePlayer != null && this.gameMode == 0)
+            {
+                if(CharacterManager.Instance.musicTypeId == 1)
+                {
+                    this.characterThemePlayer.PlayRandomCharacterTheme();
+                }
+                else if (CharacterManager.Instance.musicTypeId == 2)
+                {
+                    this.characterThemePlayer.PlayP1CharacterTheme();
+                }
+                else if (CharacterManager.Instance.musicTypeId == 3)
+                {
+                    this.characterThemePlayer.PlayP2CharacterTheme();
+                }
             }
 
             /*if (this.gameMode == 1)
@@ -532,7 +550,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator EndGameCoroutine()
     {
         yield return new WaitForSeconds(3f);
-        if(this.tempSkyboxAndStageLogic != null)
+        /*if(this.tempSkyboxAndStageLogic != null && this.tempSkyboxAndStageLogic.songs.Length - 1 >= this.tempSkyboxAndStageLogic.currentMusic && this.tempSkyboxAndStageLogic.songs[this.tempSkyboxAndStageLogic.currentMusic] != null)
         {
             AudioSource music = this.tempSkyboxAndStageLogic.songs[this.tempSkyboxAndStageLogic.currentMusic];
             float currentTime = 0;
@@ -553,8 +571,33 @@ public class GameManager : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(2f);
+        }*/
+
+        AudioSource music = null;
+        if(this.gameMode == 0 && this.characterThemePlayer != null && CharacterManager.Instance != null && CharacterManager.Instance.musicTypeId > 0)
+        {
+            music = this.characterThemePlayer.themes[this.characterThemePlayer.musicId];
+        }
+        else if (this.tempSkyboxAndStageLogic != null && this.tempSkyboxAndStageLogic.songs.Length - 1 >= this.tempSkyboxAndStageLogic.currentMusic && this.tempSkyboxAndStageLogic.songs[this.tempSkyboxAndStageLogic.currentMusic] != null)
+        {
+            music = this.tempSkyboxAndStageLogic.songs[this.tempSkyboxAndStageLogic.currentMusic];
         }
         
+        float currentTime = 0;
+        float duration = 2f;
+        float targetVolume = 0f;
+        //float targetRotation = 0f;
+        float startVolume = music.volume;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+            if (music != null)
+                music.volume = Mathf.Lerp(startVolume, targetVolume, currentTime / duration);
+
+            yield return null;
+        }
+
 
         SceneManager.LoadSceneAsync(3);
     }

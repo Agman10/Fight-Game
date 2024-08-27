@@ -16,6 +16,9 @@ public class PunchAttack : Attack
     //private IEnumerator hitboxCoroutine;
     //private IEnumerator animationCoroutine;
 
+    private int hits = 0;
+    private float slowdownTimer = 0f;
+
     /*public override void OnEnable()
     {
         base.OnEnable();
@@ -45,6 +48,46 @@ public class PunchAttack : Attack
             if (this.animations != null)
                 this.animations.SetDefaultPose();
         }*/
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if (this.hitbox != null)
+            this.hitbox.OnPlayerCollision += this.OnPunchHit;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        if (this.hitbox != null)
+            this.hitbox.OnPlayerCollision -= this.OnPunchHit;
+    }
+
+    public void OnPunchHit(TestPlayer player)
+    {
+        //this.user.AddKnockback(this.user.transform.forward.z * -100f);
+        this.hits++;
+        this.slowdownTimer = 1f;
+    }
+
+    private void Update()
+    {
+        if (this.onGoing && this.user != null && this.hits > 0)
+        {
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            {
+                this.user.rb.velocity = new Vector3(this.user.rb.velocity.x / 1.5f, this.user.rb.velocity.y - 0.4f, 0);
+                //this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y - 0.4f, 0);
+            }
+        }
+
+        if (this.slowdownTimer > 0f)
+        {
+            this.slowdownTimer -= 2f * Time.deltaTime;
+
+            if (this.slowdownTimer <= 0f)
+                this.hits = 0;
+        }
     }
 
     public override void OnDeath()
@@ -165,10 +208,14 @@ public class PunchAttack : Attack
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
 
+        float extraTime = (0.002f * this.hits);
+        //Debug.Log(extraTime);
+
         if (this.animations != null)
             this.animations.SetStartPunchPose0();
         
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.01f + extraTime);
+        //yield return new WaitForSeconds(0.01f * (1 + this.hits));
 
         if (this.animations != null)
             this.animations.SetStartPunchPose();
@@ -181,7 +228,8 @@ public class PunchAttack : Attack
             this.punchSwooshSfx.Play();
         }
 
-        yield return new WaitForSeconds(0.04f);
+        yield return new WaitForSeconds(0.04f + extraTime);
+        //yield return new WaitForSeconds(0.04f * (1 + this.hits));
 
         
 
@@ -191,7 +239,7 @@ public class PunchAttack : Attack
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f + extraTime);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
@@ -199,7 +247,9 @@ public class PunchAttack : Attack
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f + extraTime);
+        //yield return new WaitForSeconds(0.1f + (0.005f * this.hits));
+        //Debug.Log(0.1f + (0.005f * this.hits));
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

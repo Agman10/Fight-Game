@@ -31,6 +31,8 @@ public class CharacterSelectCursorLogic : MonoBehaviour
     public GameObject silhouette;
     public GameObject joinText;
 
+    public MusicTypeSelecter musicTypeSelecter;
+
     [Space]
     public GameObject readyPanel;
     public GameObject skinSelectPanel;
@@ -46,6 +48,9 @@ public class CharacterSelectCursorLogic : MonoBehaviour
             this.input.SelectInput += this.Select;
             this.input.BackInput += this.Back;
             this.input.QuitInput += this.Quit;
+
+            this.input.NextMusicTypeInput += this.NextMusicType;
+            this.input.PreviousMusicTypeInput += this.PreviousMusicType;
         }
         this.SelectCharacter(this.currentCharacterId);
 
@@ -70,6 +75,9 @@ public class CharacterSelectCursorLogic : MonoBehaviour
             this.input.SelectInput -= this.Select;
             this.input.BackInput -= this.Back;
             this.input.QuitInput -= this.Quit;
+
+            this.input.NextMusicTypeInput -= this.NextMusicType;
+            this.input.PreviousMusicTypeInput -= this.PreviousMusicType;
         }
     }
     [ContextMenu("SelectChar")]
@@ -377,6 +385,28 @@ public class CharacterSelectCursorLogic : MonoBehaviour
     {
         if (quitting && this.characterSelectLogic != null && this.canMove)
             this.characterSelectLogic.QuitToTitle();
+    }
+
+    public void NextMusicType(bool next)
+    {
+        if(this.characterSelectLogic != null && !this.characterSelectLogic.starting && this.characterSelectLogic.gameModeId == 0)
+        {
+            if (next && this.musicTypeSelecter != null && this.canMove)
+                this.musicTypeSelecter.NextMusicType();
+        }
+
+        
+    }
+
+    public void PreviousMusicType(bool previous)
+    {
+        if(this.characterSelectLogic != null && !this.characterSelectLogic.starting && this.characterSelectLogic.gameModeId == 0)
+        {
+            if (previous && this.musicTypeSelecter != null && this.canMove)
+                this.musicTypeSelecter.PreviousMusicType();
+        }
+
+        
     }
 
     private IEnumerator EnableInputting()

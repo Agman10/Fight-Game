@@ -22,6 +22,9 @@ public class CharacterManager : MonoBehaviour
     public int player2Id;
     public bool draw;
 
+    [Space]
+    public int musicTypeId;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

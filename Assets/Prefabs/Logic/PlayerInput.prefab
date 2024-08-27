@@ -60,6 +60,8 @@ MonoBehaviour:
   pastSuperInput: 0
   taunting: 0
   pastTauntInput: 0
+  suicide: 0
+  pastSuicideInput: 0
   start: 0
   pastStartInput: 0
 --- !u!114 &2629266123277287952
@@ -671,6 +673,46 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 664b6db6-2bee-4149-b28e-965723925469
     m_ActionName: PlayerInput/Start[/Keyboard/enter,/XInputControllerWindows/start,/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 653208f1-539a-4401-a60b-b88b2247027e
+    m_ActionName: Player1/Start[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b5175e3f-2649-4a77-9348-a22574996a59
+    m_ActionName: Player2/Start[/XInputControllerWindows/start,/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7830757965827869350}
+        m_TargetAssemblyTypeName: CharacterSelectInput, Assembly-CSharp
+        m_MethodName: OnPreviousMusicTypeInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c2d32e8f-eac1-445c-8eda-edd33f882322
+    m_ActionName: PlayerInput/MusicTypeL[/XInputControllerWindows/leftShoulder,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7830757965827869350}
+        m_TargetAssemblyTypeName: CharacterSelectInput, Assembly-CSharp
+        m_MethodName: OnNextMusicTypeInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e7c24f21-269a-4d93-8ff7-15ca61483460
+    m_ActionName: PlayerInput/MusicTypeR[/XInputControllerWindows/rightShoulder,/Keyboard/w]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerInput
@@ -696,3 +738,7 @@ MonoBehaviour:
   pastBackInput: 0
   quitting: 0
   pastQuitInput: 0
+  nextMusicType: 0
+  pastNextMusicTypeInput: 0
+  previousMusicType: 0
+  pastPreviousMusicTypeInput: 0

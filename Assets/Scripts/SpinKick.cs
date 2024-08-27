@@ -14,6 +14,7 @@ public class SpinKick : Attack
     public float spinRotationSpeed = 1200f;
     public float upwardVelocity = 0f;
     public float forwardVelocity = 10f;
+    public float duration = 0.9f;
     public VisualEffect fire1;
     public VisualEffect fire2;
     public bool onGoing;
@@ -132,7 +133,7 @@ public class SpinKick : Attack
         if (this.flameSfx != null)
             this.flameSfx.Play();
 
-        float time = 0.9f;
+        float time = this.duration;
         while (time > 0)
         {
             time -= Time.deltaTime;
@@ -223,7 +224,7 @@ public class SpinKick : Attack
         if (this.flameSfx != null)
             this.flameSfx.Play();
 
-        float time = 0.9f;
+        float time = this.duration;
         while (time > 0)
         {
             time -= Time.deltaTime;

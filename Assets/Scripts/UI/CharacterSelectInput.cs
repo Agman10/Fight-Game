@@ -21,6 +21,15 @@ public class CharacterSelectInput : MonoBehaviour
     public Action<bool> QuitInput;
     [HideInInspector] public bool pastQuitInput;
 
+
+    public bool nextMusicType;
+    public Action<bool> NextMusicTypeInput;
+    [HideInInspector] public bool pastNextMusicTypeInput;
+
+    public bool previousMusicType;
+    public Action<bool> PreviousMusicTypeInput;
+    [HideInInspector] public bool pastPreviousMusicTypeInput;
+
     public void OnMoveInput(InputAction.CallbackContext ctx)
     {
         Vector2 inputValue = ctx.ReadValue<Vector2>();
@@ -67,6 +76,31 @@ public class CharacterSelectInput : MonoBehaviour
         {
             this.QuitInput?.Invoke(quit);
             this.pastQuitInput = quit;
+        }
+    }
+
+
+    public void OnNextMusicTypeInput(InputAction.CallbackContext ctx)
+    {
+
+        bool next = ctx.ReadValueAsButton();
+        this.nextMusicType = next;
+        if (this.pastNextMusicTypeInput != next)
+        {
+            this.NextMusicTypeInput?.Invoke(next);
+            this.pastNextMusicTypeInput = next;
+        }
+    }
+
+    public void OnPreviousMusicTypeInput(InputAction.CallbackContext ctx)
+    {
+
+        bool previous = ctx.ReadValueAsButton();
+        this.previousMusicType = previous;
+        if (this.pastPreviousMusicTypeInput != previous)
+        {
+            this.PreviousMusicTypeInput?.Invoke(previous);
+            this.pastPreviousMusicTypeInput = previous;
         }
     }
 }
