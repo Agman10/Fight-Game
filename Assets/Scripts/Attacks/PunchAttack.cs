@@ -208,8 +208,10 @@ public class PunchAttack : Attack
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
 
+        //float extraTime = (0.005f * this.hits);
         float extraTime = (0.002f * this.hits);
         //Debug.Log(extraTime);
+        //Debug.Log(0.15f + 0.05f + (extraTime * 4));
 
         if (this.animations != null)
             this.animations.SetStartPunchPose0();
@@ -247,6 +249,7 @@ public class PunchAttack : Attack
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
 
+        //yield return new WaitForSeconds(0.05f + extraTime);
         yield return new WaitForSeconds(0.1f + extraTime);
         //yield return new WaitForSeconds(0.1f + (0.005f * this.hits));
         //Debug.Log(0.1f + (0.005f * this.hits));
