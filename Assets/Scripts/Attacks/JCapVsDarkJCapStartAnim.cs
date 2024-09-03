@@ -8,6 +8,9 @@ public class JCapVsDarkJCapStartAnim : Attack
     public bool onGoing;
     public GameObject punchEffect;
 
+    public AudioSource explosionSfx;
+    public AudioSource swooshSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -38,6 +41,12 @@ public class JCapVsDarkJCapStartAnim : Attack
         this.user.LookAtTarget();
         this.user.transform.position = new Vector3(this.user.transform.forward.z * -10f, this.user.transform.position.y, 0f);
 
+        if (this.swooshSfx != null)
+        {
+            this.swooshSfx.time = 0.06f;
+            this.swooshSfx.Play();
+        }
+
         yield return new WaitForSeconds(0.01f);
 
         if (this.animations != null)
@@ -64,6 +73,12 @@ public class JCapVsDarkJCapStartAnim : Attack
             GameObject punchEffectPrefab = this.punchEffect;
             //punchEffectPrefab = Instantiate(punchEffectPrefab, new Vector3(0f, 2.15f, 0f), Quaternion.Euler(0, 0, 0));
             punchEffectPrefab = Instantiate(punchEffectPrefab, new Vector3(0f, 1.5f, 0f), Quaternion.Euler(0, 0, 0));
+        }
+
+        if (this.explosionSfx != null)
+        {
+            this.explosionSfx.time = 0.08f;
+            this.explosionSfx.Play();
         }
 
 

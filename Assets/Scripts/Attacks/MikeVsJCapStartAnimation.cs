@@ -128,6 +128,9 @@ public class MikeVsJCapStartAnimation : Attack
         if (this.electricity != null)
             this.electricity.Stop();
 
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = false;
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -146,6 +149,9 @@ public class MikeVsJCapStartAnimation : Attack
         yield return new WaitForSeconds(0.01f);
         this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
         //this.user.rb.isKinematic = false;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = true;
 
         if (this.animations != null)
             this.animations.TestPose5();
@@ -200,6 +206,9 @@ public class MikeVsJCapStartAnimation : Attack
             this.animations.SetDefaultPose();
 
         yield return new WaitForSeconds(0.1f);
+
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = false;
 
         //this.user.rb.isKinematic = false;
         this.onGoing = false;

@@ -130,22 +130,22 @@ public class RandomSkybox : MonoBehaviour
         }
         else
         {
-            if (number <= 20)
+            if (number <= 15) //grass plains
             {
                 this.SetStage(0);
                 this.SetMusic(0);
             }
-            else if (number > 20 && number <= 35)
+            else if (number > 15 && number <= 30) //bay area
             {
                 this.SetStage(1);
                 this.SetMusic(1);
             }
-            else if (number > 35 && number <= 40)
+            else if (number > 30 && number <= 35) //tower
             {
                 this.SetStage(2);
                 this.SetMusic(2);
             }
-            else if (number > 40 && number <= 55)
+            else if (number > 35 && number <= 50) //graveyard
             {
                 this.SetStage(3);
                 this.SetMusic(3);
@@ -165,7 +165,7 @@ public class RandomSkybox : MonoBehaviour
 
                 RenderSettings.ambientLight = new Color32(110, 110, 130, 255);
             }
-            else if (number > 55 && number <= 65)
+            else if (number > 50 && number <= 60) //skrome skyway
             {
                 this.SetStage(4);
                 this.SetMusic(Random.Range(4, 6));
@@ -177,17 +177,17 @@ public class RandomSkybox : MonoBehaviour
                 else
                     this.SetSkybox(6);
             }
-            else if (number > 65 && number <= 70)
+            else if (number > 60 && number <= 65) //grass plain snow
             {
                 this.SetStage(5);
                 this.SetMusic(8);
             }
-            else if (number > 70 && number <= 75)
+            else if (number > 65 && number <= 70) //bay area snow
             {
                 this.SetStage(6);
                 this.SetMusic(9);
             }
-            else if (number > 75 && number <= 76)
+            else if (number > 70 && number <= 71) //backrooms
             {
                 this.SetStage(7);
                 this.SetMusic(6);
@@ -195,7 +195,7 @@ public class RandomSkybox : MonoBehaviour
                 /*if (this.moon != null)
                     this.moon.SetActive(false);*/
             }
-            else if (number > 76 && number <= 86)
+            else if (number > 71 && number <= 81) //throne room
             {
                 this.SetStage(8);
                 this.SetMusic(7);
@@ -209,7 +209,7 @@ public class RandomSkybox : MonoBehaviour
 
                 RenderSettings.ambientLight = new Color32(110, 110, 130, 255);
             }
-            else if (number > 86 && number <= 91)
+            else if (number > 81 && number <= 86) //hell
             {
                 this.SetStage(10);
                 this.SetMusic(11);
@@ -218,7 +218,7 @@ public class RandomSkybox : MonoBehaviour
                     this.moon.SetActive(false);*/
                 RenderSettings.ambientLight = new Color32(180, 135, 135, 255);
             }
-            else if (number > 91 && number <= 96)
+            else if (number > 86 && number <= 91) //heaven
             {
                 this.SetStage(11);
                 this.SetMusic(12);
@@ -232,7 +232,7 @@ public class RandomSkybox : MonoBehaviour
                 else
                     this.SetSkybox(1);
             }
-            else
+            else if (number > 91 && number <= 96)//night club
             {
                 this.SetStage(15);
                 this.SetMusic(14);
@@ -245,6 +245,13 @@ public class RandomSkybox : MonoBehaviour
                 //RenderSettings.ambientLight = new Color32(110, 110, 130, 255);
                 RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
                 this.numbb = 0f;
+            }
+            else
+            {
+                this.SetStage(20);
+                this.SetMusic(16);
+                this.SetSkybox(16);
+                this.directionalLight.color = new Color32(214, 214, 255, 255);
             }
         }
         
@@ -644,6 +651,14 @@ public class RandomSkybox : MonoBehaviour
                     this.SetMusic(15);
                     this.SetSkybox(0);
                     this.directionalLight.color = new Color32(242, 249, 255, 255);
+                    //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                    break;
+                case 20:
+                    this.SetMusic(16);
+                    this.SetSkybox(16);
+                    //this.directionalLight.color = new Color32(242, 249, 255, 255);
+                    this.directionalLight.color = new Color32(214, 214, 255, 255);
+                    //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
                     //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
                     break;
                 default:

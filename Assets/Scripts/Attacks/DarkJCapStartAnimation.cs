@@ -16,6 +16,9 @@ public class DarkJCapStartAnimation : Attack
 
     public Attack vsJCap;
 
+    public AudioSource ragingBeastPunchSfx;
+    public AudioSource ragingBeastSwooshSfx;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -204,7 +207,13 @@ public class DarkJCapStartAnimation : Attack
         this.user.rb.isKinematic = true;
         this.user.LookAtTarget();
         this.user.transform.position = new Vector3(this.user.transform.forward.z * -10f, this.user.transform.position.y, 0f);
-        
+
+        if (this.ragingBeastSwooshSfx != null)
+        {
+            this.ragingBeastSwooshSfx.time = 0.06f;
+            this.ragingBeastSwooshSfx.Play();
+        }
+
         yield return new WaitForSeconds(0.01f);
         if (this.trail != null)
             this.trail.SetActive(true);
@@ -242,11 +251,24 @@ public class DarkJCapStartAnimation : Attack
         //int amount = 18;
         yield return new WaitForSeconds(0.1f);
         int amount = 30;
+        int amount2 = 0;
+        if (this.user.playerNumber == 2)
+            amount2 = 1;
         while (amount > 0)
         {
             yield return new WaitForSeconds(0.025f);
-            this.PunchEffect(new Vector3(this.user.transform.forward.z * 1f + this.RandomXY(-1f, 1f), this.RandomXY(0, 3), 0));
+            bool playSfx = false;
+            if (amount2 == 0)
+                playSfx = true;
+            else
+                playSfx = false;
+
+            this.PunchEffect(new Vector3(this.user.transform.forward.z * 1f + this.RandomXY(-1f, 1f), this.RandomXY(0, 3), 0), playSfx);
             amount -= 1;
+
+            amount2++;
+            if (amount2 > 1)
+                amount2 = 0;
             yield return null;
         }
 
@@ -296,12 +318,21 @@ public class DarkJCapStartAnimation : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
-    public void PunchEffect(Vector3 position)
+    public void PunchEffect(Vector3 position, bool playSfx)
     {
         if (this.punchEffect != null)
         {
             GameObject punchEffectPrefab = this.punchEffect;
             punchEffectPrefab = Instantiate(punchEffectPrefab, position, Quaternion.Euler(0, 0, 0));
+        }
+
+        if (this.ragingBeastPunchSfx != null && playSfx)
+        {
+            this.ragingBeastPunchSfx.time = 0.01f;
+            this.ragingBeastPunchSfx.pitch = Random.Range(0.9f, 1.1f);
+            //this.punchSfx.pitch = Random.Range(0.85f, 0.95f);
+            //this.punchSfx.pitch = 0.9f;
+            this.ragingBeastPunchSfx.Play();
         }
     }
 
