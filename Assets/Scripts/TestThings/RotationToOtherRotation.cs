@@ -12,6 +12,9 @@ public class RotationToOtherRotation : MonoBehaviour
     public float height = 0.5f;
     private Vector3 startPos;
     public bool yRotation = false;
+
+    public bool useStartRot = false;
+    private float startRot;
     void Start()
     {
         
@@ -24,6 +27,13 @@ public class RotationToOtherRotation : MonoBehaviour
     {
         this.StopAllCoroutines();
     }*/
+
+
+    private void OnEnable()
+    {
+        if (this.useStartRot)
+            this.startRot = this.transform.localEulerAngles.z;
+    }
 
     // Update is called once per frame
     void Update()
@@ -50,7 +60,7 @@ public class RotationToOtherRotation : MonoBehaviour
             this.transform.localEulerAngles = new Vector3(0f, this.startPos.z + (newY * this.height), 0f);*/
 
         if (!this.yRotation)
-            this.transform.localEulerAngles = new Vector3(this.transform.localEulerAngles.x, this.transform.localEulerAngles.y, this.startPos.z + (newY * this.height));
+            this.transform.localEulerAngles = new Vector3(this.transform.localEulerAngles.x, this.transform.localEulerAngles.y, this.startPos.z + (newY * this.height + (this.startRot)));
         else
             this.transform.localEulerAngles = new Vector3(this.transform.localEulerAngles.x, this.startPos.z + (newY * this.height), this.transform.localEulerAngles.z);
     }

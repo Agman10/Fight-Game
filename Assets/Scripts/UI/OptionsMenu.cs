@@ -30,7 +30,7 @@ public class OptionsMenu : MonoBehaviour
     private void Awake()
     {
         int number = Random.Range(0, 101);
-        if(number <= -50)
+        if(number <= 50)
         {
             this.geary.gameObject.SetActive(false);
             this.geary = this.evilGeary;
@@ -50,16 +50,16 @@ public class OptionsMenu : MonoBehaviour
 
     public void SelectLanguage()
     {
-        if (this.geary != null)
+        if (this.geary != null && !this.geary.disabled)
             this.geary.SelectLanguage();
     }
 
     public void SetLanguage()
     {
-        if (this.geary != null)
+        if (this.geary != null && !this.geary.disabled)
             this.geary.SetLanguage();
 
-        if(this.languageButtonText != null)
+        if(this.languageButtonText != null && this.geary != null && !this.geary.disabled)
         {
             if (this.currentLanguageId <= 0)
             {
@@ -76,18 +76,18 @@ public class OptionsMenu : MonoBehaviour
 
     public void OnSelectTurnOffGeary()
     {
-        if (this.geary != null)
+        if (this.geary != null && !this.geary.disabled)
             this.geary.OnSelectTurnOffGeary();
     }
     public void OnTurnOffGeary()
     {
-        if (this.geary != null)
+        if (this.geary != null && !this.geary.disabled)
             this.geary.OnTurnOffGeary();
     }
 
     public void SelectBack()
     {
-        if (this.geary != null)
+        if (this.geary != null && !this.geary.disabled)
             this.geary.OnSelectBack();
     }
 
@@ -101,7 +101,7 @@ public class OptionsMenu : MonoBehaviour
 
     public void OnSelectVolume()
     {
-        if (this.geary != null)
+        if (this.geary != null && !this.geary.disabled)
             this.geary.OnSelectVolume();
 
         if (this.slider != null)
@@ -109,7 +109,7 @@ public class OptionsMenu : MonoBehaviour
     }
     public void OnVolumeChange()
     {
-        if (this.geary != null)
+        if (this.geary != null && !this.geary.disabled)
             this.geary.OnVolumeChange();
 
         if (!this.geary.disabled)

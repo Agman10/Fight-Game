@@ -450,8 +450,24 @@ public class HoodGuyTaunts : Attack
         if (this.animations != null)
             this.animations.StupidDance(0);
 
+        //int number = Random.Range(1, 11);
+
+
         int amount = 20;
         //int amount = 70;
+        //float waitTime = 0.07f;
+
+        /*if (number == 1)
+        {
+            amount = 40;
+
+            waitTime = 0.025f;
+
+            *//*amount = 80;
+
+            waitTime = 0.01f;*//*
+        }*/
+
 
         int animationId = 1;
         bool idForward = true;

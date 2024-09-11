@@ -7269,6 +7269,11 @@ public class TempPlayerAnimations : MonoBehaviour
                 this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 110f);
                 this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 110f);
 
+                /*this.rightArm.localEulerAngles = new Vector3(10f, 0f, -40f);
+                this.leftArm.localEulerAngles = new Vector3(-10f, 0f, -40f);
+                this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 60f);
+                this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 60f);*/
+
 
                 this.rightLeg.localEulerAngles = new Vector3(0f, 0f, -10f);
                 this.leftLeg.localEulerAngles = new Vector3(0f, 0f, -10f);

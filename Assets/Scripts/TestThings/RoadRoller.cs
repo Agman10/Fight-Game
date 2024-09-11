@@ -21,6 +21,8 @@ public class RoadRoller : MonoBehaviour
 
     public AudioSource explosionSfx;
 
+    public SoundEffect landingSfx;
+
     public bool exploded = false;
 
     private void OnEnable()
@@ -183,6 +185,8 @@ public class RoadRoller : MonoBehaviour
     {
         if (this.landingEffect != null)
             this.landingEffect.SetActive(true);
+
+        this.landingSfx.PlaySound();
     }
 
     public void DisableHitbox()

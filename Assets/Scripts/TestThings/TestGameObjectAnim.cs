@@ -10,6 +10,8 @@ public class TestGameObjectAnim : MonoBehaviour
 
     public Rigidbody rb;
 
+    public float speed = 0.2f;
+
     private void OnEnable()
     {
         if (this.id == 0)
@@ -30,6 +32,8 @@ public class TestGameObjectAnim : MonoBehaviour
             this.StartCoroutine(this.TestAnim8());
         else if (this.id == 8)
             this.StartCoroutine(this.TestAnim9());
+        else if (this.id == 9)
+            this.StartCoroutine(this.TestAnim10());
     }
     private void OnDisable()
     {
@@ -401,6 +405,31 @@ public class TestGameObjectAnim : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             this.StartCoroutine(this.TestAnim9());
+        }
+
+
+    }
+
+
+
+    private IEnumerator TestAnim10()
+    {
+        if (this.gameObjects.Length == 2)
+        {
+            float animSpeed = this.speed;
+            //float animSpeed = 0.05f;
+
+            this.gameObjects[0].SetActive(true);
+            this.gameObjects[1].SetActive(false);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(true);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.StartCoroutine(this.TestAnim10());
         }
 
 

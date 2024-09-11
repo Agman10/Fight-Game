@@ -16,6 +16,9 @@ public class SuperRoadRollerAttack : Attack
 
     public GameObject punchEffect;
 
+    public SoundEffect fallingSfx;
+    //public SoundEffect landingSfx;
+
     //public AudioSource explosionSfx;
 
     public override void OnHit()
@@ -160,6 +163,8 @@ public class SuperRoadRollerAttack : Attack
         //this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x - (this.user.transform.forward.z * 2.35f), targetPositionY, 0);
         yield return new WaitForSeconds(0.4f);
 
+        this.fallingSfx.PlaySound();
+
         currentTime = 0;
         duration = 0.3f;
         //float targetVolume = 0.1f;
@@ -181,8 +186,9 @@ public class SuperRoadRollerAttack : Attack
             this.activeRoadRoller.LandEffect();
             this.activeRoadRoller.DisableHitbox();
 
+            //this.landingSfx.PlaySound();
         }
-            
+        this.fallingSfx.StopSound();
 
 
         yield return new WaitForSeconds(0.1f);
@@ -506,6 +512,8 @@ public class SuperRoadRollerAttack : Attack
         this.user.knockbackInvounrability = false;
 
         this.canBeCanceled = false;
+
+        this.fallingSfx.StopSound();
         if (this.activeRoadRoller != null)
         {
             this.activeRoadRoller.Explode();

@@ -13,6 +13,7 @@ public class Geary : MonoBehaviour
     [Space]
 
     public GameObject model;
+    public GameObject face;
 
     public GameObject rightEyebrow;
     public GameObject leftEyebrow;
@@ -48,6 +49,11 @@ public class Geary : MonoBehaviour
     public int currentTurnOffGearyDialougeId;
 
     public bool dialougeLocked;
+
+    [Space]
+    public Text disableOptionText;
+    public GameObject[] textBoxTriangles;
+    public GameObject[] textBoxTrianglesDisabled;
 
 
     private void OnEnable()
@@ -102,46 +108,107 @@ public class Geary : MonoBehaviour
 
 
         int randomEntrance = Random.Range(0, 101);
-        if(randomEntrance <= 25)
+        if (this.evil)
         {
-            yield return new WaitForSeconds(0.1f);
-            this.StartCoroutine(this.SpinCog(0.5f, 4));
-            yield return new WaitForSeconds(0.5f);
-        }
-        else if(randomEntrance > 25 && randomEntrance <= 50)
-        {
-            yield return new WaitForSeconds(0.1f);
-            this.SetDefaultExpression();
-            yield return new WaitForSeconds(0.3f);
-            this.model.transform.localEulerAngles = new Vector3(0f, 179f, -0.5f);
+            
+            if(this.face != null)
+            {
+                yield return new WaitForSeconds(0.15f);
+                this.SetDefaultExpression();
+                this.rightEyeOpen.SetActive(false);
+                this.leftEyeOpen.SetActive(false);
 
-            //this.SetRightEyebrow(0.4f, 0.52f, 0.2f, 85f);
+                this.rightEyeClosed.SetActive(true);
+                this.leftEyeClosed.SetActive(true);
+                /*yield return new WaitForSeconds(0.05f);
+                this.face.transform.localPosition = new Vector3(0f, -0.05f, 0f);
+                yield return new WaitForSeconds(0.05f);
+                this.face.transform.localPosition = new Vector3(0f, 0f, 0f);
+                yield return new WaitForSeconds(0.05f);
+                this.face.transform.localPosition = new Vector3(0f, -0.05f, 0f);
+                yield return new WaitForSeconds(0.05f);
+                this.face.transform.localPosition = new Vector3(0f, 0f, 0f);*/
 
-            this.rightEyeOpen.SetActive(false);
-            //this.leftEyeOpen.SetActive(false);
-            this.rightEyeClosed.SetActive(true);
-            yield return new WaitForSeconds(0.2f);
-            this.OpenEyes();
-            this.model.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
-            //this.SetDefaultExpression();
-            yield return new WaitForSeconds(0.3f);
-            //this.leftEyeClosed.SetActive(true);
+
+                int amount = 15;
+                int laughId = 0;
+                //bool idForward = true;
+                while (amount > 0)
+                {
+                    //currentTime += Time.deltaTime;
+                    yield return new WaitForSeconds(0.05f);
+                    if (laughId == 0)
+                    {
+                        this.face.transform.localPosition = new Vector3(0f, -0.02f, 0f);
+                        laughId = 1;
+                    }
+                    else
+                    {
+                        this.face.transform.localPosition = new Vector3(0f, 0f, 0f);
+                        laughId = 0;
+                    }
+                        
+
+                    amount -= 1;
+
+                    yield return null;
+                }
+                yield return new WaitForSeconds(0.05f);
+                this.face.transform.localPosition = new Vector3(0f, 0f, 0f);
+                yield return new WaitForSeconds(0.1f);
+
+                this.rightEyeOpen.SetActive(true);
+                this.leftEyeOpen.SetActive(true);
+
+                this.rightEyeClosed.SetActive(false);
+                this.leftEyeClosed.SetActive(false);
+                this.SetDefaultExpression();
+            }
         }
         else
         {
-            yield return new WaitForSeconds(0.1f);
-            this.SetRightEyebrow(0.4f, eyebrowYHigh, 0.2f, 90f);
-            this.SetLeftEyebrow(-0.4f, eyebrowYHigh, 0.2f, 90f);
-            yield return new WaitForSeconds(0.1f);
-            this.SetRightEyebrow(0.4f, eyebrowYLow, 0.2f, 90f);
-            this.SetLeftEyebrow(-0.4f, eyebrowYLow, 0.2f, 90f);
-            yield return new WaitForSeconds(0.1f);
-            this.SetRightEyebrow(0.4f, eyebrowYHigh, 0.2f, 90f);
-            this.SetLeftEyebrow(-0.4f, eyebrowYHigh, 0.2f, 90f);
-            yield return new WaitForSeconds(0.1f);
-            this.SetRightEyebrow(0.4f, eyebrowYLow, 0.2f, 90f);
-            this.SetLeftEyebrow(-0.4f, eyebrowYLow, 0.2f, 90f);
+            if (randomEntrance <= 25)
+            {
+                yield return new WaitForSeconds(0.1f);
+                this.StartCoroutine(this.SpinCog(0.5f, 4));
+                yield return new WaitForSeconds(0.5f);
+            }
+            else if (randomEntrance > 25 && randomEntrance <= 50)
+            {
+                yield return new WaitForSeconds(0.1f);
+                this.SetDefaultExpression();
+                yield return new WaitForSeconds(0.3f);
+                this.model.transform.localEulerAngles = new Vector3(0f, 179f, -0.5f);
+
+                //this.SetRightEyebrow(0.4f, 0.52f, 0.2f, 85f);
+
+                this.rightEyeOpen.SetActive(false);
+                //this.leftEyeOpen.SetActive(false);
+                this.rightEyeClosed.SetActive(true);
+                yield return new WaitForSeconds(0.2f);
+                this.OpenEyes();
+                this.model.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+                //this.SetDefaultExpression();
+                yield return new WaitForSeconds(0.3f);
+                //this.leftEyeClosed.SetActive(true);
+            }
+            else
+            {
+                yield return new WaitForSeconds(0.1f);
+                this.SetRightEyebrow(0.4f, eyebrowYHigh, 0.2f, 90f);
+                this.SetLeftEyebrow(-0.4f, eyebrowYHigh, 0.2f, 90f);
+                yield return new WaitForSeconds(0.1f);
+                this.SetRightEyebrow(0.4f, eyebrowYLow, 0.2f, 90f);
+                this.SetLeftEyebrow(-0.4f, eyebrowYLow, 0.2f, 90f);
+                yield return new WaitForSeconds(0.1f);
+                this.SetRightEyebrow(0.4f, eyebrowYHigh, 0.2f, 90f);
+                this.SetLeftEyebrow(-0.4f, eyebrowYHigh, 0.2f, 90f);
+                yield return new WaitForSeconds(0.1f);
+                this.SetRightEyebrow(0.4f, eyebrowYLow, 0.2f, 90f);
+                this.SetLeftEyebrow(-0.4f, eyebrowYLow, 0.2f, 90f);
+            }
         }
+        
 
 
         yield return new WaitForSeconds(0.2f);
@@ -261,40 +328,41 @@ public class Geary : MonoBehaviour
 
             if (this.evil)
             {
-
+                this.SetExpression(2);
+                this.StartCoroutine(this.ShowText("Turn me off? Your presence has alredy done that."));
             }
             else
             {
-
-            }
-
-            if (this.currentTurnOffGearyDialougeId > 3)
-            {
-                this.SetExpression(6);
-                this.SetRightEyebrow(0.4f, 0.50f, 0.2f, 92f);
-                this.SetLeftEyebrow(-0.4f, 0.50f, 0.2f, 88f);
-
-                this.StartCoroutine(this.ShowText("Don't!"));
-                
-                /*this.SetExpression(5);
-                this.SetRightEyebrow(0.38f, 0.54f, 0.2f, 105f);
-                this.SetLeftEyebrow(-0.38f, 0.615f, 0.2f, 85f);*/
-            }
-            else
-            {
-                int number = Random.Range(0, 2);
-                if (number == 1)
+                if (this.currentTurnOffGearyDialougeId > 3)
                 {
-                    this.SetExpression(8);
-                    //this.StartCoroutine(this.ShowText("Pfft, why would anyone even want to do that?"));
-                    this.StartCoroutine(this.ShowText("Pfft, why would anyone ever want change that?"));
+                    this.SetExpression(6);
+                    this.SetRightEyebrow(0.4f, 0.50f, 0.2f, 92f);
+                    this.SetLeftEyebrow(-0.4f, 0.50f, 0.2f, 88f);
+
+                    this.StartCoroutine(this.ShowText("Don't!"));
+
+                    /*this.SetExpression(5);
+                    this.SetRightEyebrow(0.38f, 0.54f, 0.2f, 105f);
+                    this.SetLeftEyebrow(-0.38f, 0.615f, 0.2f, 85f);*/
                 }
                 else
                 {
-                    this.SetExpression(3);
-                    this.StartCoroutine(this.ShowText("This is my least favorite option..."));
+                    int number = Random.Range(0, 2);
+                    if (number == 1)
+                    {
+                        this.SetExpression(8);
+                        //this.StartCoroutine(this.ShowText("Pfft, why would anyone even want to do that?"));
+                        this.StartCoroutine(this.ShowText("Pfft, why would anyone ever want change that?"));
+                    }
+                    else
+                    {
+                        this.SetExpression(3);
+                        this.StartCoroutine(this.ShowText("This is my least favorite option..."));
+                    }
                 }
             }
+
+            
             
             
             this.StartCoroutine(this.Blink());
@@ -306,7 +374,8 @@ public class Geary : MonoBehaviour
     {
         if (!this.dialougeLocked /*&& this.currentDialogueId != 5*/)
         {
-            this.StopAllCoroutines();
+            //this.StopAllCoroutines();
+
             //this.currentDialogueId = 5;
             //this.SetExpression(5);
 
@@ -314,19 +383,36 @@ public class Geary : MonoBehaviour
 
             if (this.evil)
             {
-
+                
+                if (!this.disabled)
+                {
+                    this.StopAllCoroutines();
+                    this.StartCoroutine(this.TurnOffEvilGearyCoroutine());
+                    this.StartCoroutine(this.Blink());
+                }
+                
+                /*if (this.currentTurnOffGearyDialougeId != 9)
+                    this.StartCoroutine(this.Blink());
+                else
+                    this.OpenEyes();*/
             }
             else
             {
+                this.StopAllCoroutines();
+                this.StartCoroutine(this.TurnOffGearyCoroutine());
 
+                if (this.currentTurnOffGearyDialougeId != 9)
+                    this.StartCoroutine(this.Blink());
+                else
+                    this.OpenEyes();
             }
 
-            this.StartCoroutine(this.TurnOffGearyCoroutine());
+            /*this.StartCoroutine(this.TurnOffGearyCoroutine());
 
             if (this.currentTurnOffGearyDialougeId != 9)
                 this.StartCoroutine(this.Blink());
             else
-                this.OpenEyes();
+                this.OpenEyes();*/
         }
     }
 
@@ -455,19 +541,38 @@ public class Geary : MonoBehaviour
     {
         if (this.evil)
         {
+            if (this.disabled)
+            {
+                this.textBubble.gameObject.SetActive(true);
+                string textString = "That doesn't work since you disabled me... So i guess you're softlocked now...";
 
-            string textString = "Hey! Want to see something funny?";
-            /*int number = Random.Range(0, 3);
-            if (number == 1)
-                textString = "Fight On!";
-            else if (number == 2)
-                textString = "Come back if you need to do more adjustments.";*/
+                this.StartCoroutine(this.ShowText(textString));
+
+                //yield return new WaitForSeconds(1.5f + (textString.Length * 0.05f));
+                //yield return new WaitForSeconds(textString.Length * 0.05f);
+                yield return new WaitForSeconds(0.2f);
+
+
+                if (this.options != null)
+                    this.options.EnableEventSystem(true);
+            }
+            else
+            {
+                string textString = "Hey! Want to see something funny?";
+
+                this.StartCoroutine(this.ShowText(textString));
+                yield return new WaitForSeconds(1.5f + (textString.Length * 0.05f));
+
+                Debug.Log("SHUT DOWN");
+                Application.Quit();
+            }
+            /*string textString = "Hey! Want to see something funny?";
 
             this.StartCoroutine(this.ShowText(textString));
             yield return new WaitForSeconds(1.5f + (textString.Length * 0.05f));
 
             Debug.Log("SHUT DOWN");
-            Application.Quit();
+            Application.Quit();*/
 
             /*if (this.options != null)
                 this.options.FadeToBlackAndGoToMenu();*/
@@ -591,6 +696,100 @@ public class Geary : MonoBehaviour
         //Debug.Log("t");
         if (this.options != null)
             this.options.EnableEventSystem(true);
+    }
+
+
+    private IEnumerator TurnOffEvilGearyCoroutine()
+    {
+        /*if (this.options != null)
+            this.options.EnableEventSystem(false);*/
+
+        //string textString = "No!";
+        if (this.options != null)
+            this.options.EnableEventSystem(false);
+        //this.currentTurnOffGearyDialougeId++;
+        string textString = "Fine! I hated you anyway.";
+        this.SetExpression(6);
+
+        /*this.SetRightEye(1, 0.06f, 0.06f, 0.083f, -8f);
+        this.SetLeftEye(1, 0.06f, 0.06f, 0.083f, -8f);*/
+
+        this.StartCoroutine(this.ShowText(textString));
+
+        //yield return new WaitForSeconds(0.4f + (textString.Length * 0.05f));
+        yield return new WaitForSeconds(textString.Length * 0.05f + 1f);
+
+        /*if (this.disableOptionText != null)
+            this.disableOptionText.text = "Disabled";*/
+
+        this.textBubble.gameObject.SetActive(false);
+
+        //this.textBubble.transform.localPosition = new Vector3(0.7f, 0.45f, -0.1f);
+        this.MoveDialougeBox(true);
+
+        this.SetRightEye(0, -0.06f, 0f, 0.083f, 0f);
+        this.SetLeftEye(0, -0.06f, 0f, 0.083f, 0f);
+
+        float currentTime = 0;
+        float duration = 0.3f;
+        float startPos = 0f;
+        //float startPos = -2.5f;
+
+        //this.StartCoroutine(this.SpinCog(0.3f, 4));
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.model.transform.localPosition = new Vector3(Mathf.Lerp(startPos, 4f, currentTime / duration), 0f, 0f);
+            //this.model.transform.localPosition = new Vector3(0f, Mathf.Lerp(startPos, 0f, currentTime / duration), 0f);
+            yield return null;
+        }
+        this.model.transform.localPosition = new Vector3(4f, 0f, 0f);
+
+        if (this.disableOptionText != null)
+            this.disableOptionText.text = "Disabled";
+
+        this.disabled = true;
+
+        yield return new WaitForSeconds(0.4f);
+        if (this.options != null)
+            this.options.EnableEventSystem(true);
+
+
+
+        if (this.disabled)
+        {
+            /*textString = "I'm not letting you do that.";
+            this.SetExpression(6);*/
+        }
+        else
+        {
+            /*if (this.options != null)
+                this.options.EnableEventSystem(false);
+            //this.currentTurnOffGearyDialougeId++;
+            string textString = "Fine! I hated you anyway";
+            this.SetExpression(6);
+
+            this.StartCoroutine(this.ShowText(textString));
+
+            //yield return new WaitForSeconds(0.4f + (textString.Length * 0.05f));
+            yield return new WaitForSeconds(textString.Length * 0.05f);
+
+
+            this.disabled = true;
+
+            yield return new WaitForSeconds(0.4f);
+            if (this.options != null)
+                this.options.EnableEventSystem(true);*/
+        }
+
+        /*this.StartCoroutine(this.ShowText(textString));
+
+        //yield return new WaitForSeconds(0.4f + (textString.Length * 0.05f));
+        yield return new WaitForSeconds(textString.Length * 0.05f);*/
+
+        /*yield return new WaitForSeconds(0.4f);
+        if (this.options != null)
+            this.options.EnableEventSystem(true);*/
     }
 
     private IEnumerator Blink()
@@ -897,6 +1096,30 @@ public class Geary : MonoBehaviour
         {
             if (blush != null)
                 blush.SetActive(enable);
+        }
+    }
+
+    public void MoveDialougeBox(bool down = false)
+    {
+        if (down)
+        {
+            this.textBubble.transform.localPosition = new Vector3(0.7f, 0.45f, -0.1f);
+
+            foreach (GameObject triangles in this.textBoxTriangles)
+                triangles.SetActive(false);
+
+            foreach (GameObject trianglesDisabled in this.textBoxTrianglesDisabled)
+                trianglesDisabled.SetActive(true);
+        }
+        else
+        {
+            this.textBubble.transform.localPosition = new Vector3(0.3f, 1.6f, -0.1f);
+
+            foreach (GameObject triangles in this.textBoxTriangles)
+                triangles.SetActive(true);
+
+            foreach (GameObject trianglesDisabled in this.textBoxTrianglesDisabled)
+                trianglesDisabled.SetActive(false);
         }
     }
 }

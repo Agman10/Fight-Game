@@ -21,6 +21,8 @@ public class TempMenu : MonoBehaviour
     {
         //SceneManager.LoadScene("TestStage");
 
+        //SceneManager.LoadScene(8);
+
         if (UserInputManager.Instance != null)
             Destroy(UserInputManager.Instance.gameObject);
 
@@ -37,6 +39,7 @@ public class TempMenu : MonoBehaviour
     public void StartFightBall()
     {
         //SceneManager.LoadScene("TestFootBall");
+        //SceneManager.LoadScene(8);
 
         if (UserInputManager.Instance != null)
             Destroy(UserInputManager.Instance.gameObject);
