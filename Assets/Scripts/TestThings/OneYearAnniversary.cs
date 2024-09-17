@@ -84,11 +84,17 @@ public class OneYearAnniversary : MonoBehaviour
         this.textBubble.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
 
-        string textString = "Hello there!½ Today is the 1 year anniversary of the first ever build of Fightgame!§ (If you are playing this in 12th of september)";
+        string textString = "Hello there!½ Today is the one year anniversary of the first ever build of Fight Game!§ (If you are playing this in 12th of September)";
         //string textString = "Hello!½ Today is the 1 year anniversary of the first ever build of Fightgame!§ If you are playing this in 12th of september. (Close one!)";
         this.StartCoroutine(this.ShowText(textString));
 
         yield return new WaitForSeconds(3.4f + (textString.Length * 0.05f));
+
+        textString = "How fast time flies...";
+        //string textString = "Hello!½ Today is the 1 year anniversary of the first ever build of Fightgame!§ If you are playing this in 12th of september. (Close one!)";
+        this.StartCoroutine(this.ShowText(textString));
+
+        yield return new WaitForSeconds(2.1f + (textString.Length * 0.05f));
 
         textString = "But today is also the release date of Marvel vs. Capcom Fighting Collection!";
         this.StartCoroutine(this.ShowText(textString));
@@ -226,6 +232,16 @@ public class OneYearAnniversary : MonoBehaviour
 
     private IEnumerator HandshakeCoroutine(bool giveUrl = false)
     {
+        /*float currentTime = 0;
+        float duration = 0.2f;
+
+        float startPosRyu = -4f;
+        float endPosRyu = -2f;
+
+        float startPosCyclops = 4f;
+        float endPosCyclops = 2f;*/
+
+
         float currentTime = 0;
         float duration = 0.4f;
 
@@ -251,6 +267,29 @@ public class OneYearAnniversary : MonoBehaviour
             //this.model.transform.localPosition = new Vector3(0f, Mathf.Lerp(startPos, 0f, currentTime / duration), 0f);
             yield return null;
         }
+
+        /*currentTime = 0;
+        duration = 0.4f;
+
+        startPosRyu = -2f;
+        endPosRyu = -1.1f;
+
+        startPosCyclops = 2f;
+        endPosCyclops = 1.1f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+            if (this.ryu != null)
+                this.ryu.transform.localPosition = new Vector3(0f, 0f, Mathf.Lerp(startPosRyu, endPosRyu, currentTime / duration));
+
+            if (this.cyclops != null)
+                this.cyclops.transform.localPosition = new Vector3(0f, 0f, Mathf.Lerp(startPosCyclops, endPosCyclops, currentTime / duration));
+
+            //this.geary.transform.localPosition = new Vector3(0f, 0f, Mathf.Lerp(startPos, 0.1f, currentTime / duration));
+            //this.model.transform.localPosition = new Vector3(0f, Mathf.Lerp(startPos, 0f, currentTime / duration), 0f);
+            yield return null;
+        }*/
 
         if (this.handShakeSfx != null)
             this.handShakeSfx.Play();

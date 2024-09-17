@@ -30,7 +30,7 @@ public class OptionsMenu : MonoBehaviour
     private void Awake()
     {
         int number = Random.Range(0, 101);
-        if(number <= 50)
+        if(number <= 1)
         {
             this.geary.gameObject.SetActive(false);
             this.geary = this.evilGeary;
