@@ -46,6 +46,8 @@ public class TestHitbox : MonoBehaviour
     public bool doHitSound = true;
     public float hitSoundCooldown = 0f;
     public CharacterSoundEffect customHitSound;
+
+    public Transform hitEffectTransformOrigin;
     void Start()
     {
         
@@ -129,6 +131,19 @@ public class TestHitbox : MonoBehaviour
                         {
                             if (player.skelletonBody != null /*&& player.skelletonBody.enabled*/)
                                 player.skelletonBody.EnableAndDisableSkelleton();
+                        }
+
+                        /*if (this.hitEffectTransformOrigin != null && player.hitEffectLogic != null && this.belongsTo != null)
+                            player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);*/
+
+                        if (this.hitEffectTransformOrigin != null && player.hitEffectLogic != null && this.belongsTo != null)
+                        {
+                            float forwardZ = 1f;
+                            if (player.transform.position.x > this.belongsTo.transform.position.x)
+                                forwardZ = -1f;
+
+                            player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, forwardZ);
+                            //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);
                         }
 
                         //Debug.Log(player.transform.forward);
@@ -243,6 +258,13 @@ public class TestHitbox : MonoBehaviour
                 else
                     ball.KnockBack(new Vector3(direction * this.horizontalKnockback, this.verticalKnockback, 0));
             }
+
+
+            DamagableEntity damagableEntity = other.GetComponent<DamagableEntity>();
+            if (damagableEntity != null && !damagableEntity.dead)
+            {
+                this.HitDamagableEntity(damagableEntity);
+            }
         }
         
     }
@@ -298,6 +320,17 @@ public class TestHitbox : MonoBehaviour
                         if (player.skelletonBody != null /*&& player.skelletonBody.enabled*/)
                             player.skelletonBody.EnableAndDisableSkelleton();
                     }
+
+                    if (this.hitEffectTransformOrigin != null && player.hitEffectLogic != null && this.belongsTo != null)
+                    {
+                        float forwardZ = 1f;
+                        if (player.transform.position.x > this.belongsTo.transform.position.x)
+                            forwardZ = -1f;
+
+                        player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, forwardZ);
+                        //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);
+                    }
+                        
 
                     //Debug.Log("collision: " + player);
                     float knockbackMultiplier = 1f;
@@ -410,7 +443,40 @@ public class TestHitbox : MonoBehaviour
 
                 this.StartCoroutine(this.RemoveGameObjectCoroutine(this.damageDelay, ball.gameObject));
             }
+
+            DamagableEntity damagableEntity = other.GetComponent<DamagableEntity>();
+            if (damagableEntity != null && !damagableEntity.dead && !this.others.Contains(damagableEntity.gameObject))
+            {
+                this.others.Add(damagableEntity.gameObject);
+
+                this.HitDamagableEntity(damagableEntity);
+
+                this.StartCoroutine(this.RemoveGameObjectCoroutine(this.damageDelay, damagableEntity.gameObject));
+            }
         }
+    }
+
+    public void HitDamagableEntity(DamagableEntity damagableEntity)
+    {
+        Vector3 dir = (damagableEntity.transform.position - this.transform.position).normalized;
+        float direction = 1f;
+        if (dir.x < 0f)
+            direction = -1f;
+        else if (dir.x == 0f)
+            direction = -damagableEntity.transform.forward.z;
+
+        Vector3 posOrigin = this.transform.position;
+        if (this.hitboxOrigin != null)
+            posOrigin = this.hitboxOrigin.position;
+
+        float knockbackDir = this.transform.forward.z * this.horizontalKnockback;
+        if (this.explosionKnockback)
+            knockbackDir = direction * this.horizontalKnockback;
+
+        damagableEntity.TakeDamage(posOrigin, this.damage, this.stun, knockbackDir, this.verticalKnockback, this.changeTargetDir);
+
+
+
     }
 
     public void PlayerCollisionInvoke(TestPlayer player)

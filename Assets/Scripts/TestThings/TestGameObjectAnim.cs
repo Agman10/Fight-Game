@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class TestGameObjectAnim : MonoBehaviour
 {
@@ -12,8 +13,17 @@ public class TestGameObjectAnim : MonoBehaviour
 
     public float speed = 0.2f;
 
+    public GameObject objectToEnable;
+
+    public VisualEffect vfx;
+
+    private Vector3 originalPos;
+
+
     private void OnEnable()
     {
+        this.originalPos = this.transform.localPosition;
+
         if (this.id == 0)
             this.StartCoroutine(this.TestAnim());
         else if (this.id == 1)
@@ -34,10 +44,40 @@ public class TestGameObjectAnim : MonoBehaviour
             this.StartCoroutine(this.TestAnim9());
         else if (this.id == 9)
             this.StartCoroutine(this.TestAnim10());
+        else if (this.id == 10)
+            this.StartCoroutine(this.TestAnim11());
+        else if (this.id == 11)
+            this.StartCoroutine(this.TestAnim12());
     }
     private void OnDisable()
     {
         this.StopAllCoroutines();
+    }
+
+    private IEnumerator TestAnimTemplate()
+    {
+        if (this.gameObjects.Length == 3)
+        {
+            float animSpeed = this.speed;
+
+            this.gameObjects[0].SetActive(true);
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(false);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(true);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(true);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.StartCoroutine(this.TestAnimTemplate());
+        }
     }
 
     private IEnumerator TestAnim()
@@ -433,5 +473,185 @@ public class TestGameObjectAnim : MonoBehaviour
         }
 
 
+    }
+
+    private IEnumerator TestAnim11()
+    {
+        if (this.gameObjects.Length == 8)
+        {
+            float animSpeed = this.speed;
+            //float animSpeed = 0.05f;
+
+            this.gameObjects[0].SetActive(true);
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(false);
+            this.gameObjects[4].SetActive(false);
+            this.gameObjects[5].SetActive(false);
+            this.gameObjects[6].SetActive(false);
+            this.gameObjects[7].SetActive(false);
+
+
+            int amount = 20;
+            //int amount = 16;
+            int laughId = 0;
+            //bool idForward = true;
+            while (amount > 0)
+            {
+                this.gameObjects[0].SetActive(true);
+                this.gameObjects[1].SetActive(false);
+                yield return new WaitForSeconds(0.03f);
+                this.gameObjects[0].SetActive(false);
+                this.gameObjects[1].SetActive(true);
+
+                /*yield return new WaitForSeconds(0.001f);
+                if (laughId == 0)
+                {
+                    this.gameObjects[0].SetActive(true);
+                    this.gameObjects[1].SetActive(false);
+                    laughId = 1;
+                }
+                else
+                {
+
+                    this.gameObjects[0].SetActive(false);
+                    this.gameObjects[1].SetActive(true);
+                    laughId = 0;
+                }*/
+
+
+                amount -= 1;
+                //Debug.Log(laughId);
+
+                if (this.objectToEnable != null && amount <= 6)
+                    this.objectToEnable.SetActive(true);
+
+                /*if (this.objectToEnable != null && amount <= 3)
+                    this.objectToEnable.SetActive(true);*/
+
+
+                yield return null;
+            }
+
+            if (this.objectToEnable != null)
+                this.objectToEnable.SetActive(false);
+
+            //yield return new WaitForSeconds(animSpeed);
+
+            if (this.rb != null)
+                this.rb.AddForce(new Vector3(0f, 0f, 650f));
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(true);
+
+            yield return new WaitForSeconds(0.1f);
+
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(true);
+
+            yield return new WaitForSeconds(0.45f);
+
+            if (this.rb != null)
+                this.rb.velocity = new Vector3(0f, 0f, this.rb.velocity.z / 2f);
+
+            this.gameObjects[3].SetActive(false);
+            this.gameObjects[4].SetActive(true);
+
+            yield return new WaitForSeconds(0.15f);
+
+            this.gameObjects[4].SetActive(false);
+            this.gameObjects[5].SetActive(true);
+
+            //yield return new WaitForSeconds(animSpeed);
+            yield return new WaitForSeconds(0.01f);
+
+            this.gameObjects[4].SetActive(false);
+            this.gameObjects[5].SetActive(false);
+            this.gameObjects[6].SetActive(true);
+
+            yield return new WaitForSeconds(0.1f);
+
+            //this.gameObjects[5].SetActive(false);
+            this.gameObjects[6].SetActive(false);
+            this.gameObjects[7].SetActive(true);
+
+            if (this.rb != null)
+                this.rb.velocity = Vector3.zero;
+            //yield return new WaitForSeconds(animSpeed);
+            yield return new WaitForSeconds(1f);
+
+            this.transform.localPosition = this.originalPos;
+            this.StartCoroutine(this.TestAnim11());
+        }
+
+
+    }
+
+
+    private IEnumerator TestAnim12()
+    {
+        if (this.gameObjects.Length == 8)
+        {
+            float animSpeed = this.speed;
+
+            this.gameObjects[0].SetActive(true);
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(false);
+            this.gameObjects[4].SetActive(false);
+            this.gameObjects[5].SetActive(false);
+            this.gameObjects[6].SetActive(false);
+            this.gameObjects[7].SetActive(false);
+
+            yield return new WaitForSeconds(0.5f);
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(true);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(true);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(true);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.gameObjects[3].SetActive(false);
+            this.gameObjects[4].SetActive(true);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.gameObjects[4].SetActive(false);
+            this.gameObjects[5].SetActive(true);
+
+            yield return new WaitForSeconds(0.2f);
+
+            if (this.vfx != null)
+                this.vfx.Play();
+
+            yield return new WaitForSeconds(0.1f);
+
+            if (this.vfx != null)
+                this.vfx.Stop();
+
+            yield return new WaitForSeconds(0.1f);
+
+            this.gameObjects[5].SetActive(false);
+            this.gameObjects[6].SetActive(true);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.gameObjects[6].SetActive(false);
+            this.gameObjects[7].SetActive(true);
+
+            yield return new WaitForSeconds(2f);
+
+            this.StartCoroutine(this.TestAnim12());
+        }
     }
 }

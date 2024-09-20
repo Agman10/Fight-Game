@@ -13,6 +13,8 @@ public class SuperKickBarrage : Attack
     public TestHitbox hitboxSpinKick;
     public TestHitbox hitboxSpinKickEnd;
 
+    public TestHitbox firtsHitbox;
+
     public GameObject startParticle;
 
     public AudioSource kickSfx;
@@ -102,12 +104,18 @@ public class SuperKickBarrage : Attack
         if (this.hitboxLower != null)
             this.hitboxLower.gameObject.SetActive(true);
 
+        if (this.firtsHitbox != null)
+            this.firtsHitbox.gameObject.SetActive(true);
+
         this.PlayKickSfx(1.1f);
 
         yield return new WaitForSeconds(animSpeed + 0.05f);
 
         if (this.hitboxLower != null)
             this.hitboxLower.gameObject.SetActive(false);
+
+        if (this.firtsHitbox != null)
+            this.firtsHitbox.gameObject.SetActive(false);
 
         if (this.animations != null)
             this.animations.ForwardKickShippu(3, 2);

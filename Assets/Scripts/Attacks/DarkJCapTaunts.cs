@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class DarkJCapTaunts : Attack
 {
     public TempPlayerAnimations animations;
     public bool onGoing;
     public Spinner bombJuggle;
+
+    public GameObject handCigg;
+    public GameObject mouthCigg;
+    public VisualEffect ciggLitFlame;
+    public VisualEffect ciggRemoverFlame;
+    public ParticleSystem ciggDestroySmoke;
 
     public override void OnEnable()
     {
@@ -33,6 +40,20 @@ public class DarkJCapTaunts : Attack
         if (this.user != null)
             this.user.OnDisableItems -= this.DisableItem;
     }
+
+    private void Update()
+    {
+        if (this.onGoing)
+        {
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            {
+                //this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+                this.user.rb.velocity = new Vector3(this.user.rb.velocity.x / 1.5f, this.user.rb.velocity.y, 0);
+            }
+
+        }
+    }
+
     public override void OnHit()
     {
         base.OnHit();
@@ -64,7 +85,8 @@ public class DarkJCapTaunts : Attack
                 }
                 else if (this.user.input.moveInput.x * this.user.transform.forward.z > 0f) //Forward
                 {
-                    this.StartCoroutine(this.NeutralTauntCoroutine());
+                    //this.StartCoroutine(this.NeutralTauntCoroutine());
+                    this.StartCoroutine(this.SmokingCoroutine());
                 }
                 else if (this.user.input.moveInput.x * this.user.transform.forward.z < 0f) //Backward
                 {
@@ -116,6 +138,12 @@ public class DarkJCapTaunts : Attack
             this.DisableItem();
         }
 
+        if (this.ciggLitFlame != null)
+            this.ciggLitFlame.Stop();
+
+        if (this.ciggRemoverFlame != null)
+            this.ciggRemoverFlame.Stop();
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -128,6 +156,15 @@ public class DarkJCapTaunts : Attack
             this.bombJuggle.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
             this.bombJuggle.speedMultiplier = 1f;
         }
+
+        if (this.handCigg != null)
+        {
+            this.handCigg.SetActive(false);
+            this.handCigg.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
+        }
+
+        if (this.mouthCigg != null)
+            this.mouthCigg.SetActive(false);
     }
 
     private IEnumerator NeutralTauntCoroutine()
@@ -328,5 +365,170 @@ public class DarkJCapTaunts : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+
+    private IEnumerator SmokingCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+
+        this.animations.Smoking(0);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.handCigg != null)
+        {
+            this.handCigg.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
+            this.handCigg.SetActive(true);
+        }
+            
+
+        this.animations.Smoking(1);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.handCigg != null)
+        {
+            this.handCigg.transform.localEulerAngles = new Vector3(0f, -132f, 0f);
+        }
+
+        this.animations.Smoking(2);
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.animations.Smoking(3);
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.animations.Smoking(4);
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.ciggLitFlame != null)
+            this.ciggLitFlame.Play();
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.ciggLitFlame != null)
+            this.ciggLitFlame.Stop();
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.handCigg != null)
+        {
+            this.handCigg.transform.localEulerAngles = new Vector3(0f, 2.8f, 0f);
+        }
+
+        this.animations.Smoking(5);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.handCigg != null)
+        {
+            //this.handCigg.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
+            this.handCigg.SetActive(false);
+        }
+            
+
+        if (this.mouthCigg != null)
+            this.mouthCigg.SetActive(true);
+
+        this.animations.Smoking(6);
+
+        int amount = 4;
+        while (amount > 0)
+        {
+            //currentTime += Time.deltaTime;
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+
+            yield return new WaitForSeconds(1f);
+
+            this.user.TakeDamage(this.user.transform.position, 0.1f, 0f, 0f, 0f, false, true);
+
+            amount -= 1;
+
+            if (amount <= 0 && this.user.input.taunting)
+                amount = 1;
+
+            yield return null;
+        }
+
+        if (this.mouthCigg != null)
+            this.mouthCigg.SetActive(false);
+
+        if (this.handCigg != null)
+        {
+            //this.handCigg.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
+            this.handCigg.SetActive(true);
+        }
+
+        this.animations.Smoking(5, true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.handCigg != null)
+        {
+            this.handCigg.transform.localEulerAngles = new Vector3(0f, 48f, 0f);
+            //this.handCigg.SetActive(true);
+        }
+
+        this.animations.Smoking(3, true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.animations.Smoking(2, true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.handCigg != null)
+        {
+            this.handCigg.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
+            //this.handCigg.SetActive(true);
+        }
+
+        //this.animations.Smoking(1, true);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        /*yield return new WaitForSeconds(0.1f);
+
+        if (this.handCigg != null)
+        {
+            this.handCigg.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
+            this.handCigg.SetActive(false);
+        }*/
+
+
+        
+
+        if (this.ciggRemoverFlame != null)
+            this.ciggRemoverFlame.Play();
+        yield return new WaitForSeconds(0.05f);
+
+        if (this.handCigg != null)
+        {
+            this.handCigg.transform.localEulerAngles = new Vector3(0f, -90f, 0f);
+            this.handCigg.SetActive(false);
+        }
+        if (this.ciggDestroySmoke != null)
+            this.ciggDestroySmoke.Play();
+
+        if (this.ciggRemoverFlame != null)
+            this.ciggRemoverFlame.Stop();
+
+        yield return new WaitForSeconds(0.05f);
+
+
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+
     }
 }

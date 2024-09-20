@@ -80,7 +80,8 @@ public class AttackAnimationTests : Attack
             //this.user.AddStun(0.2f, true);
 
             this.user.AddStun(0.2f, true);
-            this.StartCoroutine(this.TestButtAttack());
+            //this.StartCoroutine(this.TestButtAttack());
+            this.StartCoroutine(this.Fly());
 
             /*if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
             {
@@ -710,6 +711,116 @@ public class AttackAnimationTests : Attack
 
         yield return new WaitForSeconds(0.1f);
 
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+
+    private IEnumerator Fly()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        //this.user.rb.isKinematic = true;
+
+        this.user.rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+
+        if (this.animations != null)
+            this.animations.TestFly();
+
+        if (this.objectToEnable != null)
+            this.objectToEnable.SetActive(true);
+
+        if (this.objectToEnable2 != null)
+            this.objectToEnable2.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        float maxSpeed = 1500f;
+
+        float currentTime = 0;
+        float duration = 0.8f;
+        float targetVelocity = maxSpeed;
+        float startVelocity = 500f;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+            float newY = Mathf.Sin(currentTime * 20f);
+
+            //this.user.rb.velocity = new Vector3(this.user.transform.forward.z * Mathf.Lerp(startVelocity, targetVelocity, currentTime / duration) * Time.deltaTime, 0f/*100f * Time.deltaTime*/, 0f);
+            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 500f * Time.deltaTime, 0f, 0f);
+
+            if (this.animations != null)
+            {
+                /*this.animations.rightArm.transform.Rotate(new Vector3(0f, 0f, -1500 * Time.deltaTime));
+                this.animations.leftArm.transform.Rotate(new Vector3(0f, 0f, -1500 * Time.deltaTime));*/
+
+                this.animations.rightArm.localEulerAngles = new Vector3(90f, 0f, newY * 45);
+                this.animations.leftArm.localEulerAngles = new Vector3(-90f, 0f, newY * 45);
+
+                /*this.animations.rightArm.localEulerAngles = new Vector3(20f, 0f, newY * -40);
+                this.animations.leftArm.localEulerAngles = new Vector3(-20f, 0f, newY * 40);*/
+            }
+
+            yield return null;
+        }
+
+        /*currentTime = 0;
+        duration = 0.1f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+
+            //this.user.rb.velocity = new Vector3(this.user.transform.forward.z * Mathf.Lerp(startVelocity, targetVelocity, currentTime / duration) * Time.deltaTime, 0f, 0f);
+            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * maxSpeed * Time.deltaTime, 0f, 0f);
+
+            yield return null;
+        }
+
+        this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+        currentTime = 0;
+        duration = 0.15f;
+        targetVelocity = 500f;
+        startVelocity = maxSpeed;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+
+            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * Mathf.Lerp(startVelocity, targetVelocity, currentTime / duration) * Time.deltaTime, 0f, 0f);
+            //this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 1000f * Time.deltaTime, 0f, 0f);
+
+            yield return null;
+        }*/
+
+
+        this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+        //yield return new WaitForSeconds(0.5f);
+        this.user.rb.velocity = new Vector3(0, 0, 0);
+
+        yield return new WaitForSeconds(0.1f);
+
+
+        //this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        if (this.objectToEnable != null)
+            this.objectToEnable.SetActive(false);
+
+        if (this.objectToEnable2 != null)
+            this.objectToEnable2.SetActive(false);
+
+        yield return new WaitForSeconds(0.1f);
+
+
+        this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
