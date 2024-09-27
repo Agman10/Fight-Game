@@ -416,6 +416,12 @@ public class DarkJCapTaunts : Attack
             this.ciggLitFlame.Stop();
 
         yield return new WaitForSeconds(0.1f);
+        if (this.handCigg != null)
+        {
+            this.handCigg.transform.localEulerAngles = new Vector3(0f, 30f, 0f);
+        }
+
+        yield return new WaitForSeconds(0.05f);
 
         if (this.handCigg != null)
         {

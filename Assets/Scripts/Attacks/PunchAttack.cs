@@ -156,7 +156,13 @@ public class PunchAttack : Attack
                 else
                     this.user.AddStun(0.1f, false);
 
-                this.StartCoroutine(this.PunchCoroutine());
+                //this.StartCoroutine(this.PunchCoroutine());
+                //this.StartCoroutine(this.OldPunchCoroutine());
+
+                if (this.user != null && this.user.characterId == 2)
+                    this.StartCoroutine(this.OldPunchCoroutine());
+                else
+                    this.StartCoroutine(this.PunchCoroutine());
             }
             else //in air
             {
@@ -214,13 +220,13 @@ public class PunchAttack : Attack
         //Debug.Log(0.15f + 0.05f + (extraTime * 4));
 
         if (this.animations != null)
-            this.animations.SetStartPunchPose0();
+            this.animations.NewPunch(0);
         
         yield return new WaitForSeconds(0.01f + extraTime);
         //yield return new WaitForSeconds(0.01f * (1 + this.hits));
 
-        if (this.animations != null)
-            this.animations.SetStartPunchPose();
+        /*if (this.animations != null)
+            this.animations.SetStartPunchPose();*/
 
         if (this.punchSwooshSfx != null)
         {
@@ -230,13 +236,15 @@ public class PunchAttack : Attack
             this.punchSwooshSfx.Play();
         }
 
-        yield return new WaitForSeconds(0.04f + extraTime);
+        yield return new WaitForSeconds(0.03f + extraTime);
         //yield return new WaitForSeconds(0.04f * (1 + this.hits));
 
-        
-
         if (this.animations != null)
-            this.animations.SetPunchPose();
+            this.animations.NewPunch(1);
+
+        yield return new WaitForSeconds(0.01f + extraTime);
+        if (this.animations != null)
+            this.animations.NewPunch(2);
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
@@ -244,13 +252,24 @@ public class PunchAttack : Attack
         yield return new WaitForSeconds(0.1f + extraTime);
 
         if (this.animations != null)
-            this.animations.SetDefaultPose();
+            this.animations.NewPunch(3);
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
 
+        yield return new WaitForSeconds(0.02f /*+ extraTime*/);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        /*if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(false);*/
+
         //yield return new WaitForSeconds(0.05f + extraTime);
-        yield return new WaitForSeconds(0.1f + extraTime);
+
+        //yield return new WaitForSeconds(0.1f + extraTime);
+        yield return new WaitForSeconds(0.08f + extraTime);
+
         //yield return new WaitForSeconds(0.1f + (0.005f * this.hits));
         //Debug.Log(0.1f + (0.005f * this.hits));
 
@@ -316,6 +335,60 @@ public class PunchAttack : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
+    IEnumerator OldPunchCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        //float extraTime = (0.005f * this.hits);
+        float extraTime = (0.002f * this.hits);
+        //Debug.Log(extraTime);
+        //Debug.Log(0.15f + 0.05f + (extraTime * 4));
+
+        if (this.animations != null)
+            this.animations.SetStartPunchPose0();
+
+        yield return new WaitForSeconds(0.01f + extraTime);
+        //yield return new WaitForSeconds(0.01f * (1 + this.hits));
+
+        if (this.animations != null)
+            this.animations.SetStartPunchPose();
+
+        if (this.punchSwooshSfx != null)
+        {
+            //this.punchSwooshSfx.time = 0.125f;
+            //this.punchSwooshSfx.time = 0.1f;
+            this.punchSwooshSfx.time = 0.01f;
+            this.punchSwooshSfx.Play();
+        }
+
+        yield return new WaitForSeconds(0.04f + extraTime);
+        //yield return new WaitForSeconds(0.04f * (1 + this.hits));
+
+
+
+        if (this.animations != null)
+            this.animations.SetPunchPose();
+
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f + extraTime);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(false);
+
+        //yield return new WaitForSeconds(0.05f + extraTime);
+        yield return new WaitForSeconds(0.1f + extraTime);
+        //yield return new WaitForSeconds(0.1f + (0.005f * this.hits));
+        //Debug.Log(0.1f + (0.005f * this.hits));
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
 
     public override void Stop()
     {

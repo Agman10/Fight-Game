@@ -12,7 +12,7 @@ public class FightGamePlayerIcons : MonoBehaviour
         {
             if (this.isPlayer1)
             {
-                if (CharacterManager.Instance.player1Id <= this.icons.Length)
+                if (CharacterManager.Instance.player1Id <= this.icons.Length - 1)
                 {
                     if (this.icons[CharacterManager.Instance.player1Id] != null)
                         this.icons[CharacterManager.Instance.player1Id].SetActive(true);
@@ -20,7 +20,7 @@ public class FightGamePlayerIcons : MonoBehaviour
             }
             else
             {
-                if (CharacterManager.Instance.player2Id <= this.icons.Length)
+                if (CharacterManager.Instance.player2Id <= this.icons.Length - 1)
                 {
                     if (this.icons[CharacterManager.Instance.player2Id] != null)
                         this.icons[CharacterManager.Instance.player2Id].SetActive(true);

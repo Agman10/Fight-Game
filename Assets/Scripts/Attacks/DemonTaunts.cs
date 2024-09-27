@@ -56,19 +56,23 @@ public class DemonTaunts : Attack
             {
                 if (this.user.input.moveInput.y < 0f) //Down
                 {
-                    this.StartCoroutine(this.NeutralTauntCoroutine());
+                    //this.StartCoroutine(this.NeutralTauntCoroutine());
+                    this.StartCoroutine(this.SpinTauntCoroutine());
                 }
                 else if (this.user.input.moveInput.x * this.user.transform.forward.z > 0f) //Forward
                 {
-                    this.StartCoroutine(this.NeutralTauntCoroutine());
+                    //this.StartCoroutine(this.NeutralTauntCoroutine());
+                    this.StartCoroutine(this.SpinTauntCoroutine());
                 }
                 else if (this.user.input.moveInput.x * this.user.transform.forward.z < 0f) //Backward
                 {
-                    this.StartCoroutine(this.NeutralTauntCoroutine());
+                    //this.StartCoroutine(this.NeutralTauntCoroutine());
+                    this.StartCoroutine(this.SpinTauntCoroutine());
                 }
                 else //Neutral
                 {
-                    this.StartCoroutine(this.NeutralTauntCoroutine());
+                    //this.StartCoroutine(this.NeutralTauntCoroutine());
+                    this.StartCoroutine(this.SpinTauntCoroutine());
                 }
 
                 /*else if (this.user.input.moveInput.y > 0f) //Up
@@ -146,6 +150,87 @@ public class DemonTaunts : Attack
                 currentTime = duration - 0.1f;
             yield return null;
         }
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    private IEnumerator SpinTauntCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        if (this.animations != null)
+            this.animations.SpinTaunt(0);
+
+        float currentTime = 0;
+        //float duration = 0.6f;
+        float duration = 0.45f;
+        //float targetRotation = this.animations.body.localEulerAngles.y + (360f * 2f);
+        float targetRotation = this.animations.body.localEulerAngles.y + (360f * 2f) - 90f;
+        float startRotation = this.animations.body.localEulerAngles.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (this.animations != null)
+                this.animations.body.localEulerAngles = new Vector3(
+                    this.animations.body.localEulerAngles.x,
+                    Mathf.Lerp(startRotation, targetRotation, currentTime / duration),
+                    this.animations.body.localEulerAngles.z);
+
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+            yield return null;
+        }
+
+
+
+        currentTime = 0;
+        duration = 0.2f;
+        //float targetRotation = -245f;
+        //targetRotation = (360f * 2f);
+        targetRotation = this.animations.body.localEulerAngles.y + 90f;
+        startRotation = this.animations.body.localEulerAngles.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (this.animations != null)
+                this.animations.body.localEulerAngles = new Vector3(
+                    this.animations.body.localEulerAngles.x,
+                    Mathf.Lerp(startRotation, targetRotation, currentTime / duration),
+                    this.animations.body.localEulerAngles.z);
+
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+            yield return null;
+        }
+
+
+
+        if (this.animations != null)
+            this.animations.SpinTaunt(1);
+
+
+        //float testTime = 0f;
+        currentTime = 0;
+        duration = 0.5f;
+        float startPosY = this.animations.body.localPosition.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+            float newY = Mathf.Sin(currentTime * 50f);
+            this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, startPosY + (newY * 0.01f), this.animations.body.localPosition.z);
+
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(1f);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();

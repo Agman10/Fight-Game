@@ -48,6 +48,14 @@ public class TestGameObjectAnim : MonoBehaviour
             this.StartCoroutine(this.TestAnim11());
         else if (this.id == 11)
             this.StartCoroutine(this.TestAnim12());
+        else if (this.id == 12)
+            this.StartCoroutine(this.TestAnim13());
+        else if (this.id == 13)
+            this.StartCoroutine(this.TestAnim14());
+        else if (this.id == 14)
+            this.StartCoroutine(this.TestAnim15());
+        else if (this.id == 15)
+            this.StartCoroutine(this.TestAnim16());
     }
     private void OnDisable()
     {
@@ -653,5 +661,198 @@ public class TestGameObjectAnim : MonoBehaviour
 
             this.StartCoroutine(this.TestAnim12());
         }
+    }
+
+
+    private IEnumerator TestAnim13()
+    {
+        if (this.gameObjects.Length == 4)
+        {
+            float animSpeed = 0.2f;
+
+            this.gameObjects[0].SetActive(true);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(false);
+
+            yield return new WaitForSeconds(0.01f);
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(true);
+
+            yield return new WaitForSeconds(0.04f);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(true);
+
+
+            yield return new WaitForSeconds(0.1f);
+
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(true);
+
+
+            yield return new WaitForSeconds(0.2f);
+
+
+            this.StartCoroutine(this.TestAnim13());
+        }
+
+
+    }
+
+    private IEnumerator TestAnim14()
+    {
+        if (this.gameObjects.Length == 4)
+        {
+            float animSpeed = 0.2f;
+
+            this.gameObjects[0].SetActive(true);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(false);
+
+            yield return new WaitForSeconds(0.04f);
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(true);
+
+            yield return new WaitForSeconds(0.01f);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(true);
+
+
+            yield return new WaitForSeconds(0.1f);
+
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(true);
+
+
+            yield return new WaitForSeconds(0.2f);
+
+
+            this.StartCoroutine(this.TestAnim14());
+        }
+
+
+    }
+
+    private IEnumerator TestAnim15()
+    {
+        if (this.gameObjects.Length == 7)
+        {
+            //float animSpeed = 0.2f;
+
+            this.gameObjects[0].SetActive(true);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(false);
+            this.gameObjects[4].SetActive(false);
+            this.gameObjects[5].SetActive(false);
+            this.gameObjects[6].SetActive(false);
+
+            yield return new WaitForSeconds(0.2f);
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(true);
+
+            yield return new WaitForSeconds(this.speed);
+
+            if (this.rb != null)
+                this.rb.AddForce(new Vector3(0f, 0f, 1000f));
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(true);
+
+
+            yield return new WaitForSeconds(this.speed);
+
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(true);
+
+            yield return new WaitForSeconds(this.speed);
+
+            this.gameObjects[3].SetActive(false);
+            this.gameObjects[4].SetActive(true);
+
+            yield return new WaitForSeconds(this.speed);
+
+            if (this.rb != null)
+            {
+                this.rb.velocity = new Vector3(0f, 0f, this.rb.velocity.z / 2f);
+                //this.rb.velocity = new Vector3(0f, 0f, 0f);
+            }
+                
+
+            this.gameObjects[4].SetActive(false);
+            this.gameObjects[5].SetActive(true);
+
+            yield return new WaitForSeconds(0.15f);
+
+            if (this.rb != null)
+            {
+                //this.rb.velocity = new Vector3(0f, 0f, this.rb.velocity.z / 2f);
+                this.rb.velocity = new Vector3(0f, 0f, 0f);
+            }
+
+            this.gameObjects[5].SetActive(false);
+            this.gameObjects[6].SetActive(true);
+
+            yield return new WaitForSeconds(0.4f);
+
+            this.transform.localPosition = this.originalPos;
+
+            this.StartCoroutine(this.TestAnim15());
+        }
+
+
+    }
+
+    private IEnumerator TestAnim16()
+    {
+        if (this.gameObjects.Length == 6)
+        {
+            this.gameObjects[0].SetActive(true);
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(false);
+            this.gameObjects[4].SetActive(false);
+            this.gameObjects[5].SetActive(false);
+
+            yield return new WaitForSeconds(0.2f);
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(true);
+
+            yield return new WaitForSeconds(0.1f);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(true);
+
+            yield return new WaitForSeconds(0.1f);
+
+            this.gameObjects[2].SetActive(false);
+            this.gameObjects[3].SetActive(true);
+
+            yield return new WaitForSeconds(2f);
+
+            this.gameObjects[3].SetActive(false);
+            this.gameObjects[4].SetActive(true);
+
+            yield return new WaitForSeconds(0.1f);
+
+            this.gameObjects[4].SetActive(false);
+            this.gameObjects[5].SetActive(true);
+
+            yield return new WaitForSeconds(0.2f);
+
+            this.StartCoroutine(this.TestAnim16());
+        }
+
+
     }
 }

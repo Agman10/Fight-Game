@@ -8,6 +8,10 @@ public class DemonStartAnimation : Attack
     public TempPlayerAnimations animations;
     public bool onGoing;
 
+    //public GameObject pentagram;
+    public MeshRenderer pentagram;
+    public GameObject beam;
+
     //public float fallDuration = 0.2f;
     //public VisualEffect fire;
     //public GameObject landingParticle;
@@ -38,7 +42,18 @@ public class DemonStartAnimation : Attack
             //this.user.AddStun(0.2f, true);
             int number = Random.Range(0, 2);
 
-            this.StartCoroutine(this.StartAnimation2Coroutine());
+            //this.StartCoroutine(this.StartAnimation2Coroutine());
+            //this.StartCoroutine(this.StartAnimationSummonCoroutine());
+
+            /*if (GameManager.Instance != null && GameManager.Instance.tempSkyboxAndStageLogic != null)
+            {
+                Debug.Log(GameManager.Instance.tempSkyboxAndStageLogic.currentStage);
+            }*/
+
+            if (GameManager.Instance != null && GameManager.Instance.tempSkyboxAndStageLogic != null && GameManager.Instance.tempSkyboxAndStageLogic.currentStage == 10)
+                this.StartCoroutine(this.StartAnimation2Coroutine());
+            else
+                this.StartCoroutine(this.StartAnimationSummonCoroutine());
             //Debug.Log(number);
             /*if (this.vsJCap != null && this.user.characterId == 7 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 6 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
@@ -106,6 +121,12 @@ public class DemonStartAnimation : Attack
         base.Stop();
         if (!this.user.dead)
             this.user.rb.isKinematic = false;
+
+        if (this.pentagram != null)
+            this.pentagram.gameObject.SetActive(false);
+
+        if (this.beam != null)
+            this.beam.SetActive(false);
         //this.PlayFire(false);
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
@@ -185,7 +206,120 @@ public class DemonStartAnimation : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
+    private IEnumerator StartAnimationSummonCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        this.user.rb.isKinematic = true;
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
 
+        if (this.animations != null)
+            this.animations.body.transform.localPosition = new Vector3(0f, -10f, 0f); ;
+
+        if (this.pentagram != null)
+        {
+            this.pentagram.gameObject.SetActive(true);
+            if (this.transform.forward.z == -1)
+                this.pentagram.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+            
+        //this.PlayFire(true);
+        this.user.LookAtTarget();
+        /*if (this.animations != null)
+            this.animations.DarkJCapStartAnimation();*/
+        yield return new WaitForSeconds(0.01f);
+        /*if (this.animations != null)
+            this.animations.DarkJCapStartAnimation();*/
+
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.beam != null)
+            this.beam.SetActive(true);
+
+        float currentTime = 0;
+        float duration = 0.1f;
+        float startScale = 0.1f;
+        float targetScale = 2.5f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (this.beam != null)
+                this.beam.transform.localScale = new Vector3(Mathf.Lerp(startScale, targetScale, currentTime / duration), 7, Mathf.Lerp(startScale, targetScale, currentTime / duration));
+            yield return null;
+        }
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+        currentTime = 0;
+        duration = 0.1f;
+        startScale = 2.5f;
+        targetScale = 0f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (this.beam != null)
+                this.beam.transform.localScale = new Vector3(Mathf.Lerp(startScale, targetScale, currentTime / duration), 7, Mathf.Lerp(startScale, targetScale, currentTime / duration));
+            yield return null;
+        }
+
+        if (this.beam != null)
+            this.beam.SetActive(false);
+        //this.PlayFire(false);
+
+        /*currentTime = 0;
+        duration = 0.2f;
+        targetPosition = 0f;
+        start = this.transform.position.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
+            yield return null;
+        }*/
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+        
+
+        currentTime = 0;
+        duration = 0.1f;
+        float startAlpha = 1f;
+        float targetAlpha = 0f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (this.pentagram != null && this.pentagram.material != null)
+            {
+                //this.pentagram.material.SetColor("_BaseColor", Color.HSVToRGB(1, 1, 1, ))
+
+                Color tempColor = this.pentagram.material.color;
+                tempColor.a = Mathf.Lerp(startAlpha, targetAlpha, currentTime / duration);
+                this.pentagram.material.SetColor("_BaseColor", tempColor);
+            }
+                
+
+
+            yield return null;
+        }
+
+        if (this.pentagram != null)
+            this.pentagram.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.user.rb.isKinematic = false;
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
 
     /*public void PlayFire(bool playing)
     {

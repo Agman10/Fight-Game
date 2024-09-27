@@ -24,7 +24,12 @@ public class UpAndDown : MonoBehaviour
     private void OnDisable()
     {
         //this.transform.position = this.startPos;
-        this.transform.position = new Vector3(this.transform.position.x, this.startPos.y, this.transform.position.z);
+        //this.transform.position = new Vector3(this.transform.position.x, this.startPos.y, this.transform.position.z);
+
+        if (this.local)
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.startPos.y, this.transform.localPosition.z);
+        else
+            this.transform.position = new Vector3(this.transform.position.x, this.startPos.y, this.transform.position.z);
     }
 
     void Update()

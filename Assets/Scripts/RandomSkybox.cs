@@ -35,7 +35,9 @@ public class RandomSkybox : MonoBehaviour
     public RandomTest[] randomTests;*/
 
     // Start is called before the first frame update
-    void Start()
+
+    //CHANGE THIS TO START WHEN STAGE SELECT GETS IMPLEMENTED
+    void OnEnable()
     {
 
         if (this.randomSkybox)

@@ -45,6 +45,8 @@ public class TestHitbox : MonoBehaviour
     public bool preventDeathSound = false;
     public bool doHitSound = true;
     public float hitSoundCooldown = 0f;
+
+    public Transform explosionHitboxOrigin;
     public CharacterSoundEffect customHitSound;
 
     public Transform hitEffectTransformOrigin;
@@ -149,6 +151,10 @@ public class TestHitbox : MonoBehaviour
                         //Debug.Log(player.transform.forward);
                         //float distance = Vector3.Distance(player.transform.position, this.transform.position);
                         Vector3 dir = (player.transform.position - this.transform.position).normalized;
+
+                        if (this.explosionHitboxOrigin != null)
+                            dir = (player.transform.position - this.explosionHitboxOrigin.position).normalized;
+
                         //Debug.Log(dir.x);
                         float direction = 1f;
                         if (dir.x < 0f)

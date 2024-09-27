@@ -90,7 +90,12 @@ public class KickAttack : Attack
                 else
                 {
                     this.user.AddStun(0.2f, true);
-                    this.StartCoroutine(this.KickCoroutine());
+                    //this.StartCoroutine(this.KickCoroutine());
+
+                    if (this.user != null && this.user.characterId == 2)
+                        this.StartCoroutine(this.OldKickCoroutine());
+                    else
+                        this.StartCoroutine(this.KickCoroutine());
                 }
 
             }
@@ -132,12 +137,12 @@ public class KickAttack : Attack
         this.onGoing = true;
 
         if (this.animations != null)
-            this.animations.Kick(0);
+            this.animations.NewKick(0);
 
         yield return new WaitForSeconds(0.05f);
 
         if (this.animations != null)
-            this.animations.Kick(1);
+            this.animations.NewKick(1);
 
         if (this.kickSwooshSfx != null)
         {
@@ -148,12 +153,12 @@ public class KickAttack : Attack
         yield return new WaitForSeconds(0.025f);
 
         if (this.animations != null)
-            this.animations.Kick(2);
+            this.animations.NewKick(2);
 
         yield return new WaitForSeconds(0.025f);
 
         if (this.animations != null)
-            this.animations.Kick(3);
+            this.animations.NewKick(3);
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
@@ -316,6 +321,51 @@ public class KickAttack : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
+    IEnumerator OldKickCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        if (this.animations != null)
+            this.animations.Kick(0);
+
+        yield return new WaitForSeconds(0.05f);
+
+        if (this.animations != null)
+            this.animations.Kick(1);
+
+        if (this.kickSwooshSfx != null)
+        {
+            this.kickSwooshSfx.time = 0.01f;
+            this.kickSwooshSfx.Play();
+        }
+
+        yield return new WaitForSeconds(0.025f);
+
+        if (this.animations != null)
+            this.animations.Kick(2);
+
+        yield return new WaitForSeconds(0.025f);
+
+        if (this.animations != null)
+            this.animations.Kick(3);
+
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.2f);
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
     public override void Stop()
     {
         base.Stop();
