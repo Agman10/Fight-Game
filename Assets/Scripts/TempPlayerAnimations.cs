@@ -6815,9 +6815,11 @@ public class TempPlayerAnimations : MonoBehaviour
 
             if (stageId == 0)
             {
-                this.rightArm.localEulerAngles = new Vector3(0f, -50f, -90f);
+                //this.rightArm.localEulerAngles = new Vector3(0f, -50f, -90f);
+                this.rightArm.localEulerAngles = new Vector3(0f, 140f, 90f);
                 this.leftArm.localEulerAngles = new Vector3(-75f, 0f, 0f);
-                this.rightArmJoint.localEulerAngles = new Vector3(120f, 0f, 0f);
+                //this.rightArmJoint.localEulerAngles = new Vector3(120f, 0f, 0f);
+                this.rightArmJoint.localEulerAngles = new Vector3(-120f, 0f, 0f);
                 this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 120f);
             }
             else if (stageId == 1)
@@ -8868,6 +8870,20 @@ public class TempPlayerAnimations : MonoBehaviour
         }
 
         this.SetEyes(0);
+
+
+        if (this.wingRight != null)
+        {
+            if (stageId == 1 || stageId == 2)
+                this.wingRight.localEulerAngles = new Vector3(0f, 60f, 0f);
+            else if (stageId == 3)
+                this.wingRight.localEulerAngles = new Vector3(0f, 15f, 0f);
+            else if (stageId == 4)
+                this.wingRight.localEulerAngles = new Vector3(0f, 3f, 0f);
+            else
+                this.wingRight.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        }
     }
 
 

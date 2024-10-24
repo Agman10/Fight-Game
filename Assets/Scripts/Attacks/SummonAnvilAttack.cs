@@ -55,6 +55,8 @@ public class SummonAnvilAttack : Attack
             {
                 
             }*/
+
+            //TRY MAKING IT USABLE IN AIR FOR THE OP VERSION
             if (this.user.superCharge >= this.user.maxSuperCharge * 0.5f)
             {
                 if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)

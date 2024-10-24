@@ -269,7 +269,8 @@ public class TestHitbox : MonoBehaviour
             DamagableEntity damagableEntity = other.GetComponent<DamagableEntity>();
             if (damagableEntity != null && !damagableEntity.dead)
             {
-                this.HitDamagableEntity(damagableEntity);
+                if (this.belongsTo != damagableEntity.owner || this.damageOwner)
+                    this.HitDamagableEntity(damagableEntity);
             }
         }
         
@@ -453,11 +454,14 @@ public class TestHitbox : MonoBehaviour
             DamagableEntity damagableEntity = other.GetComponent<DamagableEntity>();
             if (damagableEntity != null && !damagableEntity.dead && !this.others.Contains(damagableEntity.gameObject))
             {
-                this.others.Add(damagableEntity.gameObject);
+                if (this.belongsTo != damagableEntity.owner || this.damageOwner)
+                {
+                    this.others.Add(damagableEntity.gameObject);
 
-                this.HitDamagableEntity(damagableEntity);
+                    this.HitDamagableEntity(damagableEntity);
 
-                this.StartCoroutine(this.RemoveGameObjectCoroutine(this.damageDelay, damagableEntity.gameObject));
+                    this.StartCoroutine(this.RemoveGameObjectCoroutine(this.damageDelay, damagableEntity.gameObject));
+                }
             }
         }
     }

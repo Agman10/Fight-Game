@@ -10,6 +10,8 @@ public class ScissorKickAttack : Attack
     public TestHitbox hitbox;
     public TestHitbox hitbox2;
 
+    public TestHitbox footDiveHitbox;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -46,12 +48,17 @@ public class ScissorKickAttack : Attack
         base.Initiate();
         if (this.user != null)
         {
-            this.user.AddStun(0.2f, true);
-            this.StartCoroutine(this.ScissorKickCoroutine());
+            
 
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
             {
-
+                this.user.AddStun(0.2f, true);
+                this.StartCoroutine(this.ScissorKickCoroutine());
+            }
+            else if (Mathf.Abs(this.user.transform.position.y) >= 0.2f)
+            {
+                this.user.AddStun(0.2f, true);
+                this.StartCoroutine(this.FootDiveCoroutine());
             }
 
             /*if (this.user.superCharge >= this.user.maxSuperCharge * 0.5f)
@@ -146,6 +153,63 @@ public class ScissorKickAttack : Attack
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
+
+    private IEnumerator FootDiveCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        if (this.animations != null)
+            this.animations.FootDive(0);
+
+        float time = 0.2f;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+            /*if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0, this.spinRotationSpeed * Time.deltaTime, 0));*/
+
+            //this.user.ragdoll.transform.Rotate(new Vector3(0, this.spinRotationSpeed * Time.deltaTime, 0));
+            this.user.rb.velocity = new Vector3(0f, 0.85f, 0f);
+
+            yield return null;
+        }
+
+        if (this.footDiveHitbox != null)
+            this.footDiveHitbox.gameObject.SetActive(true);
+
+        if (this.animations != null)
+            this.animations.FootDive(1);
+
+        time = 1f;
+        while (time > 0 && /*Mathf.Abs(this.user.transform.position.y) >= 0.05f*/ Mathf.Abs(this.user.rb.velocity.y) > 0f)
+        {
+            time -= Time.deltaTime;
+            /*if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0, this.spinRotationSpeed * Time.deltaTime, 0));*/
+
+            //this.user.ragdoll.transform.Rotate(new Vector3(0, this.spinRotationSpeed * Time.deltaTime, 0));
+            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 15f, -15f, 0f);
+
+            yield return null;
+        }
+
+        if (this.footDiveHitbox != null)
+            this.footDiveHitbox.gameObject.SetActive(false);
+
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+
+        //yield return new WaitForSeconds(1f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.2f);
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
     public override void Stop()
     {
         base.Stop();
@@ -155,6 +219,9 @@ public class ScissorKickAttack : Attack
 
         if (this.hitbox2 != null)
             this.hitbox2.gameObject.SetActive(false);
+
+        if (this.footDiveHitbox != null)
+            this.footDiveHitbox.gameObject.SetActive(false);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

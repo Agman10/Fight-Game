@@ -64,6 +64,7 @@ public class ArmageddonMeteorSpawner : MonoBehaviour
                         armageddonMeteorPrefab.groundHitbox.explosionHitboxOrigin = this.middleTransform;
                 }
 
+                //armageddonMeteorPrefab.direction = new Vector2(2f, Random.Range(-10f, -12f));
                 
 
                 if (this.user != null)

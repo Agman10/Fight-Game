@@ -102,6 +102,12 @@ public class FireBall : MonoBehaviour
         if (bomb != null)
             bomb.KnockBack(new Vector3(this.transform.forward.z * this.horizontalKnockack, this.verticalKnockack, 0f));
 
+        DamagableEntity damagableEntity = other.GetComponent<DamagableEntity>();
+        if (damagableEntity != null && !damagableEntity.dead)
+        {
+            damagableEntity.TakeDamage(this.transform.position, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockack, this.verticalKnockack);
+        }
+
         if (player == null /*|| this.belongsTo == null*/)
         {
             //this.gameObject.SetActive(false);

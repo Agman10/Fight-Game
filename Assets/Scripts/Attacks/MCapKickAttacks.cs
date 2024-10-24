@@ -86,12 +86,12 @@ public class MCapKickAttacks : Attack
         this.onGoing = true;
 
         if (this.animations != null)
-            this.animations.Kick(0);
+            this.animations.NewKick(0);
 
         yield return new WaitForSeconds(0.05f);
 
         if (this.animations != null)
-            this.animations.Kick(1);
+            this.animations.NewKick(1);
 
         if (this.kickSwooshSfx != null)
         {
@@ -102,12 +102,12 @@ public class MCapKickAttacks : Attack
         yield return new WaitForSeconds(0.025f);
 
         if (this.animations != null)
-            this.animations.Kick(2);
+            this.animations.NewKick(2);
 
         yield return new WaitForSeconds(0.025f);
 
         if (this.animations != null)
-            this.animations.Kick(3);
+            this.animations.NewKick(3);
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);

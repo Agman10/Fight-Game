@@ -45,6 +45,7 @@ public class MCapPunchAttacks : Attack
                     this.user.AddStun(0.1f, false);
 
                 this.StartCoroutine(this.PunchCoroutine());
+                //this.StartCoroutine(this.OldPunchCoroutine());
             }
             else //in air
             {
@@ -61,11 +62,11 @@ public class MCapPunchAttacks : Attack
         this.onGoing = true;
 
         if (this.animations != null)
-            this.animations.SetStartPunchPose0();
+            this.animations.NewPunch(0);
         yield return new WaitForSeconds(0.01f);
 
-        if (this.animations != null)
-            this.animations.SetStartPunchPose();
+        /*if (this.animations != null)
+            this.animations.SetStartPunchPose();*/
 
         if (this.punchSwooshSfx != null)
         {
@@ -75,10 +76,15 @@ public class MCapPunchAttacks : Attack
             this.punchSwooshSfx.Play();
         }
 
-        yield return new WaitForSeconds(0.04f);
+        yield return new WaitForSeconds(0.03f);
 
         if (this.animations != null)
-            this.animations.SetPunchPose();
+            this.animations.NewPunch(1);
+
+        yield return new WaitForSeconds(0.01f);
+
+        if (this.animations != null)
+            this.animations.NewPunch(2);
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
@@ -86,12 +92,16 @@ public class MCapPunchAttacks : Attack
         yield return new WaitForSeconds(0.1f);
 
         if (this.animations != null)
-            this.animations.SetDefaultPose();
+            this.animations.NewPunch(3);
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
 
-        //yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.02f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
@@ -171,6 +181,49 @@ public class MCapPunchAttacks : Attack
         }*/
 
         //this.onGoingNeutral = false;
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+
+    IEnumerator OldPunchCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        if (this.animations != null)
+            this.animations.SetStartPunchPose0();
+        yield return new WaitForSeconds(0.01f);
+
+        if (this.animations != null)
+            this.animations.SetStartPunchPose();
+
+        if (this.punchSwooshSfx != null)
+        {
+            //this.punchSwooshSfx.time = 0.125f;
+            //this.punchSwooshSfx.time = 0.1f;
+            this.punchSwooshSfx.time = 0.01f;
+            this.punchSwooshSfx.Play();
+        }
+
+        yield return new WaitForSeconds(0.04f);
+
+        if (this.animations != null)
+            this.animations.SetPunchPose();
+
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(false);
+
+        //yield return new WaitForSeconds(0.05f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
