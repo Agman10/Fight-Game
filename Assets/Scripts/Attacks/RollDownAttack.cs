@@ -10,6 +10,8 @@ public class RollDownAttack : Attack
     public TestHitbox hitbox;
     public GameObject landingParticle;
 
+    public TestHitbox shockWaveHitbox;
+
     public bool homing = false;
 
 
@@ -147,7 +149,15 @@ public class RollDownAttack : Attack
 
         this.ChangeCollision(false);
 
-        yield return new WaitForSeconds(0.2f);
+        if (this.shockWaveHitbox != null)
+            this.shockWaveHitbox.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.shockWaveHitbox != null)
+            this.shockWaveHitbox.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.1f);
 
         
 
@@ -165,6 +175,9 @@ public class RollDownAttack : Attack
             this.hitbox.gameObject.SetActive(false);
 
         this.ChangeCollision(false);
+
+        if (this.shockWaveHitbox != null)
+            this.shockWaveHitbox.gameObject.SetActive(false);
 
         this.user.attackStuns.Remove(this.gameObject);
     }

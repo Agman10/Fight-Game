@@ -134,13 +134,40 @@ public class RandomSkybox : MonoBehaviour
         {
             if (number <= 15) //grass plains
             {
-                this.SetStage(0);
-                this.SetMusic(0);
+
+                /*this.SetStage(0);
+                this.SetMusic(0);*/
+
+                float plainsNumber = Random.Range(1, 101);
+
+                if(plainsNumber <= 75)
+                {
+                    this.SetStage(0);
+                    this.SetMusic(0);
+                }
+                else
+                {
+                    this.SetStage(5);
+                    this.SetMusic(8);
+                }
             }
             else if (number > 15 && number <= 30) //bay area
             {
-                this.SetStage(1);
-                this.SetMusic(1);
+                /*this.SetStage(1);
+                this.SetMusic(1);*/
+
+                float bayNumber = Random.Range(1, 101);
+
+                if (bayNumber <= 75)
+                {
+                    this.SetStage(1);
+                    this.SetMusic(1);
+                }
+                else
+                {
+                    this.SetStage(6);
+                    this.SetMusic(9);
+                }
             }
             else if (number > 30 && number <= 35) //tower
             {
@@ -179,7 +206,7 @@ public class RandomSkybox : MonoBehaviour
                 else
                     this.SetSkybox(6);
             }
-            else if (number > 60 && number <= 65) //grass plain snow
+            /*else if (number > 60 && number <= 65) //grass plain snow
             {
                 this.SetStage(5);
                 this.SetMusic(8);
@@ -188,8 +215,8 @@ public class RandomSkybox : MonoBehaviour
             {
                 this.SetStage(6);
                 this.SetMusic(9);
-            }
-            else if (number > 70 && number <= 71) //backrooms
+            }*/
+            else if (number > 60 && number <= 61) //backrooms
             {
                 this.SetStage(7);
                 this.SetMusic(6);
@@ -197,7 +224,7 @@ public class RandomSkybox : MonoBehaviour
                 /*if (this.moon != null)
                     this.moon.SetActive(false);*/
             }
-            else if (number > 71 && number <= 81) //throne room
+            else if (number > 61 && number <= 71) //throne room
             {
                 this.SetStage(8);
                 this.SetMusic(7);
@@ -211,7 +238,7 @@ public class RandomSkybox : MonoBehaviour
 
                 RenderSettings.ambientLight = new Color32(110, 110, 130, 255);
             }
-            else if (number > 81 && number <= 86) //hell
+            else if (number > 71 && number <= 78) //hell
             {
                 this.SetStage(10);
                 this.SetMusic(11);
@@ -220,7 +247,7 @@ public class RandomSkybox : MonoBehaviour
                     this.moon.SetActive(false);*/
                 RenderSettings.ambientLight = new Color32(180, 135, 135, 255);
             }
-            else if (number > 86 && number <= 91) //heaven
+            else if (number > 78 && number <= 85) //heaven
             {
                 this.SetStage(11);
                 this.SetMusic(12);
@@ -234,7 +261,7 @@ public class RandomSkybox : MonoBehaviour
                 else
                     this.SetSkybox(1);
             }
-            else if (number > 91 && number <= 96)//night club
+            else if (number > 85 && number <= 93)//night club
             {
                 this.SetStage(15);
                 this.SetMusic(14);

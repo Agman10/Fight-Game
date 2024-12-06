@@ -345,6 +345,10 @@ public class TestHitbox : MonoBehaviour
                         knockbackMultiplier = this.physicsKnockbackMultiplier;
 
                     Vector3 dir = (player.transform.position - this.transform.position).normalized;
+
+                    if (this.explosionHitboxOrigin != null)
+                        dir = (player.transform.position - this.explosionHitboxOrigin.position).normalized;
+
                     float direction = 1f;
                     if (dir.x <= 0f)
                         direction = -1f;

@@ -53,7 +53,7 @@ public class HellBatEntity : DamagableEntity
                 this.wingRight.localEulerAngles = new Vector3(this.wingRight.localEulerAngles.x, this.wingRight.localEulerAngles.y, newY2 * -10);
 
 
-            //this.transform.Translate(new Vector3(5f * Time.deltaTime, 0f, 0f));
+            this.transform.Translate(new Vector3(5f * Time.deltaTime, 0f, 0f));
         }
         else
         {
@@ -145,7 +145,7 @@ public class HellBatEntity : DamagableEntity
         this.StartCoroutine(this.DieCoroutine(forward));
     }
 
-    /*private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         TestPlayer player = collision.collider.GetComponent<TestPlayer>();
 
@@ -154,7 +154,7 @@ public class HellBatEntity : DamagableEntity
             Debug.Log("test");
             player.TakeDamage(this.transform.position, 5, 0.2f, this.transform.forward.z * 300f, 300f);
         }
-    }*/
+    }
 
     public void SetEye(int eyeId)
     {

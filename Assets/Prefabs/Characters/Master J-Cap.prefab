@@ -310,10 +310,12 @@ MonoBehaviour:
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
 --- !u!1 &282003496929473993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,10 +1035,12 @@ MonoBehaviour:
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
 --- !u!1 &1557905914909897021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,10 +1176,12 @@ MonoBehaviour:
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
 --- !u!1 &1605753560369232388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,10 +1551,12 @@ MonoBehaviour:
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
 --- !u!1 &1722947280484241477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,10 +2104,12 @@ MonoBehaviour:
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
 --- !u!1 &2885024793173176564
 GameObject:
   m_ObjectHideFlags: 0
@@ -4200,10 +4210,12 @@ MonoBehaviour:
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0.15
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
 --- !u!1 &6870897816496557463
 GameObject:
   m_ObjectHideFlags: 0
@@ -4251,7 +4263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4949462818926471264
 Transform:
   m_ObjectHideFlags: 0
@@ -6538,6 +6550,10 @@ PrefabInstance:
     - target: {fileID: 7811251959317637768, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8035994153626754820, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
+      propertyPath: m_RootOrder
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 8087056540426598335, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_Materials.Array.data[0]

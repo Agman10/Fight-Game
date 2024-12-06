@@ -16,6 +16,10 @@ public class ExorcismSuper : Attack
 
     public GameObject cross1, cross2, cross3, cross4;
 
+    public GameObject bible;
+
+    public GameObject godLight;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -72,6 +76,10 @@ public class ExorcismSuper : Attack
 
         if (this.animations != null)
             this.animations.GrandFlameStart();
+
+        if (this.animations != null)
+            this.animations.Exorcism();
+
         if (this.startParticle != null)
         {
             GameObject startParticlePrefab = this.startParticle;
@@ -87,10 +95,18 @@ public class ExorcismSuper : Attack
         if (this.crosses != null)
             this.crosses.SetActive(true);
 
+        if (this.bible != null)
+            this.bible.SetActive(true);
+
+        if (this.godLight != null)
+            this.godLight.SetActive(true);
+
         float testTime2 = 0f;
         float currentTime = 0;
         float duration = 0.25f;
         float startPosY2 = this.animations.body.localPosition.y;
+
+        float bibleStartPosY2 = this.bible.transform.localPosition.y;
         while (currentTime < duration)
         {
             //time -= Time.deltaTime;
@@ -100,6 +116,8 @@ public class ExorcismSuper : Attack
 
             float newY = Mathf.Sin(2 * 100f);
             this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, startPosY2 + (newY * 0.01f), this.animations.body.localPosition.z);
+
+            this.bible.transform.localPosition = new Vector3(this.bible.transform.localPosition.x, bibleStartPosY2 + (newY * 0.01f), this.bible.transform.localPosition.z);
 
             this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
 
@@ -120,8 +138,10 @@ public class ExorcismSuper : Attack
 
 
         float testTime = 0f;
-        float time = 1;
+        float time = 3;
         float startPosY = this.animations.body.localPosition.y;
+
+        float bibleStartPosY = this.bible.transform.localPosition.y;
         while (time > 0)
         {
             time -= Time.deltaTime;
@@ -132,6 +152,7 @@ public class ExorcismSuper : Attack
 
             this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
 
+            this.bible.transform.localPosition = new Vector3(this.bible.transform.localPosition.x, bibleStartPosY + (newY * 0.01f), this.bible.transform.localPosition.z);
 
             if (this.crosses != null)
                 this.crosses.transform.Rotate(new Vector3(0f, 200 * Time.deltaTime, 0f));
@@ -157,6 +178,8 @@ public class ExorcismSuper : Attack
         testTime = 0f;
         time = 0.5f;
         startPosY = this.animations.body.localPosition.y;
+
+        bibleStartPosY = this.bible.transform.localPosition.y;
         while (time > 0)
         {
             time -= Time.deltaTime;
@@ -167,6 +190,8 @@ public class ExorcismSuper : Attack
 
             this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
 
+            this.bible.transform.localPosition = new Vector3(this.bible.transform.localPosition.x, bibleStartPosY + (newY * 0.01f), this.bible.transform.localPosition.z);
+
             if (this.crosses != null)
                 this.crosses.transform.Rotate(new Vector3(0f, 200 * Time.deltaTime, 0f));
             yield return null;
@@ -176,6 +201,15 @@ public class ExorcismSuper : Attack
 
         if (this.crosses != null)
             this.crosses.SetActive(false);
+
+        if (this.bible != null)
+        {
+            this.bible.transform.localPosition = new Vector3(this.bible.transform.localPosition.x, 3.5f, this.bible.transform.localPosition.z);
+            this.bible.SetActive(false);
+        }
+
+        if (this.godLight != null)
+            this.godLight.SetActive(false);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
@@ -189,6 +223,16 @@ public class ExorcismSuper : Attack
 
         if (this.crosses != null)
             this.crosses.SetActive(false);
+
+        if (this.bible != null)
+        {
+            this.bible.transform.localPosition = new Vector3(this.bible.transform.localPosition.x, 3.5f, this.bible.transform.localPosition.z);
+            this.bible.SetActive(false);
+        }
+
+        if (this.godLight != null)
+            this.godLight.SetActive(false);
+
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
