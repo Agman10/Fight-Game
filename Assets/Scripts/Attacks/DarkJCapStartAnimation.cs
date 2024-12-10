@@ -14,7 +14,10 @@ public class DarkJCapStartAnimation : Attack
 
     //public GameObject ragingFlame;
 
+    //public BigFireBall bigFireBall;
+
     public Attack vsJCap;
+    public Attack vsMaster;
 
     public AudioSource ragingBeastPunchSfx;
     public AudioSource ragingBeastSwooshSfx;
@@ -41,6 +44,8 @@ public class DarkJCapStartAnimation : Attack
                 this.StartCoroutine(this.RagingBeastStartAnimationCoroutine());
             else if (this.vsJCap != null && this.user.characterId == 1 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 0 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
                 this.vsJCap.Initiate();
+            else if (this.vsMaster != null && this.user.characterId == 1 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 6 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
+                this.vsMaster.Initiate();
             else
                 this.StartCoroutine(this.StartAnimationCoroutine());
         }
@@ -307,6 +312,22 @@ public class DarkJCapStartAnimation : Attack
         }
 
         yield return new WaitForSeconds(0.2f);
+
+        /*this.animations.SuperFireBallCharge();
+
+        yield return new WaitForSeconds(0.3f);
+
+        if (this.bigFireBall != null)
+        {
+            BigFireBall bigFireBallPrefab = this.bigFireBall;
+            bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3((this.transform.forward.z * 1.5f) + this.transform.position.x, this.transform.position.y + 1.56f, 0), this.transform.rotation);
+            bigFireBallPrefab.SetOwner(this.user);
+        }
+
+        this.animations.SuperFireBallShoot();
+
+        yield return new WaitForSeconds(0.5f);*/
+
 
         if (this.animations != null)
             this.animations.SetDefaultPose();

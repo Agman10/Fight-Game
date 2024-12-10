@@ -530,6 +530,7 @@ public class TestPlayer : MonoBehaviour
             
     }
 
+
     public void lookAtPlayer()
     {
         if (this.tempOpponent.transform.position.x > this.transform.position.x + 0.2f)
@@ -575,6 +576,27 @@ public class TestPlayer : MonoBehaviour
         }
         
         //Debug.Log("test");
+    }
+
+
+    public void LookAtCenter()
+    {
+        if (this.ragdoll != null)
+        {
+            if (this.transform.position.x > 0)
+            {
+                this.transform.eulerAngles = new Vector3(0, 180, 0);
+                if (this.ragdoll != null)
+                    this.ragdoll.transform.localScale = new Vector3(1f, 1f, -1f);
+            }
+            else
+            {
+                this.transform.eulerAngles = new Vector3(0, 0, 0);
+                if (this.ragdoll != null)
+                    this.ragdoll.transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+        }
+
     }
 
     /*public void DelayedDeath(Vector3 position, bool ragdollforce = false, bool ghost = false)

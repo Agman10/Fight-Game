@@ -204,7 +204,7 @@ public class BigFireBall : MonoBehaviour
         if (this.impactEffect != null)
         {
             GameObject impactPrefab = this.impactEffect;
-            impactPrefab = Instantiate(impactPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0f), Quaternion.Euler(0, 0, 0));
+            impactPrefab = Instantiate(impactPrefab, new Vector3(this.transform.position.x /*+ (this.transform.forward.z * 0.7f)*/, this.transform.position.y, 0f), Quaternion.Euler(0, 0, 0));
         }
 
         yield return new WaitForSeconds(0.1f);

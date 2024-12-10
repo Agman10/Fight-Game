@@ -16,6 +16,7 @@ public class MCapStartAnimation : Attack
 
     //public Attack vsDarkJCap;
     public Attack vsMikeBaller;
+    public Attack vsDark;
 
     public override void OnHit()
     {
@@ -61,6 +62,10 @@ public class MCapStartAnimation : Attack
             if (this.vsMikeBaller != null && this.user.characterId == 6 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 7 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
                 this.vsMikeBaller.Initiate();
+            }
+            else if (this.vsDark != null && this.user.characterId == 6 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 1 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
+            {
+                this.vsDark.Initiate();
             }
             else
             {

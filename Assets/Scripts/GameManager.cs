@@ -637,10 +637,20 @@ public class GameManager : MonoBehaviour
             else if (ragingBeastStageId == 2)
             {
                 this.gameCamera.mainCamera.cullingMask = this.ragingBeastDeathCameraLayers;
+                this.gameCamera.mainCamera.clearFlags = CameraClearFlags.SolidColor;
                 this.gameCamera.mainCamera.backgroundColor = Color.black;
 
                 if (this.ragingBeastSkull != null)
                     this.ragingBeastSkull.SetActive(true);
+            }
+            else if (ragingBeastStageId == 3)
+            {
+                this.gameCamera.mainCamera.cullingMask = this.ragingBeastDeathCameraLayers;
+                this.gameCamera.mainCamera.clearFlags = CameraClearFlags.SolidColor;
+                this.gameCamera.mainCamera.backgroundColor = Color.black;
+
+                if (this.ragingBeastSkull != null)
+                    this.ragingBeastSkull.SetActive(false);
             }
             else
             {
