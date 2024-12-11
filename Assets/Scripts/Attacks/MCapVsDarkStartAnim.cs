@@ -118,8 +118,11 @@ public class MCapVsDarkStartAnim : Attack
 
         yield return new WaitForSeconds(0.1f);
 
-        float minXPos = -0.75f;
-        float maxXPos = 0.75f;
+        /*float minXPos = -0.75f;
+        float maxXPos = 0.75f;*/
+
+        float minXPos = -0.75f + (this.user.transform.forward.z * -0.4f);
+        float maxXPos = 0.75f + (this.user.transform.forward.z * -0.4f);
 
         //Vector3 randomPos = new Vector3(this.user.tempOpponent.transform.position.x + this.RandomXY(minXPos, maxXPos), this.RandomXY(0.5f, 2.5f), -2);
 
@@ -131,7 +134,12 @@ public class MCapVsDarkStartAnim : Attack
         {
             /*if (amount2 == 0)
                 this.PunchEffect(new Vector3(this.user.tempOpponent.transform.position.x + this.RandomXY(minXPos, maxXPos), this.RandomXY(0.5f, 2.5f), -0.5f), false);*/
-            
+
+            //this.PunchEffect(new Vector3(this.user.tempOpponent.transform.position.x + this.RandomXY(minXPos, maxXPos), this.RandomXY(0.5f, 2.5f), -0.5f), false);
+
+            /*this.PunchEffect(new Vector3(this.user.tempOpponent.transform.position.x - 0.75f + (this.user.transform.forward.z * -0.375f), this.RandomXY(0.5f, 2.5f), -0.5f), false);
+            this.PunchEffect(new Vector3(this.user.tempOpponent.transform.position.x + 0.75f + (this.user.transform.forward.z * -0.375f), this.RandomXY(0.5f, 2.5f), -0.5f), false);*/
+
             yield return new WaitForSeconds(0.025f);
             bool playSfx = false;
             if (amount2 == 0)
@@ -384,8 +392,11 @@ public class MCapVsDarkStartAnim : Attack
         //yield return new WaitForSeconds(0.2f);
 
 
-        float minXPos = -0.75f;
-        float maxXPos = 0.75f;
+        /*float minXPos = -0.75f;
+        float maxXPos = 0.75f;*/
+
+        float minXPos = -0.65f + (this.user.transform.forward.z * 0.2f);
+        float maxXPos = 0.65f + (this.user.transform.forward.z * 0.2f);
 
         //Vector3 randomPos = new Vector3(this.user.tempOpponent.transform.position.x + this.RandomXY(minXPos, maxXPos), this.RandomXY(0.5f, 2.5f), -2);
 
@@ -396,6 +407,12 @@ public class MCapVsDarkStartAnim : Attack
         while (amount > 0)
         {
             //this.PunchEffect(new Vector3(this.user.tempOpponent.transform.position.x + this.RandomXY(minXPos, maxXPos), this.RandomXY(0.5f, 2.5f), -0.5f), false);
+
+            /*if (amount2 == 0)
+                this.PunchEffect(new Vector3(this.user.tempOpponent.transform.position.x + this.RandomXY(minXPos, maxXPos), this.RandomXY(0.5f, 2.5f), -0.5f), false);*/
+
+            /*this.PunchEffect(new Vector3(this.user.tempOpponent.transform.position.x - 0.65f + (this.user.transform.forward.z * 0.2f), this.RandomXY(0.5f, 2.5f), -0.5f), false);
+            this.PunchEffect(new Vector3(this.user.tempOpponent.transform.position.x + 0.65f + (this.user.transform.forward.z * 0.2f), this.RandomXY(0.5f, 2.5f), -0.5f), false);*/
 
             yield return new WaitForSeconds(0.025f);
             bool playSfx = false;
