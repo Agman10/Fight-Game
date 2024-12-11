@@ -11,6 +11,10 @@ public class HoodGuyStartAnimation : Attack
 
     public VisualEffect smoke;
 
+    public AudioSource throwSfx;
+
+    public AnimationCurve throwCurve;
+
     //public float fallDuration = 0.2f;
     //public VisualEffect fire;
     //public GameObject landingParticle;
@@ -41,8 +45,21 @@ public class HoodGuyStartAnimation : Attack
         if (this.user != null)
         {
             //this.user.AddStun(0.2f, true);
-            this.StartCoroutine(this.TemplateCoroutine2());
+            //this.StartCoroutine(this.TemplateCoroutine2());
             //this.StartCoroutine(this.SmokeStartAnimation());
+
+
+            if (this.user.tempOpponent != null && this.user.tempOpponent.characterId == 5 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
+            {
+                if(this.user.playerNumber == 2)
+                    this.StartCoroutine(this.ThrowP2());
+                else
+                    this.StartCoroutine(this.ThrowP1());
+            }
+            else
+            {
+                this.StartCoroutine(this.TemplateCoroutine2());
+            }
         }
     }
 
@@ -174,6 +191,9 @@ public class HoodGuyStartAnimation : Attack
         if (this.animations != null)
             this.animations.body.gameObject.SetActive(true);
 
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = false;
+
         this.PlaySmoke(false);
 
         this.onGoing = false;
@@ -195,6 +215,9 @@ public class HoodGuyStartAnimation : Attack
 
         if (this.animations != null)
             this.animations.body.gameObject.SetActive(false);
+
+        /*if (this.animations != null)
+            this.animations.body.localScale = new Vector3(0f, 0f, 0f);*/
 
         this.user.transform.position = new Vector3(this.user.transform.position.x, -3f, 0f);
         this.PlaySmoke(true);
@@ -229,6 +252,9 @@ public class HoodGuyStartAnimation : Attack
         if (this.animations != null)
             this.animations.body.gameObject.SetActive(true);
 
+        /*if (this.animations != null && this.user != null)
+            this.animations.body.localScale = new Vector3(1f, 1f, this.user.transform.forward.z);*/
+
         this.PlaySmoke(false);
 
         yield return new WaitForSeconds(0.2f);
@@ -236,6 +262,314 @@ public class HoodGuyStartAnimation : Attack
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
+
+
+
+
+
+
+
+
+    private IEnumerator ThrowP1()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        this.user.rb.isKinematic = true;
+
+        /*if (this.animations != null)
+            this.animations.body.localScale = new Vector3(0f, 0f, 0f);*/
+
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, -5f, 0f);
+        //this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
+
+        //this.user.LookAtTarget();
+
+        yield return new WaitForSeconds(0.01f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.2f);
+
+
+
+
+
+        this.user.animations.ItemThrow(0);
+
+        yield return new WaitForSeconds(0.2f);
+
+        this.user.animations.ItemThrow(1);
+
+        yield return new WaitForSeconds(0.05f);
+
+        this.user.animations.ItemThrow(2);
+
+        /*if (this.nothingSfx != null)
+            this.nothingSfx.Play();*/
+
+        if (this.throwSfx != null)
+        {
+            //this.throwSfx.time = 0.01f;
+            this.throwSfx.Play();
+        }
+
+        yield return new WaitForSeconds(0.05f);
+
+        this.user.animations.ItemThrow(3);
+
+        //this.ThrowRandomItem();
+
+        //HERE HE THROWS PLAYER 2
+
+        //yield return new WaitForSeconds(0.3f);
+
+        float currentTime = 0;
+        float duration = 0.3f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        this.user.animations.ItemThrow(4);
+
+        /*currentTime = 0;
+        duration = 0.3f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            yield return null;
+        }*/
+
+        yield return new WaitForSeconds(0.05f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        currentTime = 0;
+        duration = 0.3f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        currentTime = 0;
+        //float currentTime2 = 0;
+        duration = 0.2f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        Debug.Log("P1");
+
+        this.user.rb.isKinematic = false;
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+
+
+    private IEnumerator ThrowP2()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = true;
+
+        this.user.rb.isKinematic = true;
+
+        this.user.LookAtTarget();
+
+        if (this.animations != null)
+            this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
+        this.user.transform.position = new Vector3(-6.2f, 3f, 0f);
+        //this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
+
+        
+
+        yield return new WaitForSeconds(0.01f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+
+        yield return new WaitForSeconds(0.2f);
+
+
+
+
+
+        
+
+        yield return new WaitForSeconds(0.2f);
+
+        
+
+        yield return new WaitForSeconds(0.05f);
+
+        yield return new WaitForSeconds(0.05f);
+
+        //this.ThrowRandomItem();
+
+        //HERE HE THROWS PLAYER 2
+
+        if (this.animations != null && this.user != null)
+        {
+            this.animations.RollAnimation();
+            this.animations.body.localScale = new Vector3(0.5f, 0.5f, 0.5f * this.user.transform.forward.z);
+            this.animations.body.localPosition = new Vector3(0f, 0.65f, 0f);
+            //this.animations.body.localPosition = new Vector3(0f, this.animations.body.localPosition.y / 2f, 0f);
+        }
+
+        float currentTime = 0;
+        float duration = 0.6f;
+        float targetPositionX = 7f;
+        float startX = this.user.transform.position.x;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.user.transform.position = new Vector3(Mathf.Lerp(startX, targetPositionX, currentTime / duration), this.throwCurve.Evaluate(currentTime / duration), 0f);
+
+            //Debug.Log(this.throwCurve.Evaluate(currentTime / duration));
+
+            if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0f, 0f, 2000f * Time.deltaTime));
+            yield return null;
+        }
+
+
+
+        /*float currentTime = 0;
+        float duration = 0.3f;
+        float targetPositionX = 0f;
+        float targetPositionY = 6f;
+        float startX = this.user.transform.position.x;
+        float startY = this.user.transform.position.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.user.transform.position = new Vector3(Mathf.Lerp(startX, targetPositionX, currentTime / duration), Mathf.Lerp(startY, targetPositionY, currentTime / duration), 0f);
+
+            if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0f, 0f,2000f * Time.deltaTime));
+            yield return null;
+        }
+
+        currentTime = 0;
+        //float currentTime2 = 0;
+        duration = 0.3f;
+        targetPositionX = 7f;
+        targetPositionY = 0f;
+        startX = this.user.transform.position.x;
+        startY = this.user.transform.position.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //currentTime2 += Time.deltaTime;
+            this.user.transform.position = new Vector3(Mathf.Lerp(startX, targetPositionX, currentTime / duration), Mathf.Lerp(startY, targetPositionY, currentTime / duration), 0f);
+            //this.user.transform.position = new Vector3(Mathf.Lerp(startX, targetPositionX, currentTime2 / 0.35f), Mathf.Lerp(startY, targetPositionY, currentTime2 / 0.35f), 0f);
+
+            if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0f, 0f,2000f * Time.deltaTime));
+            yield return null;
+        }*/
+
+        this.animations.SetPunchUppercutStartAnim1();
+        this.animations.body.localPosition = new Vector3(0f, 0.72f, 0f);
+
+
+        //yield return new WaitForSeconds(0.3f);
+
+        
+
+        yield return new WaitForSeconds(0.05f);
+
+        /*currentTime = 0;
+        //currentTime2 = 0;
+
+        duration = 0.05f;
+        targetPositionX = 7f;
+        targetPositionY = 0f;
+        startX = this.user.transform.position.x;
+        startY = this.user.transform.position.y;
+        while (currentTime2 < 0.35f)
+        {
+            currentTime += Time.deltaTime;
+            currentTime2 += Time.deltaTime;
+
+            //this.user.transform.position = new Vector3(Mathf.Lerp(startX, targetPositionX, currentTime / duration), Mathf.Lerp(startY, targetPositionY, currentTime / duration), 0f);
+            this.user.transform.position = new Vector3(Mathf.Lerp(startX, targetPositionX, currentTime2 / 0.35f), Mathf.Lerp(startY, targetPositionY, currentTime2 / 0.35f), 0f);
+
+            if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0f, 0f, *//*this.user.transform.forward.z **//* 2000f * Time.deltaTime));
+            yield return null;
+        }*/
+
+
+        if (this.animations != null && this.user != null)
+        {
+            this.animations.SetDefaultPose();
+            //this.animations.body.localScale = new Vector3(0.5f, 0.5f, 0.5f * this.user.transform.forward.z);
+            //this.animations.body.localPosition = new Vector3(0f, 0.65f, 0f);
+            this.animations.body.localPosition = new Vector3(0f, this.animations.body.localPosition.y / 2f, 0f);
+        }
+
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            GameManager.Instance.gameCamera.cameraIsLocked = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+
+        currentTime = 0;
+        //float currentTime2 = 0;
+        duration = 0.2f;
+        float targetScale = 1f;
+        float startScale = 0.5f;
+
+        float targetScaleZ = 1f * this.user.transform.forward.z;
+        float startScaleZ = 0.5f * this.user.transform.forward.z;
+
+        float startPos = 1.95f * 0.5f;
+        float targetPos = 1.95f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+            this.user.animations.body.localScale = new Vector3(Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScaleZ, targetScaleZ, currentTime / duration));
+
+            this.user.animations.body.localPosition = new Vector3(0f, Mathf.Lerp(startPos, targetPos, currentTime / duration), 0f);
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        Debug.Log("P2");
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        this.user.rb.isKinematic = false;
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+
+
+
+
+
 
     /*private IEnumerator TemplateCoroutine()
     {
