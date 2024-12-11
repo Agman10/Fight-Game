@@ -55,4 +55,20 @@ public class GameCamera : MonoBehaviour
         //transform.LookAt(center);
     }
 
+    /*private void Start()
+    {
+        if (this.player1 != null && this.player2 != null)
+        {
+            this.center = ((this.player2.position - this.player1.position) / 2.0f) + this.player1.position;
+
+            float centerX = (((this.player2.position.x + this.p2ExtraWidth) - (this.player1.position.x + this.p1ExtraWidth)) / 2.0f) + this.player1.position.x;
+            
+            if (this.player1.position.x > this.player2.position.x)
+                centerX = (((this.player1.position.x + this.p1ExtraWidth) - (this.player2.position.x + this.p2ExtraWidth)) / 2.0f) + this.player2.position.x;
+
+            this.posX = Mathf.Clamp(centerX, -this.maxX, this.maxX);
+
+            this.transform.position = new Vector3(this.posX, this.transform.position.y, this.transform.position.z);
+        }
+    }*/
 }

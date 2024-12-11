@@ -114,6 +114,8 @@ public class DemonStartAnimation : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     public override void Stop()
@@ -130,6 +132,8 @@ public class DemonStartAnimation : Attack
         //this.PlayFire(false);
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     private IEnumerator StartAnimation2Coroutine()
@@ -204,6 +208,8 @@ public class DemonStartAnimation : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     private IEnumerator StartAnimationSummonCoroutine()
@@ -319,6 +325,8 @@ public class DemonStartAnimation : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     /*public void PlayFire(bool playing)

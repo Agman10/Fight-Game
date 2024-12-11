@@ -50,6 +50,8 @@ public class TestPlayer : MonoBehaviour
 
     public Action OnDisableItems;
 
+    public Action<int> OnEntranceDone;
+
     public Action<TestPlayer> OnHitFromPlayer;
     private Vector3 startPos;
 
@@ -548,6 +550,11 @@ public class TestPlayer : MonoBehaviour
             if (this.ragdoll != null)
                 this.ragdoll.transform.localScale = new Vector3(1f, 1f, -1f);
         }
+    }
+
+    public void EntranceDone()
+    {
+        this.OnEntranceDone?.Invoke(this.playerNumber);
     }
 
     public void SetInput(PlayerInput input)

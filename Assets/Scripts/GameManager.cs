@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
 
     public CharacterThemePlayer characterThemePlayer;
 
+    public EntranceAnimationHandler entranceAnimationHandler;
+
     [Space]
     public GameObject ragingBeastSkull;
     public LayerMask normalCameraLayers;
@@ -219,6 +221,12 @@ public class GameManager : MonoBehaviour
                 else if (CharacterManager.Instance.musicTypeId == 3)
                 {
                     this.characterThemePlayer.PlayP2CharacterTheme();
+                }
+
+
+                if (this.entranceAnimationHandler != null)
+                {
+                    this.entranceAnimationHandler.AddPlayers(this.player1, this.player2);
                 }
             }
 

@@ -180,6 +180,8 @@ public class JCapVsDarkJCapStartAnim : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
     public override void Stop()
     {
@@ -188,5 +190,7 @@ public class JCapVsDarkJCapStartAnim : Attack
             this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 }

@@ -12,6 +12,8 @@ public class HoodGuyStartAnimation : Attack
     public VisualEffect smoke;
 
     public AudioSource throwSfx;
+    public AudioSource rollSfx;
+    public AudioSource growSfx;
 
     public AnimationCurve throwCurve;
 
@@ -59,6 +61,7 @@ public class HoodGuyStartAnimation : Attack
             else
             {
                 this.StartCoroutine(this.TemplateCoroutine2());
+                //this.StartCoroutine(this.SmokeStartAnimation());
             }
         }
     }
@@ -129,6 +132,8 @@ public class HoodGuyStartAnimation : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     private IEnumerator TemplateCoroutine()
@@ -191,6 +196,9 @@ public class HoodGuyStartAnimation : Attack
         if (this.animations != null)
             this.animations.body.gameObject.SetActive(true);
 
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
+
         if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
             GameManager.Instance.gameCamera.cameraIsLocked = false;
 
@@ -198,6 +206,8 @@ public class HoodGuyStartAnimation : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     private IEnumerator SmokeStartAnimation()
@@ -259,8 +269,13 @@ public class HoodGuyStartAnimation : Attack
 
         yield return new WaitForSeconds(0.2f);
 
+
+        yield return new WaitForSeconds(0.25f);
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
 
@@ -322,15 +337,15 @@ public class HoodGuyStartAnimation : Attack
 
         //HERE HE THROWS PLAYER 2
 
-        //yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.3f);
 
-        float currentTime = 0;
+        /*float currentTime = 0;
         float duration = 0.3f;
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
             yield return null;
-        }
+        }*/
 
         this.user.animations.ItemThrow(4);
 
@@ -347,7 +362,7 @@ public class HoodGuyStartAnimation : Attack
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
-        currentTime = 0;
+        /*currentTime = 0;
         duration = 0.3f;
         while (currentTime < duration)
         {
@@ -366,14 +381,16 @@ public class HoodGuyStartAnimation : Attack
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.2f);*/
 
-        Debug.Log("P1");
+        //Debug.Log("P1");
 
         this.user.rb.isKinematic = false;
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
 
@@ -431,8 +448,12 @@ public class HoodGuyStartAnimation : Attack
             //this.animations.body.localPosition = new Vector3(0f, this.animations.body.localPosition.y / 2f, 0f);
         }
 
+        if (this.rollSfx != null)
+            this.rollSfx.Play();
+
         float currentTime = 0;
-        float duration = 0.6f;
+        //float duration = 0.6f;
+        float duration = 0.85f;
         float targetPositionX = 7f;
         float startX = this.user.transform.position.x;
         while (currentTime < duration)
@@ -447,6 +468,8 @@ public class HoodGuyStartAnimation : Attack
             yield return null;
         }
 
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
 
 
         /*float currentTime = 0;
@@ -493,6 +516,7 @@ public class HoodGuyStartAnimation : Attack
         
 
         yield return new WaitForSeconds(0.05f);
+        //yield return new WaitForSeconds(0.1f);
 
         /*currentTime = 0;
         //currentTime2 = 0;
@@ -529,6 +553,11 @@ public class HoodGuyStartAnimation : Attack
 
         yield return new WaitForSeconds(0.5f);
 
+        if (this.growSfx != null)
+        {
+            //this.throwSfx.time = 0.01f;
+            this.growSfx.Play();
+        }
 
         currentTime = 0;
         //float currentTime2 = 0;
@@ -552,9 +581,10 @@ public class HoodGuyStartAnimation : Attack
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
 
-        Debug.Log("P2");
+        //Debug.Log("P2");
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
@@ -563,6 +593,8 @@ public class HoodGuyStartAnimation : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
 

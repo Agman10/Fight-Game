@@ -168,6 +168,8 @@ public class RoboJCapStartAnimation : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
     public override void Stop()
     {
@@ -192,6 +194,8 @@ public class RoboJCapStartAnimation : Attack
         }
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     private IEnumerator TeleportCoroutine()
@@ -307,6 +311,8 @@ public class RoboJCapStartAnimation : Attack
         //this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     public void TeleportEffect(int id)

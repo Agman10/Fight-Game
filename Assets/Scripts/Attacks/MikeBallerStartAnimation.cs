@@ -171,6 +171,8 @@ public class MikeBallerStartAnimation : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     private IEnumerator GroundRollCoroutine()
@@ -227,6 +229,8 @@ public class MikeBallerStartAnimation : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     public override void Stop()
@@ -241,6 +245,8 @@ public class MikeBallerStartAnimation : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
 
@@ -393,6 +399,8 @@ public class MikeBallerStartAnimation : Attack
         //Debug.Log("baller");
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     /*public void PlayFire(bool playing)

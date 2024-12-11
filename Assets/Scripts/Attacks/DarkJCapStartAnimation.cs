@@ -93,11 +93,14 @@ public class DarkJCapStartAnimation : Attack
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
-        
+
+        yield return new WaitForSeconds(0.1f);
 
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
     public override void Stop()
     {
@@ -118,6 +121,8 @@ public class DarkJCapStartAnimation : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
     public void PlayFire(bool playing)
     {
@@ -203,6 +208,8 @@ public class DarkJCapStartAnimation : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     private IEnumerator RagingBeastStartAnimationCoroutine()
@@ -337,6 +344,8 @@ public class DarkJCapStartAnimation : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     public void PunchEffect(Vector3 position, bool playSfx)

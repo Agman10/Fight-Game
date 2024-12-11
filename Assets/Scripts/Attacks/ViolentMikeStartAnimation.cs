@@ -121,6 +121,9 @@ public class ViolentMikeStartAnimation : Attack
         //this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        //yield return new WaitForSeconds(1f);
+        this.user.EntranceDone();
     }
 
 
@@ -241,6 +244,8 @@ public class ViolentMikeStartAnimation : Attack
         //Debug.Log("violent");
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 
     public override void Stop()
@@ -261,5 +266,7 @@ public class ViolentMikeStartAnimation : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
 }

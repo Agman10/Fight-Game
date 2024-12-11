@@ -118,6 +118,8 @@ public class JCapStartAnimation : Attack
         this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
     public override void Stop()
     {
@@ -131,6 +133,8 @@ public class JCapStartAnimation : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
     }
     public void PlayFire(bool playing)
     {

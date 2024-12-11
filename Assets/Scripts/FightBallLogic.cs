@@ -28,6 +28,8 @@ public class FightBallLogic : MonoBehaviour
     public AudioSource goalSfx;
 
     public GoalUiLogic goalUiLogic;
+
+    public EntranceAnimationHandler entranceAnimationHandler;
     // Start is called before the first frame update
 
     private void Awake()
@@ -91,6 +93,10 @@ public class FightBallLogic : MonoBehaviour
                 this.player2.tempLookAtBall = true;
             }
 
+            if (this.entranceAnimationHandler != null)
+            {
+                this.entranceAnimationHandler.AddPlayers(this.player1, this.player2);
+            }
         }
 
         //this.StartCoroutine(this.SetBall());

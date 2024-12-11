@@ -8971,6 +8971,8 @@ MonoBehaviour:
   gameIsPaused: 0
   pauseLogic: {fileID: 1406941142}
   koUiLogic: {fileID: 0}
+  characterThemePlayer: {fileID: 0}
+  entranceAnimationHandler: {fileID: 0}
   ragingBeastSkull: {fileID: 827393460}
   normalCameraLayers:
     serializedVersion: 2
@@ -13671,6 +13673,7 @@ MonoBehaviour:
   avoidOnHitInvoke: 0
   avoidDamagingPlayer: 0
   fireProperty: 0
+  electricProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 0
   preventDeath: 0
@@ -13681,10 +13684,12 @@ MonoBehaviour:
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
 --- !u!65 &196511550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17450,6 +17455,8 @@ MonoBehaviour:
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
   eyesPosTransform: {fileID: 0}
+  wingRight: {fileID: 0}
+  wingLeft: {fileID: 0}
 --- !u!114 &262645637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18884,6 +18891,7 @@ MonoBehaviour:
   avoidOnHitInvoke: 0
   avoidDamagingPlayer: 0
   fireProperty: 0
+  electricProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 0
   preventDeath: 0
@@ -18894,10 +18902,12 @@ MonoBehaviour:
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
 --- !u!65 &289580813
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32785,6 +32795,8 @@ MonoBehaviour:
   center: {x: 0, y: 0, z: 0}
   lockCamera: 1
   cameraIsLocked: 1
+  p1ExtraWidth: 0
+  p2ExtraWidth: 0
 --- !u!1 &626787361
 GameObject:
   m_ObjectHideFlags: 0
@@ -33698,6 +33710,8 @@ MonoBehaviour:
   tempBall: {fileID: 0}
   tempLookAtBall: 0
   iceCube: {fileID: 0}
+  skelletonBody: {fileID: 0}
+  hitEffectLogic: {fileID: 0}
 --- !u!65 &665695525
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52254,6 +52268,54 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1107375511}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1108328308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1108328310}
+  - component: {fileID: 1108328309}
+  m_Layer: 0
+  m_Name: EntranceHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1108328309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108328308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2dfcbf08c1b66b4991fc58646d2ad0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  P1Ready: 0
+  P2Ready: 0
+  done: 0
+--- !u!4 &1108328310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108328308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1327057624}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1111894150
 GameObject:
   m_ObjectHideFlags: 0
@@ -60366,6 +60428,7 @@ MonoBehaviour:
   tempRandomSkybox: {fileID: 1943167108}
   goalSfx: {fileID: 1738821941}
   goalUiLogic: {fileID: 1084984843}
+  entranceAnimationHandler: {fileID: 1108328309}
 --- !u!4 &1327057624
 Transform:
   m_ObjectHideFlags: 0
@@ -60376,7 +60439,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1108328310}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -100220,6 +100284,7 @@ MonoBehaviour:
   player1Id: 0
   player2Id: 0
   draw: 0
+  musicTypeId: 0
 --- !u!4 &2134346894
 Transform:
   m_ObjectHideFlags: 0
