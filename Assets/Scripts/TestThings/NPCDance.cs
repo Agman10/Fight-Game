@@ -33,6 +33,10 @@ public class NPCDance : MonoBehaviour
         {
             this.StartCoroutine(this.RussianDanceCoroutine());
         }
+        else if (this.danceId == 100)
+        {
+            this.StartCoroutine(this.TestOraOra());
+        }
         else
         {
             Debug.Log("dance id does not exist");
@@ -298,5 +302,98 @@ public class NPCDance : MonoBehaviour
 
             this.StartCoroutine(this.SpinCoroutine());
         }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private IEnumerator TestOraOra()
+    {
+        if (this.animations != null)
+        {
+            float randomPunchZRange = 20f;
+            float randomPunchYRange = 20f;
+
+            this.animations.NewPunch(0);
+
+            yield return new WaitForSeconds(0.025f);
+
+            this.animations.NewPunch(5);
+
+            yield return new WaitForSeconds(0.01f);
+
+            this.animations.NewPunch(4);
+
+            //this.animations.rightArm.localEulerAngles = new Vector3(0f, 40f, Random.Range(70f, 110f));
+
+            //this.animations.rightArm.localEulerAngles = new Vector3(0f, 40f, 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+            this.animations.rightArm.localEulerAngles = new Vector3(0f, 40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+
+            yield return new WaitForSeconds(0.05f);
+
+            /*this.animations.NewPunch(3);
+
+            yield return new WaitForSeconds(0.02f);*/
+
+
+
+
+            this.animations.NewPunch(0, true);
+
+            yield return new WaitForSeconds(0.025f);
+
+            this.animations.NewPunch(5, true);
+
+
+
+            yield return new WaitForSeconds(0.01f);
+
+            this.animations.NewPunch(4, true);
+
+            //this.animations.leftArm.localEulerAngles = new Vector3(0f, -40f, Random.Range(70f, 110f));
+
+            //this.animations.leftArm.localEulerAngles = new Vector3(0f, -40f, 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+            this.animations.leftArm.localEulerAngles = new Vector3(0f, -40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+
+            yield return new WaitForSeconds(0.05f);
+
+           /* this.animations.NewPunch(3, true);
+
+            yield return new WaitForSeconds(0.02f);*/
+
+
+            //this.animations.SetDefaultPose();
+
+            this.StartCoroutine(this.TestOraOra());
+        }
+
+
+    }
+
+    private IEnumerator TestOraOra2()
+    {
+        if (this.animations != null)
+        {
+            this.animations.NewPunch(4);
+
+            yield return new WaitForSeconds(0.025f);
+
+            this.animations.NewPunch(4, true);
+
+            yield return new WaitForSeconds(0.025f);
+
+            this.StartCoroutine(this.TestOraOra2());
+        }
+
+
     }
 }
