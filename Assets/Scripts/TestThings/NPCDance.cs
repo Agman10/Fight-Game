@@ -35,7 +35,11 @@ public class NPCDance : MonoBehaviour
         }
         else if (this.danceId == 100)
         {
-            this.StartCoroutine(this.TestOraOra());
+            this.StartCoroutine(this.TestOraOra(false));
+        }
+        else if (this.danceId == 101)
+        {
+            this.StartCoroutine(this.TestOraOra(true));
         }
         else
         {
@@ -316,29 +320,39 @@ public class NPCDance : MonoBehaviour
 
 
 
-    private IEnumerator TestOraOra()
+    private IEnumerator TestOraOra(bool startLeft = false)
     {
         if (this.animations != null)
         {
-            float randomPunchZRange = 20f;
+            float randomPunchZRange = 30f;
             float randomPunchYRange = 20f;
 
-            this.animations.NewPunch(0);
+            float timeMultiplier = 0.5f;
 
-            yield return new WaitForSeconds(0.025f);
+            //Debug.Log(startLeft);
 
-            this.animations.NewPunch(5);
+            this.animations.NewPunch(0, startLeft);
 
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.025f * timeMultiplier);
 
-            this.animations.NewPunch(4);
+            this.animations.NewPunch(5, startLeft);
+
+            yield return new WaitForSeconds(0.01f * timeMultiplier);
+
+            this.animations.NewPunch(4, startLeft);
 
             //this.animations.rightArm.localEulerAngles = new Vector3(0f, 40f, Random.Range(70f, 110f));
 
             //this.animations.rightArm.localEulerAngles = new Vector3(0f, 40f, 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
-            this.animations.rightArm.localEulerAngles = new Vector3(0f, 40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
 
-            yield return new WaitForSeconds(0.05f);
+
+            //this.animations.rightArm.localEulerAngles = new Vector3(0f, 40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+            if (!startLeft)
+                this.animations.rightArm.localEulerAngles = new Vector3(0f, 40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+            else
+                this.animations.leftArm.localEulerAngles = new Vector3(0f, -40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+
+            yield return new WaitForSeconds(0.05f * timeMultiplier);
 
             /*this.animations.NewPunch(3);
 
@@ -347,24 +361,30 @@ public class NPCDance : MonoBehaviour
 
 
 
-            this.animations.NewPunch(0, true);
+            this.animations.NewPunch(0, !startLeft);
 
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.025f * timeMultiplier);
 
-            this.animations.NewPunch(5, true);
+            this.animations.NewPunch(5, !startLeft);
 
 
 
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.01f * timeMultiplier);
 
-            this.animations.NewPunch(4, true);
+            this.animations.NewPunch(4, !startLeft);
 
             //this.animations.leftArm.localEulerAngles = new Vector3(0f, -40f, Random.Range(70f, 110f));
 
             //this.animations.leftArm.localEulerAngles = new Vector3(0f, -40f, 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
-            this.animations.leftArm.localEulerAngles = new Vector3(0f, -40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
 
-            yield return new WaitForSeconds(0.05f);
+
+            //this.animations.leftArm.localEulerAngles = new Vector3(0f, -40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+            if (!startLeft)
+                this.animations.leftArm.localEulerAngles = new Vector3(0f, -40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+            else
+                this.animations.rightArm.localEulerAngles = new Vector3(0f, 40f + Random.Range(-randomPunchYRange, randomPunchYRange), 90f + Random.Range(-randomPunchZRange, randomPunchZRange));
+
+            yield return new WaitForSeconds(0.05f * timeMultiplier);
 
            /* this.animations.NewPunch(3, true);
 
@@ -373,7 +393,7 @@ public class NPCDance : MonoBehaviour
 
             //this.animations.SetDefaultPose();
 
-            this.StartCoroutine(this.TestOraOra());
+            this.StartCoroutine(this.TestOraOra(startLeft));
         }
 
 

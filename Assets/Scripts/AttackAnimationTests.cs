@@ -81,7 +81,8 @@ public class AttackAnimationTests : Attack
 
             this.user.AddStun(0.2f, true);
             //this.StartCoroutine(this.TestButtAttack());
-            this.StartCoroutine(this.Fly());
+            //this.StartCoroutine(this.Fly());
+            this.StartCoroutine(this.TestParry());
 
             /*if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
             {
@@ -821,6 +822,45 @@ public class AttackAnimationTests : Attack
 
 
         this.user.rb.isKinematic = false;
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+
+
+    private IEnumerator TestParry()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        if (this.animations != null)
+            this.animations.Parry();
+
+        yield return new WaitForSeconds(0.1f);
+
+        /*float currentTime = 0;
+        float duration = 0.2f;
+        //float duration = 0.05f;
+        while (currentTime < duration && Mathf.Abs(this.user.transform.position.y) >= 0.05f)
+        {
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);*/
+
+
+        //End
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
