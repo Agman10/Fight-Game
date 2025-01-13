@@ -337,7 +337,17 @@ public class TestHitbox : MonoBehaviour
                         player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, forwardZ);
                         //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);
                     }
-                        
+
+                    /*if (this.hitEffectTransformOrigin != null && player.hitEffectLogic != null)
+                    {
+                        float forwardZ = 1f;
+                        if (player.transform.position.x > this.hitEffectTransformOrigin.position.x)
+                            forwardZ = -1f;
+
+                        player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y + UnityEngine.Random.Range(-1f, 1f), forwardZ, UnityEngine.Random.Range(-1f, 1f));
+                        //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);
+                    }*/
+
 
                     //Debug.Log("collision: " + player);
                     float knockbackMultiplier = 1f;

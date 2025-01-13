@@ -44,6 +44,11 @@ public class ObjectScaleLerp : MonoBehaviour
         this.StartCoroutine(this.ScaleDownCoroutine(this.duration));
     }
 
+    public void ScaleDown2(float dur, bool disable)
+    {
+        this.StartCoroutine(this.ScaleDownCoroutine(dur, disable));
+    }
+
     private IEnumerator ScaleUpCoroutine(float durration = 0.1f)
     {
         float currentTime = 0;
@@ -70,7 +75,7 @@ public class ObjectScaleLerp : MonoBehaviour
     }
 
 
-    private IEnumerator ScaleDownCoroutine(float durration = 0.1f)
+    private IEnumerator ScaleDownCoroutine(float durration = 0.1f, bool disable = false)
     {
         float currentTime = 0;
         //float duration = 0.1f;
@@ -87,5 +92,8 @@ public class ObjectScaleLerp : MonoBehaviour
             yield return null;
         }
         this.objectToScale.localScale = this.startScale;
+
+        if (disable)
+            this.gameObject.SetActive(false);
     }
 }
