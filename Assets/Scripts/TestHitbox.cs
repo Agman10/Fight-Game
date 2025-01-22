@@ -50,6 +50,8 @@ public class TestHitbox : MonoBehaviour
     public CharacterSoundEffect customHitSound;
 
     public Transform hitEffectTransformOrigin;
+
+    public bool hitEffectRandomPos = false;
     void Start()
     {
         
@@ -328,7 +330,7 @@ public class TestHitbox : MonoBehaviour
                             player.skelletonBody.EnableAndDisableSkelleton();
                     }
 
-                    if (this.hitEffectTransformOrigin != null && player.hitEffectLogic != null && this.belongsTo != null)
+                    /*if (this.hitEffectTransformOrigin != null && player.hitEffectLogic != null && this.belongsTo != null)
                     {
                         float forwardZ = 1f;
                         if (player.transform.position.x > this.belongsTo.transform.position.x)
@@ -336,17 +338,41 @@ public class TestHitbox : MonoBehaviour
 
                         player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, forwardZ);
                         //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);
-                    }
-
-                    /*if (this.hitEffectTransformOrigin != null && player.hitEffectLogic != null)
-                    {
-                        float forwardZ = 1f;
-                        if (player.transform.position.x > this.hitEffectTransformOrigin.position.x)
-                            forwardZ = -1f;
-
-                        player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y + UnityEngine.Random.Range(-1f, 1f), forwardZ, UnityEngine.Random.Range(-1f, 1f));
-                        //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);
                     }*/
+
+                    
+
+                    if (this.hitEffectRandomPos)
+                    {
+                        if (this.hitEffectTransformOrigin != null && player.hitEffectLogic != null)
+                        {
+                            float forwardZ = 1f;
+                            if (player.transform.position.x > this.hitEffectTransformOrigin.position.x)
+                                forwardZ = -1f;
+
+                            float yPos = this.hitEffectTransformOrigin.transform.position.y + UnityEngine.Random.Range(-1f, 1f);
+
+                            if (yPos < player.transform.position.y)
+                                yPos = player.transform.position.y;
+
+                            //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y + UnityEngine.Random.Range(-1f, 1f), forwardZ, UnityEngine.Random.Range(-1f, 1f));
+
+                            player.hitEffectLogic.DoHitEffect(yPos, forwardZ, UnityEngine.Random.Range(-1f, 1f));
+                            //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);
+                        }
+                    }
+                    else
+                    {
+                        if (this.hitEffectTransformOrigin != null && player.hitEffectLogic != null && this.belongsTo != null)
+                        {
+                            float forwardZ = 1f;
+                            if (player.transform.position.x > this.belongsTo.transform.position.x)
+                                forwardZ = -1f;
+
+                            player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, forwardZ);
+                            //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);
+                        }
+                    }
 
 
                     //Debug.Log("collision: " + player);

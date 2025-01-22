@@ -24,6 +24,7 @@ public class AnimationTests : MonoBehaviour
         else if (this.animId == 1)
         {
             //this.StartCoroutine(this.DiscoDance());
+            this.StartCoroutine(this.Test2());
         }
         else
         {
@@ -66,7 +67,7 @@ public class AnimationTests : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
 
             if (this.animations != null)
-                this.animations.StupidDance(2);
+                this.animations.StupidDance(3);
 
             if (this.objectToScale != null)
                 this.objectToScale.gameObject.SetActive(true);
@@ -95,5 +96,138 @@ public class AnimationTests : MonoBehaviour
         }
 
 
+    }
+
+    private IEnumerator Test2()
+    {
+        if (this.animations != null)
+        {
+            float animSpeed = 0.01f;
+
+            int ammont = 5;
+
+            int amount = 3;
+
+            while (amount > 0)
+            {
+                this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
+                yield return new WaitForSeconds(animSpeed);
+
+                this.animations.body.localScale = new Vector3(1f, 1f, 1f);
+
+                yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);
+
+
+                amount -= 1;
+            }
+
+            amount = ammont;
+
+            while (amount > 0)
+            {
+                this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
+                yield return new WaitForSeconds(animSpeed);
+                /*yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);*/
+
+                this.animations.body.localScale = new Vector3(1f, 1f, 1f);
+
+                yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);
+
+
+                amount -= 1;
+            }
+
+            amount = ammont;
+
+            while (amount > 0)
+            {
+                this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
+                yield return new WaitForSeconds(animSpeed);
+                /*yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);*/
+
+                this.animations.body.localScale = new Vector3(1f, 1f, 1f);
+
+                yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);
+
+
+                amount -= 1;
+            }
+
+            amount = ammont * 2;
+
+            while (amount > 0)
+            {
+                this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
+                yield return new WaitForSeconds(animSpeed);
+
+                this.animations.body.localScale = new Vector3(1f, 1f, 1f);
+
+                yield return new WaitForSeconds(animSpeed);
+
+
+                amount -= 1;
+            }
+
+            amount = ammont;
+
+            while (amount > 0)
+            {
+                this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
+                yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);
+
+                this.animations.body.localScale = new Vector3(1f, 1f, 1f);
+
+                yield return new WaitForSeconds(animSpeed);
+
+
+                amount -= 1;
+            }
+
+            amount = ammont;
+
+            while (amount > 0)
+            {
+                this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
+                yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);
+                yield return new WaitForSeconds(animSpeed);
+
+                this.animations.body.localScale = new Vector3(1f, 1f, 1f);
+
+                yield return new WaitForSeconds(animSpeed);
+
+
+                amount -= 1;
+            }
+
+            this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
+            yield return new WaitForSeconds(2f);
+
+            /*this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
+            yield return new WaitForSeconds(animSpeed);
+
+            this.animations.body.localScale = new Vector3(1f, 1f, 1f);
+
+            yield return new WaitForSeconds(animSpeed);*/
+
+            this.StartCoroutine(this.Test2());
+        }
     }
 }

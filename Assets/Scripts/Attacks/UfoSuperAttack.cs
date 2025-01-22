@@ -195,7 +195,7 @@ public class UfoSuperAttack : Attack
 
             time -= Time.deltaTime;
 
-            if (this.user.movement != null)
+            if (this.user.movement != null && this.user.stuns.Count <= 0)
                 this.user.movement.Move(this.user.movement.playerInput.moveInput * 0.9f);
 
             this.user.rb.velocity = new Vector3(this.user.rb.velocity.x, 0f, 0f);
@@ -556,9 +556,11 @@ public class UfoSuperAttack : Attack
         if (this.ufoBeam != null)
             this.ufoBeam.SetActive(false);
 
-        yield return new WaitForSeconds(1.2f);
+        //yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.5f);
 
         int amount = 50;
+        int amount2 = 0;
         //int amount = 180; kill the opponent
         while (amount > 0)
         {
@@ -569,6 +571,13 @@ public class UfoSuperAttack : Attack
             yield return new WaitForSeconds(0.025f);
 
             player.TakeDamage(this.user.transform.position, 1f, 0f, 0f, 0f, false, true, false, true);
+
+            if (amount2 == 0)
+                player.soundEffects.PlayHitSound();
+
+            amount2++;
+            if (amount2 > 1)
+                amount2 = 0;
 
             /*this.user.GiveSuperCharge(0.25f);
             player.GiveSuperCharge(0.125f);*/
