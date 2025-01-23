@@ -38,6 +38,15 @@ public class LandmineAttack : Attack
             this.user.OnDisableItems -= this.DisableItem;
     }
 
+    private void Update()
+    {
+        if (this.onGoing)
+        {
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+        }
+    }
+
     [ContextMenu("Initiate")]
     public override void Initiate()
     {

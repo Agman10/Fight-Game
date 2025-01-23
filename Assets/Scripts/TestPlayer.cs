@@ -109,10 +109,15 @@ public class TestPlayer : MonoBehaviour
         {
             this.LookAtTarget();
         }
-        
+        /*if (this.tempOpponent != null)
+        {
+            Debug.Log(Mathf.Abs(this.transform.position.x - this.tempOpponent.transform.position.x));
 
+            Debug.Log(Mathf.Abs(this.transform.position.y - this.tempOpponent.transform.position.y));
+        }*/
+            
 
-        if(this.dead && this.ragdoll != null && !this.ragdoll.rb.isKinematic)
+        if (this.dead && this.ragdoll != null && !this.ragdoll.rb.isKinematic)
         {
             this.ragdoll.transform.localScale = new Vector3(1f, 1f, 1f);
         }
