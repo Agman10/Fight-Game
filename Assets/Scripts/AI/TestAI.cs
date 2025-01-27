@@ -25,6 +25,7 @@ public class TestAI : MonoBehaviour
         if(this.playerInput != null && this.player != null)
         {
             this.StartCoroutine(this.MoveRandomlyCoroutine());
+            //this.StartCoroutine(this.MoveRandomlyCoroutineGeneral());
             //this.StartCoroutine(this.DoRandomSpecials());
         }
         
@@ -274,10 +275,38 @@ public class TestAI : MonoBehaviour
                     {
                         //this.Super(RandomSpecialDirection(0, 1, 1, 0));
 
-                        if (this.EnemyDistance() <= 1.8f)
+                        /*if (this.EnemyDistance() <= 1.8f)
                             this.Super(1);
                         else
+                            this.Super(2);*/
+
+
+                        if (this.EnemyDistance() <= 1.8f)
+                        {
+                            this.Super(1);
+                        }
+                        else if (Random.Range(1, 101) <= 70)
+                        {
                             this.Super(2);
+                        }
+                        else
+                        {
+                            if (Random.Range(1, 101) <= 40)
+                            {
+                                if (Random.Range(1, 101) <= 70)
+                                    this.Special1(1);
+                                else
+                                    this.Special1(0);
+                            }
+                            else
+                            {
+                                if (this.EnemyDistance() <= 2f)
+                                    this.Special2(RandomSpecialDirection(1, 1, 1, 1));
+                                else
+                                    this.Special2(RandomSpecialDirection(0, 1, 1, 1));
+                            }
+                        }
+                            
                     }
                     else
                     {
@@ -285,7 +314,7 @@ public class TestAI : MonoBehaviour
                         if (this.EnemyDistance() <= 1.8f)
                             this.Super(RandomSpecialDirection(1, 1, 1, 1));
                         else
-                            this.Super(RandomSpecialDirection(1, 0, 1, 0));
+                            this.Super(RandomSpecialDirection(4, 0, 1, 0));
 
 
                         //this.Super(RandomSpecialDirection(1, 1, 1, 1));
@@ -425,7 +454,7 @@ public class TestAI : MonoBehaviour
 
         List<int> direcionPool = new List<int>();
 
-        if (neutral == 1)
+        /*if (neutral == 1)
             direcionPool.Add(0);
 
         if (forward == 1)
@@ -435,8 +464,20 @@ public class TestAI : MonoBehaviour
             direcionPool.Add(2);
 
         if (down == 1)
-            direcionPool.Add(3);
+            direcionPool.Add(3);*/
 
+
+        for (int i = 0; i < neutral; i++)
+            direcionPool.Add(0);
+
+        for (int i = 0; i < forward; i++)
+            direcionPool.Add(1);
+
+        for (int i = 0; i < backward; i++)
+            direcionPool.Add(2);
+
+        for (int i = 0; i < down; i++)
+            direcionPool.Add(3);
 
         /*foreach (int id in direcionPool)
         {
@@ -450,7 +491,7 @@ public class TestAI : MonoBehaviour
         if (direcionPool.Count > 0)
         {
             int randomIndex = Random.Range(0, direcionPool.Count);
-            Debug.Log(direcionPool[randomIndex]);
+            //Debug.Log(direcionPool[randomIndex]);
             return direcionPool[randomIndex];
         }
         else
@@ -540,5 +581,189 @@ public class TestAI : MonoBehaviour
         else
             return new Vector3(0f, 0f, 0f);
 
+    }
+
+
+
+    private IEnumerator MoveRandomlyCoroutineGeneral()
+    {
+        float number = Random.Range(1, 101);
+        //float number = Random.Range(1, 21);
+
+        float xMovement = 0f;
+
+        float waitTime = Random.Range(0.1f, 0.5f);
+
+        if (number <= 60)
+        {
+            xMovement = this.player.transform.forward.z * 1f;
+        }
+        else if (number > 60 && number <= 80)
+        {
+            xMovement = this.player.transform.forward.z * -1f;
+
+            waitTime = Random.Range(0.1f, 0.2f);
+        }
+        else
+        {
+            xMovement = 0f;
+
+            waitTime = Random.Range(0.05f, 0.2f);
+        }
+
+        this.playerInput.moveInput = new Vector3(xMovement, 0f, 0f);
+
+
+
+        //yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+        yield return new WaitForSeconds(waitTime);
+
+
+        /*if (this.EnemyDistance() <= 1.5f && this.EnemyYDistance() >= 2.2f && this.player.superCharge >= this.player.maxSuperCharge && !this.player.tempOpponent.dead && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+        {
+            this.Super(3);
+        }*/
+        if (this.EnemyDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
+        {
+            //Debug.Log(EnemyDistance());
+            this.Special1(2);
+        }
+        else
+        {
+            if (Random.Range(1, 101) <= 30f)
+            {
+                //this.playerInput.JumpInput?.Invoke(true);
+                this.playerInput.jumping = true;
+                yield return new WaitForSeconds(0.01f);
+                this.playerInput.jumping = false;
+            }
+        }
+
+        yield return new WaitForSeconds(Random.Range(0.01f, 0.2f));
+
+        float number2 = Random.Range(1, 101);
+        //float number2 = Random.Range(1, 20);
+
+        //this.Special2(3);
+        //Debug.Log(EnemyDistance());
+
+        //this.RandomSpecial1(1, 1, 0, 1);
+
+        if (this.player.tempOpponent.dead && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+            number2 = Random.Range(1, 201);
+
+        /*if (this.EnemyDistance() <= 1.5f && this.player.superCharge >= this.player.maxSuperCharge && !this.player.tempOpponent.dead && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+        {
+            this.Super(3);
+        }*/
+        if (this.EnemyDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
+        {
+            //Debug.Log(EnemyDistance());
+
+            this.Special1(2);
+
+        }
+        else
+        {
+            if (number2 <= 30)
+            {
+                //this.Special1(Random.Range(0, 4));
+                //this.Special1(RandomSpecialDirection(1, 1, 0, 0));
+
+                this.Special1(RandomSpecialDirection(1, 1, 0, 1));
+            }
+            else if (number2 > 30 && number2 <= 60)
+            {
+                //this.Special2(Random.Range(0, 4));
+
+                this.Special2(RandomSpecialDirection(1, 1, 1, 1));
+                //this.Special2(3);
+            }
+            else if (number2 > 60 && number2 <= 75)
+            {
+                float randomPunch = Random.Range(1, 101);
+                if (randomPunch <= 50)
+                    this.Punch(Random.Range(0, 4));
+                else
+                    this.Kick(Random.Range(0, 4));
+
+                if (Random.Range(1, 101) <= 70)
+                {
+                    while (this.player.attackStuns.Count > 0)
+                        yield return null;
+
+                    yield return new WaitForSeconds(0.01f);
+
+                    randomPunch = Random.Range(1, 101);
+
+                    if (randomPunch <= 80)
+                        this.Punch(Random.Range(0, 4));
+                    else
+                        this.Kick(Random.Range(0, 4));
+                }
+
+
+            }
+            else if (number2 > 75 && number2 <= 100)
+            {
+                if (!this.player.tempOpponent.dead && this.player.superCharge >= this.player.maxSuperCharge / 2)
+                {
+                    //this.Super(Random.Range(0, 4));
+
+                    //this.Super(RandomSpecialDirection(1, 1, 1, 1));
+
+
+
+                    //for mike baller
+                    if (this.EnemyDistance() <= 2f)
+                    {
+                        Debug.Log(EnemyDistance());
+                        this.Super(RandomSpecialDirection(0, 0, 1, 0));
+                    }
+                    else
+                    {
+                        this.Super(RandomSpecialDirection(1, 1, 0, 0));
+                    }
+
+
+
+                }
+                else if (this.player.tempOpponent.dead)
+                {
+                    this.Taunt(Random.Range(0, 4));
+                    if (Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+                        yield return new WaitForSeconds(Random.Range(1f, 2f));
+                }
+                else
+                {
+                    if (Random.Range(1, 101) <= 50)
+                    {
+                        this.Special1(RandomSpecialDirection(1, 1, 0, 1));
+                    }
+                    else
+                    {
+                        this.Special2(RandomSpecialDirection(1, 1, 1, 1));
+                    }
+                }
+
+                //this.Special2(Random.Range(0, 4));
+                //this.Special2(3);
+            }
+            else
+            {
+                if (this.player.tempOpponent.dead)
+                {
+                    this.Taunt(Random.Range(0, 4));
+                    if (Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+                        yield return new WaitForSeconds(Random.Range(1f, 2f));
+                }
+            }
+        }
+
+
+
+        this.playerInput.moveInput = MoveInput(Random.Range(0, 4));
+
+        this.StartCoroutine(this.MoveRandomlyCoroutineGeneral());
     }
 }
