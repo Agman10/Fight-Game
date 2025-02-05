@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 
                 if (UserInputManager.Instance != null)
                 {
-                    if (UserInputManager.Instance.player1Input != null)
+                    /*if (UserInputManager.Instance.player1Input != null)
                     {
                         PlayerInput player1Input = UserInputManager.Instance.player1Input.GetComponent<PlayerInput>();
                         p1.input = player1Input;
@@ -122,6 +122,44 @@ public class GameManager : MonoBehaviour
                     if (UserInputManager.Instance.player2Input != null)
                     {
                         PlayerInput player2Input = UserInputManager.Instance.player2Input.GetComponent<PlayerInput>();
+                        p2.input = player2Input;
+                        p2.SetInput(player2Input);
+                    }*/
+
+
+
+                    if (UserInputManager.Instance.p1Input != null)
+                    {
+                        PlayerInput player1Input = UserInputManager.Instance.p1Input;
+
+                        CharacterAI characterAI = UserInputManager.Instance.p1Input.GetComponent<CharacterAI>();
+                        if (characterAI != null)
+                        {
+                            CharacterAI charAi = Instantiate(characterAI, p1.transform);
+                            player1Input = charAi.GetComponent<PlayerInput>();
+
+                            charAi.player = p1;
+                            charAi.StartAI();
+                        }
+
+                        p1.input = player1Input;
+                        p1.SetInput(player1Input);
+                    }
+
+                    if (UserInputManager.Instance.p2Input != null)
+                    {
+                        PlayerInput player2Input = UserInputManager.Instance.p2Input;
+
+                        CharacterAI characterAI = UserInputManager.Instance.p2Input.GetComponent<CharacterAI>();
+                        if (characterAI != null)
+                        {
+                            CharacterAI charAi = Instantiate(characterAI, p2.transform);
+                            player2Input = charAi.GetComponent<PlayerInput>();
+
+                            charAi.player = p2;
+                            charAi.StartAI();
+                        }
+
                         p2.input = player2Input;
                         p2.SetInput(player2Input);
                     }

@@ -7,6 +7,8 @@ public class GameModeManager : MonoBehaviour
     public static GameModeManager Instance;
 
     public int gameModeId = 0;
+    public bool vsAi;
+    public int vsAiId = 0;
 
 
     private void Awake()

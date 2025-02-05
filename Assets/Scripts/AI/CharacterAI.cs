@@ -9,13 +9,15 @@ public class CharacterAI : MonoBehaviour
 
     public virtual void OnEnable()
     {
+        this.playerInput = GetComponent<PlayerInput>();
+
         if (this.playerInput != null && this.player != null)
         {
             //this.StartCoroutine(this.MoveRandomlyCoroutine());
             //this.StartCoroutine(this.MoveRandomlyCoroutineGeneral());
             //this.StartCoroutine(this.DoRandomSpecials());
 
-            this.StartAI();
+            //this.StartAI();
         }
 
     }

@@ -15,6 +15,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
     public System.Action OnReady;
 
     public bool isPlayer1;
+    public bool isAi;
     public int currentCharacterId;
     public int currentSkinId;
 
@@ -65,6 +66,14 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
         if (this.joinText != null)
             this.joinText.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if(this.isAi && this.rivalCursor != null)
+        {
+            this.canMove = this.rivalCursor.ready;
+        }
     }
 
     private void OnDisable()
@@ -341,6 +350,14 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
     public void Back(bool backing)
     {
+        if (this.characterSelectLogic != null && this.characterSelectLogic.vsAI)
+            this.BackAi(backing);
+        else
+            this.BackNormal(backing);
+    }
+
+    public void BackNormal(bool backing)
+    {
         if (backing && !this.lockedIn && this.canMove)
         {
             if(this.currentCharacterId >= 0)
@@ -381,6 +398,50 @@ public class CharacterSelectCursorLogic : MonoBehaviour
         }
         
     }
+
+    public void BackAi(bool backing)
+    {
+        if (this.currentCharacterId >= 0)
+        {
+            if (!this.rivalCursor.selectingSkin && backing && !this.lockedIn)
+            {
+                if (this.selectingSkin && !this.ready)
+                {
+                    this.selectingSkin = false;
+                    if (this.skinSelectPanel != null)
+                        this.skinSelectPanel.gameObject.SetActive(false);
+                }
+                else if (!this.selectingSkin && this.ready)
+                {
+                    this.selectingSkin = true;
+                    this.ready = false;
+
+                    if (this.skinSelectPanel != null)
+                        this.skinSelectPanel.SetActive(true);
+
+                    if (this.readyPanel != null)
+                        this.readyPanel.SetActive(false);
+
+                    if (this.glowPlatform != null)
+                        this.glowPlatform.SetActive(false);
+                }
+            }
+            
+        }
+        else
+        {
+            if (this.ready)
+            {
+                this.ready = false;
+                if (this.readyPanel != null)
+                    this.readyPanel.SetActive(false);
+
+                if (this.glowPlatform != null)
+                    this.glowPlatform.SetActive(false);
+            }
+        }
+    }
+
     public void Quit(bool quitting)
     {
         if (quitting && this.characterSelectLogic != null && this.canMove)

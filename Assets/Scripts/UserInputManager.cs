@@ -14,6 +14,9 @@ public class UserInputManager : MonoBehaviour
     public UnityEngine.InputSystem.PlayerInput player1Input;
     public UnityEngine.InputSystem.PlayerInput player2Input;
 
+    public PlayerInput p1Input;
+    public PlayerInput p2Input;
+
     public Action<int> PlayerJoined;
 
     public string testname;
@@ -49,7 +52,45 @@ public class UserInputManager : MonoBehaviour
     {
         //Debug.Log(playerInput.playerIndex);
 
-        this.PlayerJoined?.Invoke(playerInput.playerIndex);
+        if (CharacterSelectLogic.Instance != null && CharacterSelectLogic.Instance.vsAI)
+        {
+            this.JoinVsAI(playerInput);
+        }
+        else if (CharacterSelectLogic.Instance != null)
+        {
+            this.PlayerJoined?.Invoke(playerInput.playerIndex);
+
+            if (playerInput.playerIndex == 0)
+            {
+                this.player1Input = playerInput;
+                this.p1Input = playerInput.GetComponent<PlayerInput>();
+                playerInput.gameObject.transform.parent = this.transform;
+
+                if (CharacterSelectLogic.Instance != null)
+                {
+                    CharacterSelectLogic.Instance.p1Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
+                    CharacterSelectLogic.Instance.p1Cursor.gameObject.SetActive(true);
+                }
+
+            }
+
+            if (playerInput.playerIndex == 1)
+            {
+                this.player2Input = playerInput;
+                this.p2Input = playerInput.GetComponent<PlayerInput>();
+                playerInput.gameObject.transform.parent = this.transform;
+
+                if (CharacterSelectLogic.Instance != null)
+                {
+                    CharacterSelectLogic.Instance.p2Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
+                    CharacterSelectLogic.Instance.p2Cursor.gameObject.SetActive(true);
+                }
+            }
+        }
+
+
+
+        /*this.PlayerJoined?.Invoke(playerInput.playerIndex);
 
         if (playerInput.playerIndex == 0)
         {
@@ -74,9 +115,30 @@ public class UserInputManager : MonoBehaviour
                 CharacterSelectLogic.Instance.p2Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
                 CharacterSelectLogic.Instance.p2Cursor.gameObject.SetActive(true);
             }
+        }*/
+    }
+
+    public void JoinVsAI(UnityEngine.InputSystem.PlayerInput playerInput)
+    {
+        if (playerInput.playerIndex == 0)
+        {
+            this.PlayerJoined?.Invoke(playerInput.playerIndex);
+
+            this.player1Input = playerInput;
+            this.p1Input = playerInput.GetComponent<PlayerInput>();
+            playerInput.gameObject.transform.parent = this.transform;
+            if (CharacterSelectLogic.Instance != null)
+            {
+                CharacterSelectLogic.Instance.p1Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
+                CharacterSelectLogic.Instance.p1Cursor.gameObject.SetActive(true);
+
+                CharacterSelectLogic.Instance.p2Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
+                CharacterSelectLogic.Instance.p2Cursor.isAi = true;
+                CharacterSelectLogic.Instance.p2Cursor.gameObject.SetActive(true);
+            }
         }
-            
-        //Debug.Log("test");
+
+        
     }
     public void Testtt()
     {

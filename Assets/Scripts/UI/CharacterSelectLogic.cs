@@ -32,6 +32,10 @@ public class CharacterSelectLogic : MonoBehaviour
     public int gameModeId = 0;
     public Material mainGameSkybox;
     public Material fightBallSkybox;
+    [Space]
+    public bool vsAI = false;
+    public int vsAiId = 0;
+    public PlayerInput emtyAi;
 
     [Space]
     public int[] randomCharacterPool;
@@ -72,6 +76,8 @@ public class CharacterSelectLogic : MonoBehaviour
         if (GameModeManager.Instance != null)
         {
             this.gameModeId = GameModeManager.Instance.gameModeId;
+            this.vsAI = GameModeManager.Instance.vsAi;
+            this.vsAiId = GameModeManager.Instance.vsAiId;
 
             if (GameModeManager.Instance.gameModeId == 1)
                 RenderSettings.skybox = this.fightBallSkybox;
@@ -225,6 +231,37 @@ public class CharacterSelectLogic : MonoBehaviour
     private IEnumerator StartGameCoroutine()
     {
         this.starting = true;
+
+        if (this.vsAI && CharacterManager.Instance != null && UserInputManager.Instance != null)
+        {
+            int p2CharId = CharacterManager.Instance.player2.characterId;
+            int p1CharId = CharacterManager.Instance.player1.characterId;
+
+            /*PlayerInput aiInput = Instantiate(this.characters[p2CharId].aiInput, UserInputManager.Instance.transform);
+            UserInputManager.Instance.p2Input = aiInput;*/
+            if (this.characters[p2CharId].aiInput != null)
+                UserInputManager.Instance.p2Input = this.characters[p2CharId].aiInput;
+            else
+                UserInputManager.Instance.p2Input = this.emtyAi;
+
+            if(this.vsAiId == 1)
+            {
+                if (this.characters[p1CharId].aiInput != null)
+                    UserInputManager.Instance.p1Input = this.characters[p1CharId].aiInput;
+                else
+                    UserInputManager.Instance.p1Input = this.emtyAi;
+            }
+
+            /*CharacterManager.Instance.vsAi = true;
+            CharacterManager.Instance.vsAiId = this.vsAiId;*/
+        }
+
+        if(CharacterManager.Instance != null)
+        {
+            CharacterManager.Instance.vsAi = this.vsAI;
+            CharacterManager.Instance.vsAiId = this.vsAiId;
+        }
+
         yield return new WaitForSeconds(0.2f);
 
         if (this.characterModelsP1 != null)
@@ -285,6 +322,7 @@ public class CharactersAndSkins
     public TestPlayer character;
     public GameObject canvasPanel;
     public SO_Skin[] skins;
+    public PlayerInput aiInput;
 
     [Space]
     public int right;

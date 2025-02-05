@@ -53,10 +53,14 @@ public class PlayerInput : MonoBehaviour
     private void OnEnable()
     {
         this.JumpInput += this.Jump;
+
+        this.StartInput += this.PauseIfAiVsAi;
     }
     private void OnDisable()
     {
         this.JumpInput -= this.Jump;
+
+        this.StartInput -= this.PauseIfAiVsAi;
     }
 
     /*private void Update()
@@ -218,5 +222,24 @@ public class PlayerInput : MonoBehaviour
         SceneManager.LoadScene("Menu");
         //Application.Quit();
 
+    }
+
+    public void PauseIfAiVsAi(bool pause)
+    {
+        if (pause)
+        {
+            if (GameManager.Instance != null && CharacterManager.Instance != null && CharacterManager.Instance.vsAi && CharacterManager.Instance.vsAiId == 1)
+            {
+                //GameManager.Instance.TogglePauseGame(true);
+                if (!GameManager.Instance.gameIsPaused)
+                    GameManager.Instance.PauseGame();
+                else
+                    GameManager.Instance.UnPauseGame();
+
+                //Debug.Log("paused in ai vs ai");
+                //Debug.Log("pauseeplay");
+                //this.playerInput.StartInput += this.PauseGame;
+            }
+        }
     }
 }

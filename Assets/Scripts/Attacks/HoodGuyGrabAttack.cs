@@ -51,14 +51,14 @@ public class HoodGuyGrabAttack : Attack
             this.Stop();
     }
 
-    /*private void Update()
+    private void Update()
     {
         if (this.onGoing)
         {
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                 this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
         }
-    }*/
+    }
 
     [ContextMenu("Initiate")]
     public override void Initiate()

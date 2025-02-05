@@ -31,6 +31,10 @@ public class DebugInputs : MonoBehaviour
     public Action<bool> ToggleLifeNumbersInput;
     [HideInInspector] public bool pastToggleLifeNumbersInput;*/
 
+    /*public bool pause;
+    public Action<bool> PauseInput;
+    [HideInInspector] public bool pastPauseInput;*/
+
     [Space]
     public bool lifeNumbersEnabled = false;
     public GameObject p1LifeNumbers;
@@ -46,6 +50,8 @@ public class DebugInputs : MonoBehaviour
         this.ReloadSceneInput += this.ReloadScene;
 
         this.LoadPreviousStageInput += this.LoadPreviousStage;
+
+        //this.PauseInput += this.PauseGame;
     }
     private void OnDisable()
     {
@@ -54,6 +60,8 @@ public class DebugInputs : MonoBehaviour
         this.ReloadSceneInput -= this.ReloadScene;
 
         this.LoadPreviousStageInput -= this.LoadPreviousStage;
+
+        //this.PauseInput -= this.PauseGame;
     }
 
     public void Start()
@@ -137,12 +145,17 @@ public class DebugInputs : MonoBehaviour
     public void ReloadScene(bool reload)
     {
         if (reload)
+        {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(this.sceneIndex);
+        }
+            
     }
 
     public void OnQuitInput(InputAction.CallbackContext ctx)
     {
 
+        Time.timeScale = 1f;
         bool quit = ctx.ReadValueAsButton();
         SceneManager.LoadScene("Menu");
         //Application.Quit();
@@ -237,5 +250,36 @@ public class DebugInputs : MonoBehaviour
         }*/
 
     }
+
+    /*public void PauseGame(bool pause)
+    {
+        if (pause)
+        {
+            if (GameManager.Instance != null && CharacterManager.Instance != null && CharacterManager.Instance.vsAi && CharacterManager.Instance.vsAiId == 1)
+            {
+                //GameManager.Instance.TogglePauseGame(true);
+                if (!GameManager.Instance.gameIsPaused)
+                    GameManager.Instance.PauseGame();
+                *//*else
+                    GameManager.Instance.UnPauseGame();*//*
+                //Debug.Log("pauseeplay");
+                //this.playerInput.StartInput += this.PauseGame;
+            }
+        }
+    }
+
+    public void OnPauseInput(InputAction.CallbackContext ctx)
+    {
+
+        bool pressingStart = ctx.ReadValueAsButton();
+        this.pause = pressingStart;
+        if (this.pastPauseInput != pressingStart)
+        {
+            this.PauseInput?.Invoke(pressingStart);
+            this.pastPauseInput = pressingStart;
+        }
+
+
+    }*/
 
 }

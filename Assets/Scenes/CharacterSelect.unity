@@ -9864,6 +9864,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c9e6d683912db48aab257fd221bf9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainButtons: {fileID: 0}
+  vsButtons: {fileID: 0}
+  eventSystem: {fileID: 0}
 --- !u!23 &252967974 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7607868976767909403, guid: c9bd8048090237f4daa5c56caf6dd5f4, type: 3}
@@ -18014,6 +18017,8 @@ MonoBehaviour:
   player2Id: 0
   draw: 0
   musicTypeId: 0
+  vsAi: 0
+  vsAiId: 0
 --- !u!4 &478331583
 Transform:
   m_ObjectHideFlags: 0
@@ -44644,6 +44649,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0f89263dfb2e98840b673d64f7e1e424, type: 2}
     - {fileID: 11400000, guid: 2480804123cba944e9ae080e64ddab77, type: 2}
     - {fileID: 11400000, guid: d6cdc2c6dd388fb43bf626a6451b858d, type: 2}
+    aiInput: {fileID: 7964895558864309106, guid: a4efc41a282a8e743a89e4498ad37546, type: 3}
     right: 2
     left: 3
     up: 1
@@ -44664,6 +44670,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9353f1781adb28d41b637820183ca1c0, type: 2}
     - {fileID: 11400000, guid: 714f2a4bdedff4e4aabac645bc909400, type: 2}
     - {fileID: 11400000, guid: ba61b93e4557d32498077cdcfbdc8228, type: 2}
+    aiInput: {fileID: 7964895558864309106, guid: a4efc41a282a8e743a89e4498ad37546, type: 3}
     right: -1
     left: -1
     up: 0
@@ -44684,6 +44691,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f8653f77a68239346b5233dad378bc99, type: 2}
     - {fileID: 11400000, guid: 84a6c10f46978314783707ee7b356e4a, type: 2}
     - {fileID: 11400000, guid: b9dd88a8ae6f11e41a61935ec7cd0c13, type: 2}
+    aiInput: {fileID: 7964895558864309106, guid: a4efc41a282a8e743a89e4498ad37546, type: 3}
     right: 3
     left: 0
     up: 5
@@ -44703,6 +44711,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: d566636b247d145408d2fb58783470fd, type: 2}
     - {fileID: 11400000, guid: ba61b93e4557d32498077cdcfbdc8228, type: 2}
     - {fileID: 11400000, guid: 714f2a4bdedff4e4aabac645bc909400, type: 2}
+    aiInput: {fileID: 7964895558864309106, guid: 8540d349640fd1545bfcab6734f47a03, type: 3}
     right: 0
     left: 2
     up: 4
@@ -44722,6 +44731,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: aaf97bf9e880cf2478c0667050912cbd, type: 2}
     - {fileID: 11400000, guid: d6cdc2c6dd388fb43bf626a6451b858d, type: 2}
     - {fileID: 11400000, guid: 2480804123cba944e9ae080e64ddab77, type: 2}
+    aiInput: {fileID: 7964895558864309106, guid: 8540d349640fd1545bfcab6734f47a03, type: 3}
     right: 5
     left: 5
     up: 8
@@ -44744,6 +44754,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 38dcdcc311227ec46923191d2ef184c7, type: 2}
     - {fileID: 11400000, guid: d993b6916e193af488d0452e30d81ec6, type: 2}
     - {fileID: 11400000, guid: 89638003a450658439403f9954bf31cc, type: 2}
+    aiInput: {fileID: 7964895558864309106, guid: 48991c1dbc8632149baac0da24869715, type: 3}
     right: 4
     left: 6
     up: -1
@@ -44765,6 +44776,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: c13a336a45253d4408edee92a0c221b2, type: 2}
     - {fileID: 11400000, guid: 18fc052d8e779c24c846d7aebebcc9ff, type: 2}
     - {fileID: 11400000, guid: afb1aa5a2de2ee244be9292a79774338, type: 2}
+    aiInput: {fileID: 7964895558864309106, guid: a4efc41a282a8e743a89e4498ad37546, type: 3}
     right: 5
     left: 4
     up: 7
@@ -44785,6 +44797,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 89a03b3183379fd49b122e5a7d3cca67, type: 2}
     - {fileID: 11400000, guid: a76082e481611c842ac0c0f44de0e552, type: 2}
     - {fileID: 11400000, guid: 697ddec7be62b3e46a00bb9d5726cec3, type: 2}
+    aiInput: {fileID: 7964895558864309106, guid: 8540d349640fd1545bfcab6734f47a03, type: 3}
     right: 1
     left: -1
     up: 3
@@ -44800,6 +44813,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4026c226418e88f44904e79e89a32243, type: 2}
     - {fileID: 11400000, guid: 85415006caeff774595c5070c404ccd0, type: 2}
     - {fileID: 11400000, guid: 0f8121d59cc19ba4ca629d92d46e3082, type: 2}
+    aiInput: {fileID: 7964895558864309106, guid: ee0b20f755dc56741a9eeb6cf6617443, type: 3}
     right: 0
     left: 5
     up: 2
@@ -44813,11 +44827,14 @@ MonoBehaviour:
   randomCanvasPanel: {fileID: 1060794162}
   randomRight: 1
   randomLeft: 1
-  randomUp: 3
+  randomUp: 2
   randomDown: 5
   gameModeId: 0
   mainGameSkybox: {fileID: 2100000, guid: 2e8a4ca2fc8afc345a60492a934c4487, type: 2}
   fightBallSkybox: {fileID: 2100000, guid: 4b98d76484fc6914b90e22d8d7f54520, type: 2}
+  vsAI: 0
+  vsAiId: 0
+  emtyAi: {fileID: 7964895558864309106, guid: ee0b20f755dc56741a9eeb6cf6617443, type: 3}
   randomCharacterPool: 000000000100000002000000030000000400000005000000
 --- !u!4 &1224596431
 Transform:
@@ -64606,6 +64623,7 @@ MonoBehaviour:
   input: {fileID: 1993457875}
   rivalCursor: {fileID: 1835231004}
   isPlayer1: 0
+  isAi: 0
   currentCharacterId: 3
   currentSkinId: 0
   selectingSkin: 0
@@ -65106,6 +65124,7 @@ MonoBehaviour:
   input: {fileID: 2068889108}
   rivalCursor: {fileID: 1817565733}
   isPlayer1: 1
+  isAi: 0
   currentCharacterId: 0
   currentSkinId: 0
   selectingSkin: 0

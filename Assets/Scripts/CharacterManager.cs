@@ -25,6 +25,10 @@ public class CharacterManager : MonoBehaviour
     [Space]
     public int musicTypeId;
 
+    [Space]
+    public bool vsAi = false;
+    public int vsAiId = 0;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
