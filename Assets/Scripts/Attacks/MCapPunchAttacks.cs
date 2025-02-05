@@ -31,6 +31,35 @@ public class MCapPunchAttacks : Attack
             this.Stop();
     }
 
+    public override void OnEnable()
+    {
+        base.OnEnable();
+
+        if (this.hitbox != null)
+            this.hitbox.OnPlayerCollision += this.OnPunchHit;
+    }
+    public override void OnDisable()
+    {
+        base.OnDisable();
+
+        if (this.hitbox != null)
+            this.hitbox.OnPlayerCollision -= this.OnPunchHit;
+    }
+
+    public void OnPunchHit(TestPlayer player)
+    {
+        //this.user.AddKnockback(this.user.transform.forward.z * -100f);
+        /*this.hits++;
+        this.slowdownTimer = 1f;
+        Debug.Log(this.hits);*/
+
+        if (player != null)
+        {
+            player.hits++;
+            player.hitsTimer = 1f;
+        }
+    }
+
     [ContextMenu("Initiate")]
     public override void Initiate()
     {

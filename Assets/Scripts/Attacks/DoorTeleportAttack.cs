@@ -6,6 +6,7 @@ public class DoorTeleportAttack : Attack
 {
     public TempPlayerAnimations animations;
     public bool onGoing;
+    public bool comingBack;
 
     public InterdimensionalDoor door;
     public InterdimensionalDoor doorP2;
@@ -192,6 +193,8 @@ public class DoorTeleportAttack : Attack
         if (this.closeSfx != null)
             this.closeSfx.Play();
 
+        this.comingBack = true;
+
         yield return new WaitForSeconds(0.1f);
 
         if (this.currentDoor != null)
@@ -213,6 +216,8 @@ public class DoorTeleportAttack : Attack
 
         if (this.user.collision != null)
             this.user.collision.enabled = false;
+
+        //this.comingBack = true;
 
         yield return new WaitForSeconds(0.3f);
 
@@ -260,6 +265,7 @@ public class DoorTeleportAttack : Attack
         {
             GameManager.Instance.gameCamera.lockCamera = false;
         }*/
+        this.comingBack = false;
 
         yield return new WaitForSeconds(0.1f);
 
@@ -310,6 +316,7 @@ public class DoorTeleportAttack : Attack
         if (!this.user.dead)
             this.Disappear(false);
 
+        this.comingBack = false;
 
         if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
         {

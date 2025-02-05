@@ -68,6 +68,7 @@ public class PunchAttack : Attack
         //this.user.AddKnockback(this.user.transform.forward.z * -100f);
         this.hits++;
         this.slowdownTimer = 1f;
+        //Debug.Log(this.hits);
     }
 
     private void Update()

@@ -13,6 +13,8 @@ public class SuperElectricBallAttack : Attack
     public GameObject electricBallModelP1;
     public GameObject electricBallModelP2;
 
+    public TestHitbox knockbackHitbox;
+
     public float ballMoveSpeed = 2f;
     public float ballWaveSpeed = 5f;
 
@@ -206,6 +208,9 @@ public class SuperElectricBallAttack : Attack
             electricBallPrefab.waveSpeed = this.ballWaveSpeed;
         }
 
+        if (this.knockbackHitbox != null)
+            this.knockbackHitbox.gameObject.SetActive(true);
+
         /*yield return new WaitForSeconds(0.5f);
 
         if (this.electricBall != null)
@@ -223,6 +228,9 @@ public class SuperElectricBallAttack : Attack
 
 
         yield return new WaitForSeconds(0.8f);
+
+        if (this.knockbackHitbox != null)
+            this.knockbackHitbox.gameObject.SetActive(false);
 
         /*if (this.animationId == 1)
         {
@@ -276,6 +284,8 @@ public class SuperElectricBallAttack : Attack
             this.electricBallModel.transform.localScale = new Vector3(1f, 1f, 1f);
             
         }
+        if (this.knockbackHitbox != null)
+            this.knockbackHitbox.gameObject.SetActive(false);
 
         if (this.electricitySfx != null)
             this.electricitySfx.Stop();
@@ -394,6 +404,9 @@ public class SuperElectricBallAttack : Attack
             electricBallPrefab.waveSpeed = this.ballWaveSpeed;
         }
 
+        if (this.knockbackHitbox != null)
+            this.knockbackHitbox.gameObject.SetActive(true);
+
         yield return new WaitForSeconds(0.2f);
 
         if (this.animations != null)
@@ -482,8 +495,14 @@ public class SuperElectricBallAttack : Attack
             electricBallPrefab.waveSpeed = this.ballWaveSpeed;
         }
 
+        if (this.knockbackHitbox != null)
+            this.knockbackHitbox.gameObject.SetActive(true);
+
 
         yield return new WaitForSeconds(0.8f);
+
+        if (this.knockbackHitbox != null)
+            this.knockbackHitbox.gameObject.SetActive(false);
 
         this.user.rb.isKinematic = false;
 

@@ -62,7 +62,10 @@ public class TestPlayer : MonoBehaviour
     public GameObject iceCube;
     public SkelletonBody skelletonBody;
     public HitEffectLogic hitEffectLogic;
-    
+
+    [HideInInspector] public float hits;
+    [HideInInspector] public float hitsTimer = 0f;
+
     void Awake()
     {
         this.animations = GetComponent<TempPlayerAnimations>();
@@ -114,8 +117,20 @@ public class TestPlayer : MonoBehaviour
             Debug.Log(Mathf.Abs(this.transform.position.x - this.tempOpponent.transform.position.x));
 
             Debug.Log(Mathf.Abs(this.transform.position.y - this.tempOpponent.transform.position.y));
+
+            //Debug.Log(this.playerNumber);
+            if (this.playerNumber == 2)
+            {
+                //Debug.Log(this.transform.position.y - this.tempOpponent.transform.position.y);
+                Debug.Log(Mathf.Abs(this.transform.position.y - this.tempOpponent.transform.position.y));
+                Debug.Log(this.tempOpponent.transform.position.y - this.transform.position.y);
+            }
+
+            //Debug.Log(Vector2.Distance(this.transform.position, this.tempOpponent.transform.position));
+            *//*if (this.playerNumber == 2)
+                Debug.Log(Vector2.Distance(new Vector2(this.transform.position.x, this.transform.position.y + 2.9f), this.tempOpponent.transform.position));*//*
         }*/
-            
+
 
         if (this.dead && this.ragdoll != null && !this.ragdoll.rb.isKinematic)
         {
@@ -125,6 +140,14 @@ public class TestPlayer : MonoBehaviour
         {
             this.transform.position = new Vector3(this.ragdoll.transform.position.x, this.transform.position.y, 0f);
         }*/
+
+        if (this.hitsTimer > 0f && this.hits > 0)
+        {
+            this.hitsTimer -= 2f * Time.deltaTime;
+
+            if (this.hitsTimer <= 0f)
+                this.hits = 0;
+        }
     }
 
 

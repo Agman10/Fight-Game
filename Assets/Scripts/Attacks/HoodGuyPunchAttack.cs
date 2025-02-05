@@ -25,6 +25,10 @@ public class HoodGuyPunchAttack : Attack
     public AudioSource forwardPunchSwooshSfx;
     public AudioSource backPunchSwooshSfx;
 
+
+    private int hits = 0;
+    private float slowdownTimer = 0f;
+
     //private IEnumerator hitboxCoroutine;
     //private IEnumerator animationCoroutine;
 
@@ -76,6 +80,14 @@ public class HoodGuyPunchAttack : Attack
             }
 
         }
+
+        if (this.slowdownTimer > 0f)
+        {
+            this.slowdownTimer -= 2f * Time.deltaTime;
+
+            if (this.slowdownTimer <= 0f)
+                this.hits = 0;
+        }
     }
 
     public override void OnEnable()
@@ -83,12 +95,32 @@ public class HoodGuyPunchAttack : Attack
         base.OnEnable();
         if (this.user != null)
             this.user.OnDisableItems += this.DisableItem;
+
+        if (this.hitbox != null)
+            this.hitbox.OnPlayerCollision += this.OnPunchHit;
     }
     public override void OnDisable()
     {
         base.OnDisable();
         if (this.user != null)
             this.user.OnDisableItems -= this.DisableItem;
+
+        if (this.hitbox != null)
+            this.hitbox.OnPlayerCollision -= this.OnPunchHit;
+    }
+
+    public void OnPunchHit(TestPlayer player)
+    {
+        //this.user.AddKnockback(this.user.transform.forward.z * -100f);
+        this.hits++;
+        this.slowdownTimer = 1f;
+        Debug.Log(this.hits);
+
+        if (player != null)
+        {
+            player.hits++;
+            player.hitsTimer = 1f;
+        }
     }
 
     [ContextMenu("Initiate")]
@@ -149,7 +181,8 @@ public class HoodGuyPunchAttack : Attack
                     else
                         this.user.AddStun(0.1f, false);
 
-                    this.StartCoroutine(this.PunchCoroutine());
+                    //this.StartCoroutine(this.PunchCoroutine());
+                    this.StartCoroutine(this.PunchCoroutineSlowScale());
                 }
                 else //in air
                 {
@@ -229,6 +262,66 @@ public class HoodGuyPunchAttack : Attack
             this.animations.SetDefaultPose();
 
         yield return new WaitForSeconds(0.01f);
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    IEnumerator PunchCoroutineSlowScale()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        float extraTime = (0.002f * this.hits);
+
+        if (this.animations != null)
+            this.animations.TestHoodGuyPunch(0);
+        yield return new WaitForSeconds(0.01f + extraTime);
+
+        if (extraTime > 0f)
+            yield return new WaitForSeconds(extraTime * 2);
+
+        if (this.animations != null)
+            this.animations.TestHoodGuyPunch(1);
+
+        if (this.punchSwooshSfx != null)
+        {
+            this.punchSwooshSfx.time = 0.01f;
+            this.punchSwooshSfx.Play();
+        }
+
+        /*if (extraTime > 0f)
+            yield return new WaitForSeconds(extraTime * 2);*/
+
+        yield return new WaitForSeconds(0.04f + extraTime);
+
+        if (this.animations != null)
+            this.animations.TestHoodGuyPunch(2);
+
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(true);
+
+        if (this.neutralHitbox2 != null)
+            this.neutralHitbox2.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f + extraTime);
+
+        if (this.animations != null)
+            this.animations.TestHoodGuyPunch(0);
+
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(false);
+
+        if (this.neutralHitbox2 != null)
+            this.neutralHitbox2.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.04f + extraTime);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.01f + extraTime);
+        //yield return new WaitForSeconds(0.06f + extraTime);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

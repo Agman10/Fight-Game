@@ -35,9 +35,9 @@ public class TestAI : MonoBehaviour
     {
 
         yield return new WaitForSeconds(Random.Range(0.3f, 0.6f));
-        if (this.EnemyDistance() <= 1.95f)
+        if (this.EnemyXDistance() <= 1.95f)
         {
-            Debug.Log(EnemyDistance());
+            Debug.Log(EnemyXDistance());
             this.Special1(2);
         }
         else
@@ -87,7 +87,7 @@ public class TestAI : MonoBehaviour
         {
             this.Super(3);
         }*/
-        if (this.EnemyDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
+        if (this.EnemyXDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
         {
             //Debug.Log(EnemyDistance());
             //this.Special1(2);
@@ -114,7 +114,7 @@ public class TestAI : MonoBehaviour
             }
                 
         }
-        else if (this.EnemyDistance() <= 1.5f && this.player.superCharge >= this.player.maxSuperCharge && !this.player.tempOpponent.dead && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+        else if (this.EnemyXDistance() <= 1.5f && this.player.superCharge >= this.player.maxSuperCharge && !this.player.tempOpponent.dead && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
         {
             this.Super(3);
         }
@@ -146,7 +146,7 @@ public class TestAI : MonoBehaviour
         {
             this.Super(3);
         }*/
-        if (this.EnemyDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
+        if (this.EnemyXDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
         {
             //Debug.Log(EnemyDistance());
 
@@ -167,7 +167,7 @@ public class TestAI : MonoBehaviour
             }
                 
         }
-        else if (this.EnemyDistance() <= 1.5f && this.player.superCharge >= this.player.maxSuperCharge && !this.player.tempOpponent.dead && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+        else if (this.EnemyXDistance() <= 1.5f && this.player.superCharge >= this.player.maxSuperCharge && !this.player.tempOpponent.dead && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
         {
             this.Super(3);
         }
@@ -187,7 +187,7 @@ public class TestAI : MonoBehaviour
             {
                 //this.Special2(Random.Range(0, 4));
 
-                if (this.EnemyDistance() <= 2f)
+                if (this.EnemyXDistance() <= 2f)
                     this.Special2(RandomSpecialDirection(1, 1, 1, 1));
                 else
                     this.Special2(RandomSpecialDirection(0, 1, 1, 1));
@@ -281,7 +281,7 @@ public class TestAI : MonoBehaviour
                             this.Super(2);*/
 
 
-                        if (this.EnemyDistance() <= 1.8f)
+                        if (this.EnemyXDistance() <= 1.8f)
                         {
                             this.Super(1);
                         }
@@ -300,7 +300,7 @@ public class TestAI : MonoBehaviour
                             }
                             else
                             {
-                                if (this.EnemyDistance() <= 2f)
+                                if (this.EnemyXDistance() <= 2f)
                                     this.Special2(RandomSpecialDirection(1, 1, 1, 1));
                                 else
                                     this.Special2(RandomSpecialDirection(0, 1, 1, 1));
@@ -311,7 +311,7 @@ public class TestAI : MonoBehaviour
                     else
                     {
 
-                        if (this.EnemyDistance() <= 1.8f)
+                        if (this.EnemyXDistance() <= 1.8f)
                             this.Super(RandomSpecialDirection(1, 1, 1, 1));
                         else
                             this.Super(RandomSpecialDirection(4, 0, 1, 0));
@@ -344,7 +344,7 @@ public class TestAI : MonoBehaviour
                     }
                     else
                     {
-                        if (this.EnemyDistance() <= 2f)
+                        if (this.EnemyXDistance() <= 2f)
                             this.Special2(RandomSpecialDirection(1, 1, 1, 1));
                         else
                             this.Special2(RandomSpecialDirection(0, 1, 1, 1));
@@ -496,7 +496,8 @@ public class TestAI : MonoBehaviour
         }
         else
         {
-            return 0;
+            //return 0;
+            return Random.Range(0, 4);
         }
 
         /*if(neutral == 1)
@@ -540,7 +541,7 @@ public class TestAI : MonoBehaviour
     }
 
 
-    public float EnemyDistance()
+    public float EnemyXDistance()
     {
         
         if(this.player != null && this.player.tempOpponent != null)
@@ -623,7 +624,7 @@ public class TestAI : MonoBehaviour
         {
             this.Super(3);
         }*/
-        if (this.EnemyDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
+        if (this.EnemyXDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
         {
             //Debug.Log(EnemyDistance());
             this.Special1(2);
@@ -656,7 +657,7 @@ public class TestAI : MonoBehaviour
         {
             this.Super(3);
         }*/
-        if (this.EnemyDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
+        if (this.EnemyXDistance() <= 1.8f && this.EnemyYDistance() <= 2.2f && !this.player.tempOpponent.dead)
         {
             //Debug.Log(EnemyDistance());
 
@@ -715,9 +716,9 @@ public class TestAI : MonoBehaviour
 
 
                     //for mike baller
-                    if (this.EnemyDistance() <= 2f)
+                    if (this.EnemyXDistance() <= 2f)
                     {
-                        Debug.Log(EnemyDistance());
+                        Debug.Log(EnemyXDistance());
                         this.Super(RandomSpecialDirection(0, 0, 1, 0));
                     }
                     else

@@ -16,6 +16,9 @@ public class SummonAnvilAttack : Attack
     public GameObject confused;
     public GameObject rope;
 
+    [HideInInspector] public bool summoning;
+    [HideInInspector] public bool hasBeenSummoned;
+
     [Space]
     public float cooldown = 1f;
     public float summonSpeed = 0.3f;
@@ -83,6 +86,8 @@ public class SummonAnvilAttack : Attack
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
 
+        this.summoning = true;
+
         if (this.animations != null)
             this.animations.GrandFlameStart();
 
@@ -96,6 +101,7 @@ public class SummonAnvilAttack : Attack
         }
 
         yield return new WaitForSeconds(this.summonSpeed);
+        this.hasBeenSummoned = true;
 
         //this.cooldownTimer = 3f;
         this.cooldownTimer = this.cooldown;
@@ -116,6 +122,9 @@ public class SummonAnvilAttack : Attack
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
+
+        this.summoning = false;
+        this.hasBeenSummoned = false;
 
         yield return new WaitForSeconds(0.3f);
 
@@ -244,6 +253,10 @@ public class SummonAnvilAttack : Attack
 
         if (this.confused != null)
             this.confused.gameObject.SetActive(false);
+
+        this.summoning = false;
+        this.hasBeenSummoned = false;
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }

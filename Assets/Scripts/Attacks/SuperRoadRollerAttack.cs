@@ -17,6 +17,9 @@ public class SuperRoadRollerAttack : Attack
     public GameObject punchEffect;
 
     public SoundEffect fallingSfx;
+
+    [HideInInspector] public bool anvilVulnerability;
+    [HideInInspector] public bool fallingDown;
     //public SoundEffect landingSfx;
 
     //public AudioSource explosionSfx;
@@ -89,6 +92,8 @@ public class SuperRoadRollerAttack : Attack
             startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
         }
 
+        this.anvilVulnerability = true;
+
         float testTime = 0f;
         float time = 0.3f;
         float startPosY = this.animations.body.localPosition.y;
@@ -102,11 +107,16 @@ public class SuperRoadRollerAttack : Attack
 
             /*if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                 this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);*/
+
+            if (testTime > 0.2f)
+                this.anvilVulnerability = false;
             yield return null;
         }
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
+
+        this.anvilVulnerability = false;
 
         float currentTime = 0;
         float duration = 0.4f;
@@ -161,6 +171,8 @@ public class SuperRoadRollerAttack : Attack
             this.animations.RoadRollerFall();
 
         //this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x - (this.user.transform.forward.z * 2.35f), targetPositionY, 0);
+
+        this.fallingDown = true;
         yield return new WaitForSeconds(0.4f);
 
         this.fallingSfx.PlaySound();
@@ -200,11 +212,13 @@ public class SuperRoadRollerAttack : Attack
             GameManager.Instance.gameCamera.lockCamera = false;
         }*/
 
-        //AFTER ROAD ROLLER LANDS
+        this.fallingDown = false;
 
+        //AFTER ROAD ROLLER LANDS
         if (this.activeRoadRoller != null)
         {
-            if(this.activeRoadRoller.victim != null)
+            //IF HIT
+            if (this.activeRoadRoller.victim != null)
             {
                 //yield return new WaitForSeconds(0.1f);
 
@@ -380,7 +394,7 @@ public class SuperRoadRollerAttack : Attack
                 this.onGoing = false;
                 this.user.attackStuns.Remove(this.gameObject);
             }
-            else
+            else //IF MISS
             {
                 //yield return new WaitForSeconds(0.3f);
 
@@ -415,6 +429,11 @@ public class SuperRoadRollerAttack : Attack
                     
                 }
 
+                this.anvilVulnerability = true;
+
+                this.user.knockbackInvounrability = false;
+                this.canBeCanceled = true;
+
                 currentTime = 0;
                 duration = 0.4f;
 
@@ -431,16 +450,21 @@ public class SuperRoadRollerAttack : Attack
 
                     if (this.animations != null)
                         this.animations.body.transform.Rotate(new Vector3(0f, 0f, 2000f * Time.deltaTime));
+
+                    if (currentTime >= 0.2f)
+                        this.anvilVulnerability = false;
                     yield return null;
                 }
+
+                this.anvilVulnerability = false;
 
                 this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
 
                 if (this.animations != null)
                     this.animations.SetDefaultPose();
 
-                this.user.knockbackInvounrability = false;
-                this.canBeCanceled = true;
+                //this.user.knockbackInvounrability = false;
+                //this.canBeCanceled = true;
                 this.user.rb.isKinematic = false;
 
                 yield return new WaitForSeconds(0.1f);
@@ -533,6 +557,9 @@ public class SuperRoadRollerAttack : Attack
         {
             GameManager.Instance.gameCamera.lockCamera = false;
         }*/
+
+        this.anvilVulnerability = false;
+        this.fallingDown = false;
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

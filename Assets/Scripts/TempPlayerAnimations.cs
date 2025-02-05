@@ -2164,7 +2164,7 @@ public class TempPlayerAnimations : MonoBehaviour
             this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.39f, 0f);
         }
     }
-    //[ContextMenu("GrandFlame")]
+    [ContextMenu("GrandFlame")]
     public void GrandFlame()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
