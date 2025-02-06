@@ -545,12 +545,18 @@ public class MikeBallerAI : CharacterAI
             GrandFlameAttack grandFlame = this.player.tempOpponent.attackStuns[0].GetComponent<GrandFlameAttack>();
             SummonAnvilAttack anvilSummon = this.player.tempOpponent.attackStuns[0].GetComponent<SummonAnvilAttack>();
             SuperRoadRollerAttack roadRollerAttack = this.player.tempOpponent.attackStuns[0].GetComponent<SuperRoadRollerAttack>();
+            ElectricalFieldAttack electricalField = this.player.tempOpponent.attackStuns[0].GetComponent<ElectricalFieldAttack>();
+            RollForwardAttack rollForward = this.player.tempOpponent.attackStuns[0].GetComponent<RollForwardAttack>();
 
             if (grandFlame != null)
                 return true;
             else if (anvilSummon != null && anvilSummon.summoning)
                 return true;
             else if (roadRollerAttack != null)
+                return true;
+            else if (electricalField != null && this.EnemyXDistance() < 2.5f && this.EnemyYDistance(true) < -2f && Mathf.Abs(this.player.rb.velocity.y) > 0f)
+                return true;
+            else if (rollForward != null && !rollForward.rollingBack && this.EnemyYDistance() <= 2f && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0 && this.player.transform.forward.z != this.player.tempOpponent.transform.forward.z)
                 return true;
             else
                 return false;
@@ -568,6 +574,10 @@ public class MikeBallerAI : CharacterAI
             GrandFlameAttack grandFlame = this.player.tempOpponent.attackStuns[0].GetComponent<GrandFlameAttack>();
             SummonAnvilAttack anvilSummon = this.player.tempOpponent.attackStuns[0].GetComponent<SummonAnvilAttack>();
             SuperRoadRollerAttack roadRollerAttack = this.player.tempOpponent.attackStuns[0].GetComponent<SuperRoadRollerAttack>();
+            ElectricalFieldAttack electricalField = this.player.tempOpponent.attackStuns[0].GetComponent<ElectricalFieldAttack>();
+            RollForwardAttack rollForward = this.player.tempOpponent.attackStuns[0].GetComponent<RollForwardAttack>();
+
+            
 
             if (grandFlame != null)
                 yield return this.AvoidGrandFLameCoroutine();
@@ -575,7 +585,19 @@ public class MikeBallerAI : CharacterAI
                 yield return this.AvoidAnvilCoroutine(anvilSummon);
             else if (roadRollerAttack != null)
                 yield return this.AvoidRoadRollerCoroutine(roadRollerAttack);
+            else if (electricalField != null && this.EnemyXDistance() < 2.5f && this.EnemyYDistance(true) < -2f && Mathf.Abs(this.player.rb.velocity.y) > 0f)
+                yield return this.AvoidElectricCrouch();
+            else if (rollForward != null && !rollForward.rollingBack && this.EnemyYDistance() <= 2f && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0 && this.player.transform.forward.z != this.player.tempOpponent.transform.forward.z)
+                yield return this.AvoidRollForwardCoroutine();
         }
+    }
+
+    private IEnumerator AvoidElectricCrouch()
+    {
+        while (this.player.attackStuns.Count > 0 && this.player.stuns.Count > 0)
+            yield return null;
+
+        this.Special2(2);
     }
 
 
@@ -909,6 +931,59 @@ public class MikeBallerAI : CharacterAI
         this.playerInput.moveInput = this.MoveInput(0);
     }
 
+    private IEnumerator AvoidRollForwardCoroutine()
+    {
+        this.playerInput.moveInput = new Vector3(0f, 0f, 0f);
+
+        if (this.EnemyXDistance() >= 6f && this.EnemyXDistance() < 11f && this.player.tempOpponent.characterId != 7)
+        {
+            float enemyDistance = 5.8f;
+
+            if (this.player.characterId == 7)
+                enemyDistance = 4.8f;
+
+            while (this.EnemyXDistance() >= enemyDistance)
+                yield return null;
+
+            Debug.Log(this.EnemyXDistance());
+            this.Special1(2);
+        }
+        else if (this.EnemyXDistance() >= 11f)
+        {
+            this.Special1(1);
+        }
+        else if (this.EnemyXDistance() >= 4f && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+        {
+            this.Special2(3);
+            this.playerInput.special2 = true;
+            while (this.player.tempOpponent.attackStuns.Count > 0 && !this.player.tempOpponent.dead)
+            {
+                yield return null;
+            }
+
+            float distance = 2f;
+            if (this.player.characterId == 7)
+                distance = 3f;
+
+            while (this.EnemyXDistance() <= distance && !this.player.tempOpponent.dead && this.player.attackStuns.Count > 0)
+            {
+                //this.playerInput.special2 = true;
+                yield return null;
+            }
+
+            this.playerInput.special2 = false;
+        }
+        else
+        {
+            //this.Special1(1);
+            //this.Special2(3);
+
+            this.Special2(1);
+            //this.Punch(0);
+            //this.Kick(0);
+        }
+    }
+
     private IEnumerator AvoidPunchStun()
     {
         if (Mathf.Abs(this.transform.position.x) > 12)
@@ -1028,6 +1103,81 @@ public class MikeBallerAI : CharacterAI
         //yield return new WaitForSeconds(Random.Range(0.01f, 0.1f));
         yield return new WaitForSeconds(0.01f);
 
+
+        if (!this.player.tempOpponent.dead && this.player.tempOpponent.attackStuns.Count > 0)
+        {
+            RollForwardAttack rollForward = this.player.tempOpponent.attackStuns[0].GetComponent<RollForwardAttack>();
+            
+            if (rollForward != null && !rollForward.rollingBack && this.EnemyYDistance() <= 2f && this.player.stuns.Count <= 0 && this.player.attackStuns.Count <= 0)
+            {
+                //Debug.Log(this.EnemyXDistance());
+                if (this.EnemyXDistance() >= 6f && this.EnemyXDistance() < 11f && this.player.tempOpponent.characterId != 7)
+                {
+                    float enemyDistance = 5.8f;
+
+                    if(this.player.characterId == 7)
+                        enemyDistance = 4.8f;
+
+                    while (this.EnemyXDistance() >= enemyDistance)
+                        yield return null;
+
+                    Debug.Log(this.EnemyXDistance());
+                    this.Special1(2);
+                }
+                else if (this.EnemyXDistance() >= 11f)
+                {
+                    this.Special1(1);
+                }
+                else if (this.EnemyXDistance() >= 4f && Mathf.Abs(this.player.rb.velocity.y) <= 0f)
+                {
+                    this.Special2(3);
+                    this.playerInput.special2 = true;
+                    while (this.player.tempOpponent.attackStuns.Count > 0 && !this.player.tempOpponent.dead)
+                    {
+                        yield return null;
+                    }
+
+                    while (this.EnemyXDistance() <= 3f && !this.player.tempOpponent.dead && this.player.attackStuns.Count > 0)
+                    {
+                        //this.playerInput.special2 = true;
+                        yield return null;
+                    }
+
+                    this.playerInput.special2 = false;
+                }
+                else if (this.EnemyXDistance() <= 2f)
+                {
+                    //this.Special1(1);
+                    this.Punch(0);
+                }
+                else
+                {
+                    //this.Special1(1);
+                    //this.Special2(3);
+
+                    this.Special2(1);
+                    //this.Punch(0);
+                    //this.Kick(0);
+                }
+            }
+        }
+
+        /*if (!this.player.tempOpponent.dead && this.player.tempOpponent.attackStuns.Count > 0)
+        {
+            ElectricalFieldAttack electricalField = this.player.tempOpponent.attackStuns[0].GetComponent<ElectricalFieldAttack>();
+            Debug.Log(this.EnemyYDistance());
+            if (electricalField != null && this.EnemyXDistance() < 2.5f && this.EnemyYDistance(true) < -2f && Mathf.Abs(this.player.rb.velocity.y) > 0f)
+            {
+                //Debug.Log(this.EnemyYDistance(true));
+                Debug.Log("test");
+
+                while (this.player.attackStuns.Count > 0 && this.player.stuns.Count > 0)
+                    yield return null;
+
+                this.Special2(2);
+            }
+        }*/
+
         //yield return this.Special2Coroutine();
 
         //yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
@@ -1049,7 +1199,7 @@ public class MikeBallerAI : CharacterAI
             yield return AvoidAttacksCoroutine();
         }*/
 
-        if (this.player.attacks.downSpecial != null && this.player.attacks.downSpecial is CFourAttack c4 && c4.activeCFour == null)
+        /*if (this.player.attacks.downSpecial != null && this.player.attacks.downSpecial is CFourAttack c4 && c4.activeCFour == null)
         {
             this.Special1(3);
         }
@@ -1057,340 +1207,11 @@ public class MikeBallerAI : CharacterAI
         if (this.player.hits > 2)
         {
             yield return this.AvoidPunchStun();
+        }*/
 
-            /*while (this.player.hits > 2 && this.EnemyXDistance() < 3f)
-            {
-                this.playerInput.moveInput = MoveInput(2);
-                //this.Kick(0);
-                //this.Punch(0);
-                //this.Special2(1);
-                //this.playerInput.jumping = true;
-
-                this.playerInput.jumping = true;
-                *//*yield return new WaitForSeconds(0.06f);
-                this.playerInput.jumping = false;*//*
-                //this.Kick(0);
-                //this.Punch(0);
-                //this.Special2(2);
-                this.Special2(1);
-                //this.Kick(0);
-                yield return null;
-            }
-            this.playerInput.jumping = false;*/
-            /*while (this.player.attackStuns.Count > 0)
-            {
-                yield return null;
-            }*/
-            //this.Special2(2);
-
-            //this.playerInput.moveInput = MoveInput(0);
-
-            /*while (this.player.hits > 2 && this.EnemyXDistance() < 3f)
-            {
-                this.playerInput.moveInput = MoveInput(2);
-                //this.Punch(0);
-                yield return null;
-            }
-            while (this.player.attackStuns.Count > 0)
-            {
-                yield return null;
-            }
-            yield return new WaitForSeconds(0.01f);
-            this.Special2(2);*/
-        }
 
 
         //this.playerInput.moveInput = MoveInput(Random.Range(0, 4));
-
-        /*if (!this.player.tempOpponent.dead &&
-             this.player.attackStuns.Count <= 0 &&
-             this.player.stuns.Count <= 0)
-        {
-            if (this.player.attacks.downSpecial != null && this.player.attacks.downSpecial is CFourAttack c4)
-            {
-                if (c4.activeCFour == null)
-                {
-                    this.Special1(3);
-
-                }
-                else if (
-                    Mathf.Abs(this.player.tempOpponent.transform.position.y - c4.activeCFour.transform.position.y) < 1f &&
-                    Mathf.Abs(this.player.tempOpponent.transform.position.x - c4.activeCFour.transform.position.x) < 1f &&
-                    Mathf.Abs(this.player.transform.position.x - c4.activeCFour.transform.position.x) > 3.2f
-                    )
-                {
-                    this.Special1(3);
-                }
-            }
-        }*/
-
-
-
-
-        //Debug.Log(this.EnemyYDistance(true));
-        /*if (this.CanHitElectricBall())
-        {
-            Debug.Log(this.transform.forward.z);
-            Debug.Log(this.transform.position.x);
-            this.Super(1);
-        }*/
-
-        /*if (this.CanHitAnvil())
-        {
-            //Debug.Log("an");
-            this.Super(0);
-            yield return this.AnvilHitCoroutine();
-
-            yield return new WaitForSeconds(2f);
-        }*/
-
-
-
-
-
-
-        /*if (!this.player.tempOpponent.dead && Mathf.Abs(this.player.tempOpponent.rb.velocity.x) <= 2.5f && Mathf.Abs(this.player.rb.velocity.y) <= 0f && this.player.tempOpponent.attackStuns.Count > 0 && this.player.superCharge >= this.player.maxSuperCharge / 2 && !this.player.tempOpponent.knockbackInvounrability && !this.player.tempOpponent.preventDeath && this.player.attackStuns.Count <= 0)
-        {
-            this.Super(0);
-            Debug.Log("test");
-        }*/
-
-        /*if (!this.player.tempOpponent.dead && this.player.tempOpponent.attackStuns.Count > 0 && this.player.superCharge >= this.player.maxSuperCharge / 2)
-        {
-            UppercutAttack uppercut = this.player.tempOpponent.attackStuns[0].GetComponent<UppercutAttack>();
-            if (uppercut != null)
-                this.Super(0);
-        }*/
-        /*if (CanHitAnvil())
-        {
-            this.Super(0);
-
-            *//*SummonAnvilAttack anvilAttack = null;
-
-            if (this.player.attackStuns.Count > 0)
-                anvilAttack = this.player.attackStuns[0].GetComponent<SummonAnvilAttack>();*//*
-
-            if (this.player.attacks.neutralSuper != null && this.player.attacks.neutralSuper is SummonAnvilAttack anvilAttack)
-            {
-                //Debug.Log("fdgsdfgsd");
-                while (anvilAttack.onGoing)
-                {
-                    yield return null;
-                }
-            }
-
-            *//*while (this.player.attackStuns.Count <= 0)
-            {
-                yield return null;
-            }*//*
-
-            //Debug.Log("NoAttackStuns");
-            //yield return new WaitForSeconds(0.01f);
-            //this.Punch(0);
-
-            float startHealth = this.player.health;
-
-            //Debug.Log(startHealth);
-
-            if (this.player.tempOpponent.attackStuns.Count > 0)
-            {
-                Anvil anvil = null;
-
-                yield return new WaitForSeconds(0.05f);
-                //Debug.Log(this.player.tempOpponent.attackStuns.Count);
-                //Debug.Log(this.player.tempOpponent.attackStuns[0]);
-                if (this.player.tempOpponent.attackStuns.Count > 0)
-                    anvil = this.player.tempOpponent.attackStuns[0].GetComponent<Anvil>();
-
-                *//*bool testBool = anvil != null &&
-                    !this.player.tempOpponent.dead &&
-                    this.player.tempOpponent.attackStuns.Count > 0 &&
-                    this.player.tempOpponent.attackStuns[0] == anvil.gameObject &&
-                    Mathf.Abs(this.player.rb.velocity.y) <= 0 &&
-                    !this.player.dead &&
-                    this.player.health >= startHealth - 5;*/
-
-
-        /*if (anvil != null &&
-            !this.player.tempOpponent.dead &&
-            this.player.tempOpponent.attackStuns.Count > 0 &&
-            this.player.tempOpponent.attackStuns[0] == anvil.gameObject &&
-            Mathf.Abs(this.player.rb.velocity.y) <= 0 &&
-            !this.player.dead &&
-            this.player.health >= startHealth - 5)
-        {
-
-        }*//*
-
-        if (this.anvilElectrecute)
-        {
-            float currentTime = 0;
-            float duration = 2f;
-            while (this.EnemyXDistance() > 2f && this.anvilElectrecute)
-            {
-                currentTime += Time.deltaTime;
-                this.playerInput.moveInput = this.MoveInput(1);
-                yield return null;
-            }
-            Debug.Log("1");
-            while (this.EnemyXDistance() < 1.5f && this.anvilElectrecute)
-            {
-                currentTime += Time.deltaTime;
-                if (this.player.transform.position.x < 0)
-                    this.playerInput.moveInput = new Vector3(1f, 0f, 0f);
-                else
-                    this.playerInput.moveInput = new Vector3(-1f, 0f, 0f);
-                //this.playerInput.moveInput = this.MoveInput(2);
-                yield return null;
-            }
-            Debug.Log("2");
-            this.playerInput.moveInput = this.MoveInput(0);
-
-            *//*while (this.player.tempOpponent.attackStuns.Count > 0)
-            {
-                yield return null;
-            }*//*
-
-            //yield return new WaitForSeconds(0.4f);
-
-            while (!anvil.growHitbox.gameObject.active && this.anvilElectrecute)
-                yield return null;
-
-            Debug.Log("3");
-            if (this.anvilElectrecute)
-            {
-                this.Special2(3);
-                float dur = 0.2f;
-
-                if (this.player.attacks.downSpecial2 != null && this.player.attacks.downSpecial2 is ElectricalFieldAttack electricalField)
-                {
-                    dur = electricalField.startDelay;
-                }
-
-                currentTime = 0;
-                //duration = dur + 0.1f;
-                duration = 0.2f + 0.4f;
-                while (this.player.attackStuns.Count > 0 && currentTime < duration)
-                {
-                    currentTime += Time.deltaTime;
-                    this.playerInput.special2 = true;
-                    yield return null;
-                }
-                Debug.Log("4");
-            }
-
-            Debug.Log(this.EnemyXDistance());
-            //yield return new WaitForSeconds(0.2f + 0.4f);
-            while (this.EnemyXDistance() <= 2f && !this.player.tempOpponent.dead && this.player.attackStuns.Count > 0)
-            {
-                this.playerInput.special2 = true;
-                yield return null;
-            }
-            this.playerInput.special2 = false;
-
-            Debug.Log("tesertet");
-        }
-
-        *//*while (this.player.attackStuns.Count > 0)
-        {
-            yield return null;
-        }
-        this.Taunt();*//*
-    }
-
-    Debug.Log("end");
-    //this.Taunt();
-
-}*/
-
-
-        /*if (!this.player.tempOpponent.dead && 
-            Mathf.Abs(this.player.tempOpponent.rb.velocity.x) <= 2.5f && 
-            Mathf.Abs(this.player.rb.velocity.y) <= 0f && 
-            this.player.tempOpponent.attackStuns.Count > 0 && 
-            this.player.superCharge >= this.player.maxSuperCharge / 2 && 
-            !this.player.tempOpponent.knockbackInvounrability && 
-            !this.player.tempOpponent.preventDeath && 
-            this.player.attackStuns.Count <= 0)
-        {
-            yield return new WaitForSeconds(0.2f);
-            *//*if(Mathf.Abs(this.player.tempOpponent.rb.velocity.x) <= 2.5f)
-            {
-                this.Super(0);
-                Debug.Log("test");
-            }*//*
-
-            while (Mathf.Abs(this.player.tempOpponent.rb.velocity.x) <= 2.5f)
-            {
-                //currentTime += Time.deltaTime;
-                yield return null;
-            }
-            if (this.player.tempOpponent.attackStuns.Count > 0)
-            {
-                this.Super(0);
-                Debug.Log("test");
-            }
-            //this.Super(0);
-
-        }*/
-
-        /*if (Random.Range(1, 101) <= 30f)
-        {
-            //this.playerInput.JumpInput?.Invoke(true);
-            this.playerInput.jumping = true;
-            yield return new WaitForSeconds(0.01f);
-            this.playerInput.jumping = false;
-        }
-
-        yield return new WaitForSeconds(Random.Range(0.01f, 0.2f));
-
-
-        if (!this.player.tempOpponent.dead && this.player.superCharge >= this.player.maxSuperCharge / 2)
-        {
-            //for mike baller
-            if (this.EnemyXDistance() <= 2f && this.EnemyYDistance(true) >= -1.4f)
-            {
-                //Debug.Log(EnemyXDistance());
-                //Debug.Log(this.EnemyYDistance(true));
-                this.Super(RandomSpecialDirection(0, 0, 1, 0));
-            }
-            else
-            {
-                Debug.Log(EnemyXDistance());
-                Debug.Log(this.EnemyYDistance(true));
-                //this.Super(RandomSpecialDirection(1, 1, 0, 0));
-            }
-
-
-
-        }*/
-
-
-        /*int randomSpecial = this.RandomSpecialDirection(0, 2, 0, 1);
-
-        if (Mathf.Abs(this.player.rb.velocity.y) <= 0f)
-            randomSpecial = this.RandomSpecialDirection(1, 0, 0, 0);
-
-        this.Special1(randomSpecial);
-
-        if (randomSpecial == 0)
-        {
-            if (this.EnemyXDistance() <= 3f)
-                this.playerInput.moveInput = MoveInput(RandomSpecialDirection(0, 0, 1, 1));
-            else
-                this.playerInput.moveInput = MoveInput(RandomSpecialDirection(1, 1, 0, 0));
-
-            float currentTime = 0;
-            float duration = 0.25f;
-            while (this.player.attackStuns.Count > 0 && currentTime < duration)
-            {
-                currentTime += Time.deltaTime;
-                yield return null;
-            }
-
-        }
-
-        this.playerInput.moveInput = MoveInput(Random.Range(0, 4));*/
 
         this.StartCoroutine(this.AttackTests());
     }

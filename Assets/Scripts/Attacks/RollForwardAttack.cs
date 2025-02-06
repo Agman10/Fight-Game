@@ -8,6 +8,7 @@ public class RollForwardAttack : Attack
     public TestHitbox hitbox;
     public bool onGoing;
     public bool rolling;
+    public bool rollingBack;
 
     public float damage = 13f;
     public float superCharge = 8f;
@@ -256,6 +257,7 @@ public class RollForwardAttack : Attack
     {
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
+        this.rollingBack = true;
         /*yield return new WaitForSeconds(0.01f);
         this.user.AddKnockback(this.transform.forward.z * -300f, 900f);
         if (this.hitbox != null)
@@ -289,6 +291,7 @@ public class RollForwardAttack : Attack
         yield return new WaitForSeconds(this.hitEndLag);
 
         //this.user.knockbackInvounrability = false;
+        this.rollingBack = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
@@ -301,6 +304,7 @@ public class RollForwardAttack : Attack
     {
         base.Stop();
         this.rolling = false;
+        this.rollingBack = false;
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
