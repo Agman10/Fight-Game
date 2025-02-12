@@ -26,6 +26,11 @@ public class AnimationTests : MonoBehaviour
             //this.StartCoroutine(this.DiscoDance());
             this.StartCoroutine(this.Test2());
         }
+        else if (this.animId == 2)
+        {
+            //this.StartCoroutine(this.DiscoDance());
+            this.StartCoroutine(this.TestShake());
+        }
         else
         {
             Debug.Log("dance id does not exist");
@@ -229,5 +234,33 @@ public class AnimationTests : MonoBehaviour
 
             this.StartCoroutine(this.Test2());
         }
+    }
+
+    private IEnumerator TestShake()
+    {
+        if (this.animations != null)
+        {
+            float animSpeed = 0.2f;
+
+            float testTime = 0f;
+            float time = 0.5f;
+            float startPosY = this.animations.body.localPosition.y;
+            float startPosX = this.animations.body.localPosition.x;
+            while (time > 0)
+            {
+                time -= Time.deltaTime;
+                testTime += Time.deltaTime;
+
+                float newY = Mathf.Sin(testTime * 100f);
+                //this.animations.body.localPosition = new Vector3(this.animations.body.localPosition.x, startPosY + (newY * 0.01f), this.animations.body.localPosition.z);
+                this.animations.body.localPosition = new Vector3(startPosX + (newY * 0.01f), this.animations.body.localPosition.y, this.animations.body.localPosition.z);
+                yield return null;
+            }
+
+
+            this.StartCoroutine(this.TestShake());
+        }
+
+
     }
 }

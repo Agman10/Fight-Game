@@ -450,7 +450,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
     public void NextMusicType(bool next)
     {
-        if(this.characterSelectLogic != null && !this.characterSelectLogic.starting && this.characterSelectLogic.gameModeId == 0)
+        if(this.characterSelectLogic != null && !this.characterSelectLogic.starting && this.characterSelectLogic.gameModeId == 0 && !this.isAi)
         {
             if (next && this.musicTypeSelecter != null && this.canMove)
                 this.musicTypeSelecter.NextMusicType();
@@ -461,7 +461,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
     public void PreviousMusicType(bool previous)
     {
-        if(this.characterSelectLogic != null && !this.characterSelectLogic.starting && this.characterSelectLogic.gameModeId == 0)
+        if(this.characterSelectLogic != null && !this.characterSelectLogic.starting && this.characterSelectLogic.gameModeId == 0 && !this.isAi)
         {
             if (previous && this.musicTypeSelecter != null && this.canMove)
                 this.musicTypeSelecter.PreviousMusicType();
