@@ -37,7 +37,8 @@ public class CharacterSkinTest : MonoBehaviour
 
     public void SetSkin(SO_Skin skin)
     {
-        this.ChangeSkin(skin);
+        if (skin != null)
+            this.ChangeSkin(skin);
     }
     public void ChangeSkin(SO_Skin skinData)
     {

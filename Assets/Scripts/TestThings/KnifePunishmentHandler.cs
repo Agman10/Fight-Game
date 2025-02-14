@@ -8,6 +8,9 @@ public class KnifePunishmentHandler : MonoBehaviour
 
     public PunishmentKnife[] innerKnifes;
     public PunishmentKnife[] outerKnifes;
+
+    public AudioSource knifeSwooshSfx;
+    public AudioSource knifeHitSfx;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -17,12 +20,27 @@ public class KnifePunishmentHandler : MonoBehaviour
         this.StartCoroutine(this.KnifesCoroutine());
     }
 
+    private void OnDisable()
+    {
+        this.StopAllCoroutines();
+    }
+
     private IEnumerator KnifesCoroutine()
     {
         yield return new WaitForSeconds(0.4f);
+
+        if (this.knifeSwooshSfx != null)
+            this.knifeSwooshSfx.Play();
         this.StartInnerKnifes();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
         this.StartOuterKnifes();
+
+        yield return new WaitForSeconds(0.1f);
+        if (this.knifeHitSfx != null)
+            this.knifeHitSfx.Play();
+
+        yield return new WaitForSeconds(2f);
+        this.gameObject.SetActive(false);
     }
 
     public void StartInnerKnifes()

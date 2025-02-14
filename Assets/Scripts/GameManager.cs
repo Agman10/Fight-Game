@@ -709,4 +709,28 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+    public void PauseMusic()
+    {
+        if (CharacterManager.Instance != null && CharacterManager.Instance.musicTypeId != 0 && this.gameMode == 0 && this.characterThemePlayer != null)
+        {
+            this.characterThemePlayer.themes[this.characterThemePlayer.musicId].Pause();
+        }
+        else if (this.tempSkyboxAndStageLogic != null)
+        {
+            this.tempSkyboxAndStageLogic.songs[this.tempSkyboxAndStageLogic.currentMusic].Pause();
+        }
+    }
+
+    public void UnPauseMusic()
+    {
+        if (CharacterManager.Instance != null && CharacterManager.Instance.musicTypeId != 0 && this.gameMode == 0 && this.characterThemePlayer != null)
+        {
+            this.characterThemePlayer.themes[this.characterThemePlayer.musicId].Play();
+        }
+        else if (this.tempSkyboxAndStageLogic != null)
+        {
+            this.tempSkyboxAndStageLogic.songs[this.tempSkyboxAndStageLogic.currentMusic].Play();
+        }
+    }
 }

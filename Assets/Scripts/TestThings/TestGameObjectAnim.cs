@@ -58,6 +58,8 @@ public class TestGameObjectAnim : MonoBehaviour
             this.StartCoroutine(this.TestAnim16());
         else if (this.id == 16)
             this.StartCoroutine(this.TestAnim17());
+        else if (this.id == 17)
+            this.StartCoroutine(this.TestAnim18());
     }
     private void OnDisable()
     {
@@ -874,6 +876,32 @@ public class TestGameObjectAnim : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             this.StartCoroutine(this.TestAnim17());
+        }
+
+
+    }
+
+    private IEnumerator TestAnim18()
+    {
+        if (this.gameObjects.Length == 3)
+        {
+            this.gameObjects[0].SetActive(true);
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(false);
+
+            yield return new WaitForSeconds(1f);
+
+            this.gameObjects[0].SetActive(false);
+            this.gameObjects[1].SetActive(true);
+
+            yield return new WaitForSeconds(0.1f);
+
+            this.gameObjects[1].SetActive(false);
+            this.gameObjects[2].SetActive(true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            this.StartCoroutine(this.TestAnim18());
         }
 
 

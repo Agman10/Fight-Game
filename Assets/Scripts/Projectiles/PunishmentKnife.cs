@@ -44,13 +44,21 @@ public class PunishmentKnife : MonoBehaviour
     {
         TestPlayer player = other.GetComponent<TestPlayer>();
 
-        if (player != null)
+        if (player != null && !this.disabled)
         {
             if (this.belongsTo == null || player != this.belongsTo)
             {
                 this.HitEnemy();
 
                 player.TakeDamage(player.transform.position, 1.25f);
+
+                player.lookAtPlayer();
+                player.animations.KnifePunishmentHit();
+
+                if (player.animations != null)
+                    player.animations.body.localEulerAngles = new Vector3(player.animations.body.localEulerAngles.x, player.animations.body.localEulerAngles.y, -2);
+                /*player.LookAtCenter();
+                player.animations.KnifePunishmentHit();*/
             }
         }
 
@@ -86,7 +94,7 @@ public class PunishmentKnife : MonoBehaviour
 
     private IEnumerator DisableCoroutine()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
 
         this.gameObject.SetActive(false);
     }
@@ -145,7 +153,7 @@ public class PunishmentKnife : MonoBehaviour
 
 
         float currentTime = 0;
-        float duration = 0.1f;
+        float duration = 0.15f;
         //float duration = 0.1f;
         //float targetVolume = 0.1f;
         /*float targetPosition = 3.5f;
