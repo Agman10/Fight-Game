@@ -17,6 +17,7 @@ public class CharacterSelectLogic : MonoBehaviour
     public Image fader;
 
     public bool starting;
+    public bool quitting;
     public MusicTypeSelecter musicTypeSelecter;
 
     public static CharacterSelectLogic Instance;
@@ -310,7 +311,13 @@ public class CharacterSelectLogic : MonoBehaviour
     public void QuitToTitle()
     {
         //Debug.Log("Quit");
-        SceneManager.LoadSceneAsync("Menu");
+        //SceneManager.LoadSceneAsync("Menu");
+
+        if (!this.quitting)
+        {
+            this.quitting = true;
+            SceneManager.LoadSceneAsync("Menu");
+        }
     }
 }
 

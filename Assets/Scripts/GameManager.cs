@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
 
     public EntranceAnimationHandler entranceAnimationHandler;
 
+    public GameObject blackAndWhiteFilter;
+
     [Space]
     public GameObject ragingBeastSkull;
     public LayerMask normalCameraLayers;
@@ -732,5 +734,23 @@ public class GameManager : MonoBehaviour
         {
             this.tempSkyboxAndStageLogic.songs[this.tempSkyboxAndStageLogic.currentMusic].Play();
         }
+    }
+
+    public void TurnBlackAndWhite()
+    {
+        if (PostProcessController.Instance != null)
+            PostProcessController.Instance.TurnBlackAndWhite();
+
+        if (this.blackAndWhiteFilter != null)
+            this.blackAndWhiteFilter.SetActive(true);
+    }
+
+    public void ReturnColors()
+    {
+        if (PostProcessController.Instance != null)
+            PostProcessController.Instance.ReturnColors();
+
+        if (this.blackAndWhiteFilter != null)
+            this.blackAndWhiteFilter.SetActive(false);
     }
 }

@@ -19,6 +19,9 @@ public class SuperKnifePunishmentAttack : Attack
     public GameObject knivesRight;
     public GameObject knivesLeft;
     public GameObject book;
+    public GameObject wineGlass;
+
+    public bool timeStopping = false;
 
     public AudioSource takeOutKnivesSfx;
     public AudioSource knifeAppearSfx;
@@ -228,6 +231,8 @@ public class SuperKnifePunishmentAttack : Attack
         }
 
         //this.animations.rightArmJoint.localEulerAngles = new Vector3(this.animations.rightArmJoint.localEulerAngles.x, this.animations.rightArmJoint.localEulerAngles.y, 39f);
+        /*this.animations.rightArmJoint.localEulerAngles = new Vector3(-43, this.animations.rightArmJoint.localEulerAngles.y, 21f);
+        this.animations.rightArm.localEulerAngles = new Vector3(this.animations.rightArm.localEulerAngles.x, this.animations.rightArm.localEulerAngles.y, 69f);*/
 
         currentTime = 0;
         duration = 0.3f;
@@ -293,13 +298,21 @@ public class SuperKnifePunishmentAttack : Attack
         if (this.knivesRight != null) this.knivesRight.SetActive(false);
         if (this.knivesLeft != null) this.knivesLeft.SetActive(false);
 
+        this.timeStopping = true;
+
         if (GameManager.Instance != null)
+        {
             GameManager.Instance.PauseMusic();
+            GameManager.Instance.TurnBlackAndWhite();
+        }
+            
 
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(0.2f);
 
-        if(GameManager.Instance != null)
+        this.timeStopping = false;
+
+        if (GameManager.Instance != null)
         {
             while (GameManager.Instance.gameIsPaused)
                 yield return null;
@@ -308,8 +321,10 @@ public class SuperKnifePunishmentAttack : Attack
         Time.timeScale = 1f;
 
         if (GameManager.Instance != null)
+        {
             GameManager.Instance.UnPauseMusic();
-
+            GameManager.Instance.ReturnColors();
+        }
 
         /*currentTime = 0;
         duration = 0.2f;
@@ -328,6 +343,10 @@ public class SuperKnifePunishmentAttack : Attack
 
         this.animations.Book();
         if (this.book != null) this.book.SetActive(true);
+        if (this.wineGlass != null) this.wineGlass.SetActive(true);
+
+        this.animations.leftArm.localEulerAngles = new Vector3(0f, -45f, 80f);
+        this.animations.leftArmJoint.localEulerAngles = new Vector3(107f, 0f, 0f);
 
         if (this.punishmentKnives != null)
         {
@@ -362,6 +381,14 @@ public class SuperKnifePunishmentAttack : Attack
             yield return new WaitForSeconds(0.1f);*/
 
             if (this.book != null) this.book.SetActive(false);
+            if (this.wineGlass != null) this.wineGlass.SetActive(false);
+
+            this.animations.BookStart();
+            this.animations.body.localEulerAngles = new Vector3(this.animations.body.localEulerAngles.x, 0f, this.animations.body.localEulerAngles.z);
+            this.animations.body.localPosition = new Vector3(this.user.transform.forward.z * -0.18f, this.animations.body.localPosition.y, this.animations.body.localPosition.z);
+            this.animations.rightArm.localEulerAngles = new Vector3(0f, 13.5f, 35f);
+            yield return new WaitForSeconds(0.05f);
+
             this.animations.SetDefaultPose();
         }
         else
@@ -399,8 +426,27 @@ public class SuperKnifePunishmentAttack : Attack
             yield return new WaitForSeconds(0.15f);
 
             if (this.book != null) this.book.SetActive(false);
+            if (this.wineGlass != null) this.wineGlass.SetActive(false);
+
+            /*this.animations.SetDefaultPose();
+
+            yield return new WaitForSeconds(0.15f);*/
+
+            this.animations.BookStart();
+            this.animations.body.localEulerAngles = new Vector3(this.animations.body.localEulerAngles.x, 0f, this.animations.body.localEulerAngles.z);
+            this.animations.body.localPosition = new Vector3(this.user.transform.forward.z * -0.18f, this.animations.body.localPosition.y, this.animations.body.localPosition.z);
+            this.animations.rightArm.localEulerAngles = new Vector3(0f, 13.5f, 35f);
+
+            /*this.animations.rightArm.localEulerAngles = new Vector3(0f, 0f, 40f);
+            this.animations.rightArmJoint.localEulerAngles = new Vector3(-85f, 0f, 16f);
+
+            this.animations.leftArm.localEulerAngles = new Vector3(0f, -20f, 37f);
+            this.animations.leftArmJoint.localEulerAngles = new Vector3(56f, 0f, -25f);*/
+            //this.animations.SetEyes(0);
+
+            yield return new WaitForSeconds(0.05f);
             this.animations.SetDefaultPose();
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.1f);
 
             if (!player.dead)
                 player.animations.SetDefaultPose();
@@ -463,9 +509,24 @@ public class SuperKnifePunishmentAttack : Attack
             this.grabbedPlayer = null;
         }
 
+        if (this.timeStopping)
+        {
+            Time.timeScale = 1f;
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.UnPauseMusic();
+                GameManager.Instance.ReturnColors();
+            }
+        }
+        
+
+        this.timeStopping = false;
+
         if (this.knivesRight != null) this.knivesRight.SetActive(false);
         if (this.knivesLeft != null) this.knivesLeft.SetActive(false);
         if (this.book != null) this.book.SetActive(false);
+        if (this.wineGlass != null) this.wineGlass.SetActive(false);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
