@@ -30,9 +30,24 @@ public class CharacterSelectBackingLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.selectCursor != null && this.selectCursor.input != null && this.backingObject != null && this.backingSlider != null && !this.hasBacked && CharacterSelectLogic.Instance != null && !CharacterSelectLogic.Instance.quitting)
+        this.BackingUpdateLogic();
+    }
+
+
+    public void QuitToTitle()
+    {
+        if(CharacterSelectLogic.Instance != null && !CharacterSelectLogic.Instance.quitting)
         {
-            if(!this.selectCursor.selectingSkin && !this.selectCursor.ready && !this.selectCursor.lockedIn)
+            CharacterSelectLogic.Instance.QuitToTitle();
+        }
+    }
+
+
+    public void BackingUpdateLogic()
+    {
+        if (this.selectCursor != null && this.selectCursor.input != null && this.backingObject != null && this.backingSlider != null && !this.hasBacked && CharacterSelectLogic.Instance != null && !CharacterSelectLogic.Instance.quitting)
+        {
+            if (!this.selectCursor.selectingSkin && !this.selectCursor.ready && !this.selectCursor.lockedIn && !this.selectCursor.isAi)
             {
                 if (!this.canBack)
                 {
@@ -57,8 +72,8 @@ public class CharacterSelectBackingLogic : MonoBehaviour
                 }
 
 
-                
-                    
+
+
             }
             else
             {
@@ -71,7 +86,7 @@ public class CharacterSelectBackingLogic : MonoBehaviour
             }
         }
 
-        if(this.backingObject != null && this.backingSlider != null)
+        if (this.backingObject != null && this.backingSlider != null)
         {
             if (this.backingProgress <= 0f)
             {
@@ -111,18 +126,9 @@ public class CharacterSelectBackingLogic : MonoBehaviour
                 this.canBackTimer = 0f;
         }
 
-        if(this.backingProgress >= 1f)
+        if (this.backingProgress >= 1f)
         {
             this.QuitToTitle();
-        }
-    }
-
-
-    public void QuitToTitle()
-    {
-        if(CharacterSelectLogic.Instance != null && !CharacterSelectLogic.Instance.quitting)
-        {
-            CharacterSelectLogic.Instance.QuitToTitle();
         }
     }
 }

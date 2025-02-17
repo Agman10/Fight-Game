@@ -100,6 +100,13 @@ public class TempMenu : MonoBehaviour
         //this.DisableEventSystem();
     }
 
+    public void GoToHowToPlay()
+    {
+        SceneManager.LoadScene("zTestSceneHowToPlay");
+
+        this.DisableEventSystem();
+    }
+
     public void SelectMainMode()
     {
         if (this.mainButtons != null)

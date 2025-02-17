@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.024357833, g: 0.006101507, b: 0.07753493, a: 1}
+  m_IndirectSpecularColor: {r: 0.024358945, g: 0.0062135486, b: 0.07774588, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -612,6 +612,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12878827}
   m_CullTransparentMesh: 1
+--- !u!1 &13536889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 13536890}
+  - component: {fileID: 13536891}
+  m_Layer: 0
+  m_Name: BackingP1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &13536890
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13536889}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1835231005}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &13536891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13536889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5109772b45f30bc43be3049c31f7df99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backingObject: {fileID: 1754351329}
+  backingSlider: {fileID: 1968382031}
+  selectCursor: {fileID: 1835231004}
+  backingProgress: 0
+  hasBacked: 0
+  canBackTimer: 0
 --- !u!1 &13934028
 GameObject:
   m_ObjectHideFlags: 0
@@ -19242,6 +19291,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514547897}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &515229250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515229251}
+  - component: {fileID: 515229252}
+  m_Layer: 0
+  m_Name: BackingP2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &515229251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515229250}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1817565734}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &515229252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515229250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5109772b45f30bc43be3049c31f7df99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backingObject: {fileID: 1961353880}
+  backingSlider: {fileID: 378532699}
+  selectCursor: {fileID: 1817565733}
+  backingProgress: 0
+  hasBacked: 0
+  canBackTimer: 0
 --- !u!1 &515436849
 GameObject:
   m_ObjectHideFlags: 0
@@ -45783,6 +45881,7 @@ MonoBehaviour:
   music: {fileID: 1382418213}
   fader: {fileID: 1698473631}
   starting: 0
+  quitting: 0
   musicTypeSelecter: {fileID: 1415450469}
   randomCanvasPanel: {fileID: 1060794162}
   randomRight: 1
@@ -66068,6 +66167,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1993457876}
+  - {fileID: 515229251}
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66569,6 +66669,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2068889109}
+  - {fileID: 13536890}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -70756,6 +70857,86 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 7a43cde3-4841-4b7d-a0b0-259094dc7f14
     m_ActionName: CharacterSelectP2/Back[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cb6eb62e-295b-4c07-8187-2a7a3060f7fa
+    m_ActionName: Player1/Taunt[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 653208f1-539a-4401-a60b-b88b2247027e
+    m_ActionName: Player1/Start[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d32ea420-37b3-4b72-bc0b-386558867d33
+    m_ActionName: Player2/Taunt[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b5175e3f-2649-4a77-9348-a22574996a59
+    m_ActionName: Player2/Start[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e268647-9908-46ee-b2a7-638bc0b51f0e
+    m_ActionName: PlayerInput/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a6d83ba1-4ad7-4640-86b9-1e950e807752
+    m_ActionName: PlayerInput/Jump[/Keyboard/upArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 03f3bc94-f17e-4215-abe7-b6b129031df0
+    m_ActionName: PlayerInput/Punch[/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 931cbe1b-4875-468b-aeeb-0d721068ce35
+    m_ActionName: PlayerInput/Kick[/Keyboard/z]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 29d49023-c570-42a2-9362-6771af9f4e84
+    m_ActionName: PlayerInput/Special[/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c300c737-0efa-438a-bf8f-b54fcbf488f8
+    m_ActionName: PlayerInput/Suicide[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c696fe2-614b-4c39-99a6-8883f4f8ef75
+    m_ActionName: PlayerInput/Special2[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0913afb3-a58f-4256-a03e-7a2ee46b46f8
+    m_ActionName: PlayerInput/Super[/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 42d788b9-9fa1-49a5-bb81-f0f1d0ee486a
+    m_ActionName: PlayerInput/Taunt[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 664b6db6-2bee-4149-b28e-965723925469
+    m_ActionName: PlayerInput/Start[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c2d32e8f-eac1-445c-8eda-edd33f882322
+    m_ActionName: PlayerInput/MusicTypeL[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7c24f21-269a-4d93-8ff7-15ca61483460
+    m_ActionName: PlayerInput/MusicTypeR[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4992e51a-8d3e-4ba4-bc93-e134f3bc01e3
+    m_ActionName: General/LoadPreviousStage[/Keyboard/minus]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 240f1073-b383-4d7a-b0b2-883277f32150
+    m_ActionName: General/ToggleLifeNumbers[/Keyboard/backquote]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f8a0e62f-ab27-49c4-b7a6-04791c95b777
+    m_ActionName: General/Pause[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 62471f5c-87e7-4690-8925-4e259117d7bd
+    m_ActionName: CharacterSelectP1/Quit[/Keyboard/backspace]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: CharacterSelectP2
