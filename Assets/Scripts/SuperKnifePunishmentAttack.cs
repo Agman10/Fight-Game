@@ -110,6 +110,9 @@ public class SuperKnifePunishmentAttack : Attack
 
         yield return new WaitForSeconds(0.3f);
 
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(true);
+
         /*if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);*/
 
@@ -131,6 +134,8 @@ public class SuperKnifePunishmentAttack : Attack
             this.ghost.SetActive(false);
 
         yield return new WaitForSeconds(0.2f);
+        if (this.hitbox != null)
+            this.hitbox.gameObject.SetActive(true);
 
         /*while (this.grabbedPlayer == null)
         {

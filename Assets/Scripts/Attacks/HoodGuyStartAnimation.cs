@@ -17,6 +17,9 @@ public class HoodGuyStartAnimation : Attack
 
     public AnimationCurve throwCurve;
 
+    public GameObject pipe;
+    public AnimationCurve pipeJumpCurve;
+
     //public float fallDuration = 0.2f;
     //public VisualEffect fire;
     //public GameObject landingParticle;
@@ -50,6 +53,7 @@ public class HoodGuyStartAnimation : Attack
             //this.StartCoroutine(this.TemplateCoroutine2());
             //this.StartCoroutine(this.SmokeStartAnimation());
 
+            int number = Random.Range(0, 10);
 
             if (this.user.tempOpponent != null && this.user.tempOpponent.characterId == 5 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
@@ -60,7 +64,14 @@ public class HoodGuyStartAnimation : Attack
             }
             else
             {
-                this.StartCoroutine(this.TemplateCoroutine2());
+                if (number == 0)
+                    this.StartCoroutine(this.PipeCoroutine());
+                else
+                    this.StartCoroutine(this.TemplateCoroutine2());
+
+                //this.StartCoroutine(this.TemplateCoroutine2());
+                //this.StartCoroutine(this.PipeCoroutine());
+
                 //this.StartCoroutine(this.SmokeStartAnimation());
             }
         }
@@ -198,6 +209,12 @@ public class HoodGuyStartAnimation : Attack
 
         if (this.rollSfx != null)
             this.rollSfx.Stop();
+
+
+        if (this.pipe != null)
+        {
+            this.pipe.SetActive(false);
+        }
 
         if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
             GameManager.Instance.gameCamera.cameraIsLocked = false;
@@ -599,7 +616,219 @@ public class HoodGuyStartAnimation : Attack
 
 
 
+    private IEnumerator PipeCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
 
+        this.user.rb.isKinematic = true;
+
+        this.animations.HoodGuyPipe(0);
+
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, -5f, 0f);
+        this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
+
+        this.user.LookAtTarget();
+
+        if (this.pipe != null)
+        {
+            this.pipe.SetActive(true);
+            //this.pipe.transform.localPosition = new Vector3(0f, -1.8f, 0f);
+        }
+            
+
+        yield return new WaitForSeconds(0.01f);
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 0, 0f);
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
+        this.animations.HoodGuyPipe(0);
+
+        //this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
+        this.user.animations.body.transform.localPosition = new Vector3(0f, 0f, 0f);
+
+        /*float currentTime = 0;
+        float duration = 0.1f;
+        float targetPosition = 0f;
+        float start = -1.8f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+            if (this.pipe != null)
+                this.pipe.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            //this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            yield return null;
+        }
+
+        this.user.animations.body.transform.localPosition = new Vector3(0f, 0f, 0f);*/
+        yield return new WaitForSeconds(0.1f);
+
+        float currentTime = 0;
+        //float duration = 0.75f;
+        float duration = 0.45f;
+        /*float targetPosition = 0f;
+        float start = this.transform.position.y;*/
+        //float targetPosition = this.user.animations.defaultYPos;
+        float targetPosition = 3.45f;
+        float start = this.user.animations.body.transform.localPosition.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            yield return null;
+        }
+
+        /*if (this.cosmos != null)
+        {
+            //this.cosmos.gameObject.SetActive(false);
+            //this.cosmos.ScaleUp();
+            this.cosmos.ScaleDown();
+        }*/
+
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+        yield return new WaitForSeconds(0.1f);
+        this.animations.HoodGuyPipe(1);
+        this.user.animations.body.transform.localPosition = new Vector3(0f, 3.45f, 0f);
+
+        /*currentTime = 0;
+        duration = 0.2f;
+
+        targetPosition = 6f;
+        start = this.user.animations.body.transform.localPosition.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            yield return null;
+        }*/
+
+        /*currentTime = 0;
+        duration = 0.1f;
+
+        targetPosition = this.user.animations.defaultYPos;
+        //targetPosition = 6f;
+        start = this.user.animations.body.transform.localPosition.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            yield return null;
+        }*/
+
+
+
+
+        /*currentTime = 0;
+        duration = 0.4f;
+
+        targetPosition = 6f;
+        start = this.user.animations.body.transform.localPosition.y;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            //this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.body.transform.localPosition = new Vector3(0f, this.pipeJumpCurve.Evaluate(currentTime / duration), 0f);
+            yield return null;
+        }
+
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+
+
+        currentTime = 0;
+        duration = 0.25f;
+        targetPosition = -1.8f;
+        start = 0f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+
+            if (this.pipe != null)
+                this.pipe.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            //this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            yield return null;
+        }
+
+        if (this.pipe != null)
+            this.pipe.SetActive(false);*/
+
+
+
+        float currentTime2 = 0;
+        float duration2 = 0.4f;
+
+        currentTime = 0;
+        duration = 0.25f;
+        /*float targetPosition = 0f;
+        float start = this.transform.position.y;*/
+        targetPosition = -1.8f;
+        start = 0f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            currentTime2 += Time.deltaTime;
+
+            if (this.pipe != null)
+                this.pipe.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+
+            this.user.animations.body.transform.localPosition = new Vector3(0f, this.pipeJumpCurve.Evaluate(currentTime2 / duration2), 0f);
+
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            //this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            yield return null;
+        }
+
+        if (this.pipe != null)
+            this.pipe.SetActive(false);
+
+        currentTime = 0;
+        duration = 0.4f;
+
+        targetPosition = 6f;
+        start = this.user.animations.body.transform.localPosition.y;
+        while (currentTime2 < duration2)
+        {
+            currentTime2 += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            //this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.body.transform.localPosition = new Vector3(0f, this.pipeJumpCurve.Evaluate(currentTime2 / duration2), 0f);
+            yield return null;
+        }
+
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        //yield return new WaitForSeconds(0.25f);
+
+        /*if (this.cosmos != null)
+        {
+            this.cosmos.gameObject.SetActive(false);
+            //this.cosmos.ScaleUp();
+            //this.cosmos.ScaleDown();
+        }*/
+
+        this.user.rb.isKinematic = false;
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.user.EntranceDone();
+    }
 
 
 
