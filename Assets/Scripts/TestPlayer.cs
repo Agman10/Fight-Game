@@ -55,6 +55,9 @@ public class TestPlayer : MonoBehaviour
     public Action<TestPlayer> OnHitFromPlayer;
     private Vector3 startPos;
 
+    public SleepLogic sleepLogic;
+    //public bool sleeping = false;
+
     //Remove this later
     public TestPlayer tempOpponent;
     public GameObject tempBall;

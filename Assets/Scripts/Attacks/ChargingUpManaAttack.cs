@@ -76,7 +76,7 @@ public class ChargingUpManaAttack : Attack
         while (this.user.input != null && this.user.input.special)
         {
             yield return new WaitForSeconds(0.1f);
-            this.user.GiveSuperCharge(0.2f);
+            this.user.GiveSuperCharge(0.4f);
             yield return null;
         }
         if (this.chargeUpParticle != null)
