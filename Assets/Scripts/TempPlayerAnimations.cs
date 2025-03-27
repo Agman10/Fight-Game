@@ -11505,7 +11505,7 @@ public class TempPlayerAnimations : MonoBehaviour
         if (this.eyes != null)
         {
             this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
-            this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.eyes.localEulerAngles = new Vector3(0f, 5f, 0f);
 
 
         }

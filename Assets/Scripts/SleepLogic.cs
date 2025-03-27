@@ -211,6 +211,8 @@ public class SleepLogic : MonoBehaviour
             this.user.OnHit?.Invoke();
 
             this.user.AddStun(0.05f, true);
+            //this.user.rb.velocity = new Vector3(this.user.rb.velocity.x, -1f, 0f);
+
             //this.user.attackStuns.Add(this.gameObject);
             this.onGoing = true;
 
