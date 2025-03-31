@@ -12,6 +12,8 @@ public class CharacterSkinTest : MonoBehaviour
     public int eyeIndex;
     public bool glowingEyes;
 
+    public System.Action OnSkinChanged;
+
     [Space]
     public bool useExtraEmission;
     public Renderer[] extraEmissionRenderers;
@@ -42,6 +44,8 @@ public class CharacterSkinTest : MonoBehaviour
     }
     public void ChangeSkin(SO_Skin skinData)
     {
+        this.OnSkinChanged?.Invoke();
+
         //int val = 0;
         /*Renderer[] children;
         children = GetComponentsInChildren<Renderer>();*/

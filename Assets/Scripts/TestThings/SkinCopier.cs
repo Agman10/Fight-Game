@@ -16,5 +16,28 @@ public class SkinCopier : MonoBehaviour
 
             this.skin.SetSkin(this.skinToCopy.skin);
         }
+
+        if (this.skinToCopy != null)
+        {
+            this.skinToCopy.OnSkinChanged += this.CopySkin;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (this.skinToCopy != null)
+        {
+            this.skinToCopy.OnSkinChanged -= this.CopySkin;
+        }
+    }
+
+    public void CopySkin()
+    {
+        if (this.skin != null && this.skinToCopy != null)
+        {
+            //this.skin.skin = this.skinToCopy.skin;
+
+            this.skin.SetSkin(this.skinToCopy.skin);
+        }
     }
 }
