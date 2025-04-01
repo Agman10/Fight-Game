@@ -39,7 +39,7 @@ public class AnimateTest : MonoBehaviour
 
             yield return new WaitForSeconds(this.animationGameObjects[animId].duration);
 
-            Debug.Log(animId);
+            //Debug.Log(animId);
 
             animId += 1;
             amount -= 1;
