@@ -21,6 +21,8 @@ public class TestPoseLookAtCamera : MonoBehaviour
 
             //this.transform.localEulerAngles = new Vector3(this.transform.localEulerAngles.x, 90f + (distance / 1.7f), this.transform.localEulerAngles.z);
             this.transform.localEulerAngles = new Vector3(this.transform.localEulerAngles.x, 90f + (distance * 5), this.transform.localEulerAngles.z);
+
+            //this.transform.position = new Vector3(distance * 0.1f, this.transform.position.y, this.transform.position.z);
         }
     }
 }

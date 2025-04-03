@@ -94,6 +94,9 @@ public class SuperPunchGhostAttack : Attack
 
         float maxX = 10.5f;
 
+        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+            maxX = 7.5f;
+
         if (pos > maxX && forwardZ == 1 || pos < -maxX && forwardZ == -1)
         {
             float currentTime2 = 0;

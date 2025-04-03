@@ -89,16 +89,37 @@ public class FlameGrabMasterAttack : Attack
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
 
+        /*if (this.animations != null)
+            this.animations.FlameGrabStartPose();*/
+
         if (this.animations != null)
-            this.animations.FlameGrabStartPose();
+            this.animations.MasterFlameGrabStartPose();
+
+        if(GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+        {
+            float distance = this.user.transform.position.x - GameManager.Instance.gameCamera.transform.position.x;
+
+            this.animations.body.localEulerAngles = new Vector3(this.animations.body.localEulerAngles.x, this.user.transform.forward.z * 90f + (distance * 5), this.animations.body.localEulerAngles.z);
+        }
+
 
         if (this.user.soundEffects != null)
             this.user.soundEffects.PlaySuperSfx();
 
         if (this.startParticle != null)
         {
+            float xOffset = 0f;
+            if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            {
+                float distance = this.user.transform.position.x - GameManager.Instance.gameCamera.transform.position.x;
+
+                xOffset = this.user.transform.forward.z * (-distance * 0.1f);
+                xOffset = (-distance * 0.1f);
+            }
+
+
             GameObject startParticlePrefab = this.startParticle;
-            startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
+            startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x + xOffset, this.user.transform.position.y + 2f, -0.8f), Quaternion.Euler(0, 0, 0));
         }
 
         yield return new WaitForSeconds(0.25f);
@@ -109,8 +130,11 @@ public class FlameGrabMasterAttack : Attack
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
 
+        /*if (this.animations != null)
+            this.animations.FlameGrabDash();*/
+
         if (this.animations != null)
-            this.animations.FlameGrabDash();
+            this.animations.MasterFlameGrabDash();
 
         float currentTime = 0;
         float duration = 1.4f;
@@ -147,6 +171,53 @@ public class FlameGrabMasterAttack : Attack
 
     private IEnumerator GrabbingCoroutine(TestPlayer player)
     {
+        float forwardZ = this.user.transform.forward.z;
+        float pos = this.user.transform.position.x;
+        int charId = player.characterId;
+
+        float xForward = 1.6f;
+
+        float xMax = 14f;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+            xMax = 11f;
+
+        //float maxX = 10.5f;
+
+        if (charId == 3 || charId == 4 || charId == 7)
+        {
+            //maxX = 10.5f;
+            xForward = 1.75f;
+        }
+
+        //float maxX = 14f - xForward;
+        float maxX = xMax - xForward;
+
+        if (pos > maxX && forwardZ == 1 || pos < -maxX && forwardZ == -1)
+        {
+            /*float currentTime2 = 0;
+            float duration2 = 0.15f;
+            while (currentTime2 < duration2)
+            {
+                this.user.transform.position = new Vector3(Mathf.Lerp(this.user.transform.position.x, maxX * forwardZ, currentTime2 / duration2), this.user.transform.position.y, 0f);
+                player.transform.position = new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * xForward), player.transform.position.y, 0f);
+
+                currentTime2 += Time.deltaTime;
+                yield return null;
+            }*/
+
+            this.user.transform.position = new Vector3(maxX * forwardZ, this.user.transform.position.y, 0f);
+            player.transform.position = new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * xForward), player.transform.position.y, 0f);
+        }
+        /*else
+        {
+            yield return new WaitForSeconds(0.15f);
+        }*/
+        //yield return new WaitForSeconds(0.35f);
+
+
+
+
 
         yield return new WaitForSeconds(0.5f);
         this.PlayFire(true);
@@ -229,6 +300,7 @@ public class FlameGrabMasterAttack : Attack
 
 
         this.StopGrab(player);
+        //player.animations.KnifePunishmentFalling(0);
 
         //player.TakeDamage(this.user.transform.position, 10f, 0.5f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true);
         //player.TakeDamage(this.user.transform.position, 0f, 0.5f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true);
@@ -339,7 +411,7 @@ public class FlameGrabMasterAttack : Attack
             if (!player.dead)
             {
                 player.rb.isKinematic = false;
-                player.TakeDamage(this.user.transform.position, 0f, 0.5f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true);
+                player.TakeDamage(this.user.transform.position, 0f, 1f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true);
 
                 if (!player.dead)
                     player.animations.SetDefaultPose();
