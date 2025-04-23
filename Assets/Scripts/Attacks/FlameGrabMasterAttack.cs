@@ -411,10 +411,15 @@ public class FlameGrabMasterAttack : Attack
             if (!player.dead)
             {
                 player.rb.isKinematic = false;
-                player.TakeDamage(this.user.transform.position, 0f, 1f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true);
+                //player.TakeDamage(this.user.transform.position, 0f, 1f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true);
+                player.TakeDamage(this.user.transform.position, 0f, 1f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true, true);
 
                 if (!player.dead)
-                    player.animations.SetDefaultPose();
+                {
+                    //player.animations.SetDefaultPose();
+                    //player.KnockDown(this.user.transform.forward.z * 1000f, 1000f, 1f, 0f, 0.5f);
+                }
+                    
             }
             this.user.rb.isKinematic = false;
 

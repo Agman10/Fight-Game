@@ -16,6 +16,10 @@ public class RoadRoller : MonoBehaviour
     public GameObject landingEffect;
 
     public GameObject explosion;
+    public GameObject smallExplosionEffect;
+
+    public GameObject electricEffects;
+    public Transform modelToScale;
 
     public CharacterSkinTest skin;
 
@@ -132,7 +136,8 @@ public class RoadRoller : MonoBehaviour
         /*if (player.collision != null)
             player.collision.enabled = false;*/
 
-        player.TakeDamage(this.transform.position, 20f);
+        //player.TakeDamage(this.transform.position, 20f);
+        player.TakeDamage(this.transform.position, 15f);
 
         if (player.animations != null)
             player.animations.LayDown();
@@ -142,6 +147,8 @@ public class RoadRoller : MonoBehaviour
     {
         if (!this.exploded)
         {
+            //this.StopAllCoroutines();
+
             this.exploded = true;
 
             if (this.explosion != null)
@@ -156,6 +163,8 @@ public class RoadRoller : MonoBehaviour
             if (this.hitbox != null)
                 this.hitbox.gameObject.SetActive(false);
 
+            this.EnableElectricity(false);
+
             if (this.victim != null)
             {
                 TestPlayer victimm = this.victim;
@@ -164,10 +173,12 @@ public class RoadRoller : MonoBehaviour
 
 
 
-                victimm.TakeDamage(new Vector3(this.transform.position.x, this.transform.position.y - 1f, 0f), 15f, 1.35f, this.transform.forward.z * 1000f, 1200f, true, true, true, false, true, false, true);
+                /*victimm.TakeDamage(new Vector3(this.transform.position.x, this.transform.position.y - 1f, 0f), 15f, 1.35f, this.transform.forward.z * 1000f, 1200f, true, true, true, false, true, false, true);
 
                 if (!victimm.dead)
-                    victimm.animations.SetDefaultPose();
+                    victimm.animations.SetDefaultPose();*/
+
+                victimm.TakeDamage(new Vector3(this.transform.position.x, this.transform.position.y - 1f, 0f), 15f, 1.35f, this.transform.forward.z * 1000f, 1200f, true, true, true, false, true, false, true, true);
             }
 
             if (this.explosionSfx != null)
@@ -244,6 +255,214 @@ public class RoadRoller : MonoBehaviour
 
             if (this.skin != null && player.skin != null && player.skin.skin != null)
                 this.skin.SetSkin(player.skin.skin);
+        }
+    }
+
+
+
+    public void EnableElectricity(bool activate = true)
+    {
+        if(this.electricEffects != null)
+        {
+            this.electricEffects.SetActive(activate);
+        }
+    }
+
+    [ContextMenu("StartExploding")]
+    public void StartExploding()
+    {
+        //this.StartCoroutine(this.ExplodingCoroutine());
+        //this.StartCoroutine(this.ExplodingLoopCoroutine());
+        this.StartCoroutine(this.ExplodingCoroutine2());
+    }
+
+    private IEnumerator ExplodingCoroutine2()
+    {
+        if(this.modelToScale != null)
+        {
+            float currentTime = 0;
+            float duration = 0.05f;
+            float targetScale = 0.95f;
+            Vector3 startScale = this.modelToScale.localScale;
+            while (currentTime < duration)
+            {
+                currentTime += Time.deltaTime;
+                this.modelToScale.localScale = new Vector3(Mathf.Lerp(startScale.x, targetScale, currentTime / duration), Mathf.Lerp(startScale.y, targetScale, currentTime / duration), Mathf.Lerp(startScale.z, targetScale, currentTime / duration));
+                yield return null;
+            }
+        }
+        this.Explode();
+    }
+
+
+
+
+
+    private IEnumerator ExplodingLoopCoroutine()
+    {
+        /*int amount = 10;
+        while (amount > 0)
+        {
+            float minXPos = -2.5f;
+            float maxXPos = 2.5f;
+            float minYPos = 0.5f;
+            float maxYPos = 2.5f;
+
+            this.SmallExplosionEffect(new Vector3(this.transform.position.x + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+
+            yield return new WaitForSeconds(0.05f);
+
+            amount -= 1;
+
+            yield return null;
+        }*/
+
+        int amount = 2;
+        int animId = 0;
+        float forwardZ = this.transform.forward.z;
+        while (amount > 0)
+        {
+            float minXPos = -2.5f;
+            float maxXPos = 2.5f;
+            float minYPos = 0.5f;
+            float maxYPos = 2.5f;
+
+            if (animId == 0)
+            {
+                minXPos = forwardZ * -0.75f;
+                maxXPos = forwardZ * 1.5f;
+                maxYPos = 2.5f;
+
+                this.SmallExplosionEffect(new Vector3(this.transform.position.x - (forwardZ * 2.35f) + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+                animId = 1;
+            }
+            else
+            {
+                minXPos = forwardZ * -1.5f;
+                maxXPos = forwardZ * 0.75f;
+                maxYPos = 3f;
+
+                this.SmallExplosionEffect(new Vector3(this.transform.position.x + (forwardZ * 1.6f) + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+                animId = 0;
+            }
+
+
+            //this.SmallExplosionEffect(new Vector3(this.transform.position.x + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+
+            yield return new WaitForSeconds(0.05f);
+
+            amount -= 1;
+
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(0.1f);
+
+        this.StartCoroutine(this.ExplodingLoopCoroutine());
+    }
+
+    private IEnumerator ExplodingCoroutine()
+    {
+        //yield return new WaitForSeconds(0.1f);
+
+        /*int amount = 40;
+        while (amount > 0)
+        {
+            float minXPos = -2.5f;
+            float maxXPos = 2.5f;
+            float minYPos = 0.5f;
+            float maxYPos = 2.5f;
+
+            //this.SmallExplosionEffect(new Vector3(this.transform.position.x + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+
+            //minXPos = -0.75f;
+            //maxXPos = 0.75f;
+
+            minXPos = -0.75f;
+            maxXPos = 1.5f;
+            this.SmallExplosionEffect(new Vector3(this.transform.position.x - 2.35f + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+
+            yield return new WaitForSeconds(0.05f);
+            minXPos = -1.5f;
+            maxXPos = 0.75f;
+            this.SmallExplosionEffect(new Vector3(this.transform.position.x + 1.6f + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+
+            yield return new WaitForSeconds(0.05f);
+            //this.SmallExplosionEffect(new Vector3(this.transform.position.x + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+
+            amount -= 1;
+
+            yield return null;
+        }*/
+
+
+        /*int amount = 10;
+        while (amount > 0)
+        {
+            float minXPos = -2.5f;
+            float maxXPos = 2.5f;
+            float minYPos = 0.5f;
+            float maxYPos = 2.5f;
+
+            this.SmallExplosionEffect(new Vector3(this.transform.position.x + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+
+            yield return new WaitForSeconds(0.05f);
+
+            amount -= 1;
+
+            yield return null;
+        }*/
+
+        int amount = 6;
+        int animId = 0;
+        float forwardZ = this.transform.forward.z;
+        while (amount > 0)
+        {
+            float minXPos = -2.5f;
+            float maxXPos = 2.5f;
+            float minYPos = 0.5f;
+            float maxYPos = 2.5f;
+
+            if (animId == 0)
+            {
+                minXPos = forwardZ * -0.75f;
+                maxXPos = forwardZ * 1.5f;
+                maxYPos = 2.5f;
+
+                this.SmallExplosionEffect(new Vector3(this.transform.position.x - (forwardZ * 2.35f) + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+                animId = 1;
+            }
+            else
+            {
+                minXPos = forwardZ * -1.5f;
+                maxXPos = forwardZ * 0.75f;
+                maxYPos = 3f;
+
+                this.SmallExplosionEffect(new Vector3(this.transform.position.x + (forwardZ * 1.6f) + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+                animId = 0;
+            }
+
+
+            //this.SmallExplosionEffect(new Vector3(this.transform.position.x + Random.Range(minXPos, maxXPos), Random.Range(minYPos, maxYPos), -2.5f));
+
+            yield return new WaitForSeconds(0.05f);
+
+            amount -= 1;
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.Explode();
+    }
+
+    public void SmallExplosionEffect(Vector3 position)
+    {
+        if (this.smallExplosionEffect != null)
+        {
+            GameObject explosionEffectPrefab = this.smallExplosionEffect;
+            explosionEffectPrefab = Instantiate(explosionEffectPrefab, position, Quaternion.Euler(0, 0, 0));
         }
     }
 }

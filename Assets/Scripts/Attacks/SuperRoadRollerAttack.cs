@@ -17,6 +17,7 @@ public class SuperRoadRollerAttack : Attack
     public GameObject punchEffect;
 
     public SoundEffect fallingSfx;
+    public SoundEffect finalPunchSfx;
 
     [HideInInspector] public bool anvilVulnerability;
     [HideInInspector] public bool fallingDown;
@@ -80,8 +81,10 @@ public class SuperRoadRollerAttack : Attack
         this.user.rb.isKinematic = true;
         this.canBeCanceled = true;
 
-        if (this.animations != null)
-            this.animations.Wry();
+        /*if (this.animations != null)
+            this.animations.Wry();*/
+
+        this.animations.KnifePunishmentWryPoseAnim(0);
 
         if (this.user.soundEffects != null)
             this.user.soundEffects.PlaySuperSfx();
@@ -93,6 +96,9 @@ public class SuperRoadRollerAttack : Attack
         }
 
         this.anvilVulnerability = true;
+
+        yield return new WaitForSeconds(0.05f);
+        this.animations.KnifePunishmentWryPoseAnim(1);
 
         float testTime = 0f;
         float time = 0.3f;
@@ -113,8 +119,11 @@ public class SuperRoadRollerAttack : Attack
             yield return null;
         }
 
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
         if (this.animations != null)
-            this.animations.SetDefaultPose();
+            this.animations.RoadRollerRiseUp();
 
         this.anvilVulnerability = false;
 
@@ -167,6 +176,10 @@ public class SuperRoadRollerAttack : Attack
             this.user.transform.position = new Vector3(summonPos - (this.user.transform.forward.z * 2.35f), targetPositionY, 0);
             //bigSpherePrefab.belongsTo = this.user;
         }
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
         if (this.animations != null)
             this.animations.RoadRollerFall();
 
@@ -213,6 +226,7 @@ public class SuperRoadRollerAttack : Attack
         }*/
 
         this.fallingDown = false;
+        float rollSpeed = 2000f;
 
         //AFTER ROAD ROLLER LANDS
         if (this.activeRoadRoller != null)
@@ -254,7 +268,19 @@ public class SuperRoadRollerAttack : Attack
                     if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
                         this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
 
-                    yield return new WaitForSeconds(0.05f);
+                    //yield return new WaitForSeconds(0.05f);
+
+                    if (amount <= 1)
+                    {
+                        yield return new WaitForSeconds(0.2f);
+                        if (this.animations != null)
+                            this.animations.RoadRollerPunchMid();
+                        yield return new WaitForSeconds(0.001f);
+                    }
+                    else
+                    {
+                        yield return new WaitForSeconds(0.05f);
+                    }
 
                     if(this.activeRoadRoller.victim != null && !this.activeRoadRoller.victim.dead)
                     {
@@ -308,8 +334,64 @@ public class SuperRoadRollerAttack : Attack
                     yield return null;
                 }
 
+                if (this.activeRoadRoller != null)
+                {
+                    //this.activeRoadRoller.StartExploding();
+                    this.activeRoadRoller.EnableElectricity();
+                }
+
+                //make the last punch so he chargest it longer and the release
+
+                this.activeRoadRoller.victim.TakeDamage(this.user.transform.position, 5f, 0f, 0f, 0f, true, true, false, true);
+                this.finalPunchSfx.PlaySound();
+
+                this.PunchEffect(new Vector3(this.user.transform.position.x + this.RandomX(-0.75f, 0.75f), this.RandomX(0.5f, 2.5f), -2.5f));
+                this.PunchEffect(new Vector3(this.user.transform.position.x + this.RandomX(-0.75f, 0.75f), this.RandomX(0.5f, 2.5f), -2.5f));
+                this.PunchEffect(new Vector3(this.user.transform.position.x + this.RandomX(-0.75f, 0.75f), this.RandomX(0.5f, 2.5f), -2.5f));
+
+                amount = 10;
+                float posOffsett = 0.025f;
+                while (amount > 0)
+                {
+                    this.OffsetRoadRoller(animId, posOffsett);
+                    if (animId == 0)
+                        animId = 1;
+                    else
+                        animId = 0;
+
+                    yield return new WaitForSeconds(0.025f);
+
+                    this.OffsetRoadRoller(animId, posOffsett);
+                    if (animId == 0)
+                        animId = 1;
+                    else
+                        animId = 0;
+
+                    amount -= 1;
+                    yield return null;
+                }
+
+                /*if (this.animations != null)
+                    this.animations.SetEyes(0);
+                yield return new WaitForSeconds(0.1f);*/
+
+
+                //this.user.LookAtTarget();
+
+                if (this.animations != null)
+                    this.animations.SetDefaultPose();
+
+                if (this.animations != null)
+                    this.animations.RoadRollerEndLand();
+                //this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 30f, 0f);
+                yield return new WaitForSeconds(0.1f);
+
                 if (this.animations != null)
                     this.animations.RollAnimation();
+
+                float currentTime2 = 0;
+                float duration2 = 0.7f;
+                float targetRotation = -360f * 4f;
 
                 currentTime = 0;
                 duration = 0.3f;
@@ -321,17 +403,22 @@ public class SuperRoadRollerAttack : Attack
                 while (currentTime < duration)
                 {
                     currentTime += Time.deltaTime;
+                    currentTime2 += Time.deltaTime;
                     //this.user.transform.position = new Vector3(Mathf.Lerp(startPositionX, targetPositionX, currentTime / duration), Mathf.Lerp(startPositionY, targetPositionY, currentTime / duration), 0f);
                     this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(startPositionY, targetPositionY, currentTime / duration), 0f);
 
+                    /*if (this.animations != null)
+                        this.animations.body.transform.Rotate(new Vector3(0f, 0f, rollSpeed * Time.deltaTime));*/
+
                     if (this.animations != null)
-                        this.animations.body.transform.Rotate(new Vector3(0f, 0f, 2000f * Time.deltaTime));
+                        this.animations.body.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(0, targetRotation, currentTime2 / duration2));
                     yield return null;
                 }
 
                 if (this.activeRoadRoller != null)
                 {
                     this.activeRoadRoller.Explode();
+                    //this.activeRoadRoller.StartExploding();
 
                     /*if (this.activeRoadRoller.victim != null && !this.activeRoadRoller.victim.dead)
                         this.activeRoadRoller.victim.animations.SetDefaultPose();*/
@@ -348,18 +435,25 @@ public class SuperRoadRollerAttack : Attack
                 while (currentTime < duration)
                 {
                     currentTime += Time.deltaTime;
+                    currentTime2 += Time.deltaTime;
                     //this.user.transform.position = new Vector3(Mathf.Lerp(startPositionX, targetPositionX, currentTime / duration), Mathf.Lerp(startPositionY, targetPositionY, currentTime / duration), 0f);
                     this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(startPositionY, targetPositionY, currentTime / duration), 0f);
 
+                    /*if (this.animations != null)
+                        this.animations.body.transform.Rotate(new Vector3(0f, 0f, rollSpeed * Time.deltaTime));*/
+
                     if (this.animations != null)
-                        this.animations.body.transform.Rotate(new Vector3(0f, 0f, 2000f * Time.deltaTime));
+                        this.animations.body.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(0, targetRotation, currentTime2 / duration2));
                     yield return null;
                 }
 
                 this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
 
+                /*if (this.animations != null)
+                    this.animations.SetDefaultPose();*/
+
                 if (this.animations != null)
-                    this.animations.SetDefaultPose();
+                    this.animations.RoadRollerEndLand();
 
                 //yield return new WaitForSeconds(0.3f);
                 /*if (this.animations != null)
@@ -389,7 +483,8 @@ public class SuperRoadRollerAttack : Attack
                 if (this.animations != null)
                     this.animations.SetDefaultPose();
 
-                
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+                yield return new WaitForSeconds(0.1f);
 
                 this.onGoing = false;
                 this.user.attackStuns.Remove(this.gameObject);
@@ -398,8 +493,27 @@ public class SuperRoadRollerAttack : Attack
             {
                 //yield return new WaitForSeconds(0.3f);
 
+                /*if (this.activeRoadRoller != null)
+                {
+                    //this.activeRoadRoller.StartExploding();
+                    this.activeRoadRoller.EnableElectricity();
+                }*/
+
+                this.user.LookAtTarget();
+
+                if (this.animations != null)
+                    this.animations.RoadRollerEndLand();
+                yield return new WaitForSeconds(0.1f);
+
+                /*this.user.knockbackInvounrability = false;
+                this.canBeCanceled = true;*/
+
                 if (this.animations != null)
                     this.animations.RollAnimation();
+
+                float currentTime2 = 0;
+                float duration2 = 0.7f;
+                float targetRotation = -360f * 4f;
 
                 currentTime = 0;
                 duration = 0.3f;
@@ -411,11 +525,15 @@ public class SuperRoadRollerAttack : Attack
                 while (currentTime < duration)
                 {
                     currentTime += Time.deltaTime;
+                    currentTime2 += Time.deltaTime;
                     //this.user.transform.position = new Vector3(Mathf.Lerp(startPositionX, targetPositionX, currentTime / duration), Mathf.Lerp(startPositionY, targetPositionY, currentTime / duration), 0f);
                     this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(startPositionY, targetPositionY, currentTime / duration), 0f);
 
+                    /*if (this.animations != null)
+                        this.animations.body.transform.Rotate(new Vector3(0f, 0f, rollSpeed * Time.deltaTime));*/
+
                     if (this.animations != null)
-                        this.animations.body.transform.Rotate(new Vector3(0f, 0f, 2000f * Time.deltaTime));
+                        this.animations.body.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(0, targetRotation, currentTime2 / duration2));
                     yield return null;
                 }
 
@@ -445,11 +563,15 @@ public class SuperRoadRollerAttack : Attack
                 while (currentTime < duration)
                 {
                     currentTime += Time.deltaTime;
+                    currentTime2 += Time.deltaTime;
                     //this.user.transform.position = new Vector3(Mathf.Lerp(startPositionX, targetPositionX, currentTime / duration), Mathf.Lerp(startPositionY, targetPositionY, currentTime / duration), 0f);
                     this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(startPositionY, targetPositionY, currentTime / duration), 0f);
 
+                    /*if (this.animations != null)
+                        this.animations.body.transform.Rotate(new Vector3(0f, 0f, rollSpeed * Time.deltaTime));*/
+
                     if (this.animations != null)
-                        this.animations.body.transform.Rotate(new Vector3(0f, 0f, 2000f * Time.deltaTime));
+                        this.animations.body.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(0, targetRotation, currentTime2 / duration2));
 
                     if (currentTime >= 0.2f)
                         this.anvilVulnerability = false;
@@ -460,13 +582,22 @@ public class SuperRoadRollerAttack : Attack
 
                 this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
 
+                /*if (this.animations != null)
+                    this.animations.SetDefaultPose();*/
+
                 if (this.animations != null)
-                    this.animations.SetDefaultPose();
+                    this.animations.RoadRollerEndLand();
 
                 //this.user.knockbackInvounrability = false;
                 //this.canBeCanceled = true;
                 this.user.rb.isKinematic = false;
 
+                yield return new WaitForSeconds(0.1f);
+
+                if (this.animations != null)
+                    this.animations.SetDefaultPose();
+
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
                 yield return new WaitForSeconds(0.1f);
 
 
@@ -486,7 +617,7 @@ public class SuperRoadRollerAttack : Attack
                         this.activeRoadRoller.StopRoadRoller(this.activeRoadRoller.victim);*//*
                 }*/
 
-                
+
 
                 this.onGoing = false;
                 this.user.attackStuns.Remove(this.gameObject);
@@ -563,5 +694,21 @@ public class SuperRoadRollerAttack : Attack
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void OffsetRoadRoller(int animId = 0, float posOffsett = 0.025f)
+    {
+        if (animId == 0)
+        {
+            this.user.animations.body.transform.position = new Vector3(this.user.animations.body.transform.position.x - posOffsett, this.user.animations.body.transform.position.y, 0f);
+            this.activeRoadRoller.transform.position = new Vector3(this.activeRoadRoller.transform.position.x - posOffsett, this.activeRoadRoller.transform.position.y, 0f);
+            this.activeRoadRoller.victim.animations.body.transform.position = new Vector3(this.activeRoadRoller.victim.animations.body.transform.position.x - 0.01f, this.activeRoadRoller.victim.animations.body.transform.position.y, 0f);
+        }
+        else
+        {
+            this.user.animations.body.transform.position = new Vector3(this.user.animations.body.transform.position.x + posOffsett, this.user.animations.body.transform.position.y, 0f);
+            this.activeRoadRoller.transform.position = new Vector3(this.activeRoadRoller.transform.position.x + posOffsett, this.activeRoadRoller.transform.position.y, 0f);
+            this.activeRoadRoller.victim.animations.body.transform.position = new Vector3(this.activeRoadRoller.victim.animations.body.transform.position.x + 0.01f, this.activeRoadRoller.victim.animations.body.transform.position.y, 0f);
+        }
     }
 }

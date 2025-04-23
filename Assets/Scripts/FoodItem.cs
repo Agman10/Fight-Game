@@ -20,6 +20,9 @@ public class FoodItem : MonoBehaviour
     public float spinSpeed = -500f;
 
     public AudioSource pickupSfx;
+
+    public GameObject breakVfx;
+    public AudioSource breakSfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -173,6 +176,31 @@ public class FoodItem : MonoBehaviour
         {
             this.rb.AddForce(knockback /** 0.75f*/);
         }
+    }
+
+    public void Break()
+    {
+        this.StopAllCoroutines();
+        if (this.rb != null)
+            this.rb.isKinematic = true;
+
+        if (this.coliderr != null)
+            this.coliderr.enabled = false;
+
+        if (this.collision != null)
+            this.collision.SetActive(false);
+
+        this.hasCollided = true;
+        if (this.model != null)
+            this.model.SetActive(false);
+
+        if (this.breakSfx != null)
+            this.breakSfx.Play();
+
+        if (this.breakVfx != null)
+            this.breakVfx.SetActive(true);
+
+        this.StartCoroutine(this.DisableCoroutine());
     }
 
     private IEnumerator DisableCoroutine()

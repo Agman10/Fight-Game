@@ -56,6 +56,7 @@ public class TestPlayer : MonoBehaviour
     private Vector3 startPos;
 
     public SleepLogic sleepLogic;
+    public KnockDownLogic knockDownLogic;
     //public bool sleeping = false;
 
     //Remove this later
@@ -154,7 +155,7 @@ public class TestPlayer : MonoBehaviour
     }
 
 
-    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false, bool super = false/*, bool delayDeath = false*/)
+    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false, bool super = false, bool knockDown = false/*, bool delayDeath = false*/)
     {
         if(this.damageMitigation != 0f && amount > 0f)
         {
@@ -194,7 +195,8 @@ public class TestPlayer : MonoBehaviour
 
         if(Mathf.Abs(horizontalKnockback) > 0f || Mathf.Abs(verticalKnockback) > 0f)
         {
-            this.AddKnockback(horizontalKnockback, verticalKnockback);
+            if (!knockDown)
+                this.AddKnockback(horizontalKnockback, verticalKnockback);
         }
         if(changeDir && stun > 0f && !this.knockbackInvounrability)
         {
@@ -232,6 +234,8 @@ public class TestPlayer : MonoBehaviour
             if (this.health >= this.maxHealth)
                 this.health = this.maxHealth;
         }
+        if (knockDown)
+            this.KnockDown(horizontalKnockback, verticalKnockback, stun);
         
         //Debug.Log("ouch");
     }
@@ -289,6 +293,12 @@ public class TestPlayer : MonoBehaviour
                     this.superCharge = 0f;
             }
         }
+    }
+
+    public void KnockDown(float xForce = 300f, float yForce = 600f, float stunTime = 2f, float impactStunDuration = 0f, float sitDuration = 0.5f)
+    {
+        if (this.knockDownLogic != null)
+            this.knockDownLogic.KnockDown(xForce, yForce, stunTime, impactStunDuration, sitDuration);
     }
 
     public void Die(Vector3 position, bool ragdollforce = true, bool ghost = true, bool ragdoll = true, bool preventDeathSound = false, bool super = false)
@@ -610,6 +620,10 @@ public class TestPlayer : MonoBehaviour
             {
                 this.animations.SetDefaultPose();
                 //this.animations.ResetRigPos();
+
+                //DO THIS AFTER FIXING SOME SUPERS
+                /*if(this.attackStuns.Count <= 0)
+                    this.animations.SetDefaultPose();*/
             }
         }
         
@@ -628,6 +642,26 @@ public class TestPlayer : MonoBehaviour
                     this.ragdoll.transform.localScale = new Vector3(1f, 1f, -1f);
             }
             else
+            {
+                this.transform.eulerAngles = new Vector3(0, 0, 0);
+                if (this.ragdoll != null)
+                    this.ragdoll.transform.localScale = new Vector3(1f, 1f, 1f);
+            }
+        }
+
+    }
+
+    public void LookAtDirection(float xDir = 0f)
+    {
+        if (this.ragdoll != null)
+        {
+            if (xDir > 0f)
+            {
+                this.transform.eulerAngles = new Vector3(0, 180, 0);
+                if (this.ragdoll != null)
+                    this.ragdoll.transform.localScale = new Vector3(1f, 1f, -1f);
+            }
+            else if (xDir < 0f)
             {
                 this.transform.eulerAngles = new Vector3(0, 0, 0);
                 if (this.ragdoll != null)

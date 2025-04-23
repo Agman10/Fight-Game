@@ -41,6 +41,9 @@ public class TestHitbox : MonoBehaviour
     public Transform hitboxOrigin;
 
     public bool isSuper = false;
+    public bool knockDown = false;
+    //public float knockDownImpactDuration = 0f;
+    //public float knockDownSitDuration = 0.5f;
 
     public bool preventDeathSound = false;
     public bool doHitSound = true;
@@ -146,7 +149,7 @@ public class TestHitbox : MonoBehaviour
                             if (player.transform.position.x > this.belongsTo.transform.position.x)
                                 forwardZ = -1f;
 
-                            player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, forwardZ);
+                            player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, forwardZ, this.hitEffectTransformOrigin.position.z);
                             //player.hitEffectLogic.DoHitEffect(this.hitEffectTransformOrigin.transform.position.y, -this.belongsTo.transform.forward.z);
                         }
 
@@ -171,9 +174,9 @@ public class TestHitbox : MonoBehaviour
                             posOrigin = this.hitboxOrigin.position;
 
                         if (!this.explosionKnockback)
-                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown);
                         else
-                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown);
 
                         if (this.belongsTo != null && this.superChargeAmount != 0f && this.belongsTo != player)
                         {

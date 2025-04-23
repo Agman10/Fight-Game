@@ -7,6 +7,7 @@ public class TestRagdoll : MonoBehaviour
     public TestPlayer owner;
     public Rigidbody rb;
     public bool canBeAttacked = false;
+    public bool twistUpperBody = false;
     private Rigidbody[] rigRigidbodies;
     private Collider[] colliders;
 
@@ -62,6 +63,15 @@ public class TestRagdoll : MonoBehaviour
     public void EnableRagdoll()
     {
         //this.SetTPose();
+
+        if (this.twistUpperBody && this.owner != null && this.owner.animations != null && this.owner.animations.upperBody != null && this.owner.animations.eyes != null)
+        {
+            Vector3 eyesRotation = this.owner.animations.eyes.eulerAngles;
+
+            this.owner.animations.upperBody.localEulerAngles = Vector3.zero;
+            this.owner.animations.eyes.eulerAngles = eyesRotation;
+        }
+
         if (this.rigRigidbodies.Length > 0)
         {
             foreach (Rigidbody rigidbody in this.rigRigidbodies)
