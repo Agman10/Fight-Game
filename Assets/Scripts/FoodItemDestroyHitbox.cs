@@ -25,7 +25,7 @@ public class FoodItemDestroyHitbox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         FoodItem food = other.GetComponent<FoodItem>();
-        if(food != null)
+        if(food != null && !food.broken)
         {
             food.Break();
         }

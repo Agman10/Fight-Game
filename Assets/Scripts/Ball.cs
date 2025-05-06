@@ -47,7 +47,7 @@ public class Ball : MonoBehaviour
         this.transform.position = new Vector3(0, 4, 0);*/
     }
 
-    public void KnockBack(Vector3 knockback)
+    public void KnockBack(Vector3 knockback, bool doHitSound = true)
     {
         if (this.rb != null && knockback.magnitude > 0f)
         {
@@ -56,7 +56,7 @@ public class Ball : MonoBehaviour
             //this.rb.AddTorque(knockback);
             this.rb.AddTorque(new Vector3(1000, 1000, 1000));
 
-            if (this.soundEffects != null)
+            if (this.soundEffects != null && doHitSound)
                 this.soundEffects.PlayHitSound();
         }
     }

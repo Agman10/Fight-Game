@@ -11,9 +11,18 @@ public class SuperLaserHumpAttack : Attack
 
     public GameObject laser;
 
+    public TestHitbox hitbox;
+
     public Transform hitboxOrigin;
 
     public CharacterSoundEffect laserSfx;
+
+    private float normalDamage;
+    private float normalStun;
+    private float normalKnockDownImpactDuration;
+    private float normalKnockDownSitDuration;
+    private float normalHorizontalKnockback;
+    private float normalVerticalKnockback;
 
     public override void OnHit()
     {
@@ -23,6 +32,20 @@ public class SuperLaserHumpAttack : Attack
             this.Stop();
             /*if (this.animations != null)
                 this.animations.SetDefaultPose();*/
+        }
+    }
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        if(this.hitbox != null)
+        {
+            this.normalDamage = this.hitbox.damage;
+            this.normalStun = this.hitbox.stun;
+            this.normalKnockDownImpactDuration = this.hitbox.knockDownImpactDuration;
+            this.normalKnockDownSitDuration = this.hitbox.knockDownSitDuration;
+            this.normalHorizontalKnockback = this.hitbox.horizontalKnockback;
+            this.normalVerticalKnockback = this.hitbox.verticalKnockback;
         }
     }
 
@@ -127,7 +150,12 @@ public class SuperLaserHumpAttack : Attack
         }
 
         //yield return new WaitForSeconds(0.45f);
-        yield return new WaitForSeconds(0.35f);
+
+        //yield return new WaitForSeconds(0.35f);
+
+        yield return new WaitForSeconds(0.2f);
+        this.SetWeakDamage();
+        yield return new WaitForSeconds(0.15f);
 
         /*if (this.objectToScale != null)
             this.objectToScale.ScaleDown2(0.05f, true);*/
@@ -152,7 +180,7 @@ public class SuperLaserHumpAttack : Attack
             this.laser.SetActive(false);
             this.laser.transform.localScale = new Vector3(1f, 1f, 1f);
         }
-
+        this.SetNormalDamage();
         //yield return new WaitForSeconds(0.1f);
         yield return new WaitForSeconds(0.05f);
 
@@ -172,6 +200,30 @@ public class SuperLaserHumpAttack : Attack
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
+
+    public void SetWeakDamage()
+    {
+        if(this.hitbox != null)
+        {
+            this.hitbox.damage = 15f;
+            this.hitbox.stun = 0.5f;
+            this.hitbox.knockDownImpactDuration = 0.1f;
+            this.hitbox.knockDownSitDuration = 0.25f;
+            this.hitbox.horizontalKnockback = 150f;
+            this.hitbox.verticalKnockback = 600f;
+        }
+    }
+
+    public void SetNormalDamage()
+    {
+        this.hitbox.damage = this.normalDamage;
+        this.hitbox.stun = this.normalStun;
+        this.hitbox.knockDownImpactDuration = this.normalKnockDownImpactDuration;
+        this.hitbox.knockDownSitDuration = this.normalKnockDownSitDuration;
+        this.hitbox.horizontalKnockback = this.normalHorizontalKnockback;
+        this.hitbox.verticalKnockback = this.normalVerticalKnockback;
+    }
+
     public override void Stop()
     {
         base.Stop();
@@ -180,7 +232,7 @@ public class SuperLaserHumpAttack : Attack
             this.laser.SetActive(false);
             this.laser.transform.localScale = new Vector3(1f, 1f, 1f);
         }
-            
+        this.SetNormalDamage();
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

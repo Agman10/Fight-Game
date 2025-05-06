@@ -114,17 +114,26 @@ public class RandomSkybox : MonoBehaviour
 
         if(this.gameMode == 1)
         {
-            if (number <= 50)
+            if (number <= 25) //plain
             {
                 this.SetStage(0);
                 this.SetMusic(0);
             }
-            else
+            else if (number > 25 && number <= 65) //disco
             {
                 this.SetStage(1);
                 this.SetMusic(1);
 
                 this.SetSkybox(2);
+
+                if (this.moon != null)
+                    this.moon.SetActive(false);
+            }
+            else //back alley
+            {
+                this.SetStage(2);
+                this.SetMusic(2);
+                this.LoadRandomSkybox();
 
                 if (this.moon != null)
                     this.moon.SetActive(false);
@@ -517,6 +526,13 @@ public class RandomSkybox : MonoBehaviour
                     this.SetMusic(1);
 
                     this.SetSkybox(2);
+
+                    if (this.moon != null)
+                        this.moon.SetActive(false);
+                    break;
+                case 2:
+                    this.SetMusic(2);
+                    this.LoadRandomSkybox();
 
                     if (this.moon != null)
                         this.moon.SetActive(false);

@@ -42,8 +42,8 @@ public class TestHitbox : MonoBehaviour
 
     public bool isSuper = false;
     public bool knockDown = false;
-    //public float knockDownImpactDuration = 0f;
-    //public float knockDownSitDuration = 0.5f;
+    public float knockDownImpactDuration = 0f;
+    public float knockDownSitDuration = 0.5f;
 
     public bool preventDeathSound = false;
     public bool doHitSound = true;
@@ -174,9 +174,9 @@ public class TestHitbox : MonoBehaviour
                             posOrigin = this.hitboxOrigin.position;
 
                         if (!this.explosionKnockback)
-                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown, this.knockDownImpactDuration, this.knockDownSitDuration);
                         else
-                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown, this.knockDownImpactDuration, this.knockDownSitDuration);
 
                         if (this.belongsTo != null && this.superChargeAmount != 0f && this.belongsTo != player)
                         {
@@ -487,9 +487,9 @@ public class TestHitbox : MonoBehaviour
                     direction = -1f;
                 //ragdoll.rb.AddForce(new Vector3(this.transform.forward.z * (this.horizontalKnockback * 150f), this.verticalKnockback * 150f, 0));
                 if (!this.explosionKnockback)
-                    ball.KnockBack(new Vector3(this.transform.forward.z * (this.horizontalKnockback * this.physicsKnockbackMultiplier), this.verticalKnockback * this.physicsKnockbackMultiplier, 0));
+                    ball.KnockBack(new Vector3(this.transform.forward.z * (this.horizontalKnockback * this.physicsKnockbackMultiplier), this.verticalKnockback * this.physicsKnockbackMultiplier, 0), this.doHitSound);
                 else
-                    ball.KnockBack(new Vector3(direction * (this.horizontalKnockback * this.physicsKnockbackMultiplier), this.verticalKnockback  * this.physicsKnockbackMultiplier, 0));
+                    ball.KnockBack(new Vector3(direction * (this.horizontalKnockback * this.physicsKnockbackMultiplier), this.verticalKnockback  * this.physicsKnockbackMultiplier, 0), this.doHitSound);
 
                 this.StartCoroutine(this.RemoveGameObjectCoroutine(this.damageDelay, ball.gameObject));
             }

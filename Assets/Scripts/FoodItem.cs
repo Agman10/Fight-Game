@@ -14,6 +14,7 @@ public class FoodItem : MonoBehaviour
     private Collider coliderr;
 
     public bool hasCollided;
+    public bool broken;
 
     public GameObject pickUpParticle;
 
@@ -76,7 +77,7 @@ public class FoodItem : MonoBehaviour
     {
         TestPlayer player = other.GetComponent<TestPlayer>();
 
-        if(player != null)
+        if(player != null && !this.broken)
         {
             this.Heal(player);
             this.Disable();
@@ -191,6 +192,7 @@ public class FoodItem : MonoBehaviour
             this.collision.SetActive(false);
 
         this.hasCollided = true;
+        this.broken = true;
         if (this.model != null)
             this.model.SetActive(false);
 
