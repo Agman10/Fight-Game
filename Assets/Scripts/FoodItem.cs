@@ -207,7 +207,8 @@ public class FoodItem : MonoBehaviour
 
     private IEnumerator DisableCoroutine()
     {
-        yield return new WaitForSeconds(0.8f);
+        //yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(2f);
         this.gameObject.SetActive(false);
     }
 }
