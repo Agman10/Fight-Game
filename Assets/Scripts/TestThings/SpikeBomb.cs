@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpikeBomb : MonoBehaviour
 {
     public Explosion explosion;
+    public AudioSource explosionSfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +50,8 @@ public class SpikeBomb : MonoBehaviour
             explosionPrefab.SetSize(2f);
 
         }
+        if (this.explosionSfx != null)
+            this.explosionSfx.Play();
 
         this.gameObject.SetActive(false);
     }

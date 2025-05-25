@@ -34,6 +34,9 @@ public class HoodGuySpecializedSupers : MonoBehaviour
                 if (this.supers[this.user.tempOpponent.characterId] != null)
                 {
                     this.attackScript.neutralSuper = this.supers[this.user.tempOpponent.characterId];
+
+                    if (!this.supers[this.user.tempOpponent.characterId].gameObject.active)
+                        this.supers[this.user.tempOpponent.characterId].gameObject.SetActive(true);
                 }
             }
         }

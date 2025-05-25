@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class PlayerInput : MonoBehaviour
 {
     public Vector3 moveInput;
+    public Action<Vector3> MoveInput;
+    [HideInInspector] public Vector3 pastMoveInput;
 
     //public InputAction inputAction;
     public bool jumping;
@@ -73,6 +75,12 @@ public class PlayerInput : MonoBehaviour
         Vector2 inputValue = ctx.ReadValue<Vector2>();
 
         this.moveInput = new Vector3(inputValue.x, inputValue.y, 0);
+
+        if (this.pastMoveInput != new Vector3(inputValue.x, inputValue.y, 0))
+        {
+            this.MoveInput?.Invoke(new Vector3(inputValue.x, inputValue.y, 0));
+            this.pastMoveInput = new Vector3(inputValue.x, inputValue.y, 0);
+        }
     }
     public void OnJumpInput(InputAction.CallbackContext ctx)
     {
