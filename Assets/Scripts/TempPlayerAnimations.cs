@@ -1196,6 +1196,7 @@ public class TempPlayerAnimations : MonoBehaviour
         }
     }
 
+    //[ContextMenu("RazorKick1")]
     public void SetKickUppercutStartAnim()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
@@ -1230,6 +1231,7 @@ public class TempPlayerAnimations : MonoBehaviour
         }
     }
 
+    //[ContextMenu("RazorKick2")]
     public void SetKickUppercutStartAnim2()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
@@ -1264,6 +1266,7 @@ public class TempPlayerAnimations : MonoBehaviour
         }
     }
 
+    //[ContextMenu("RazorKick3")]
     public void SetKickUpercutAnim0()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
@@ -1295,6 +1298,7 @@ public class TempPlayerAnimations : MonoBehaviour
         }
     }
 
+    //[ContextMenu("RazorKick4")]
     public void SetKickUpercutAnim()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
@@ -1325,6 +1329,7 @@ public class TempPlayerAnimations : MonoBehaviour
         }
     }
 
+    //[ContextMenu("RazorKick5")]
     public void SetKickUpercutAnim2()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
@@ -1355,6 +1360,7 @@ public class TempPlayerAnimations : MonoBehaviour
         }
     }
 
+    //[ContextMenu("RazorKick6")]
     public void SetKickUpercutAnim3()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
