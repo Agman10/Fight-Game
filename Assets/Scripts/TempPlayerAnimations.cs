@@ -10008,7 +10008,7 @@ public class TempPlayerAnimations : MonoBehaviour
             }
             else
             {
-                this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.upperBody.localEulerAngles = new Vector3(0f, -70f, 0f);
                 this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
             }
 
@@ -10024,7 +10024,7 @@ public class TempPlayerAnimations : MonoBehaviour
             else
             {
                 this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
-                this.eyes.localEulerAngles = new Vector3(0f, 20f, 0f);
+                this.eyes.localEulerAngles = new Vector3(0f, -16f, 0f);
             }
 
 
@@ -10039,7 +10039,8 @@ public class TempPlayerAnimations : MonoBehaviour
             }
             else
             {
-
+                this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 180f, -45f);
             }
 
         }
@@ -10048,6 +10049,12 @@ public class TempPlayerAnimations : MonoBehaviour
         {
             this.eyesPosTransform.localPosition = new Vector3(0f, -0.04f, 0.04f);
             this.eyesPosTransform.localEulerAngles = new Vector3(40f, 0f, 0f);
+
+            if (stageId == 1)
+            {
+                this.eyesPosTransform.localPosition = new Vector3(0f, -0.05f, 0f);
+                this.eyesPosTransform.localEulerAngles = new Vector3(42f, 0f, 0f);
+            }
         }
 
         if (this.dress != null)
@@ -11443,7 +11450,7 @@ public class TempPlayerAnimations : MonoBehaviour
 
         this.SetEyes(0);
     }
-
+    [ContextMenu("KnifePunishmentHit")]
     public void KnifePunishmentHit()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)

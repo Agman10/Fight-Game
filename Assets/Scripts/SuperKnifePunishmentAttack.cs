@@ -398,6 +398,57 @@ public class SuperKnifePunishmentAttack : Attack
         }
         else
         {
+            this.StopGrab(player);
+            player.KnockDown(player.transform.forward.z * -300f, 600f, 1.45f, 0f, 0.35f);
+            //player.animations.KnifePunishmentFalling(0);
+
+
+
+            /*player.rb.isKinematic = false;
+            player.knockbackInvounrability = false;*/
+
+            //player.AddKnockback(player.transform.forward.z * -300f, 600f);
+            yield return new WaitForSeconds(0.1f);
+            currentTime = 0;
+            duration = 1f;
+            while (currentTime < duration && Mathf.Abs(player.rb.velocity.y) > 0f && !player.dead)
+            {
+                currentTime += Time.deltaTime;
+                /*if (Mathf.Abs(player.rb.velocity.y) <= 0f)
+                    player.rb.velocity = new Vector3(0f, player.rb.velocity.y, 0f);*/
+                yield return null;
+            }
+
+            /*if (!player.dead)
+            {
+                player.animations.KnifePunishmentFalling(1);
+                player.rb.velocity = new Vector3(0f, player.rb.velocity.y, 0f);
+            }*/
+
+
+
+            yield return new WaitForSeconds(0.15f);
+
+            if (this.book != null) this.book.SetActive(false);
+            if (this.wineGlass != null) this.wineGlass.SetActive(false);
+
+            this.animations.BookStart();
+            this.animations.body.localEulerAngles = new Vector3(this.animations.body.localEulerAngles.x, 0f, this.animations.body.localEulerAngles.z);
+            this.animations.body.localPosition = new Vector3(this.user.transform.forward.z * -0.18f, this.animations.body.localPosition.y, this.animations.body.localPosition.z);
+            this.animations.rightArm.localEulerAngles = new Vector3(0f, 13.5f, 35f);
+
+            yield return new WaitForSeconds(0.05f);
+            this.animations.SetDefaultPose();
+            yield return new WaitForSeconds(0.1f);
+
+            /*if (!player.dead)
+                player.animations.SetDefaultPose();*/
+            yield return new WaitForSeconds(0.1f);
+
+            //this.StopGrab(player);
+        }
+        /*else
+        {
             //player.animations.HoodGuyGrabbed();
             player.animations.KnifePunishmentFalling(0);
 
@@ -418,8 +469,6 @@ public class SuperKnifePunishmentAttack : Attack
                 yield return null;
             }
 
-            //player.animations.LayingDownPose();
-            //player.animations.LayDown();
             if (!player.dead)
             {
                 player.animations.KnifePunishmentFalling(1);
@@ -433,21 +482,10 @@ public class SuperKnifePunishmentAttack : Attack
             if (this.book != null) this.book.SetActive(false);
             if (this.wineGlass != null) this.wineGlass.SetActive(false);
 
-            /*this.animations.SetDefaultPose();
-
-            yield return new WaitForSeconds(0.15f);*/
-
             this.animations.BookStart();
             this.animations.body.localEulerAngles = new Vector3(this.animations.body.localEulerAngles.x, 0f, this.animations.body.localEulerAngles.z);
             this.animations.body.localPosition = new Vector3(this.user.transform.forward.z * -0.18f, this.animations.body.localPosition.y, this.animations.body.localPosition.z);
             this.animations.rightArm.localEulerAngles = new Vector3(0f, 13.5f, 35f);
-
-            /*this.animations.rightArm.localEulerAngles = new Vector3(0f, 0f, 40f);
-            this.animations.rightArmJoint.localEulerAngles = new Vector3(-85f, 0f, 16f);
-
-            this.animations.leftArm.localEulerAngles = new Vector3(0f, -20f, 37f);
-            this.animations.leftArmJoint.localEulerAngles = new Vector3(56f, 0f, -25f);*/
-            //this.animations.SetEyes(0);
 
             yield return new WaitForSeconds(0.05f);
             this.animations.SetDefaultPose();
@@ -457,30 +495,8 @@ public class SuperKnifePunishmentAttack : Attack
                 player.animations.SetDefaultPose();
             yield return new WaitForSeconds(0.1f);
 
-            //yield return new WaitForSeconds(0.3f);
-
-            //yield return new WaitForSeconds(1.3f);
-
-            /*currentTime = 0;
-            duration = 1f;
-            while (currentTime < duration)
-            {
-                currentTime += Time.deltaTime;
-                testTime += Time.deltaTime;
-                newY = Mathf.Sin(testTime * 100f);
-                player.animations.body.localPosition = new Vector3(startPosX + (newY * 0.01f), player.animations.body.localPosition.y, player.animations.body.localPosition.z);
-                yield return null;
-            }*/
-
-            /*this.animations.BookStart();
-            if (this.book != null) this.book.SetActive(false);
-            yield return new WaitForSeconds(0.1f);*/
-
-            /*if (this.book != null) this.book.SetActive(false);
-            this.animations.SetDefaultPose();*/
-
             this.StopGrab(player);
-        }
+        }*/
 
         
         this.onGoing = false;

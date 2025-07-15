@@ -12,6 +12,12 @@ public class HowToPlaySuperMeter : MonoBehaviour
     public Color fullChargeColor;
     public Color lowChargeColor;
     public Color halfChargeColor;
+
+    public GameObject HalfSuperBackground;
+    public GameObject FullSuperFlame;
+
+    public GameObject HalfSuperTexts;
+    public GameObject FullSuperTexts;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +36,21 @@ public class HowToPlaySuperMeter : MonoBehaviour
                 this.chargeFill.color = this.halfChargeColor;
             else
                 this.chargeFill.color = this.lowChargeColor;
+
+            if (this.HalfSuperBackground != null)
+                this.HalfSuperBackground.SetActive(this.chargeSlider.value >= 50f && this.chargeSlider.value < 100f);
+
+            if (this.FullSuperFlame != null)
+                this.FullSuperFlame.SetActive(this.chargeSlider.value >= 100f);
+
+
+
+
+            if (this.HalfSuperTexts != null)
+                this.HalfSuperTexts.SetActive(this.chargeSlider.value >= 50f && this.chargeSlider.value < 100f);
+
+            if (this.FullSuperTexts != null)
+                this.FullSuperTexts.SetActive(this.chargeSlider.value >= 100f);
         }
     }
 }

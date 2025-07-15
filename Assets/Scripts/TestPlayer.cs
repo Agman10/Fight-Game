@@ -57,6 +57,7 @@ public class TestPlayer : MonoBehaviour
 
     public SleepLogic sleepLogic;
     public KnockDownLogic knockDownLogic;
+    public HitAnimationLogic hitAnimLogic;
     //public bool sleeping = false;
 
     //Remove this later
@@ -236,6 +237,8 @@ public class TestPlayer : MonoBehaviour
         }
         if (knockDown)
             this.KnockDown(horizontalKnockback, verticalKnockback, stun, impactStunDuration, knockDownSitDuration);
+        /*else
+            this.TriggerHitAnim();*/
         
         //Debug.Log("ouch");
     }
@@ -299,6 +302,12 @@ public class TestPlayer : MonoBehaviour
     {
         if (this.knockDownLogic != null)
             this.knockDownLogic.KnockDown(xForce, yForce, stunTime, impactStunDuration, sitDuration);
+    }
+
+    public void TriggerHitAnim()
+    {
+        if (this.hitAnimLogic != null)
+            this.hitAnimLogic.TriggerHitAnimation();
     }
 
     public void Die(Vector3 position, bool ragdollforce = true, bool ghost = true, bool ragdoll = true, bool preventDeathSound = false, bool super = false)

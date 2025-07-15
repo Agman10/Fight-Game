@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthBars : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class HealthBars : MonoBehaviour
 
     public Color fullHealthColor;
     public Color noHealthColor;
+    public Color highHealthColor;
 
     [Space]
 
@@ -33,9 +35,19 @@ public class HealthBars : MonoBehaviour
     public Text player1Name;
     public Text player2Name;
 
+    public TextMeshProUGUI p1Name;
+    public TextMeshProUGUI p2Name;
+
     [Space]
     public Text p1HealthNumbers;
     public Text p2HealthNumbers;
+
+    [Space]
+    public GameObject p1HalfSuperReady;
+    public GameObject p1FullSuperReady;
+
+    public GameObject p2HalfSuperReady;
+    public GameObject p2FullSuperReady;
 
 
     // Start is called before the first frame update
@@ -75,7 +87,11 @@ public class HealthBars : MonoBehaviour
 
             if(this.p1HealthFill != null)
             {
-                this.p1HealthFill.color = Color.Lerp(this.noHealthColor, this.fullHealthColor, this.player1.health / this.player1.maxHealth);
+                //this.p1HealthFill.color = Color.Lerp(this.noHealthColor, this.fullHealthColor, this.player1.health / this.player1.maxHealth);
+                if (this.player1.health >= this.player1.maxHealth)
+                    this.p1HealthFill.color = this.fullHealthColor;
+                else
+                    this.p1HealthFill.color = Color.Lerp(this.noHealthColor, this.highHealthColor, this.player1.health / this.player1.maxHealth);
             }
 
             if (this.p1HealthNumbers != null)
@@ -89,7 +105,12 @@ public class HealthBars : MonoBehaviour
 
             if (this.p2HealthFill != null)
             {
-                this.p2HealthFill.color = Color.Lerp(this.noHealthColor, this.fullHealthColor, this.player2.health / this.player2.maxHealth);
+                //this.p2HealthFill.color = Color.Lerp(this.noHealthColor, this.fullHealthColor, this.player2.health / this.player2.maxHealth);
+
+                if (this.player2.health >= this.player2.maxHealth)
+                    this.p2HealthFill.color = this.fullHealthColor;
+                else
+                    this.p2HealthFill.color = Color.Lerp(this.noHealthColor, this.highHealthColor, this.player2.health / this.player2.maxHealth);
             }
 
             if (this.p2HealthNumbers != null)
@@ -113,6 +134,13 @@ public class HealthBars : MonoBehaviour
                     this.p1ChargeFill.color = this.halfChargeColor;
                 else
                     this.p1ChargeFill.color = this.lowChargeColor;
+
+
+                if (this.p1HalfSuperReady != null)
+                    this.p1HalfSuperReady.SetActive(this.player1.superCharge >= this.player1.maxSuperCharge / 2 && this.player1.superCharge < this.player1.maxSuperCharge);
+
+                if (this.p1FullSuperReady != null)
+                    this.p1FullSuperReady.SetActive(this.player1.superCharge >= this.player1.maxSuperCharge);
             }
         }
 
@@ -130,6 +158,13 @@ public class HealthBars : MonoBehaviour
                     this.p2ChargeFill.color = this.halfChargeColor;
                 else
                     this.p2ChargeFill.color = this.lowChargeColor;
+
+
+                if (this.p2HalfSuperReady != null)
+                    this.p2HalfSuperReady.SetActive(this.player2.superCharge >= this.player2.maxSuperCharge / 2 && this.player2.superCharge < this.player2.maxSuperCharge);
+
+                if (this.p2FullSuperReady != null)
+                    this.p2FullSuperReady.SetActive(this.player2.superCharge >= this.player2.maxSuperCharge);
             }
         }
     }
@@ -141,5 +176,13 @@ public class HealthBars : MonoBehaviour
 
         if (this.player2 && this.player2Name != null)
             this.player2Name.text = this.player2.characterName.ToString();
+
+
+
+        if (this.player1 && this.p1Name != null)
+            this.p1Name.text = this.player1.characterName.ToString();
+
+        if (this.player2 && this.p2Name != null)
+            this.p2Name.text = this.player2.characterName.ToString();
     }
 }

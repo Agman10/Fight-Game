@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class TestPreFightDialogue : MonoBehaviour
 {
     public SO_PreFightDialogue preFightDialogue;
+
+    public bool inDialogue;
 
     public int currentDialogueIndex;
 
@@ -24,6 +27,11 @@ public class TestPreFightDialogue : MonoBehaviour
 
     public Transform p1Transform;
     public Transform p2Transform;
+
+
+    public PlayerInput playerInput;
+    public bool skipButtonDown;
+
 
     private void OnEnable()
     {
@@ -45,6 +53,27 @@ public class TestPreFightDialogue : MonoBehaviour
 
             if (this.p2Transform != null)
                 this.p2Transform.gameObject.SetActive(false);
+        }
+
+        if (this.playerInput != null)
+        {
+            this.playerInput.PunchInput += this.Skip;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (this.playerInput != null)
+        {
+            this.playerInput.PunchInput -= this.Skip;
+        }
+    }
+
+    public void Skip(bool skipping)
+    {
+        if (skipping && this.inDialogue)
+        {
+            this.skipButtonDown = true;
         }
     }
 
@@ -83,10 +112,14 @@ public class TestPreFightDialogue : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
+        this.inDialogue = true;
+
         /*this.StartCoroutine(this.ShowText("P1 fdfssfasda", 1));
         this.StartCoroutine(this.ShowText("P2 ddfss", 2));*/
 
         yield return this.DisplayText();
+
+        this.inDialogue = false;
 
         /*this.StartCoroutine(this.ShowText("Fuck you J-Cap!", 1));
 
@@ -159,20 +192,56 @@ public class TestPreFightDialogue : MonoBehaviour
             {
                 //Debug.Log(i);
 
-                
-
-                if (this.preFightDialogue.dialogueLines[i].charDialogue1.Length > 0)
+                /*if (this.preFightDialogue.dialogueLines[i].charDialogue1.Length > 0)
                     this.StartCoroutine(this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue1, p1Index));
 
                 if (this.preFightDialogue.dialogueLines[i].charDialogue2.Length > 0)
-                    this.StartCoroutine(this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index));
+                    this.StartCoroutine(this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index));*/
 
-                while (this.P1InProgress || this.P2InProgress)
+
+                IEnumerator p1DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue1, p1Index);
+                IEnumerator p2DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index);
+
+                if (this.preFightDialogue.dialogueLines[i].charDialogue1.Length > 0)
+                    this.StartCoroutine(p1DialogueCoroutine);
+
+                if (this.preFightDialogue.dialogueLines[i].charDialogue2.Length > 0)
+                    this.StartCoroutine(p2DialogueCoroutine);
+
+                /*while (this.P1InProgress || this.P2InProgress)
                 {
                     yield return null;
                 }
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(1f);*/
+
+                while (this.P1InProgress && !this.skipButtonDown || this.P2InProgress && !this.skipButtonDown)
+                {
+                    yield return null;
+                }
+
+                this.StopCoroutine(p1DialogueCoroutine);
+                this.StopCoroutine(p2DialogueCoroutine);
+
+                this.skipButtonDown = false;
+
+                if (this.preFightDialogue.dialogueLines[i].charDialogue1.Length > 0)
+                    this.ShowFullText(this.preFightDialogue.dialogueLines[i].charDialogue1, p1Index);
+
+                if (this.preFightDialogue.dialogueLines[i].charDialogue2.Length > 0)
+                    this.ShowFullText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index);
+
+                float currentTime = 0;
+                float duration = 1f;
+                while (currentTime < duration && !this.skipButtonDown)
+                {
+                    currentTime += Time.deltaTime;
+                    yield return null;
+                }
+
+                this.skipButtonDown = false;
+
+                //yield return new WaitForSeconds(1f);
 
                 this.ClearAllText();
             }
@@ -279,7 +348,7 @@ public class TestPreFightDialogue : MonoBehaviour
                     else
                         this.currentP1Text = this.currentP1Text + fullText.Substring(i, 1);
                 }
-                else if (fullText.Substring(i, 8) == "[DELETE]")
+                /*else if (fullText.Substring(i, 8) == "[DELETE]")
                 {
                     if (playerNumber == 2)
                     {
@@ -291,7 +360,7 @@ public class TestPreFightDialogue : MonoBehaviour
                         this.p1Text.text = "";
                         this.currentP1Text = "";
                     }
-                }
+                }*/
                 else
                 {
                     if (fullText.Substring(i, 1) == "§")
@@ -319,6 +388,8 @@ public class TestPreFightDialogue : MonoBehaviour
             this.P1InProgress = false;
     }
 
+    
+
     public void ClearAllText()
     {
         if(this.p1Text != null)
@@ -329,6 +400,29 @@ public class TestPreFightDialogue : MonoBehaviour
         
         this.currentP2Text = "";
         this.currentP1Text = "";
+    }
+
+    public void ShowFullText(string fullText, int playerNumber)
+    {
+        //string textt = Regex.Replace(fullText, "[§\\½]", "");
+        string textt = Regex.Replace(fullText, "[§\\½]", "");
+        //Debug.Log(textt);
+
+        //string[] separators = new string[] { "§", "½" }; // still need to use the escape char to denote the quotations
+        //string[] numbers = fullText.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+        if (playerNumber == 2)
+        {
+            this.p2Text.text = textt;
+            this.currentP2Text = textt;
+            this.P2InProgress = false;
+        }
+        else
+        {
+            this.p1Text.text = textt;
+            this.currentP1Text = textt;
+            this.P1InProgress = false;
+        }
     }
 
     // Update is called once per frame

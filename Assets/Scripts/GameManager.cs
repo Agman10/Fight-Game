@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,6 +31,12 @@ public class GameManager : MonoBehaviour
 
     public Text player1ScoreText;
     public Text player2ScoreText;
+
+    public TextMeshProUGUI p1ScoreText;
+    public TextMeshProUGUI p2ScoreText;
+
+    public CharacterIconManager p1Icon;
+    public CharacterIconManager p2Icon;
 
     public GameObject player1WinText;
     public GameObject player2WinText;
@@ -174,6 +181,12 @@ public class GameManager : MonoBehaviour
 
                     if (CharacterManager.Instance.player2Skin != null && p2.skin != null)
                         p2.skin.SetSkin(CharacterManager.Instance.player2Skin);
+
+                    if (this.p1Icon != null)
+                        this.p1Icon.SetIcon();
+
+                    if (this.p2Icon != null)
+                        this.p2Icon.SetIcon();
                 }
 
 
@@ -490,6 +503,9 @@ public class GameManager : MonoBehaviour
 
             if (this.player1ScoreText != null)
                 this.player1ScoreText.text = this.player1Score.ToString();
+
+            if (this.p1ScoreText != null)
+                this.p1ScoreText.text = this.player1Score.ToString();
         }
         else if(playerNumber == 2)
         {
@@ -497,6 +513,9 @@ public class GameManager : MonoBehaviour
 
             if (this.player2ScoreText != null)
                 this.player2ScoreText.text = this.player2Score.ToString();
+
+            if (this.p2ScoreText != null)
+                this.p2ScoreText.text = this.player2Score.ToString();
         }
         else
         {
@@ -508,6 +527,13 @@ public class GameManager : MonoBehaviour
 
             if (this.player2ScoreText != null)
                 this.player2ScoreText.text = this.player2Score.ToString();
+
+
+            if (this.p1ScoreText != null)
+                this.p1ScoreText.text = this.player1Score.ToString();
+
+            if (this.p2ScoreText != null)
+                this.p2ScoreText.text = this.player2Score.ToString();
         }
     }
 

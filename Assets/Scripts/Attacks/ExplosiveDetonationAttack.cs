@@ -306,6 +306,9 @@ public class ExplosiveDetonationAttack : Attack
         if (this.buttHitbox != null)
             this.buttHitbox.gameObject.SetActive(false);
 
+        if (this.animations != null)
+            this.animations.HoodGuyButtAttack(1);
+
         this.buttAttacking = false;
 
         yield return new WaitForSeconds(0.1f);
