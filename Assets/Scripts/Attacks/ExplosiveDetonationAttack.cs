@@ -165,7 +165,8 @@ public class ExplosiveDetonationAttack : Attack
         if (this.animations != null)
             this.animations.ExplosiveBox(1, true);
 
-        this.user.TakeDamage(this.user.transform.position, 5);
+        this.user.TakeDamage(this.user.transform.position, 5, 0f, 0f, 0f, true, true, false, false, true, false, false, false, 0, 0, this.user);
+        //this.user.TakeDamage(this.user.transform.position, 5);
 
         //yield return new WaitForSeconds(0.7f);
 

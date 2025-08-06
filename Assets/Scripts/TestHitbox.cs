@@ -100,8 +100,10 @@ public class TestHitbox : MonoBehaviour
 
                         //this.OnPlayerCollision.Invoke(player);
 
+
+                        //MAKE IT CUSTOMIZABLE FOR FUTURE SO IT ISNT A FALL OF ICON IF I WANT TO USE INSTA KILL FOR OTHER THINGS
                         if (this.instaKill)
-                            player.Die(this.transform.position, false, false, true, this.preventDeathSound, this.isSuper);
+                            player.Die(this.transform.position, false, false, true, this.preventDeathSound, 5);
 
                         this.players.Add(player);
                         if (!this.avoidOnHitInvoke)
@@ -174,9 +176,9 @@ public class TestHitbox : MonoBehaviour
                             posOrigin = this.hitboxOrigin.position;
 
                         if (!this.explosionKnockback)
-                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown, this.knockDownImpactDuration, this.knockDownSitDuration);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown, this.knockDownImpactDuration, this.knockDownSitDuration, this.belongsTo);
                         else
-                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown, this.knockDownImpactDuration, this.knockDownSitDuration);
+                            player.TakeDamage(posOrigin, this.damage, this.stun, direction * this.horizontalKnockback, this.verticalKnockback, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown, this.knockDownImpactDuration, this.knockDownSitDuration, this.belongsTo);
 
                         if (this.belongsTo != null && this.superChargeAmount != 0f && this.belongsTo != player)
                         {
@@ -293,8 +295,10 @@ public class TestHitbox : MonoBehaviour
                 if(this.belongsTo != player || this.damageOwner)
                 {
                     this.players.Add(player);
+
+                    //MAKE IT CUSTOMIZABLE TOO FOR FUTURE SO IT ISNT A FALL OF ICON IF I WANT TO USE INSTA KILL FOR OTHER THINGS
                     if (this.instaKill)
-                        player.Die(this.transform.position, false, false, true, this.preventDeathSound, this.isSuper);
+                        player.Die(this.transform.position, false, false, true, this.preventDeathSound, 5);
 
                     //player.TakeDamage(this.transform.position, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockback, this.verticalKnockback);
                     if (!this.avoidOnHitInvoke)
@@ -397,9 +401,9 @@ public class TestHitbox : MonoBehaviour
                         posOrigin = this.hitboxOrigin.position;
 
                     if (!this.explosionKnockback)
-                        player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper);
+                        player.TakeDamage(posOrigin, this.damage, this.stun, this.transform.forward.z * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown, this.knockDownImpactDuration, this.knockDownSitDuration, this.belongsTo);
                     else
-                        player.TakeDamage(posOrigin, this.damage, this.stun, direction * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper);
+                        player.TakeDamage(posOrigin, this.damage, this.stun, direction * (this.horizontalKnockback * knockbackMultiplier), this.verticalKnockback * knockbackMultiplier, this.ragdollForce, true, this.changeTargetDir, this.preventDeath, !this.preventMomentumStop, this.preventDeathSound, this.isSuper, this.knockDown, this.knockDownImpactDuration, this.knockDownSitDuration, this.belongsTo);
 
 
                     if (this.belongsTo != null && this.superChargeAmount != 0f && this.belongsTo != player)

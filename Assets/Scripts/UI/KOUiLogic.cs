@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class KOUiLogic : MonoBehaviour
 {
@@ -10,6 +11,19 @@ public class KOUiLogic : MonoBehaviour
     public GameObject perfectP2;
     public GameObject draw;
     public GameObject hyperKO;
+
+    public GameObject suicide;
+    //public GameObject fallOff;
+    public GameObject hyperSuicide;
+    public GameObject ring;
+    public GameObject outText;
+
+    public GameObject timeOver;
+
+    public TextMeshProUGUI roundX;
+    public GameObject fight;
+
+    public
 
 
     // Start is called before the first frame update
@@ -50,8 +64,51 @@ public class KOUiLogic : MonoBehaviour
         this.StartCoroutine(this.HyperKOCoroutine());
     }
 
+    public void SuicideText()
+    {
+        this.StartCoroutine(this.SuicideCoroutine());
+    }
+
+    public void RingOutText()
+    {
+        this.StartCoroutine(this.RingOutCoroutine());
+    }
+
+    public void HyperSuicideText()
+    {
+        this.StartCoroutine(this.HyperSuicideCoroutine());
+    }
+
+    public void TimeOverText()
+    {
+        this.StartCoroutine(this.TimeOverCoroutine());
+    }
+
+    public void CurrentRoundText(int round)
+    {
+        if(this.roundX != null)
+        {
+            this.roundX.text = "ROUND " + round.ToString();
+        }
+
+        this.StartCoroutine(this.CurrentRoundCoroutine());
+    }
+
+    public void FightText()
+    {
+        //this.StopAllCoroutines();
+        this.RemoveAllText();
+
+        if (this.roundX.gameObject != null)
+            this.roundX.gameObject.SetActive(false);
+
+        this.StartCoroutine(this.FightCoroutine());
+    }
+
     public void RemoveAllText()
     {
+        this.StopAllCoroutines();
+
         if (this.k != null)
         {
             //this.k.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -76,6 +133,27 @@ public class KOUiLogic : MonoBehaviour
 
         if (this.hyperKO != null)
             this.hyperKO.SetActive(false);
+
+        if (this.suicide != null)
+            this.suicide.SetActive(false);
+
+        if (this.ring != null)
+            this.ring.SetActive(false);
+
+        if (this.outText != null)
+            this.outText.SetActive(false);
+
+        if (this.hyperSuicide != null)
+            this.hyperSuicide.SetActive(false);
+
+        if (this.timeOver != null)
+            this.timeOver.SetActive(false);
+
+        if (this.roundX != null)
+            this.roundX.gameObject.SetActive(false);
+
+        if (this.fight != null)
+            this.fight.SetActive(false);
     }
 
     private IEnumerator KOCoroutine()
@@ -256,5 +334,80 @@ public class KOUiLogic : MonoBehaviour
 
         if (this.hyperKO != null)
             this.hyperKO.SetActive(false);
+    }
+
+    private IEnumerator SuicideCoroutine()
+    {
+        if (this.suicide != null)
+            this.suicide.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+
+        if (this.suicide != null)
+            this.suicide.SetActive(false);
+    }
+
+    private IEnumerator RingOutCoroutine()
+    {
+        //yield return new WaitForSeconds(0.25f);
+
+        if (this.ring != null)
+            this.ring.SetActive(true);
+
+        //yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSecondsRealtime(0.25f);
+
+        if (this.outText != null)
+            this.outText.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+
+        if (this.ring != null)
+            this.ring.SetActive(false);
+
+        if (this.outText != null)
+            this.outText.SetActive(false);
+    }
+
+    private IEnumerator HyperSuicideCoroutine()
+    {
+        if (this.hyperSuicide != null)
+            this.hyperSuicide.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+
+        if (this.hyperSuicide != null)
+            this.hyperSuicide.SetActive(false);
+    }
+
+    private IEnumerator TimeOverCoroutine()
+    {
+        if (this.timeOver != null)
+            this.timeOver.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+
+        if (this.timeOver != null)
+            this.timeOver.SetActive(false);
+    }
+
+    private IEnumerator CurrentRoundCoroutine()
+    {
+        if (this.roundX != null)
+            this.roundX.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(1.5f);
+
+        if (this.roundX != null)
+            this.roundX.gameObject.SetActive(false);
+    }
+
+    private IEnumerator FightCoroutine()
+    {
+        if (this.fight != null)
+            this.fight.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (this.fight != null)
+            this.fight.SetActive(false);
     }
 }

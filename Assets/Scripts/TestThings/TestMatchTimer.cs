@@ -19,6 +19,8 @@ public class TestMatchTimer : MonoBehaviour
 
     public float currentSecond;
 
+    public bool isTimer2;
+
     public Color maxTimeColor;
     public Color lowTimeColor;
     // Start is called before the first frame update
@@ -32,7 +34,13 @@ public class TestMatchTimer : MonoBehaviour
         this.time = this.startTime;
         this.timeInt = this.startTime;
         this.currentSecond = 1f;
-        this.StartCoroutine(this.UpdateTimerCoroutine());
+        //this.StartCoroutine(this.UpdateTimerCoroutine());
+        this.UpdateTimeDisplay();
+
+        if (this.isTimer2)
+            this.StartCoroutine(this.UpdateTimerCoroutine3());
+        else
+            this.StartCoroutine(this.UpdateTimerCoroutine());
     }
 
     // Update is called once per frame
@@ -69,13 +77,42 @@ public class TestMatchTimer : MonoBehaviour
         //this.timer.text = this.time.ToString("D2");
     }
 
-    
-
-    private IEnumerator UpdateTimerCoroutine()
+    private IEnumerator UpdateTimerCoroutine3()
     {
         while (this.time > 0f)
         {
+            //this.time -= Time.deltaTime;
+
+            /*string currentTime = this.time.ToString("00");
+
+            if (this.digit1 != null && this.digit2 != null)
+            {
+                this.digit1.text = currentTime[0].ToString();
+                this.digit2.text = currentTime[1].ToString();
+            }*/
+
+            yield return new WaitForSeconds(1);
+            this.time--;
+
+            this.UpdateTimeDisplay();
+
+            yield return null;
+        }
+
+        this.digit1.color = this.lowTimeColor;
+        this.digit2.color = this.lowTimeColor;
+
+        this.time = 0f;
+        this.UpdateTimeDisplay();
+    }
+
+    private IEnumerator UpdateTimerCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        while (this.time > 0f /*this.time >= 1f*/)
+        {
             this.time -= Time.deltaTime;
+            //this.time -= Time.fixedDeltaTime;
 
             /*string currentTime = this.time.ToString("00");
 
@@ -88,6 +125,8 @@ public class TestMatchTimer : MonoBehaviour
 
             yield return null;
         }
+        this.digit1.color = this.lowTimeColor;
+        this.digit2.color = this.lowTimeColor;
 
         this.time = 0f;
         this.UpdateTimeDisplay();
@@ -116,6 +155,23 @@ public class TestMatchTimer : MonoBehaviour
         {
             this.digit1.text = currentTime[0].ToString();
             this.digit2.text = currentTime[1].ToString();
+
+
+            /*if (this.time > 99)
+            {
+                this.digit1.text = 9.ToString();
+                this.digit2.text = 9.ToString();
+            }
+            else if (this.time < 0)
+            {
+                this.digit1.text = 0.ToString();
+                this.digit2.text = 0.ToString();
+            }
+            else
+            {
+                this.digit1.text = currentTime[0].ToString();
+                this.digit2.text = currentTime[1].ToString();
+            }*/
 
             /*this.digit1.color = Color.Lerp(this.lowTimeColor, this.maxTimeColor, roundedNumber / this.startTime);
             this.digit2.color = Color.Lerp(this.lowTimeColor, this.maxTimeColor, roundedNumber / this.startTime);*/

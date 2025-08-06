@@ -280,7 +280,12 @@ public class Anvil : MonoBehaviour
 
         if (player.health <= 0f)
         {
-            player.Die(player.transform.position, false, true, false, false, true);
+            int deathType = 1;
+
+            if (player == this.belongsTo)
+                deathType = 4;
+
+            player.Die(player.transform.position, false, true, false, false, deathType);
 
             player.preventDeath = false;
             player.knockbackInvounrability = false;
@@ -406,12 +411,12 @@ public class Anvil : MonoBehaviour
                 player.hitboxes.gameObject.SetActive(true);
 
             yield return new WaitForSeconds(0.1f);
-            if (player.animations != null)
+            if (player.animations != null && !player.dead)
                 player.animations.SetDefaultPose();
 
             player.LookAtTarget();
 
-            if (player.collision != null)
+            if (player.collision != null && !player.dead)
                 player.collision.enabled = true;
 
             /*if (this.blood != null)

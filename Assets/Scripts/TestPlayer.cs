@@ -44,7 +44,8 @@ public class TestPlayer : MonoBehaviour
     public Action OnHit;
     public Action OnTakeDamage;
     public Action OnDeath;
-    public Action<bool> OnKO;
+    public Action<int, int> OnKO;
+    //public Action<bool> OnKO;
     public Action OnReset;
     public Action OnAttack;
 
@@ -156,7 +157,7 @@ public class TestPlayer : MonoBehaviour
     }
 
 
-    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false, bool super = false, bool knockDown = false, float impactStunDuration = 0f, float knockDownSitDuration = 0.5f/*, bool delayDeath = false*/)
+    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false, bool super = false, bool knockDown = false, float impactStunDuration = 0f, float knockDownSitDuration = 0.5f, TestPlayer damageOwner = null/*, bool delayDeath = false*/)
     {
         if(this.damageMitigation != 0f && amount > 0f)
         {
@@ -217,8 +218,32 @@ public class TestPlayer : MonoBehaviour
         
         if(this.health <= 0f && !this.preventDeath /*&& !dontKill*/)
         {
+            int koType = 0;
+
+            if (damageOwner == this)
+            {
+                if (super)
+                    koType = 4; //HyperSuicide
+                else
+                    koType = 3; //Suicide
+
+                /*koType = 3; //Suicide
+                koType = 4; //HyperSuicide*/
+
+            }
+            else if (super)
+            {
+                koType = 1; //HyperKo
+            }
+                
+
+            //MAKE AN OPTION SO NOT ALL SELF DAMAGE ATTACKS TRIGGER SUICIDE
+
             if (!dontKill)
-                this.Die(position, ragdollForce, ghost, true, preventDeathSound, super);
+                this.Die(position, ragdollForce, ghost, true, preventDeathSound, koType);
+
+            /*if (!dontKill)
+                this.Die(position, ragdollForce, ghost, true, preventDeathSound, super);*/
 
             //this.Die(position, ragdollForce, ghost);
 
@@ -310,14 +335,15 @@ public class TestPlayer : MonoBehaviour
             this.hitAnimLogic.TriggerHitAnimation();
     }
 
-    public void Die(Vector3 position, bool ragdollforce = true, bool ghost = true, bool ragdoll = true, bool preventDeathSound = false, bool super = false)
+    public void Die(Vector3 position, bool ragdollforce = true, bool ghost = true, bool ragdoll = true, bool preventDeathSound = false, int deathType = 0/*bool super = false*/)
     {
         if (!this.dead)
         {
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
-            this.OnKO?.Invoke(super);
+            //this.OnKO?.Invoke(super);
+            this.OnKO?.Invoke(deathType, this.playerNumber);
             this.hasBeenHit = true;
 
             if (!preventDeathSound && this.soundEffects != null)
@@ -376,7 +402,8 @@ public class TestPlayer : MonoBehaviour
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
-            this.OnKO?.Invoke(false);
+            //this.OnKO?.Invoke(false);
+            this.OnKO?.Invoke(3, this.playerNumber);
             this.hasBeenHit = true;
 
             if (this.soundEffects != null)
@@ -432,7 +459,8 @@ public class TestPlayer : MonoBehaviour
             this.dead = true;
             this.health = 0f;
             this.OnDeath?.Invoke();
-            this.OnKO?.Invoke(false);
+            //this.OnKO?.Invoke(false);
+            this.OnKO?.Invoke(0, this.playerNumber);
 
             if (this.hitboxes != null)
             {

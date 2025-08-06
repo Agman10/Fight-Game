@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public GameCamera gameCamera;
+    public RoundTimer roundTimer;
 
     public TestPlayer player1;
     public TestPlayer player2;
@@ -27,13 +28,20 @@ public class GameManager : MonoBehaviour
     public int maxScore = 2;
     public int player1Score;
     public int player2Score;
+    private int currentRoundNumber = 1;
     public bool isStartingNewRound;
+
+    public int p1DeathType;
+    public int p2DeathType;
 
     public Text player1ScoreText;
     public Text player2ScoreText;
 
     public TextMeshProUGUI p1ScoreText;
     public TextMeshProUGUI p2ScoreText;
+
+    public MatchScoreDisplayLogic p1ScoreDisplay;
+    public MatchScoreDisplayLogic p2ScoreDisplay;
 
     public CharacterIconManager p1Icon;
     public CharacterIconManager p2Icon;
@@ -319,7 +327,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    [ContextMenu("Pause")]
+    //[ContextMenu("Pause")]
     public void TogglePauseGame(bool pause)
     {
         if (pause)
@@ -371,16 +379,43 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OnPlayerDeath(bool super)
+    public void OnPlayerDeath(int koType, int playerNumber/*bool super*/)
     {
+        if (this.roundTimer != null)
+            this.roundTimer.StopTimer();
+
+        if (playerNumber == 1)
+            this.p1DeathType = koType;
+
+        if (playerNumber == 2)
+            this.p2DeathType = koType;
+
         if (!this.gameIsOver && !this.isStartingNewRound && this.gameMode == 0)
         {
             this.isStartingNewRound = true;
 
-            if (super)
+            if (this.koUiLogic != null)
+                this.koUiLogic.RemoveAllText();
+
+            if (koType == 1 /*super*/)
             {
                 if (this.koUiLogic != null)
                     this.koUiLogic.HyperKOText();
+            }
+            else if (koType == 3/* || koType == 4*/)
+            {
+                if (this.koUiLogic != null)
+                    this.koUiLogic.SuicideText();
+            }
+            else if (koType == 4)
+            {
+                if (this.koUiLogic != null)
+                    this.koUiLogic.HyperSuicideText();
+            }
+            else if (koType == 5)
+            {
+                if (this.koUiLogic != null)
+                    this.koUiLogic.RingOutText();
             }
             else
             {
@@ -403,6 +438,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator PlayerDeathCoroutine()
     {
+        //maybe make it so if both are dead in the first frame it says double K.O but if it isnt, then the second frame display it as it usualy is
+
         /*Time.timeScale = 0.1f;
         yield return new WaitForSeconds(0.1f);
         Time.timeScale = 1f;*/
@@ -421,11 +458,34 @@ public class GameManager : MonoBehaviour
 
         //Time.timeScale = 1f;
 
-        if (this.player1.dead)
+        /*if (this.player1.dead)
             this.GiveScore(2);
 
         if (this.player2.dead)
-            this.GiveScore(1);
+            this.GiveScore(1);*/
+
+        int perfect = 0;
+
+        if (!this.player1.dead && this.player2.dead)
+        {
+            if (!this.player1.hasBeenHit)
+                perfect = 2;
+
+            this.GiveScore(1, this.p2DeathType, perfect);
+        }
+        else if (this.player1.dead && !this.player2.dead)
+        {
+            if (!this.player2.hasBeenHit)
+                perfect = 2;
+
+            this.GiveScore(2, this.p1DeathType , perfect);
+        }
+        else if (this.player1.dead && this.player2.dead)
+        {
+            this.GiveScore(1, this.p2DeathType, 1);
+            this.GiveScore(2, this.p1DeathType, 1);
+        }
+            
 
         if (this.player1Score >= this.maxScore && this.player2Score < this.maxScore)
             this.EndTheGame(1);
@@ -462,6 +522,111 @@ public class GameManager : MonoBehaviour
         //yield return new WaitForSeconds(4.5f);
     }
 
+    //[ContextMenu("TimeOver")]
+    public void EvaluateTimeOverWinner()
+    {
+        if(!this.gameIsOver && !this.isStartingNewRound && this.gameMode == 0)
+        {
+            float p1HealthPercentage = (this.player1.health / this.player1.maxHealth) * 100;
+            float p2HealthPercentage = (this.player2.health / this.player2.maxHealth) * 100;
+            //Debug.Log(p1HealthPercentage);
+            //Debug.Log(p2HealthPercentage);
+
+            
+            float healthDifference = Mathf.Abs(p1HealthPercentage - p2HealthPercentage);
+
+            if (healthDifference < 1)
+                this.TimeOver(0);
+            else if (p1HealthPercentage > p2HealthPercentage)
+                this.TimeOver(1);
+            else if (p1HealthPercentage < p2HealthPercentage)
+                this.TimeOver(2);
+
+            /*float healthDifference = Mathf.Abs(this.player1.health - this.player2.health);
+
+            if (healthDifference <= 1)
+                this.TimeOver(0);
+            else if (this.player1.health > this.player2.health)
+                this.TimeOver(1);
+            else if (this.player1.health < this.player2.health)
+                this.TimeOver(2);*/
+
+            //Debug.Log(healthDifference);
+        }
+    }
+
+    
+    public void TimeOver(int playerId = 0)
+    {
+        //int playerId = 0;
+        //0 = draw
+
+        if (!this.gameIsOver && !this.isStartingNewRound && this.gameMode == 0)
+        {
+            this.isStartingNewRound = true;
+
+            if (this.koUiLogic != null)
+                this.koUiLogic.TimeOverText();
+
+            //Fix so you can get perfect
+
+            if (playerId == 0)
+            {
+                this.GiveScore(1, 2, 1);
+                this.GiveScore(2, 2, 1);
+
+                this.player1.Die(this.player1.transform.position, false, false, true, false, 2);
+                this.player2.Die(this.player2.transform.position, false, false, true, false, 2);
+            }
+            else if (playerId == 1)
+            {
+                this.GiveScore(1, 2, 0);
+
+                //this.player1.Die(this.player1.transform.position, false, false, true, false, 2);
+                this.player2.Die(this.player2.transform.position, false, false, true, false, 2);
+            }
+            else if (playerId == 2)
+            {
+                this.GiveScore(2, 2, 0);
+
+                this.player1.Die(this.player1.transform.position, false, false, true, false, 2);
+                //this.player2.Die(this.player2.transform.position, false, false, true, false, 2);
+            }
+
+
+            this.StartCoroutine(this.TimeOverCoroutine(playerId));
+        }
+    }
+
+    private IEnumerator TimeOverCoroutine(int playerId = 0)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (playerId == 0)
+        {
+            if (this.koUiLogic != null)
+                this.koUiLogic.DrawText();
+        }
+        /*else if (playerId == 1 && !this.player1.hasBeenHit)
+        {
+
+        }
+        else if (playerId == 2 && !this.player2.hasBeenHit)
+        {
+
+        }*/
+
+
+        if (this.player1Score >= this.maxScore && this.player2Score < this.maxScore)
+            this.EndTheGame(1);
+        else if (this.player1Score < this.maxScore && this.player2Score >= this.maxScore)
+            this.EndTheGame(2);
+        else if (this.player1Score >= this.maxScore && this.player2Score >= this.maxScore)
+            this.EndTheGame(0);
+        else
+            this.StartNewRound();
+    }
+
     public void OnPlayer1Death()
     {
         if(!this.gameIsOver && !this.isStartingNewRound)
@@ -495,11 +660,14 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    public void GiveScore(int playerNumber = 0)
+    public void GiveScore(int playerNumber = 0, int scoreTypeId = 0, int performanceTypeId = 0)
     {
         if(playerNumber == 1)
         {
             this.player1Score++;
+
+            if (this.p1ScoreDisplay != null)
+                this.p1ScoreDisplay.AddScore(scoreTypeId, performanceTypeId);
 
             if (this.player1ScoreText != null)
                 this.player1ScoreText.text = this.player1Score.ToString();
@@ -510,6 +678,9 @@ public class GameManager : MonoBehaviour
         else if(playerNumber == 2)
         {
             this.player2Score++;
+
+            if (this.p2ScoreDisplay != null)
+                this.p2ScoreDisplay.AddScore(scoreTypeId, performanceTypeId);
 
             if (this.player2ScoreText != null)
                 this.player2ScoreText.text = this.player2Score.ToString();
@@ -552,16 +723,48 @@ public class GameManager : MonoBehaviour
     {
         this.OnRoundReset?.Invoke();
 
+        this.currentRoundNumber++;
+
+        this.p1DeathType = 0;
+        this.p2DeathType = 0;
+
         if (this.koUiLogic != null)
             this.koUiLogic.RemoveAllText();
 
         this.isStartingNewRound = false;
         if (this.player1 != null)
+        {
             this.player1.ResetPlayer();
+            this.player1.LookAtTarget();
+        }
+            
 
         if (this.player2 != null)
+        {
             this.player2.ResetPlayer();
+            this.player2.LookAtTarget();
+        }
+            
+
+        if (this.roundTimer != null)
+        {
+            this.roundTimer.ResetTimer();
+            //this.roundTimer.StartTimer();
+        }
+
+        if (this.entranceAnimationHandler != null)
+        {
+            this.entranceAnimationHandler.AddPlayers(this.player1, this.player2);
+            this.entranceAnimationHandler.StartNewRound(this.currentRoundNumber);
+        }
+
     }
+
+    /*private IEnumerator StartNewRoundCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+    }*/
+
     public void EndGame(bool isPlayer1)
     {
         this.gameIsOver = true;

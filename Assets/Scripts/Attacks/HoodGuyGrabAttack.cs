@@ -162,7 +162,8 @@ public class HoodGuyGrabAttack : Attack
                 this.animations.body.transform.Rotate(0f, -1500 * Time.deltaTime, 0f);*/
 
             
-            yield return new WaitForSeconds(0.075f);
+            //yield return new WaitForSeconds(0.075f);
+            yield return new WaitForSeconds(0.05f);
             if (!player.dead)
                 player.animations.HoodGuyGrabbed();
 
@@ -283,7 +284,8 @@ public class HoodGuyGrabAttack : Attack
             if (!player.dead)
             {
                 player.rb.isKinematic = false;
-                player.TakeDamage(new Vector3(this.user.transform.position.x - (this.user.transform.forward.z * 1.5f), player.transform.position.y - 0.5f, 0f), 5f, 1f, this.user.transform.forward.z * 700f, 900f);
+                //player.TakeDamage(new Vector3(this.user.transform.position.x - (this.user.transform.forward.z * 1.5f), player.transform.position.y - 0.5f, 0f), 5f, 1f, this.user.transform.forward.z * 700f, 900f);
+                player.TakeDamage(new Vector3(this.user.transform.position.x - (this.user.transform.forward.z * 1.5f), player.transform.position.y - 0.5f, 0f), 5f, 1f, this.user.transform.forward.z * 700f, 900f, true, true, false, false, true,false, false, true, 0, 0.3f);
 
                 this.user.GiveSuperCharge(3f);
                 player.GiveSuperCharge(1.5f);
@@ -292,7 +294,7 @@ public class HoodGuyGrabAttack : Attack
                     player.soundEffects.PlayHitSound();
             }
 
-            player.animations.SetDefaultPose();
+            //player.animations.SetDefaultPose();
 
             
 
