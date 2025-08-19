@@ -7,6 +7,7 @@ public class PlayOrStopVfxOnEnable : MonoBehaviour
 {
     public VisualEffect visualEffect;
     public bool stopOnEnable = true;
+    public bool stopOnDisable = false;
     private void OnEnable()
     {
         if (this.visualEffect != null)
@@ -20,6 +21,10 @@ public class PlayOrStopVfxOnEnable : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        if (this.visualEffect != null)
+        {
+            if (this.stopOnDisable)
+                this.visualEffect.Stop();
+        }
     }
 }

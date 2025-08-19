@@ -25,6 +25,12 @@ public class RoundTimer : MonoBehaviour
     public Color lowTimeColor;*/
 
 
+
+    private void Awake()
+    {
+        this.startTime = PlayerPrefs.GetInt("GameTimer", 99);
+        this.infiniteTime = this.intToBool(PlayerPrefs.GetInt("GameTimerIsInfinite", 1));
+    }
     private void OnEnable()
     {
         if (this.infiniteTime)
@@ -42,7 +48,7 @@ public class RoundTimer : MonoBehaviour
             this.StartCoroutine(this.UpdateTimerCoroutine());*/
         }
     }
-
+    
     private void OnDisable()
     {
         this.StopAllCoroutines();
@@ -211,5 +217,15 @@ public class RoundTimer : MonoBehaviour
             if (this.normalTimer != null)
                 this.normalTimer.SetActive(false);
         }
+    }
+
+
+
+    bool intToBool(int val)
+    {
+        if (val != 0)
+            return true;
+        else
+            return false;
     }
 }

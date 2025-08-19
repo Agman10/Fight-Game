@@ -37,4 +37,19 @@ public class MatchScoreDisplayLogic : MonoBehaviour
 
         //this.score++;
     }
+
+    /*private void OnEnable()
+    {
+        this.SetMaxScore(2);
+    }*/
+
+    public void SetMaxScore(int maxScore = 2)
+    {
+        for (int i = 0; i < this.scorePoints.Length; i++)
+        {
+            this.scorePoints[i].gameObject.SetActive(i <= maxScore - 1);
+            //Debug.Log(i);
+        }
+
+    }
 }

@@ -16,6 +16,12 @@ public class MikeBallerStartAnimation : Attack
 
     public GameObject exclamationMark;
 
+    public AudioSource rollSfx;
+    public AudioSource jumpSfx;
+    public CharacterSoundEffect rollHitSfx;
+
+    public AnimationCurve flyBackCurve;
+
     //public Attack vsDarkJCap;
     public Attack vsJCap;
 
@@ -52,6 +58,10 @@ public class MikeBallerStartAnimation : Attack
             else if (this.user.characterId == 3 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 4 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
                 this.StartCoroutine(this.VsViolentMikeStartAnimation());
+            }
+            else if (this.user.characterId == 3 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 3 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
+            {
+                this.StartCoroutine(this.VsMikeCoroutine());
             }
             else
             {
@@ -243,13 +253,103 @@ public class MikeBallerStartAnimation : Attack
         if (this.exclamationMark != null)
             this.exclamationMark.SetActive(false);
 
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
+
+        if (this.jumpSfx != null)
+            this.jumpSfx.Stop();
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
 
         this.user.EntranceDone();
     }
 
+    private IEnumerator VsMikeCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        this.user.rb.isKinematic = true;
+        this.user.LookAtTarget();
 
+        float startXPos = this.user.transform.position.x;
+        this.user.transform.position = new Vector3(startXPos * 2f, 0f, 0f);
+
+        yield return new WaitForSeconds(0.01f);
+
+        if (this.rollSfx != null && this.user.playerNumber == 1)
+            this.rollSfx.Play();
+
+        //this.user.LookAtTarget();
+
+        if (this.animations != null)
+            this.animations.RollAnimation();
+
+        float currentTime = 0;
+        float duration = 0.5f;
+
+        float targetPosition = this.transform.forward.z * -0.6f;
+        float start = this.user.transform.position.x;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.user.transform.position = new Vector3(Mathf.Lerp(start, targetPosition, currentTime / duration), 0f, 0f);
+
+
+            if (this.animations != null)
+            {
+                
+                this.animations.body.transform.Rotate(0f, 0f, -3000f * Time.deltaTime);
+            }
+
+
+            yield return null;
+        }
+        //yield return new WaitForSeconds(0.1f);
+        if (this.user.playerNumber == 1)
+            this.rollHitSfx.PlaySound();
+
+        currentTime = 0;
+        duration = 0.4f;
+
+        targetPosition = startXPos;
+        start = this.user.transform.position.x;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.user.transform.position = new Vector3(Mathf.Lerp(start, targetPosition, currentTime / duration), this.flyBackCurve.Evaluate(currentTime / duration), 0f);
+
+
+            if (this.animations != null)
+            {
+                
+                this.animations.body.transform.Rotate(0f, 0f, -4000f * Time.deltaTime);
+            }
+
+
+            yield return null;
+        }
+        this.user.transform.position = new Vector3(startXPos, 0f, 0f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        if (this.rollSfx != null && this.user.playerNumber == 1)
+            this.rollSfx.Stop();
+
+
+        yield return new WaitForSeconds(0.1f);
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose()*/;
+
+
+        this.user.rb.isKinematic = false;
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+        yield return new WaitForSeconds(0.01f);
+        this.user.EntranceDone();
+    }
 
     private IEnumerator VsViolentMikeStartAnimation()
     {
@@ -297,6 +397,12 @@ public class MikeBallerStartAnimation : Attack
 
         //yield return new WaitForSeconds(0.3f);
 
+        /*if (this.rollSfx != null)
+            this.rollSfx.Play();*/
+
+        if (this.jumpSfx != null)
+            this.jumpSfx.Play();
+
         if (this.animations != null)
             this.animations.RollAnimation();
 
@@ -341,6 +447,12 @@ public class MikeBallerStartAnimation : Attack
 
             yield return null;
         }
+
+        /*if (this.rollSfx != null)
+            this.rollSfx.Stop();*/
+
+        if (this.jumpSfx != null)
+            this.jumpSfx.Stop();
 
 
         //yield return new WaitForSeconds(0.1f);

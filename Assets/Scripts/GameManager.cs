@@ -229,6 +229,8 @@ public class GameManager : MonoBehaviour
         }
         //int number = Random.Range(1, 1001);
         this.randomNumber = UnityEngine.Random.Range(1, 1001);
+
+        this.maxScore = PlayerPrefs.GetInt("MaxWins", 2);
     }
     private void OnEnable()
     {
@@ -299,6 +301,12 @@ public class GameManager : MonoBehaviour
                 this.player1.health = 100000f;
                 this.player2.health = 100000f;
             }*/
+
+            if(this.p1ScoreDisplay != null && this.p2ScoreDisplay != null)
+            {
+                this.p1ScoreDisplay.SetMaxScore(this.maxScore);
+                this.p2ScoreDisplay.SetMaxScore(this.maxScore);
+            }
         }
     }
     private void OnDisable()
@@ -735,14 +743,16 @@ public class GameManager : MonoBehaviour
         if (this.player1 != null)
         {
             this.player1.ResetPlayer();
-            this.player1.LookAtTarget();
+            //this.player1.LookAtTarget();
+            this.player1.LookAtCenter();
         }
             
 
         if (this.player2 != null)
         {
             this.player2.ResetPlayer();
-            this.player2.LookAtTarget();
+            //this.player2.LookAtTarget();
+            this.player2.LookAtCenter();
         }
             
 

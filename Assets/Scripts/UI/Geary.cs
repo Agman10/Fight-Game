@@ -221,7 +221,10 @@ public class Geary : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
-        string textString = "Hello I'm Geary. How can I help you?";
+        //string textString = "Hello I'm Geary. How can I help you?";
+
+        string textString = "Hi! Geary here. Right now the settings are under construction so it might look a little weird right now.";
+
         //Debug.Log(textString.Length);
         int number = Random.Range(0, 2);
         /*if (number == 1)
@@ -236,8 +239,8 @@ public class Geary : MonoBehaviour
         }
         else
         {
-            if (number == 1)
-                textString = "Hello my name is Geary. I'm here to help you with the settings.";
+            /*if (number == 1)
+                textString = "Hello my name is Geary. I'm here to help you with the settings.";*/
         }
         
 
@@ -257,6 +260,35 @@ public class Geary : MonoBehaviour
         /*if (this.options != null && this.options.eventSystem != null)
             this.options.eventSystem.SetActive(true);*/
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -416,7 +448,7 @@ public class Geary : MonoBehaviour
         }
     }
 
-    public void OnSelectBack()
+    public void OnSelectExit()
     {
         if (!this.dialougeLocked && this.currentDialogueId != 4)
         {
@@ -467,7 +499,7 @@ public class Geary : MonoBehaviour
         
     }
 
-    public void OnBack()
+    public void OnExit()
     {
         if (!this.dialougeLocked && this.currentDialogueId != 5)
         {
@@ -532,6 +564,285 @@ public class Geary : MonoBehaviour
             this.StartCoroutine(this.Blink());
         }
     }
+
+    public void OnSelectMaxWins()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 8)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 8;
+
+            if (this.evil)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            /*this.SetDefaultExpression();
+            this.SetRightEyebrow(0.4f, 0.63f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 80f);*/
+            this.SetExpression(0);
+            this.StartCoroutine(this.ShowText("Set the amount of rounds you need to win in order to become victorious."));
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+    public void OnSelectTimer()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 9)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 9;
+
+            if (this.evil)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            /*this.SetDefaultExpression();
+            this.SetRightEyebrow(0.4f, 0.63f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 80f);*/
+            this.SetExpression(1);
+            this.StartCoroutine(this.ShowText("Set how long a round can last."));
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+
+    public void OnSelectAudio()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 10)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 10;
+
+            if (this.evil)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            /*this.SetDefaultExpression();
+            this.SetRightEyebrow(0.4f, 0.63f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 80f);*/
+            this.SetExpression(1);
+            this.StartCoroutine(this.ShowText("Adjust the volume on the sounds."));
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+    public void OnSelectVideo()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 11)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 11;
+
+            if (this.evil)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            /*this.SetDefaultExpression();
+            this.SetRightEyebrow(0.4f, 0.63f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 80f);*/
+            this.SetExpression(0);
+            this.StartCoroutine(this.ShowText("Change the video settings"));
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+    public void OnSelectMisc()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 12)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 12;
+
+            if (this.evil)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            /*this.SetDefaultExpression();
+            this.SetRightEyebrow(0.4f, 0.63f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 80f);*/
+            this.SetExpression(0);
+            this.StartCoroutine(this.ShowText("Change some miscelanios stuff."));
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+    public void OnSelectBack()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 13)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 13;
+
+            if (this.evil)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            /*this.SetDefaultExpression();
+            this.SetRightEyebrow(0.4f, 0.63f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 80f);*/
+            this.SetExpression(1);
+            this.StartCoroutine(this.ShowText("Go back to main settings."));
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+
+    public void OnSelectUnavalaible()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 100)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 100;
+
+            if (this.evil)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            /*this.SetDefaultExpression();
+            this.SetRightEyebrow(0.4f, 0.63f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 80f);*/
+            this.SetExpression(1);
+            this.StartCoroutine(this.ShowText("It doesn't work right now."));
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+    public void OnClickUnavailable()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 101)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 101;
+
+            if (this.evil)
+            {
+                this.SetExpression(5);
+                this.StartCoroutine(this.ShowText("Still not working... DUMB ASS!"));
+            }
+            else
+            {
+                this.SetExpression(2);
+                this.StartCoroutine(this.ShowText("Still not working..."));
+            }
+
+
+            this.StartCoroutine(this.Blink());
+        }
+
+
+    }
+
+
+
+
+
+    /*public void OnSelectCustom(int dialogueId = 0, string normalDialogue = "")
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 100)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 100;
+
+            if (this.evil)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            *//*this.SetDefaultExpression();
+            this.SetRightEyebrow(0.4f, 0.63f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 80f);*//*
+            this.SetExpression(1);
+            this.StartCoroutine(this.ShowText("It doesn't work right now."));
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+    public void OnClickCustom()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 101)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 101;
+
+            if (this.evil)
+            {
+                this.SetExpression(2);
+                this.StartCoroutine(this.ShowText("Still not working... DUMB ASS!"));
+            }
+            else
+            {
+                this.SetExpression(2);
+                this.StartCoroutine(this.ShowText("Still not working..."));
+            }
+
+
+            this.StartCoroutine(this.Blink());
+        }
+
+
+    }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -918,6 +1229,14 @@ public class Geary : MonoBehaviour
 
             this.SetRightEye(0, 0f, 0f, 0.083f, 0f);
             this.SetLeftEye(0, 0f, 0f, 0.083f, 0f);
+        }
+        else if (expressionId == 12) //nervous
+        {
+            this.SetRightEyebrow(0.4f, 0.50f, 0.2f, 90f);
+            this.SetLeftEyebrow(-0.4f, 0.50f, 0.2f, 90f);
+
+            this.SetRightEye(0, 0.05f, 0f, 0.083f, 0f);
+            this.SetLeftEye(0, 0.05f, 0f, 0.083f, 0f);
         }
         else
         {

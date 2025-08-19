@@ -8,6 +8,7 @@ public class ViolentMikeStartAnimation : Attack
     public bool onGoing;
 
     public ParticleSystem electricity;
+    public AudioSource rollSfx;
 
     public override void OnHit()
     {
@@ -153,6 +154,9 @@ public class ViolentMikeStartAnimation : Attack
         if (this.animations != null)
             this.animations.RollAnimation();
 
+        if (this.rollSfx != null)
+            this.rollSfx.Play();
+
         yield return new WaitForSeconds(0.4f);
 
         float currentTime = 0;
@@ -184,6 +188,9 @@ public class ViolentMikeStartAnimation : Attack
             this.animations.SetDefaultPose();
 
         this.user.rb.isKinematic = false;
+
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
 
         yield return new WaitForSeconds(0.1f);
         this.user.LookAtTarget();
@@ -263,6 +270,9 @@ public class ViolentMikeStartAnimation : Attack
 
         if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
             GameManager.Instance.gameCamera.cameraIsLocked = false;
+
+        if (this.rollSfx != null)
+            this.rollSfx.Stop();
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
