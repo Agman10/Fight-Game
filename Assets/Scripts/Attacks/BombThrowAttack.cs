@@ -91,20 +91,20 @@ public class BombThrowAttack : Attack
 
         yield return new WaitForSeconds(time / 2);
 
-        if(number <= 10 && number >= 1)
+        if(number <= 10/* && number >= 1*/)
         {
             if (this.grenadeModel != null)
                 this.grenadeModel.SetActive(true);
 
             this.holdingGrenade = true;
         }
-        else if (number <= 1)
+        /*else if (number <= 1)
         {
             if (this.flashbangModel != null)
                 this.flashbangModel.SetActive(true);
 
             this.holdingFlashbang = true;
-        }
+        }*/
         else
         {
             if (this.bombModel != null)

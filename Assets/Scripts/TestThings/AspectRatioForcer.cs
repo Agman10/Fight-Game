@@ -5,17 +5,18 @@ using UnityEngine;
 public class AspectRatioForcer : MonoBehaviour
 {
     // Use this for initialization
-
+    public bool forceOnEnable;
 
     void Start()
     {
         //this.FixAspect();
-        this.FovFixer();
+        //this.FovFixer();
     }
 
     private void OnEnable()
     {
-        
+        if (this.forceOnEnable)
+            this.FovFixer();
     }
 
 
@@ -30,13 +31,13 @@ public class AspectRatioForcer : MonoBehaviour
         Camera camera = GetComponent<Camera>();
         float baseFov = camera.fieldOfView;
 
-        Debug.Log(scaleheight);
+        //Debug.Log(scaleheight);
 
         if(camera != null && scaleheight != 1f)
         {
             camera.fieldOfView = baseFov * ((scaleheight * 0.1f) + 1f);
 
-            Debug.Log((scaleheight * 0.1f) + 1f);
+            //Debug.Log((scaleheight * 0.1f) + 1f);
         }
     }
 
