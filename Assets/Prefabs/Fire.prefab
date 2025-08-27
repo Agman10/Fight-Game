@@ -483,7 +483,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0040a0665e06e9c4ca0e2ecd4d33d746, type: 2}
+  - {fileID: 2100000, guid: 13acdaf364f784e4a83e4d46f3eed5b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -546,19 +546,27 @@ MonoBehaviour:
   avoidOnHitInvoke: 1
   avoidDamagingPlayer: 0
   fireProperty: 1
+  electricProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 0
   preventDeath: 0
   ragdollForce: 0
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
+  isSuper: 0
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0.15
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!54 &1743743267460368865
 Rigidbody:
   m_ObjectHideFlags: 0
