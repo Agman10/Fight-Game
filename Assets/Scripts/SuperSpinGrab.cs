@@ -23,6 +23,8 @@ public class SuperSpinGrab : Attack
     public float grabStunLength = 0.6f;
     public float grabSpeed = 0.2f;
 
+    public float grabHitEndLag = 0.4f;
+
     private float grabbedPlayerYPos;
 
     public VisualEffect legFire1;
@@ -245,7 +247,9 @@ public class SuperSpinGrab : Attack
         //this.animations.SetSpinGrabEndPose2();
         //this.animations.Wry();
 
-        yield return new WaitForSeconds(0.4f);
+        //yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(this.grabHitEndLag);
+
         this.user.attackStuns.Remove(this.gameObject);
         this.animations.SetDefaultPose();
         /*yield return new WaitForSeconds(time);

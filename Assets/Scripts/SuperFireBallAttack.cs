@@ -10,7 +10,12 @@ public class SuperFireBallAttack : Attack
     public BigFireBall bigFireBall;
 
     public GameObject smoke;
+    public ParticleSystem smokeVfx;
+    public ParticleSystem smokeVfxAir;
     public GameObject confused;
+
+    public Transform groundTransform;
+    public Transform airTransform;
 
     public float cooldownTimer;
     //private float cooldown = 1.35f;
@@ -84,6 +89,8 @@ public class SuperFireBallAttack : Attack
         {
             if (this.animationId == 1)
                 this.animations.ShootPoseCrouch();
+            else if (this.animationId == 2)
+                this.animations.JokeSuperFireBall(0);
             else
                 this.animations.SuperFireBallCharge();
         }
@@ -101,20 +108,29 @@ public class SuperFireBallAttack : Attack
         /*if (this.animations != null)
             this.animations.SuperFireBallShoot();*/
 
+        if(this.animationId == 2 && this.animations != null)
+        {
+            this.animations.JokeSuperFireBall(1);
+            yield return new WaitForSeconds(0.025f);
+        }
+
         if (!fail)
         {
             if (this.animations != null)
             {
                 if (this.animationId == 1)
                     this.animations.ShootPoseCrouch2();
+                else if (this.animationId == 2)
+                    this.animations.JokeSuperFireBall(2);
                 else
                     this.animations.SuperFireBallShoot();
             }
 
-            if (this.bigFireBall != null)
+            if (this.bigFireBall != null && this.groundTransform != null)
             {
                 BigFireBall bigFireBallPrefab = this.bigFireBall;
-                bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3((this.transform.forward.z * 1.5f) + this.transform.position.x, this.transform.position.y + 1.56f, 0), this.transform.rotation);
+                //bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3((this.transform.forward.z * 1.5f) + this.transform.position.x, this.transform.position.y + 1.56f, 0), this.transform.rotation);
+                bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3(this.groundTransform.position.x, this.groundTransform.position.y, 0), this.transform.rotation);
                 bigFireBallPrefab.SetOwner(this.user);
             }
             this.cooldownTimer = this.cooldown;
@@ -151,15 +167,24 @@ public class SuperFireBallAttack : Attack
             {
                 if (this.animationId == 1)
                     this.animations.ShootPoseCrouch();
+                else if (this.animationId == 2)
+                    this.animations.JokeSuperFireBall(2);
                 else
                     this.animations.SuperFireBallShoot();
             }
 
-            if (this.smoke != null)
+            /*if (this.smoke != null)
             {
                 GameObject smokePrefab = this.smoke;
                 smokePrefab = Instantiate(smokePrefab, new Vector3((this.transform.forward.z * 1.5f) + this.transform.position.x, this.transform.position.y + 1.56f, 0), Quaternion.Euler(0, 0, 0));
+            }*/
+
+            if (this.smokeVfx != null)
+            {
+                this.smokeVfx.Play();
             }
+
+
 
             if (this.confused != null)
                 this.confused.gameObject.SetActive(true);
@@ -226,10 +251,12 @@ public class SuperFireBallAttack : Attack
                     this.animations.SuperFireBallShoot(true);
             }
 
-            if (this.bigFireBall != null)
+            if (this.bigFireBall != null && this.airTransform != null)
             {
                 BigFireBall bigFireBallPrefab = this.bigFireBall;
-                bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3((this.transform.forward.z * 1.495f) + this.transform.position.x, this.transform.position.y + 1.53f, 0), this.user.transform.rotation);
+                //bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3((this.transform.forward.z * 1.495f) + this.transform.position.x, this.transform.position.y + 1.53f, 0), this.user.transform.rotation);
+                bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3(this.airTransform.position.x, this.airTransform.position.y, 0), this.user.transform.rotation);
+
                 //bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3((this.transform.forward.z * 1.5f) + this.transform.position.x, this.transform.position.y + 1.56f, 0), this.user.transform.rotation);
                 bigFireBallPrefab.transform.localEulerAngles = new Vector3(0f, this.user.transform.localEulerAngles.y, -20f);
                 bigFireBallPrefab.SetOwner(this.user);
@@ -271,11 +298,17 @@ public class SuperFireBallAttack : Attack
                 else
                     this.animations.SuperFireBallShoot(true);
             }
-            if (this.smoke != null)
+            /*if (this.smoke != null)
             {
                 GameObject smokePrefab = this.smoke;
                 smokePrefab = Instantiate(smokePrefab, new Vector3((this.transform.forward.z * 1.495f) + this.transform.position.x, this.transform.position.y + 1.53f, 0), Quaternion.Euler(0, 0, 0));
+            }*/
+
+            if (this.smokeVfxAir != null)
+            {
+                this.smokeVfxAir.Play();
             }
+
             if (this.confused != null)
                 this.confused.gameObject.SetActive(true);
 

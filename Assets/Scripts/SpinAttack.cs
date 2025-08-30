@@ -21,6 +21,7 @@ public class SpinAttack : Attack
     [Space]
 
     public float dissyRemovalSpeed = 20f;
+    public float dizzyMeterBuildUpSpeed = 40f;
     public float moveSpeed = 0.1f;
 
     public float stunTime1 = 0.2f;
@@ -115,7 +116,8 @@ public class SpinAttack : Attack
                 this.animations.eyes.transform.eulerAngles = eyeRotation;*/
             }
 
-            this.dizzyMeter += Time.deltaTime * 40f;
+            //this.dizzyMeter += Time.deltaTime * 40f;
+            this.dizzyMeter += Time.deltaTime * this.dizzyMeterBuildUpSpeed;
 
             time -= Time.deltaTime;
 

@@ -145,6 +145,14 @@ public class UppercutAttack : Attack
                 this.user.AddStun(0.2f, true);
                 this.StartCoroutine(this.KickUppercutCoroutine(this.kickYForce));
             }
+            else if (this.uppercutId == 5)
+            {
+                if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                {
+                    this.StartCoroutine(this.JokePunchUppercutCoroutine());
+                    this.user.AddStun(0.2f, true);
+                }
+            }
             else
             {
                 if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
@@ -715,5 +723,136 @@ public class UppercutAttack : Attack
             /*if (this.animations != null && !this.user.stopAnimationOnHit)
                 this.animations.SetDefaultPose();*/
         }
+    }
+
+
+
+    //THIS IS TEMPORARY MAKE A SEPARETTE SCRIPT FOR THIS LATER
+    IEnumerator JokePunchUppercutCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        if (this.animations != null)
+            this.animations.SetPunchUppercutStartAnim1();
+        yield return new WaitForSeconds(0.1f);
+        if (this.animations != null)
+            this.animations.SetPunchUppercutStartAnim2();
+        yield return new WaitForSeconds(0.1f);
+        //this.PlayFire(true);
+
+        /*if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.001f);*/
+
+        /*this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 200, 1000, 0);*/
+
+        if (this.animations != null)
+        {
+            this.animations.SetPunchUpercutAnim();
+            /*if (this.animations.rightLeg != null)
+                this.animations.rightLeg.localScale = new Vector3(1, 1.4f, 1);*/
+        }
+
+        if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.001f);
+        this.user.rb.velocity = new Vector3(0f, 0f, 0f);
+        if (this.user.rb != null)
+            this.user.rb.AddForce(this.user.transform.forward.z * 50, 800, 0);
+
+        //this.stopSfxOnHit = true;
+
+        if (this.uppcutSfx != null)
+        {
+            this.uppcutSfx.time = 0.02f;
+            this.uppcutSfx.Play();
+        }
+
+        /*if (this.flameSfx != null)
+        {
+            //this.flameSfx.time = 0.02f;
+            this.flameSfx.Play();
+        }*/
+
+        /*if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(true);*/
+
+        yield return new WaitForSeconds(0.1f);
+        float waitTime = 0.2f;
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && /*Mathf.Abs(this.user.transform.position.y) > 0.05f &&*/ waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+        //Debug.Log(waitTime);
+
+        //yield return new WaitForSeconds(0.5f);
+
+        if (this.punchHitbox1 != null)
+            this.punchHitbox1.gameObject.SetActive(false);
+
+        if (this.punchHitbox2 != null)
+            this.punchHitbox2.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+        if (this.punchHitbox2 != null)
+            this.punchHitbox2.gameObject.SetActive(false);
+
+        //this.PlayFire(false);
+
+
+
+        yield return new WaitForSeconds(0.015f);
+        this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -90f, 0f);
+        yield return new WaitForSeconds(0.015f);
+        this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -125f, 0f);
+        yield return new WaitForSeconds(0.015f);
+        this.animations.SetDefaultPose();
+        this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * 180f, 0f);
+        yield return new WaitForSeconds(0.015f);
+
+        this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * 145f, 0f);
+        yield return new WaitForSeconds(0.015f);
+        this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * 90f, 0f);
+        yield return new WaitForSeconds(0.015f);
+        this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * 35f, 0f);
+        yield return new WaitForSeconds(0.015f);
+        this.animations.body.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        if (this.animations != null)
+            this.animations.DemonCradle(5);
+
+        waitTime = 0.3f;
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+        //yield return new WaitForSeconds(0.3f);
+
+        this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
+
+        if (this.animations != null)
+            this.animations.RoadRollerEndLand();
+
+        //yield return new WaitForSeconds(0.25f);
+
+        waitTime = 0.25f;
+        while (waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
+            yield return null;
+        }
+
+        this.animations.SetDefaultPose();
+        yield return new WaitForSeconds(0.1f);
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+
+
     }
 }

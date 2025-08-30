@@ -10,6 +10,8 @@ public class BigFireBall : MonoBehaviour
     public float speed = 10f;
     private float speedMultiplier = 1f;
 
+    public float lifeTime = 5f;
+
     private bool hasHitPlayer;
     private Collider mainCollider;
 
@@ -216,7 +218,7 @@ public class BigFireBall : MonoBehaviour
 
     private IEnumerator DisableTimer()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(this.lifeTime);
         if (!this.hasHitPlayer)
         {
             if (this.model != null)
