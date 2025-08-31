@@ -13,6 +13,7 @@ public class JoeExplosiveSuperGrab : Attack
     public GameObject trail;
 
     public ParticleSystem explosion;
+    public ParticleSystem dotsParticle;
     public AudioSource explosionSfx;
 
     //public ParticleSystem ex
@@ -106,17 +107,33 @@ public class JoeExplosiveSuperGrab : Attack
         this.moving = true;
 
         //this.user.rb.velocity = new Vector3(this.user.transform.forward.z * (30f + extraRage), 0f, 0f);
+
         this.user.rb.velocity = new Vector3(this.user.transform.forward.z * 15f, 0f, 0f);
 
         if (this.trail != null)
             this.trail.SetActive(true);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.25f);
+        //yield return new WaitForSeconds(0.35f);
+
+        float currentTime = 0;
+        float duration = 0.5f;
+
+        float startVelocity = 15f;
+
+        while (currentTime < duration && this.grabbedPlayer == null)
+        {
+            currentTime += Time.deltaTime;
+            float velocity = Mathf.Lerp(startVelocity, 2f, currentTime / duration);
+
+            this.user.rb.velocity = new Vector3(this.user.transform.forward.z * velocity, 0f, 0f);
+
+            yield return null;
+        }
 
         /*float currentTime = 0;
         float duration = 1f;
@@ -141,8 +158,14 @@ public class JoeExplosiveSuperGrab : Attack
 
             //yield return new WaitForSeconds(0.1f);
 
+            this.animations.SuperExplosiveGrabMiss();
+
+            yield return new WaitForSeconds(0.2f);
+
             if (this.animations != null)
                 this.animations.SetDefaultPose();
+
+            yield return new WaitForSeconds(0.1f);
 
             this.onGoing = false;
             this.user.attackStuns.Remove(this.gameObject);
@@ -154,7 +177,15 @@ public class JoeExplosiveSuperGrab : Attack
         //this.animations.SetGrabbingPose();
         //player.animations.KnifePunishmentHit();
 
+        yield return new WaitForSeconds(0.3f);
+
+        if (this.dotsParticle != null)
+            this.dotsParticle.Play();
+
         yield return new WaitForSeconds(1);
+
+        if (this.dotsParticle != null)
+            this.dotsParticle.Stop();
 
         this.StopGrab(player);
 
@@ -236,6 +267,9 @@ public class JoeExplosiveSuperGrab : Attack
 
             player.preventDeath = false;
 
+            /*if (this.dotsParticle != null)
+                this.dotsParticle.Stop();*/
+
             if (!player.dead)
             {
                 player.rb.isKinematic = false;
@@ -279,6 +313,9 @@ public class JoeExplosiveSuperGrab : Attack
 
         if (this.trail != null)
             this.trail.SetActive(false);
+
+        if (this.dotsParticle != null)
+            this.dotsParticle.Stop();
 
         if (this.grabbedPlayer != null)
         {

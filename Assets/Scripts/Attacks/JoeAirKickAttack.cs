@@ -90,7 +90,7 @@ public class JoeAirKickAttack : Attack
             yield return null;
         }*/
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         this.moving = true;
         this.xSpeed = 1000f;
         this.ySpeed = 200f;
@@ -162,7 +162,9 @@ public class JoeAirKickAttack : Attack
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
 
-        this.animations.SetDefaultPose();
+        //this.animations.SetDefaultPose();
+        this.animations.SetKickUppercutStartAnim();
+        this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 30f, -12f);
         //this.animations.RoadRollerEndLand();
         float inbetweenTime = 0.025f;
         float kickTime = 0.15f;

@@ -7,6 +7,10 @@ public class ChangeObjectTransformOnEnable : MonoBehaviour
     public Transform objectTransform;
     public Vector3 newPosition;
     private Vector3 oldPosition;
+
+    public bool changeRotation;
+    public Vector3 newRotation;
+    private Vector3 oldRotation;
     private void OnEnable()
     {
         if (this.objectTransform != null)
@@ -14,6 +18,13 @@ public class ChangeObjectTransformOnEnable : MonoBehaviour
             this.oldPosition = this.objectTransform.position;
 
             this.objectTransform.position = this.newPosition;
+
+            if (this.changeRotation)
+            {
+                this.oldRotation = this.objectTransform.localEulerAngles;
+
+                this.objectTransform.localEulerAngles = this.newRotation;
+            }
         }
             
     }
@@ -23,6 +34,11 @@ public class ChangeObjectTransformOnEnable : MonoBehaviour
         if (this.objectTransform != null)
         {
             this.objectTransform.position = this.oldPosition;
+
+            if (this.changeRotation)
+            {
+                this.objectTransform.localEulerAngles = this.oldRotation;
+            }
         }
     }
 }

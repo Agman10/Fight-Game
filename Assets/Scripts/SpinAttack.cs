@@ -20,6 +20,8 @@ public class SpinAttack : Attack
 
     [Space]
 
+    public float spinDuration = 1f;
+
     public float dissyRemovalSpeed = 20f;
     public float dizzyMeterBuildUpSpeed = 40f;
     public float moveSpeed = 0.1f;
@@ -102,7 +104,8 @@ public class SpinAttack : Attack
         if (this.spinSfx != null)
             this.spinSfx.Play();
 
-        float time = 1f;
+        //float time = 1f;
+        float time = this.spinDuration;
         Vector3 eyeRotation = this.animations.eyes.transform.eulerAngles;
         while (time > 0)
         {

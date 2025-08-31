@@ -8,6 +8,7 @@ public class GrandFlame : MonoBehaviour
     public VisualEffect fire;
     public TestHitbox hitBox;
     public TestHitbox hitBox2;
+    public TestHitbox selfDamageHitbox;
     public MoveAndTeleportObject[] fireBalls;
     public TestHitbox[] fireBallHitboxes;
     public TestPlayer owner;
@@ -17,6 +18,9 @@ public class GrandFlame : MonoBehaviour
     {
         if (this.hitBox != null)
             this.hitBox.gameObject.SetActive(true);
+
+        if (this.selfDamageHitbox != null)
+            this.selfDamageHitbox.gameObject.SetActive(true);
 
         if (this.flameSfx != null)
             this.flameSfx.Play();
@@ -72,6 +76,9 @@ public class GrandFlame : MonoBehaviour
         if (this.hitBox != null)
             this.hitBox.gameObject.SetActive(false);
 
+        if (this.selfDamageHitbox != null)
+            this.selfDamageHitbox.gameObject.SetActive(false);
+
         if (this.hitBox2 != null)
             this.hitBox2.gameObject.SetActive(true);
 
@@ -119,6 +126,9 @@ public class GrandFlame : MonoBehaviour
                 this.hitBox.belongsTo = user;
             if (this.hitBox2 != null)
                 this.hitBox2.belongsTo = user;
+
+            if (this.selfDamageHitbox != null)
+                this.selfDamageHitbox.belongsTo = user;
 
             foreach (TestHitbox fireBallHitbox in this.fireBallHitboxes)
             {

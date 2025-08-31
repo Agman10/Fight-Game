@@ -101,7 +101,7 @@ public class GrandFlameAttack : Attack
         yield return new WaitForSeconds(this.riseUpDelay);
 
         this.user.rb.constraints = RigidbodyConstraints.FreezeAll;
-        this.user.knockbackInvounrability = true;
+        //this.user.knockbackInvounrability = true;
 
 
 
@@ -131,6 +131,7 @@ public class GrandFlameAttack : Attack
         }
 
         this.canBeCanceled = false;
+        this.user.knockbackInvounrability = true;
 
         yield return new WaitForSeconds(0.05f);
 
