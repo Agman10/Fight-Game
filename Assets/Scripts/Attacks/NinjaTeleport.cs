@@ -9,7 +9,7 @@ public class NinjaTeleport : Attack
     public Movement movement;
     public GameObject teleportEffect;
     public float teleportEffeftYPos = 0f;
-    private float teleportDistance = 7f;
+    public float teleportDistance = 7f;
     public TestHitbox hitbox;
 
     public AudioSource teleportSfx;

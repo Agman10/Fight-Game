@@ -92,7 +92,7 @@ public class JCapStartAnimation : Attack
         //this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
         int number = Random.Range(1, 1001);
         //Debug.Log(number);
-        if (number == 1)
+        /*if (number == 1)
         {
             this.user.ragdoll.transform.localScale = new Vector3(1f, 1f, 1f);
             this.user.Suicide();
@@ -100,8 +100,11 @@ public class JCapStartAnimation : Attack
         else if (this.animations != null)
         {
             this.animations.JCapLandingStartAnimation();
-        }
-        
+        }*/
+
+        if (this.animations != null)
+            this.animations.JCapLandingStartAnimation();
+
         /*yield return new WaitForSeconds(1f - this.fallDuration - 0.1f);
         if (this.animations != null)
             this.animations.JCapLandingStartAnimation2();

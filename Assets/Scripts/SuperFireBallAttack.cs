@@ -224,6 +224,8 @@ public class SuperFireBallAttack : Attack
         {
             if (this.animationId == 1)
                 this.animations.ShootPoseCrouch(true);
+            else if (this.animationId == 2)
+                this.animations.JokeSuperFireBallAir(0);
             else
                 this.animations.SuperFireBallCharge(true);
         }
@@ -241,12 +243,20 @@ public class SuperFireBallAttack : Attack
         /*if (this.animations != null)
             this.animations.SuperFireBallShoot();*/
 
+        if (this.animationId == 2 && this.animations != null)
+        {
+            this.animations.JokeSuperFireBallAir(1);
+            yield return new WaitForSeconds(0.025f);
+        }
+
         if (!fail)
         {
             if (this.animations != null)
             {
                 if (this.animationId == 1)
                     this.animations.ShootPoseCrouch2(true);
+                else if (this.animationId == 2)
+                    this.animations.JokeSuperFireBallAir(2);
                 else
                     this.animations.SuperFireBallShoot(true);
             }
@@ -295,6 +305,8 @@ public class SuperFireBallAttack : Attack
             {
                 if (this.animationId == 1)
                     this.animations.ShootPoseCrouch(true);
+                else if (this.animationId == 2)
+                    this.animations.JokeSuperFireBallAir(2);
                 else
                     this.animations.SuperFireBallShoot(true);
             }

@@ -14,6 +14,9 @@ public class CowardRunAttack : Attack
     public TestHitbox hitbox1;
     public TestHitbox hitbox2;
 
+    //public float superStartTime = 0.3f;
+    public float superEndlagTime = 0.05f;
+
     //private float testTime = 0f;
 
     public override void OnHit()
@@ -94,6 +97,7 @@ public class CowardRunAttack : Attack
         //do this so they doen't glide when walking towards them
         float currentTime = 0;
         float duration = 0.3f;
+        //float duration = this.superStartTime;
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
@@ -175,7 +179,17 @@ public class CowardRunAttack : Attack
             yield return null;
         }*/
 
-        yield return new WaitForSeconds(0.05f);
+        currentTime = 0;
+        duration = this.superEndlagTime;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0f);
+            yield return null;
+        }
+
+        //yield return new WaitForSeconds(0.05f);
 
         //yield return new WaitForSeconds(0.3f);
 

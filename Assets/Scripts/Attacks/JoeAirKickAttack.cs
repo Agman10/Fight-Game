@@ -11,6 +11,9 @@ public class JoeAirKickAttack : Attack
     public TestHitbox hitbox2;
     public TestHitbox hitbox3;
 
+    public AudioSource kickSfx1;
+    public AudioSource kickSfx2;
+
     private bool moving = false;
     private float xSpeed = 0f;
     private float ySpeed = 0f;
@@ -97,24 +100,52 @@ public class JoeAirKickAttack : Attack
 
         this.animations.JoekukyakuKicksInbetweens(0);
 
+        if (this.kickSfx1 != null)
+        {
+            this.kickSfx1.time = 0.01f;
+            this.kickSfx1.Play();
+        }
 
         yield return new WaitForSeconds(0.05f);
 
         this.animations.JoekukyakuKicks(0);
         this.EnableHitbox(1);
+
+        
+
         yield return new WaitForSeconds(kickTime);
         this.animations.JoekukyakuKicksInbetweens(1);
+
+        if (this.kickSfx2 != null)
+        {
+            this.kickSfx2.time = 0.02f;
+            this.kickSfx2.Play();
+        }
+
         yield return new WaitForSeconds(inbetweenTime);
         this.animations.JoekukyakuKicks(1);
         this.EnableHitbox(2);
+
+        
+
         yield return new WaitForSeconds(kickTime);
         this.animations.JoekukyakuKicksInbetweens(0);
 
         this.xSpeed = 800f;
         this.ySpeed = -100f;
+
+        if (this.kickSfx1 != null)
+        {
+            this.kickSfx1.time = 0.01f;
+            this.kickSfx1.Play();
+        }
+
         yield return new WaitForSeconds(inbetweenTime);
         this.animations.JoekukyakuKicks(2);
         this.EnableHitbox(3);
+
+        
+
         yield return new WaitForSeconds(kickTime);
         this.EnableHitbox(0);
 
@@ -189,6 +220,11 @@ public class JoeAirKickAttack : Attack
 
         this.animations.JoekukyakuKicksInbetweens(0);
 
+        if (this.kickSfx1 != null)
+        {
+            this.kickSfx1.time = 0.01f;
+            this.kickSfx1.Play();
+        }
 
         yield return new WaitForSeconds(0.05f);
 
@@ -198,6 +234,11 @@ public class JoeAirKickAttack : Attack
         this.animations.JoekukyakuKicksInbetweens(1);
         //yield return new WaitForSeconds(inbetweenTime);
 
+        if (this.kickSfx2 != null)
+        {
+            this.kickSfx2.time = 0.02f;
+            this.kickSfx2.Play();
+        }
 
         this.animations.JoekukyakuKicksInbetweens(1);
         yield return new WaitForSeconds(inbetweenTime);
