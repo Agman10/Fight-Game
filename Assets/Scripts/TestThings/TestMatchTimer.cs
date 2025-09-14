@@ -136,8 +136,8 @@ public class TestMatchTimer : MonoBehaviour
     {
         //float roundedNumber = Mathf.FloorToInt(this.time);
         float roundedNumber = Mathf.FloorToInt(Mathf.Abs(this.time));
-        Debug.Log(this.time);
-        Debug.Log(roundedNumber);
+        //Debug.Log(this.time);
+        //Debug.Log(roundedNumber);
 
         //string currentTime = this.time.ToString("00");
         string currentTime = roundedNumber.ToString("00");
