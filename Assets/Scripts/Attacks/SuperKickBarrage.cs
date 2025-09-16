@@ -94,7 +94,8 @@ public class SuperKickBarrage : Attack
             startParticlePrefab = Instantiate(startParticlePrefab, new Vector3(this.user.transform.position.x + (this.user.transform.forward.z * 0f), this.user.transform.position.y + 1.62f, -1.25f), Quaternion.Euler(0, 0, 0));
         }
 
-        yield return new WaitForSeconds(0.25f);
+        //yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.2f);
 
         this.user.rb.AddForce(new Vector3(this.user.transform.forward.z * 250f, 0f, 0f));
 

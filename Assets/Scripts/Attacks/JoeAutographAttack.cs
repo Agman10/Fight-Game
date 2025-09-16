@@ -8,6 +8,7 @@ public class JoeAutographAttack : Attack
     public bool onGoing;
 
     public TestHitbox hitbox;
+    public TestHitbox hitbox2;
 
     public GameObject paper;
     public GameObject pen;
@@ -80,7 +81,7 @@ public class JoeAutographAttack : Attack
         if (this.animations != null)
             this.animations.WritingAutograph(0);
 
-        int amount = 16;
+        int amount = 10;
         int armId = 1;
         //bool idForward = true;
         while (amount > 0)
@@ -128,7 +129,7 @@ public class JoeAutographAttack : Attack
             this.hitbox.gameObject.SetActive(false);
 
 
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.3f);
 
         if (this.animations != null)
             this.animations.ThrowAutoGraph(2);
@@ -142,7 +143,15 @@ public class JoeAutographAttack : Attack
 
         this.ChangePaperPosition(4);
 
-        yield return new WaitForSeconds(0.5f);
+        if (this.hitbox2 != null)
+            this.hitbox2.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.hitbox2 != null)
+            this.hitbox2.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.2f);
 
         if (this.animations != null)
             this.animations.JokeSuperFireBall(2);
@@ -177,6 +186,9 @@ public class JoeAutographAttack : Attack
 
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(false);
+
+        if (this.hitbox2 != null)
+            this.hitbox2.gameObject.SetActive(false);
 
         this.ChangePaperPosition(0);
 

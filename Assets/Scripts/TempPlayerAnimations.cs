@@ -3848,6 +3848,48 @@ public class TempPlayerAnimations : MonoBehaviour
         this.SetEyes(0);
     }
 
+    [ContextMenu("Grabbing2")]
+    public void Grabbing2()
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            this.rightArm.localEulerAngles = new Vector3(0f, 5f, 90f);
+            this.leftArm.localEulerAngles = new Vector3(0f, -5f, 90f);
+            this.rightArmJoint.localEulerAngles = new Vector3(-10f, 0f, 5f);
+            this.leftArmJoint.localEulerAngles = new Vector3(10f, 0f, 5f);
+
+            /*this.rightLeg.localEulerAngles = new Vector3(0f, 0f, -15f);
+            this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 35f);
+            this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, -15f);
+            this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, -30f);*/
+
+            this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 35f);
+            this.leftLeg.localEulerAngles = new Vector3(0f, 0f, -15f);
+            this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, -30f);
+            this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, -15f);
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.eyes != null)
+        {
+            this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+            this.eyes.localEulerAngles = new Vector3(0f, 5f, 0f);
+        }
+
+        if (this.body != null)
+        {
+            this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.08f, this.transform.forward.z * 0f);
+            this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, -5f);
+        }
+
+        this.SetEyes(0);
+    }
+
     public void WalkPose2()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
@@ -13821,6 +13863,296 @@ public class TempPlayerAnimations : MonoBehaviour
         
     }
 
+    public void JoeGrabbing(int stageId = 0)
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            if (stageId == 0)
+            {
+                this.rightArm.localEulerAngles = new Vector3(0, 5.000001f, 105f);
+                this.leftArm.localEulerAngles = new Vector3(0, 355f, 105f);
+                this.rightArmJoint.localEulerAngles = new Vector3(350f, 0, 5.000001f);
+                this.leftArmJoint.localEulerAngles = new Vector3(10f, 0, 5.000001f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 355f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 10f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 350f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 10f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 355f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 350f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+            else if (stageId == 1)
+            {
+                this.rightArm.localEulerAngles = new Vector3(15.00001f, 180f, 182f);
+                this.leftArm.localEulerAngles = new Vector3(345f, 180f, 182f);
+                this.rightArmJoint.localEulerAngles = new Vector3(25f, 0f, 0f);
+                this.leftArmJoint.localEulerAngles = new Vector3(335f, 0f, 0f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 60f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 350f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 260f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 350f);
+            }
+            else if (stageId == 2)
+            {
+                this.rightArm.localEulerAngles = new Vector3(0f, 10f, 90f);
+                this.leftArm.localEulerAngles = new Vector3(0f, 350f, 90f);
+                this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 34.99999f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 340f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 270f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 300f);
+            }
+            else
+            {
+                this.rightArm.localEulerAngles = new Vector3(20f, 0f, 0f);
+                this.leftArm.localEulerAngles = new Vector3(-20f, 0f, 0f);
+                this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+
+            
+
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            if (stageId == 0)
+            {
+                this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+            else if (stageId == 1)
+            {
+                this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+            else
+            {
+                this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+
+        }
+
+        if (this.eyes != null)
+        {
+            if (stageId == 0)
+            {
+                this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+                this.eyes.localEulerAngles = new Vector3(0f, 5f, 0f);
+            }
+            else if (stageId == 1)
+            {
+                this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+                this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+            else
+            {
+                this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+                this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+
+
+        }
+
+        if (this.body != null)
+        {
+            if (stageId == 0)
+            {
+                this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, 0f);
+            }
+            else if (stageId == 1)
+            {
+                this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, 2f);
+            }
+            else if (stageId == 2)
+            {
+                this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, -25f);
+            }
+            else
+            {
+                this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, 0f);
+            }
+
+        }
+
+        this.SetEyes(0);
+    }
+
+    public void JoeGrabbed()
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            this.rightArm.localEulerAngles = new Vector3(20f, 0f, 90f);
+            this.leftArm.localEulerAngles = new Vector3(-20f, 0f,90f);
+            this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+            this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 90f);
+            this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 90f);
+            this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+            float charId = this.characterId;
+            if(charId == 3 || charId == 4 || charId == 7)
+            {
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 50f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 50f);
+            }
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.eyes != null)
+        {
+            this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+            this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.body != null)
+        {
+            this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+            this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, -90f);
+        }
+
+        this.SetEyes(2);
+    }
+
+    public void JoeGrabStart(int stageId = 0)
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            if (stageId == 0)
+            {
+                this.rightArm.localEulerAngles = new Vector3(80f, 180f, 130f);
+                this.leftArm.localEulerAngles = new Vector3(280f, 180f, 130f);
+                this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 20f);
+                this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 20f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 5f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 335f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 350f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 355f);
+            }
+            else if (stageId == 1)
+            {
+                this.rightArm.localEulerAngles = new Vector3(90f, 25f, 0f);
+                this.leftArm.localEulerAngles = new Vector3(270f, 335f, 0f);
+                this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 60f);
+                this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 60f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 10f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 335f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 350f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 355f);
+            }
+            else if (stageId == 2)
+            {
+                this.rightArm.localEulerAngles = new Vector3(90f, 270f, 0f);
+                this.leftArm.localEulerAngles = new Vector3(270f, 90f, 0f);
+                this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 20f);
+                this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 20f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 20f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 335f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 350f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 355f);
+            }
+            else if (stageId == 3)
+            {
+                this.rightArm.localEulerAngles = new Vector3(20f, 0f, 80f);
+                this.leftArm.localEulerAngles = new Vector3(340f, 0f, 80f);
+                this.rightArmJoint.localEulerAngles = new Vector3(325f, 0f, 0f);
+                this.leftArmJoint.localEulerAngles = new Vector3(35f, 0f, 0f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 10f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 315f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 10f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 330f);
+            }
+            else
+            {
+                this.rightArm.localEulerAngles = new Vector3(20f, 0f, 0f);
+                this.leftArm.localEulerAngles = new Vector3(-20f, 0f, 0f);
+                this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.leftArmJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+
+            
+
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        }
+
+        if (this.eyes != null)
+        {
+            this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+            this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.body != null)
+        {
+            if (stageId == 0)
+            {
+                this.body.localPosition = new Vector3(-0.17f, this.defaultYPos - 0.015f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, 5f);
+            }
+            else if (stageId == 1)
+            {
+                this.body.localPosition = new Vector3(-0.1f, this.defaultYPos - 0.01f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, 0f);
+            }
+            else if (stageId == 2)
+            {
+                this.body.localPosition = new Vector3(0.03f, this.defaultYPos - 0.02f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, 350f);
+            }
+            else if (stageId == 3)
+            {
+                this.body.localPosition = new Vector3(0.36f, this.defaultYPos - 0.05f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, 340f);
+            }
+            else
+            {
+                this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+                this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 0f, 0f);
+            }
+
+        }
+        if (stageId == 3)
+            this.SetEyes(2);
+        else
+            this.SetEyes(0);
+    }
 
     public void WitchBroomSit()
     {

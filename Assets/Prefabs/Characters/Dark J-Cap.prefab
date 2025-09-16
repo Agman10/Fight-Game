@@ -34106,6 +34106,7 @@ MonoBehaviour:
   movement: {fileID: 4206752788515778439}
   teleportEffect: {fileID: 3824353003390138084, guid: 5abba8343ccfae647acacaab2ba54a99, type: 3}
   teleportEffeftYPos: 0
+  teleportDistance: 7
   hitbox: {fileID: 7141975216863783276}
   teleportSfx: {fileID: 33214814802215875}
   shrink: 0
@@ -52019,6 +52020,7 @@ MonoBehaviour:
   downwardForce: 500
   grabStunLength: 1
   grabSpeed: 0.2
+  grabHitEndLag: 0.4
   legFire1: {fileID: 1280922845282019976}
   legFire2: {fileID: 8096717793486255425}
   playFire: 0
@@ -82929,7 +82931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eebe9763539c32b428c4751370eaf510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 11
+  damage: 12
   stun: 0.5
   horizontalKnockback: 600
   verticalKnockback: -700
@@ -82953,7 +82955,7 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 3585203878947254225}
   isSuper: 1
-  knockDown: 0
+  knockDown: 1
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   preventDeathSound: 0
@@ -113505,7 +113507,9 @@ MonoBehaviour:
   spinning: 0
   dizzyMeter: 0
   spinSfx: {fileID: 2601425784015256765}
+  spinDuration: 1
   dissyRemovalSpeed: 20
+  dizzyMeterBuildUpSpeed: 40
   moveSpeed: 0.1
   stunTime1: 0.2
   stunTime2: 0.2

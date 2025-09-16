@@ -37,7 +37,8 @@ public class SuperRazorKick : Attack
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
             {
                 //this.user.rb.velocity = new Vector3(this.user.rb.velocity.x / 1.5f, this.user.rb.velocity.y - 0.4f, 0);
-                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y - 0.4f, 0);
+                //this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y - 0.4f, 0);
+                this.user.rb.velocity = new Vector3(0f, this.user.rb.velocity.y, 0);
             }
 
         }
@@ -100,7 +101,8 @@ public class SuperRazorKick : Attack
         if (this.animations != null)
             this.animations.SetKickUppercutStartAnim();
 
-        yield return new WaitForSeconds(0.25f);
+        //yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.2f);
 
         /*if (this.animations != null)
             this.animations.SetKickUppercutStartAnim();
@@ -233,9 +235,16 @@ public class SuperRazorKick : Attack
             this.animations.SetSpinKickAnimPoseEnd3();
 
         yield return new WaitForSeconds(animSpeed);
+        
+        if (this.animations != null)
+            this.animations.body.localEulerAngles = new Vector3(0f, 0f, 0f);
+        yield return new WaitForSeconds(0.025f);
+
         if (this.trail != null)
             this.trail.SetActive(false);
-        this.animations.SetDefaultPose();
+
+        //this.animations.SetDefaultPose();
+        this.animations.DemonCradle(5);
         //this.animations.SuperRazorKickEnd();
         if (this.hitbox3 != null)
             this.hitbox3.gameObject.SetActive(false);
@@ -246,12 +255,32 @@ public class SuperRazorKick : Attack
             this.animations.SetDefaultPose();
         yield return new WaitForSeconds(0.25f);*/
 
-        yield return new WaitForSeconds(0.5f);
+        /*yield return new WaitForSeconds(0.5f);
 
         this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
 
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.25f);*/
+
+        float waitTime = 0.6f;
+        while (Mathf.Abs(this.user.rb.velocity.y) > 0f && waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        if (Mathf.Abs(this.user.rb.velocity.y) == 0f)
+            this.animations.RoadRollerEndLand();
+        else
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
