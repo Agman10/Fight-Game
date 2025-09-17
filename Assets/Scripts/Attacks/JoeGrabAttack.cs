@@ -26,6 +26,8 @@ public class JoeGrabAttack : Attack
     {
         base.OnEnable();
 
+        //MAKE IT SO HE CAN GRAB THE BALL IN THE FUTURE
+
         if (this.hitbox != null)
             this.hitbox.OnPlayerCollision += this.Grab;
     }

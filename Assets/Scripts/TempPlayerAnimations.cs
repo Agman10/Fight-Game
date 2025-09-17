@@ -3851,6 +3851,7 @@ public class TempPlayerAnimations : MonoBehaviour
     [ContextMenu("Grabbing2")]
     public void Grabbing2()
     {
+        bool flipLegs = false;
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
         {
             this.rightArm.localEulerAngles = new Vector3(0f, 5f, 90f);
@@ -3867,6 +3868,14 @@ public class TempPlayerAnimations : MonoBehaviour
             this.leftLeg.localEulerAngles = new Vector3(0f, 0f, -15f);
             this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, -30f);
             this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, -15f);
+
+            if (flipLegs)
+            {
+                this.rightLeg.localEulerAngles = new Vector3(0f, 0f, -15f);
+                this.leftLeg.localEulerAngles = new Vector3(0f, 0f, 35f);
+                this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, -15f);
+                this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, -30f);
+            }
         }
 
         if (this.upperBody != null && this.lowerBody != null)

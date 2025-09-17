@@ -232,6 +232,7 @@ public class JoeExplosiveSuperGrab : Attack
 
             this.animations.SetDefaultPose();
             this.animations.SetGrabbingPose();
+            //this.animations.Grabbing2();
 
             Vector3 pos = this.user.transform.position;
             int charId = player.characterId;

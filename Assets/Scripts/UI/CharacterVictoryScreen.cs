@@ -14,7 +14,7 @@ public class CharacterVictoryScreen : MonoBehaviour
     // Start is called before the first frame update
     private void OnEnable()
     {
-        if(this.opponentId <= this.specificQuotes.Length - 1 && this.specificQuotes.Length >= 1)
+        if(this.opponentId <= this.specificQuotes.Length - 1 && this.specificQuotes.Length >= 1 && this.specificQuotes[this.opponentId].quotes.Length >= 1)
         {
             int victoryIndex = Random.Range(0, this.specificQuotes[this.opponentId].quotes.Length);
             //Debug.Log(victoryIndex);

@@ -19,7 +19,7 @@ public class AnimateTest : MonoBehaviour
     private IEnumerator AnimateCoroutine()
     {
         int amount = this.animationGameObjects.Length;
-        Debug.Log(amount);
+        //Debug.Log(amount);
 
         int animId = 0;
 
