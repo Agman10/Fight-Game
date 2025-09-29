@@ -2527,6 +2527,9 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 0
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
   preventDeathSound: 0
   doHitSound: 0
   hitSoundCooldown: 0
@@ -9274,6 +9277,9 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 0
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -15916,6 +15922,9 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -16119,7 +16128,7 @@ MonoBehaviour:
   stun: 0.5
   horizontalKnockback: 300
   verticalKnockback: 800
-  explosionKnockback: 1
+  explosionKnockback: 0
   continousDamage: 1
   damageDelay: 0.1
   players: []
@@ -16139,6 +16148,9 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -36397,7 +36409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3156592098874206422, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_RootOrder
-      value: 32
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 3447192611636232129, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_RootOrder
@@ -36481,7 +36493,7 @@ PrefabInstance:
       objectReference: {fileID: 4548918730609249123, guid: 524901ff5669a364a8433057057d83ac, type: 3}
     - target: {fileID: 4757115079179506212, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_RootOrder
-      value: 31
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 4825284022575653703, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: hitSound.sound
@@ -36501,7 +36513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5485217639674405769, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_RootOrder
-      value: 29
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5505291409837629747, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -36633,7 +36645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6125321858305528826, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_RootOrder
-      value: 30
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 6329310971187404995, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_RootOrder
@@ -36769,7 +36781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6860035015387234192, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_RootOrder
-      value: 33
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 7023818979293107309, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.b
@@ -36973,7 +36985,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8970255322328576877, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 29
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd03bb1feb1acd94a891fddb7ec959ac, type: 3}
