@@ -708,6 +708,12 @@ public class TestPlayer : MonoBehaviour
 
     }
 
+    public void EnableCollision(bool enable = true)
+    {
+        if (!this.dead && this.collision != null)
+            this.collision.enabled = enable;
+    }
+
     /*public void DelayedDeath(Vector3 position, bool ragdollforce = false, bool ghost = false)
     {
         if (!this.dead)
