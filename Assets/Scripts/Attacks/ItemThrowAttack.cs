@@ -24,6 +24,7 @@ public class ItemThrowAttack : Attack
     public FireBall pebble;
     public FireBall snowball;
     public FireBall hammer;
+    public MolotovProjectile molotov;
 
     public SpikeBall spikeBall;
 
@@ -47,6 +48,8 @@ public class ItemThrowAttack : Attack
     public FoodItem carrot;
     public FoodItem chocolate;
     public FoodItem orange;
+    public FoodItem cake;
+    public FoodItem pie;
 
     [Space]
     public AudioSource throwSfx;
@@ -179,7 +182,10 @@ public class ItemThrowAttack : Attack
 
         //this.ThrowPotion();
 
+        //this.ThrowMolotov();
+
         this.ThrowRandomItem();
+
 
         yield return new WaitForSeconds(0.3f * throwSpeed);
 
@@ -250,6 +256,10 @@ public class ItemThrowAttack : Attack
         {
             this.ThrowHammer();
         }
+        /*else if (number > 600 && number <= 725)
+        {
+            this.ThrowMolotov();
+        }*/
         else if (number > 725 && number <= 800)
         {
             this.ThrowSpikeBall();
@@ -365,6 +375,15 @@ public class ItemThrowAttack : Attack
         else if (number > 2500 && number <= 3000)
         {
             foodPrefab = this.hamburger;
+
+            /*int foodNumber = Random.Range(0, 4);
+            Debug.Log(foodNumber);
+            if (foodNumber <= 1)
+                foodPrefab = this.hamburger;
+            else if (foodNumber == 2)
+                foodPrefab = this.cake;
+            else
+                foodPrefab = this.pie;*/
         }
         else if (number > 3000 && number <= 3500)
         {
@@ -376,7 +395,7 @@ public class ItemThrowAttack : Attack
         }
         else if(number > 3500 && number <= 7500)
         {
-            int foodNumber = Random.Range(1, 6);
+            int foodNumber = Random.Range(1, 8);
             if (foodNumber <= 1)
                 foodPrefab = this.melon;
             else if (foodNumber > 1 && foodNumber <= 2)
@@ -385,8 +404,12 @@ public class ItemThrowAttack : Attack
                 foodPrefab = this.carrot;
             else if (foodNumber > 3 && foodNumber <= 4)
                 foodPrefab = this.chocolate;
-            else
+            else if (foodNumber > 4 && foodNumber <= 5)
                 foodPrefab = this.orange;
+            else if (foodNumber > 5 && foodNumber <= 6)
+                foodPrefab = this.cake;
+            else
+                foodPrefab = this.pie;
 
             //Debug.Log(foodNumber);
         }
@@ -410,6 +433,24 @@ public class ItemThrowAttack : Attack
             else
                 foodPrefab = this.enegryDrink;
         }
+
+
+        /*else if (number > 7501 && number <= 9501)
+        {
+            int energyNumber = Random.Range(1, 1001);
+            if (energyNumber <= 500)
+                foodPrefab = this.coffee;
+            else
+                foodPrefab = this.enegryDrink;
+        }
+        else
+        {
+            int foodNumber = Random.Range(1, 2);
+            if (foodNumber <= 1)
+                foodPrefab = this.cake;
+            else
+                foodPrefab = this.pie;
+        }*/
 
         /*else if (number > 250 && number <= 500)
         {
@@ -583,6 +624,21 @@ public class ItemThrowAttack : Attack
         }
     }
 
+    public void ThrowMolotov()
+    {
+        if (this.molotov != null)
+        {
+            MolotovProjectile molotovPrefab = this.molotov;
+            float forward = this.transform.forward.z;
+            //ghostPrefab = Instantiate(ghostPrefab, this.transform.position, this.transform.rotation);
+            molotovPrefab = Instantiate(molotovPrefab, new Vector3(this.user.transform.position.x + (forward * 0.8f), this.user.transform.position.y + 3, 0), this.user.transform.rotation);
+            if (this.user != null)
+                molotovPrefab.owner = this.user;
+
+            molotovPrefab.KnockBack(new Vector3(forward * 260f, 600f, 0));
+        }
+    }
+
     //MAKE IT SO IT SUPPORTS MULTIPLE POTIONS
     //IMPROVE CODE PLS
     public void ThrowPotion()
@@ -656,6 +712,7 @@ public class ItemThrowAttack : Attack
             this.user.animations.ItemThrow(3);
 
             this.ThrowRandomItem();
+            //this.ThrowFood();
             //this.ThrowRandomItemBombAndFire();
 
             yield return new WaitForSeconds(0.025f);

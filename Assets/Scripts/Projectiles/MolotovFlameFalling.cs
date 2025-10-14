@@ -6,7 +6,8 @@ using UnityEngine.VFX;
 public class MolotovFlameFalling : MonoBehaviour
 {
 
-    public GameObject molotovFlame;
+    //public GameObject molotovFlame;
+    public MolotovFlames molotovFlame;
     public VisualEffect flame;
     private Rigidbody rb;
     private Collider colision;
@@ -22,7 +23,8 @@ public class MolotovFlameFalling : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /*if (this.rb != null)
+            this.rb.velocity = new Vector3(this.rb.velocity.x, this.rb.velocity.y -0.1f, 0f);*/
     }
 
     private void OnEnable()
@@ -35,7 +37,7 @@ public class MolotovFlameFalling : MonoBehaviour
             this.rb.isKinematic = false;
 
             //this.rb.AddForce(0f, -500f, 0f);
-           this.rb.velocity = new Vector3(0f, -10f, 0f);
+            this.rb.velocity = new Vector3(0f, -10f, 0f);
         }
             
 
@@ -95,13 +97,22 @@ public class MolotovFlameFalling : MonoBehaviour
     {
         
 
-        if (this.molotovFlame != null)
+        /*if (this.molotovFlame != null)
         {
             GameObject firePrefab = this.molotovFlame;
 
             firePrefab = Instantiate(firePrefab, new Vector3(this.transform.position.x, 0f, 0f), this.transform.rotation);
-            /*if (this.belongsTo != null)
-                firePrefab.SetOwner(this.belongsTo);*/
+            *//*if (this.belongsTo != null)
+                firePrefab.SetOwner(this.belongsTo);*//*
+        }*/
+
+        if (this.molotovFlame != null)
+        {
+            MolotovFlames firePrefab = this.molotovFlame;
+
+            firePrefab = Instantiate(firePrefab, new Vector3(this.transform.position.x, 0f, 0f), this.transform.rotation);
+            if (this.owner != null)
+                firePrefab.SetOwner(this.owner);
         }
 
 

@@ -3745,6 +3745,7 @@ MonoBehaviour:
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
   eyesPosTransform: {fileID: 0}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!1 &678618499895071049
@@ -29595,6 +29596,7 @@ MonoBehaviour:
   movement: {fileID: 6338301620535137730}
   teleportEffect: {fileID: 1239192568902054290, guid: dc9fbc8e4b9f49846b3b6167da50d0b6, type: 3}
   teleportEffeftYPos: 0
+  teleportDistance: 7
   hitbox: {fileID: 8444979752896951263}
   teleportSfx: {fileID: 0}
   shrink: 0
@@ -37728,6 +37730,7 @@ MonoBehaviour:
   isSuper: 1
   hitbox1: {fileID: 1908148738114596418}
   hitbox2: {fileID: 5323736097486249114}
+  superEndlagTime: 0.05
 --- !u!1 &3626496756713354108
 GameObject:
   m_ObjectHideFlags: 0
@@ -41729,6 +41732,7 @@ MonoBehaviour:
   pebble: {fileID: 2796423417487575980, guid: 76cefdd247c8387438efb857426f9a3f, type: 3}
   snowball: {fileID: 2796423417487575980, guid: af40b4e10f981ac41b22ba40fe2896cc, type: 3}
   hammer: {fileID: 2796423417487575980, guid: 706fda0f4268f1b4bb427bf7396f3a69, type: 3}
+  molotov: {fileID: 7622928957479040337, guid: 98d077d51e5154645b41a9db0fc3010d, type: 3}
   spikeBall: {fileID: 475921856621807860, guid: 47c2fa6472468ba4b883ecf0d5ac2c9a, type: 3}
   spring: {fileID: 1705014586924796343, guid: 2d0952c53e4e5434693dba4266d5a768, type: 3}
   healingPotion: {fileID: 4960478471794199406, guid: 6abbb8b4a062f7a4ab21115f3fa4b788, type: 3}
@@ -41747,6 +41751,8 @@ MonoBehaviour:
   carrot: {fileID: 792614000186996116, guid: 091fb6e7df52d3f4dbc0b05c5dfa22b2, type: 3}
   chocolate: {fileID: 792614000186996116, guid: 0391bbc5f839991488c85ec30e88f1bd, type: 3}
   orange: {fileID: 8100452912889387360, guid: 58985638368838b46808d4831a6edf76, type: 3}
+  cake: {fileID: 290884111967804714, guid: 20d74080ac4f9ac459b9ea1ff6e144ff, type: 3}
+  pie: {fileID: 290884111967804714, guid: f3badc437f2aa5f46b76d65ca5905533, type: 3}
   throwSfx: {fileID: 8770404749729711476}
   nothingSfx: {fileID: 6955607055901961357}
   switchPlaceSfx: {fileID: 8922597547482018190}
@@ -47147,6 +47153,7 @@ MonoBehaviour:
   downwardForce: 1000
   grabStunLength: 1
   grabSpeed: 0.2
+  grabHitEndLag: 0.4
   legFire1: {fileID: 7023818979293107309}
   legFire2: {fileID: 7594906205669944086}
   playFire: 0
@@ -70755,6 +70762,7 @@ MonoBehaviour:
   pebble: {fileID: 2796423417487575980, guid: 76cefdd247c8387438efb857426f9a3f, type: 3}
   snowball: {fileID: 2796423417487575980, guid: af40b4e10f981ac41b22ba40fe2896cc, type: 3}
   hammer: {fileID: 2796423417487575980, guid: 706fda0f4268f1b4bb427bf7396f3a69, type: 3}
+  molotov: {fileID: 7622928957479040337, guid: 98d077d51e5154645b41a9db0fc3010d, type: 3}
   spikeBall: {fileID: 475921856621807860, guid: 47c2fa6472468ba4b883ecf0d5ac2c9a, type: 3}
   spring: {fileID: 1705014586924796343, guid: 2d0952c53e4e5434693dba4266d5a768, type: 3}
   healingPotion: {fileID: 4960478471794199406, guid: 6abbb8b4a062f7a4ab21115f3fa4b788, type: 3}
@@ -70773,6 +70781,8 @@ MonoBehaviour:
   carrot: {fileID: 792614000186996116, guid: 091fb6e7df52d3f4dbc0b05c5dfa22b2, type: 3}
   chocolate: {fileID: 792614000186996116, guid: 0391bbc5f839991488c85ec30e88f1bd, type: 3}
   orange: {fileID: 8100452912889387360, guid: 58985638368838b46808d4831a6edf76, type: 3}
+  cake: {fileID: 290884111967804714, guid: 20d74080ac4f9ac459b9ea1ff6e144ff, type: 3}
+  pie: {fileID: 290884111967804714, guid: f3badc437f2aa5f46b76d65ca5905533, type: 3}
   throwSfx: {fileID: 8770404749729711476}
   nothingSfx: {fileID: 6955607055901961357}
   switchPlaceSfx: {fileID: 8922597547482018190}
@@ -72523,7 +72533,11 @@ MonoBehaviour:
   startParticle: {fileID: 4329289393352912245, guid: aed0a43d21e8d3e4c8156378f642bed4, type: 3}
   bigFireBall: {fileID: 7060237417115328767, guid: 481856d5150f4db418e87706de39df03, type: 3}
   smoke: {fileID: 3115403492533551452, guid: a19e3ec5c2991114dbe154bd7bb26c6a, type: 3}
+  smokeVfx: {fileID: 0}
+  smokeVfxAir: {fileID: 0}
   confused: {fileID: 5286092167473453687}
+  groundTransform: {fileID: 0}
+  airTransform: {fileID: 0}
   cooldownTimer: 0
   cooldown: 1.8
   animationId: 0
@@ -72747,6 +72761,7 @@ MonoBehaviour:
   bloodPuddle: {fileID: 3858207001782180185}
   dress: {fileID: 7759566163783103383}
   eyesPosTransform: {fileID: 5507334412705657205}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!114 &7391764266120123986
@@ -99645,7 +99660,9 @@ MonoBehaviour:
   spinning: 0
   dizzyMeter: 0
   spinSfx: {fileID: 0}
+  spinDuration: 1
   dissyRemovalSpeed: 20
+  dizzyMeterBuildUpSpeed: 40
   moveSpeed: 0.1
   stunTime1: 0.2
   stunTime2: 0.2
