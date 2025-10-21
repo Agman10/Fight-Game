@@ -16,7 +16,7 @@ public class ItemThrowAttack : Attack
     public Bomb bomb;
     public Bomb bigBomb;
     public Bomb flashBang;
-
+    public SmokeGrenade smokeGrenade;
     
 
     public FireBall fireBall;
@@ -184,6 +184,8 @@ public class ItemThrowAttack : Attack
 
         //this.ThrowMolotov();
 
+        //this.ThrowSmoke();
+
         this.ThrowRandomItem();
 
 
@@ -252,29 +254,29 @@ public class ItemThrowAttack : Attack
             }
             
         }
-        else if (number > 600 && number <= 725)
+        else if (number > 600 && number <= 715)
         {
             this.ThrowHammer();
         }
-        /*else if (number > 600 && number <= 725)
-        {
-            this.ThrowMolotov();
-        }*/
-        else if (number > 725 && number <= 800)
+        else if (number > 715 && number <= 765)
         {
             this.ThrowSpikeBall();
         }
-        else if (number > 800 && number <= 850)
+        else if (number > 765 && number <= 815)
         {
             this.ThrowPotion();
         }
-        else if (number > 850 && number <= 900)
+        else if (number > 815 && number <= 865)
         {
             this.ThrowSpring();
         }
-        else if (number > 900 && number <= 910)
+        else if (number > 865 && number <= 870)
         {
             this.ThrowFlashBang();
+        }
+        else if (number > 870 && number <= 910)
+        {
+            this.ThrowMolotov();
         }
         else if (number > 910 && number <= 950)
         {
@@ -395,6 +397,7 @@ public class ItemThrowAttack : Attack
         }
         else if(number > 3500 && number <= 7500)
         {
+            //int foodNumber = Random.Range(1, 6);
             int foodNumber = Random.Range(1, 8);
             if (foodNumber <= 1)
                 foodPrefab = this.melon;
@@ -636,6 +639,18 @@ public class ItemThrowAttack : Attack
                 molotovPrefab.owner = this.user;
 
             molotovPrefab.KnockBack(new Vector3(forward * 260f, 600f, 0));
+        }
+    }
+
+    public void ThrowSmoke()
+    {
+        if (this.bomb != null && this.user != null)
+        {
+            SmokeGrenade smokePrefab = this.smokeGrenade;
+            float forward = this.user.transform.forward.z;
+
+            smokePrefab = Instantiate(smokePrefab, new Vector3(this.user.transform.position.x + (forward * 0.8f), this.user.transform.position.y + 3, 0), Quaternion.Euler(0, 0, 0));
+            smokePrefab.KnockBack(new Vector3(forward * 150, 500f, 0));
         }
     }
 
