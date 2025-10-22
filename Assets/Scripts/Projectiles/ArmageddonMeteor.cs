@@ -97,8 +97,8 @@ public class ArmageddonMeteor : MonoBehaviour
         }
 
 
-        if (this.transform.position.y <= 1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
-            this.Explode(true);
+        /*if (this.transform.position.y <= 1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
+            this.Explode(true);*/
 
 
     }

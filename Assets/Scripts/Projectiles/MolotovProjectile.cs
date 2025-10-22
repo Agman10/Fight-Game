@@ -104,8 +104,8 @@ public class MolotovProjectile : Projectile
             this.BreakBottle();
         }
 
-        if (this.transform.position.y <= 1f && this.transform.position.y > -1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
-            this.BreakBottle();
+        /*if (this.transform.position.y <= 1f && this.transform.position.y > -1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
+            this.BreakBottle();*/
     }
 
     public void BreakBottle()

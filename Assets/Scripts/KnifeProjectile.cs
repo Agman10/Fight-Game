@@ -97,8 +97,8 @@ public class KnifeProjectile : MonoBehaviour
             this.Disable();
         }
 
-        if (this.transform.position.y <= 1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
-            this.Disable();
+        /*if (this.transform.position.y <= 1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
+            this.Disable();*/
     }
 
 
@@ -119,7 +119,7 @@ public class KnifeProjectile : MonoBehaviour
                 hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(this.transform.position.x + (this.transform.forward.z * 0.45f), this.transform.position.y, this.transform.position.z), Quaternion.Euler(0, 0, 0));
 
         }
-
+        this.disabled = true;
         //this.gameObject.SetActive(false);
         this.StartCoroutine(this.DisableCoroutine());
         //this.gameObject.SetActive(false);

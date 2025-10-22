@@ -97,8 +97,8 @@ public class BigFireBall : MonoBehaviour
             this.Explode();
         }
 
-        if (this.transform.position.y <= 1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
-            this.Explode();
+        /*if (this.transform.position.y <= 1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
+            this.Explode();*/
 
 
     }

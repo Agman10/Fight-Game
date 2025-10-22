@@ -149,7 +149,7 @@ public class ElectricBallProjectile : MonoBehaviour
             electricBall.Explode();*/
         }
 
-        if (other.tag == "Wall" || other.tag == "Ground")
+        if (other.tag == "Wall" /*|| other.tag == "Ground"*/)
         {
             this.Explode();
         }

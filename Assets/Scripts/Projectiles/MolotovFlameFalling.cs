@@ -65,8 +65,8 @@ public class MolotovFlameFalling : MonoBehaviour
             this.DisableFire(true);
         }
 
-        if (this.transform.position.y <= 1f && this.transform.position.y > -1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
-            this.DisableFire(true);
+        /*if (this.transform.position.y <= 1f && this.transform.position.y > -1f) //REMOVE THIS WHEN ADDING GROUND TAG ON ALL STAGES
+            this.DisableFire(true);*/
     }
 
     public void DisableFire(bool spawnMolotov = true)
