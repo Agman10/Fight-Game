@@ -235,9 +235,17 @@ public class BookCounterAttack : Attack
 
         float maxXPos = 12.5f;
 
-        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+        /*if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
         {
             maxXPos = 9.5f;
+        }*/
+
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.gameMode == 1)
+                maxXPos = 9.5f;
+            else if (GameManager.Instance.gameCamera != null)
+                maxXPos = GameManager.Instance.gameCamera.maxX + 6f;
         }
 
 

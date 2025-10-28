@@ -94,8 +94,18 @@ public class SuperPunchGhostAttack : Attack
 
         float maxX = 10.5f;
 
-        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
-            maxX = 7.5f;
+        /*if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+            maxX = 7.5f;*/
+
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.gameMode == 1)
+                maxX = 7.5f;
+            else if (GameManager.Instance.gameCamera != null)
+                maxX = GameManager.Instance.gameCamera.maxX + 4f;
+        }
+
+        //Debug.Log(maxX);
 
         if (pos > maxX && forwardZ == 1 || pos < -maxX && forwardZ == -1)
         {
@@ -124,9 +134,16 @@ public class SuperPunchGhostAttack : Attack
         if(GameManager.Instance != null && GameManager.Instance.gameMode == 1)
             range = 24f;
 
+        float maxGhostX = 18f;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameMode == 0 && GameManager.Instance.gameCamera != null)
+            maxGhostX = GameManager.Instance.gameCamera.maxX + 11.5f;
+
+        //Debug.Log(maxGhostX);
+
         float currentTime = 0;
         float duration = 5f;
-        while (currentTime < duration && this.currentPunchGhost != null && Mathf.Abs(this.user.transform.position.x - this.currentPunchGhost.transform.position.x) < range && Mathf.Abs(this.currentPunchGhost.transform.position.x) < 18f)
+        while (currentTime < duration && this.currentPunchGhost != null && Mathf.Abs(this.user.transform.position.x - this.currentPunchGhost.transform.position.x) < range && Mathf.Abs(this.currentPunchGhost.transform.position.x) < maxGhostX)
         {
             //currentTime += Time.deltaTime;
 

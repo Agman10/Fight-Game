@@ -151,10 +151,20 @@ public class SuperRoadRollerAttack : Attack
 
         float maxRollerXPos = 11.65f;
 
-        if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
+        /*if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
         {
             maxRollerXPos = 8.65f;
+        }*/
+
+        if(GameManager.Instance != null)
+        {
+            if (GameManager.Instance.gameMode == 1)
+                maxRollerXPos = 8.65f;
+            else if (GameManager.Instance.gameCamera != null)
+                maxRollerXPos = GameManager.Instance.gameCamera.maxX + 5.15f;
         }
+
+        //Debug.Log(maxRollerXPos);
 
         if (this.roadRoller != null && this.user.tempOpponent != null)
         {

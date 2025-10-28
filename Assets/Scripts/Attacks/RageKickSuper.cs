@@ -380,9 +380,18 @@ public class RageKickSuper : Attack
         float forwardZ = this.user.transform.forward.z;
         float pos = this.user.transform.position.x;
         
-        float xMax = 14f;
+        /*float xMax = 14f;
         if (GameManager.Instance != null && GameManager.Instance.gameMode == 1)
-            xMax = 11f;
+            xMax = 11f;*/
+
+        float xMax = 14f;
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.gameMode == 1)
+                xMax = 11f;
+            else if (GameManager.Instance.gameCamera != null)
+                xMax = GameManager.Instance.gameCamera.maxX + 7.5f;
+        }
 
         float maxX = xMax - xForward;
 

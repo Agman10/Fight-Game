@@ -639,10 +639,20 @@ public class SuperKnifePunishmentAttack : Attack
             {
                 float newXPos = player.transform.position.x + (4.5f * player.transform.forward.z);
 
-                float maxXPos = 14f;
+                /*float maxXPos = 14f;
 
                 if(GameManager.Instance != null && GameManager.Instance.gameMode == 1)
-                    maxXPos = 11f;
+                    maxXPos = 11f;*/
+
+                float maxXPos = 14f;
+
+                if (GameManager.Instance != null)
+                {
+                    if (GameManager.Instance.gameMode == 1)
+                        maxXPos = 11f;
+                    else if (GameManager.Instance.gameCamera != null)
+                        maxXPos = GameManager.Instance.gameCamera.maxX + 7.5f;
+                }
 
                 if (Mathf.Abs(newXPos) > maxXPos)
                 {

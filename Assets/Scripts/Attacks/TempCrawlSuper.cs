@@ -70,7 +70,8 @@ public class TempCrawlSuper : Attack
         if (GameManager.Instance != null && GameManager.Instance.gameCamera != null && this.testBool == true)
         {
             float testFloat = 0.01f;
-            if (this.user.transform.position.x < 0f)
+            //float testFloat = 0.01f * this.user.transform.forward.z;
+            if (this.user.transform.position.x < 0f /*this.user.transform.forward.z < 0f*/)
                 testFloat = -0.01f;
             else
                 testFloat = 0.01f;
@@ -83,7 +84,7 @@ public class TempCrawlSuper : Attack
 
             //this.camDistance = Mathf.Abs(GameManager.Instance.gameCamera.transform.position.x) + 7.5f;
 
-            //Debug.Log(testFloat);
+            Debug.Log(testFloat);
         }
         else
         {
@@ -220,13 +221,24 @@ public class TempCrawlSuper : Attack
         if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);
 
+        float maxXPos = 14f;
 
-        if (Mathf.Abs(this.user.transform.position.x) >= 14f)
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.gameMode == 1)
+                maxXPos = 11f;
+            else if (GameManager.Instance.gameCamera != null)
+                maxXPos = GameManager.Instance.gameCamera.maxX + 7.5f;
+        }
+
+
+        if (Mathf.Abs(this.user.transform.position.x) >= maxXPos)
         {
             //Debug.Log(-(this.transform.forward.z * 13.99f));
 
             //this.user.transform.position = new Vector3(this.user.transform.position.x + this.user.transform.forward.z * 0.01f, this.user.transform.position.y, 0f);
-            this.user.transform.position = new Vector3(-(this.transform.forward.z * 13.99f), this.user.transform.position.y, 0f);
+            //this.user.transform.position = new Vector3(-(this.transform.forward.z * 13.99f), this.user.transform.position.y, 0f);
+            this.user.transform.position = new Vector3(-(this.transform.forward.z * (maxXPos - 0.01f)), this.user.transform.position.y, 0f);
         }
 
 
@@ -253,7 +265,7 @@ public class TempCrawlSuper : Attack
             camera = GameManager.Instance.gameCamera;*/
 
 
-        while (amount > 0 && Mathf.Abs(this.user.transform.position.x) < 14f && Mathf.Abs(this.user.transform.position.x) < this.camDistance && this.moving/*|| camera != null && Mathf.Abs(this.user.transform.position.x) < Mathf.Abs(camera.transform.position.x) + 7.5f*/ /*&& this.user.transform.position.x < this.user.transform.forward.z * 13.9f*/)
+        while (amount > 0 && Mathf.Abs(this.user.transform.position.x) < maxXPos && Mathf.Abs(this.user.transform.position.x) < this.camDistance && this.moving/*|| camera != null && Mathf.Abs(this.user.transform.position.x) < Mathf.Abs(camera.transform.position.x) + 7.5f*/ /*&& this.user.transform.position.x < this.user.transform.forward.z * 13.9f*/)
         {
             //Debug.Log(Mathf.Abs(camera.transform.position.x) + 7.5f);
             //Debug.Log(Mathf.Abs(this.user.transform.forward.z * this.user.transform.position.x));

@@ -113,6 +113,16 @@ public class ArmageddonSuper : Attack
 
         this.Disappear(true);
 
+        float maxXPos = 9f;
+
+        if (GameManager.Instance != null)
+        {
+            if (GameManager.Instance.gameMode == 1)
+                maxXPos = 4f;
+            else if (GameManager.Instance.gameCamera != null)
+                maxXPos = GameManager.Instance.gameCamera.maxX + 2.5f;
+        }
+
         if (this.armageddonMeteorSpawner != null)
         {
             ArmageddonMeteorSpawner armageddonMeteorSpawnerPrefab = this.armageddonMeteorSpawner;
@@ -120,10 +130,12 @@ public class ArmageddonSuper : Attack
 
             float xPos = this.user.transform.position.x;
 
-            if (this.user.transform.position.x > 9 && this.user.transform.forward.z == 1)
-                xPos = 9f;
-            else if (this.user.transform.position.x < -9 && this.user.transform.forward.z == -1)
-                xPos = -9f;
+            if (this.user.transform.position.x > maxXPos && this.user.transform.forward.z == 1)
+                xPos = maxXPos;
+            else if (this.user.transform.position.x < -maxXPos && this.user.transform.forward.z == -1)
+                xPos = -maxXPos;
+
+            Debug.Log(xPos);
 
             //armageddonMeteorSpawnerPrefab = Instantiate(armageddonMeteorSpawnerPrefab, new Vector3(this.user.transform.position.x, 0f, 0), this.transform.rotation);
             armageddonMeteorSpawnerPrefab = Instantiate(armageddonMeteorSpawnerPrefab, new Vector3(xPos, 0f, 0), this.transform.rotation);

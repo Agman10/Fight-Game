@@ -218,6 +218,11 @@ public class NinjaTeleport : Attack
         if (this.user.movement != null && GameManager.Instance != null && GameManager.Instance.gameCamera != null && GameManager.Instance.gameMode == 0)
         {
             GameCamera cameraa = GameManager.Instance.gameCamera;
+            float maxX = 14f;
+            if (cameraa != null)
+                maxX = cameraa.maxX + 7.5f;
+
+            //Debug.Log(maxX);
 
             /*if (this.movement.playerInput.moveInput.x > 0)
             {
@@ -237,16 +242,16 @@ public class NinjaTeleport : Attack
             {
                 
                 this.user.transform.position = new Vector3(this.transform.position.x + this.teleportDistance, this.transform.position.y, 0f);
-                if(this.user.transform.position.x > 14f && Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) <= 15f)
+                if(this.user.transform.position.x > maxX && Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) <= 15f)
                 {
-                    this.user.transform.position = new Vector3(14f, this.transform.position.y, 0f);
+                    this.user.transform.position = new Vector3(maxX, this.transform.position.y, 0f);
                 }
                 else if (this.user.tempOpponent != null && Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) > 15f)
                 {
                     this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x + 15f, this.transform.position.y, 0f);
-                    if (this.user.transform.position.x > 14f)
+                    if (this.user.transform.position.x > maxX)
                     {
-                        this.user.transform.position = new Vector3(14f, this.transform.position.y, 0f);
+                        this.user.transform.position = new Vector3(maxX, this.transform.position.y, 0f);
                     }
                 }
                 /*else if (this.user.transform.position.x > 14f)
@@ -257,16 +262,16 @@ public class NinjaTeleport : Attack
             else if (this.user.movement.playerInput.moveInput.x < 0)
             {
                 this.user.transform.position = new Vector3(this.transform.position.x - this.teleportDistance, this.transform.position.y, 0f);
-                if (this.user.transform.position.x < -14f && Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) <= 15f)
+                if (this.user.transform.position.x < -maxX && Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) <= 15f)
                 {
-                    this.user.transform.position = new Vector3(-14f, this.transform.position.y, 0f);
+                    this.user.transform.position = new Vector3(-maxX, this.transform.position.y, 0f);
                 }
                 else if (this.user.tempOpponent != null && Vector3.Distance(new Vector3(this.user.transform.position.x, 0f, 0f), new Vector3(this.user.tempOpponent.transform.position.x, 0f, 0f)) > 15f)
                 {
                     this.user.transform.position = new Vector3(this.user.tempOpponent.transform.position.x - 15f, this.transform.position.y, 0f);
-                    if (this.user.transform.position.x < -14f)
+                    if (this.user.transform.position.x < -maxX)
                     {
-                        this.user.transform.position = new Vector3(-14f, this.transform.position.y, 0f);
+                        this.user.transform.position = new Vector3(-maxX, this.transform.position.y, 0f);
                     }
                 }
                 /*else if (this.user.transform.position.x < -14f)
