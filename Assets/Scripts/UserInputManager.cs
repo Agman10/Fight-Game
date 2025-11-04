@@ -31,6 +31,26 @@ public class UserInputManager : MonoBehaviour
     {
         
     }
+
+    //MAYBE USE THIS WHEN ADDING ANIMATIONS ON STARTUP
+    /*private void OnEnable()
+    {
+        if (this.playerInputManager != null)
+        {
+            this.playerInputManager.enabled = false;
+            this.StartCoroutine(this.EnableInputManagerCoroutine());
+        }
+    }
+
+    private IEnumerator EnableInputManagerCoroutine()
+    {
+        yield return new WaitForSeconds(0.3f);
+        if (this.playerInputManager != null)
+        {
+            this.playerInputManager.enabled = true;
+        }
+    }*/
+
     /*private void OnEnable()
     {
         this.playerInputManager.onPlayerJoined += Test;
