@@ -74,6 +74,20 @@ public class CharacterSelectCursorLogic : MonoBehaviour
         {
             this.canMove = this.rivalCursor.ready;
         }
+
+        if (this.cursorPanelTransform != null)
+        {
+            if (this.currentCharacterId >= 0)
+            {
+                if (this.characterSelectLogic.characters[this.currentCharacterId].canvasPanel != null)
+                    this.cursorPanelTransform.transform.position = this.characterSelectLogic.characters[this.currentCharacterId].canvasPanel.transform.position;
+            }
+            else
+            {
+                if (this.characterSelectLogic.randomCanvasPanel != null)
+                    this.cursorPanelTransform.transform.position = this.characterSelectLogic.randomCanvasPanel.transform.position;
+            }
+        }
     }
 
     private void OnDisable()

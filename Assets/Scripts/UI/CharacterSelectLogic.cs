@@ -266,10 +266,16 @@ public class CharacterSelectLogic : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         if (this.characterModelsP1 != null)
-            this.characterModelsP1.Move();
+        {
+            //this.characterModelsP1.Move();
+            this.characterModelsP1.MoveReverseCustomTime(0.25f);
+        }
 
         if (this.characterModelsP2 != null)
-            this.characterModelsP2.Move();
+        {
+            //this.characterModelsP2.Move();
+            this.characterModelsP2.MoveReverseCustomTime(0.25f);
+        }
 
         float currentTime = 0;
         float duration = 1f;

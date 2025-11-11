@@ -714,6 +714,11 @@ public class TestPlayer : MonoBehaviour
             this.collision.enabled = enable;
     }
 
+    public void ResetPosition()
+    {
+        this.transform.position = this.startPos;
+    }
+
     /*public void DelayedDeath(Vector3 position, bool ragdollforce = false, bool ghost = false)
     {
         if (!this.dead)

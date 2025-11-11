@@ -455,6 +455,19 @@ public class RandomSkybox : MonoBehaviour
                 }
             }
 
+            if(this.gameMode == 0 && this.currentStage == 21)
+            {
+                if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+                {
+                    GameManager.Instance.gameCamera.maxX = 6.5f;
+                    if(GameManager.Instance.player1 != null && GameManager.Instance.player2 != null)
+                    {
+                        GameManager.Instance.player1.ResetPosition();
+                        GameManager.Instance.player2.ResetPosition();
+                    }
+                }
+            }
+
             if (previous)
             {
                 if (this.currentStage <= 0 /*this.stages.Length - 1*/)
@@ -650,7 +663,7 @@ public class RandomSkybox : MonoBehaviour
                     //RenderSettings.ambientLight = new Color32(180, 135, 135, 255);
                     break;
                 case 13:
-                    this.SetMusic(12);
+                    this.SetMusic(17);
                     this.SetSkybox(Random.Range(10, 15));
                     /*if (this.moon != null)
                         this.moon.SetActive(false);*/
@@ -705,6 +718,14 @@ public class RandomSkybox : MonoBehaviour
                     this.directionalLight.color = new Color32(214, 214, 255, 255);
                     //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
                     //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                    break;
+                case 21:
+                    this.SetMusic(18);
+                    this.SetSkybox(17);
+                    if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+                    {
+                        GameManager.Instance.gameCamera.maxX = 10000f;
+                    }
                     break;
                 default:
                     this.SetMusic(12);

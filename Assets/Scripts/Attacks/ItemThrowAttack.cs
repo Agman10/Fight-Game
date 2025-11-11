@@ -24,6 +24,7 @@ public class ItemThrowAttack : Attack
     public FireBall pebble;
     public FireBall snowball;
     public FireBall hammer;
+    public FireBall metalPipe;
     public MolotovProjectile molotov;
 
     public SpikeBall spikeBall;
@@ -177,6 +178,7 @@ public class ItemThrowAttack : Attack
         //this.ThrowSpikeBall();
 
         //this.ThrowHammer();
+        //this.ThrowMetalPipe();
 
         //this.ThrowSpring();
 
@@ -256,7 +258,13 @@ public class ItemThrowAttack : Attack
         }
         else if (number > 600 && number <= 715)
         {
-            this.ThrowHammer();
+            //this.ThrowHammer();
+
+            int hammerNumber = Random.Range(1, 1001);
+            if (hammerNumber <= 900)
+                this.ThrowHammer();
+            else
+                this.ThrowMetalPipe();
         }
         else if (number > 715 && number <= 765)
         {
@@ -607,6 +615,21 @@ public class ItemThrowAttack : Attack
                 hammerPrefab.belongsTo = this.user;
 
             hammerPrefab.KnockBack(new Vector3(forward * 300f, 600f, 0));
+        }
+    }
+
+    public void ThrowMetalPipe()
+    {
+        if (this.metalPipe != null)
+        {
+            FireBall metalPipePrefab = this.metalPipe;
+            float forward = this.transform.forward.z;
+            //ghostPrefab = Instantiate(ghostPrefab, this.transform.position, this.transform.rotation);
+            metalPipePrefab = Instantiate(metalPipePrefab, new Vector3(this.user.transform.position.x + (forward * 0.8f), this.user.transform.position.y + 3, 0), this.user.transform.rotation);
+            if (this.user != null)
+                metalPipePrefab.belongsTo = this.user;
+
+            metalPipePrefab.KnockBack(new Vector3(forward * 300f, 600f, 0));
         }
     }
 
