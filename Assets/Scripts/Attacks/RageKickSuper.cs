@@ -512,12 +512,18 @@ public class RageKickSuper : Attack
             yield return null;
         }
 
+        //REMOVE THIS WHEN ANIMATION IS ADDED!
+
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
+        if (GameManager.Instance != null)
+            GameManager.Instance.EnableAnimationPlaceholder(true);
 
+        yield return new WaitForSeconds(1f);
 
-
+        if (GameManager.Instance != null)
+            GameManager.Instance.EnableAnimationPlaceholder(false);
 
 
         //yield return new WaitForSeconds(1);
@@ -633,6 +639,10 @@ public class RageKickSuper : Attack
         this.user.rb.isKinematic = false;
 
         this.moving = false;
+
+        //REMOVE THIS WHEN ANIMATION IS ADDED!
+        if (GameManager.Instance != null)
+            GameManager.Instance.EnableAnimationPlaceholder(false);
 
 
         if (this.grabbedPlayer != null)

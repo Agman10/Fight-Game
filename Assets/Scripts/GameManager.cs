@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject blackAndWhiteFilter;
 
+    public GameObject animationPlaceholder;
+
     [Space]
     public GameObject ragingBeastSkull;
     public LayerMask normalCameraLayers;
@@ -949,6 +951,12 @@ public class GameManager : MonoBehaviour
             }
         }
         
+    }
+
+    public void EnableAnimationPlaceholder(bool enable = true)
+    {
+        if (this.animationPlaceholder != null)
+            this.animationPlaceholder.SetActive(enable);
     }
 
     public void PauseMusic()

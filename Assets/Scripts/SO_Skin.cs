@@ -13,5 +13,11 @@ public class SO_Skin : ScriptableObject
     [Space]
     [ColorUsage(false, true)] public Color extraEmission;
     [ColorUsage(true, false)] public Color extraColor = Color.white;
+
+    [Space]
+    [ColorUsage(false, true)] public Color[] emissionColors;
+
+    [Space]
+    [ColorUsage(true, false)] public Color[] iconColors;
     //public int eyeIndex;
 }

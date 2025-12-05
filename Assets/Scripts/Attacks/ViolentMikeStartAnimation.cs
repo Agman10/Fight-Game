@@ -111,7 +111,12 @@ public class ViolentMikeStartAnimation : Attack
         if (this.electricity != null)
             this.electricity.Stop();
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.15f);
+        if (this.animations != null)
+            this.animations.ViolentBalletStartAnimEnd();
+        yield return new WaitForSeconds(0.05f);
+
+        //yield return new WaitForSeconds(0.2f);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();

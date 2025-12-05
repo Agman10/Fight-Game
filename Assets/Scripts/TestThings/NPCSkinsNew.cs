@@ -40,6 +40,7 @@ public class NPCSkinsNew : MonoBehaviour
                     foreach (Material material in rend.materials)
                     {
                         material.SetColor("_BaseColor", this.colors[i]);
+                        //material.SetColor("_BaseColor", new Color(this.colors[i].r, this.colors[i].g, this.colors[i].b, material.color.a));
                     }
                 }
             }

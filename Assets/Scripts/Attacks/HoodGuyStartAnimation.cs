@@ -57,22 +57,47 @@ public class HoodGuyStartAnimation : Attack
 
             if (this.user.tempOpponent != null && this.user.tempOpponent.characterId == 5 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
-                if(this.user.playerNumber == 2)
+                if (this.user.playerNumber == 2)
                     this.StartCoroutine(this.ThrowP2());
                 else
                     this.StartCoroutine(this.ThrowP1());
             }
             else
             {
-                if (number == 0)
+                /*if (number == 0)
                     this.StartCoroutine(this.PipeCoroutine());
                 else
+                    this.StartCoroutine(this.TemplateCoroutine2());*/
+
+                if (number == 0)
+                {
+                    this.StartCoroutine(this.PipeCoroutine());
+                }
+                else if (number == 1)
+                {
+                    int numberr = Random.Range(0, 3);
+                    if (numberr == 0)
+                        this.StartCoroutine(this.SlideStartAnimation());
+                    else if (numberr == 1)
+                        this.StartCoroutine(this.SpinStartAnimation(false));
+                    else
+                        this.StartCoroutine(this.SpinStartAnimation(true));
+
+                    //Debug.Log(numberr);
+                }
+                else
+                {
                     this.StartCoroutine(this.TemplateCoroutine2());
+                }
+                //Debug.Log(number);
 
                 //this.StartCoroutine(this.TemplateCoroutine2());
                 //this.StartCoroutine(this.PipeCoroutine());
 
                 //this.StartCoroutine(this.SmokeStartAnimation());
+                //this.StartCoroutine(this.SlideStartAnimation());
+                //this.StartCoroutine(this.SpinStartAnimation());
+
             }
         }
     }
@@ -295,11 +320,172 @@ public class HoodGuyStartAnimation : Attack
         this.user.EntranceDone();
     }
 
+    private IEnumerator SlideStartAnimation()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        this.user.rb.isKinematic = true;
+        this.user.LookAtCenter();
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, -5f, 0f);
+        this.user.animations.body.transform.localPosition = new Vector3(-4f, this.user.animations.defaultYPos, 0f);
+        this.user.animations.body.transform.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 90f, 0f);
+
+        /*this.user.animations.upperBody.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
+        this.user.animations.lowerBody.transform.localEulerAngles = new Vector3(0f, 90f, 0f);*/
+
+
+        yield return new WaitForSeconds(0.01f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+        this.user.animations.body.transform.localPosition = new Vector3(-4f, this.user.animations.defaultYPos, 0f);
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+
+        
+
+        this.user.animations.body.transform.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 90f, 0f);
+
+        /*this.user.animations.upperBody.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
+        this.user.animations.lowerBody.transform.localEulerAngles = new Vector3(0f, 90f, 0f);*/
+
+        float currentTime = 0;
+        float duration = 0.75f;
+        /*float targetPosition = 0f;
+        float start = this.transform.position.y;*/
+        float targetPosition = 0f;
+        float start = -4f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.body.transform.localPosition = new Vector3(Mathf.Lerp(start, targetPosition, currentTime / duration), this.user.animations.defaultYPos, 0f);
+            //this.user.animations.body.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(0, this.user.transform.forward.z * 1080f, currentTime / duration), 0f);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        currentTime = 0;
+        duration = 0.1f;
+        start = this.user.transform.forward.z * 90f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.body.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(start, 0f, currentTime / duration), 0f);
+            yield return null;
+        }
+
+
+        /*currentTime = 0;
+        duration = 0.2f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.upperBody.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(90f, 0f, currentTime / duration), 0f);
+            yield return null;
+        }
+
+        currentTime = 0;
+        duration = 0.2f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.lowerBody.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(90f, 0f, currentTime / duration), 0f);
+            yield return null;
+        }*/
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
+        this.user.rb.isKinematic = false;
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
+    }
+
+    private IEnumerator SpinStartAnimation(bool alternate = false)
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        this.user.rb.isKinematic = true;
+        this.user.LookAtCenter();
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, -5f, 0f);
+        this.user.animations.body.transform.localPosition = new Vector3(-4f, this.user.animations.defaultYPos, 0f);
+
+
+        yield return new WaitForSeconds(0.01f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+        this.user.animations.body.transform.localPosition = new Vector3(-4f, this.user.animations.defaultYPos, 0f);
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+
+        float currentTime = 0;
+        float duration = 1f;
+        /*float targetPosition = 0f;
+        float start = this.transform.position.y;*/
+        float targetPosition = 0f;
+        float start = -4f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            //this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            this.user.animations.body.transform.localPosition = new Vector3(Mathf.Lerp(start, targetPosition, currentTime / duration), this.user.animations.defaultYPos, 0f);
+
+            if (alternate)
+                this.user.animations.body.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(0, this.user.transform.forward.z * -900f, currentTime / duration), 0f);
+            else
+                this.user.animations.body.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(0, this.user.transform.forward.z * -1080f, currentTime / duration), 0f);
 
 
 
+            //this.user.animations.body.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(0, this.user.transform.forward.z * -1260f, currentTime / duration), 0f);
+            yield return null;
+        }
 
+        //yield return new WaitForSeconds(0.2f);
+        if (alternate)
+        {
+            this.user.animations.body.transform.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 180f, 0f);
+            yield return new WaitForSeconds(0.6f);
+            currentTime = 0;
+            duration = 0.6f;
+            //start = this.user.animations.body.transform.localEulerAngles.y;
+            start = this.user.transform.forward.z * 180f;
+            while (currentTime < duration)
+            {
+                currentTime += Time.deltaTime;
+                this.user.animations.body.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(start, this.user.transform.forward.z * -360, currentTime / duration), 0f);
+                yield return null;
+            }
+        }
+        
 
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
+        this.user.rb.isKinematic = false;
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
+    }
 
 
     private IEnumerator ThrowP1()

@@ -135,7 +135,7 @@ public class ArmageddonSuper : Attack
             else if (this.user.transform.position.x < -maxXPos && this.user.transform.forward.z == -1)
                 xPos = -maxXPos;
 
-            Debug.Log(xPos);
+            //Debug.Log(xPos);
 
             //armageddonMeteorSpawnerPrefab = Instantiate(armageddonMeteorSpawnerPrefab, new Vector3(this.user.transform.position.x, 0f, 0), this.transform.rotation);
             armageddonMeteorSpawnerPrefab = Instantiate(armageddonMeteorSpawnerPrefab, new Vector3(xPos, 0f, 0), this.transform.rotation);

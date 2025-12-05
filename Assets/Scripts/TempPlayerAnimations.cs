@@ -4889,6 +4889,51 @@ public class TempPlayerAnimations : MonoBehaviour
         }
     }
 
+    public void ViolentBalletStartAnimEnd()
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            this.rightArm.localEulerAngles = new Vector3(0f, 20f, 35f);
+            this.leftArm.localEulerAngles = new Vector3(0f, -20f, 35f);
+            this.rightArmJoint.localEulerAngles = new Vector3(-15f, 0f, 0f);
+            this.leftArmJoint.localEulerAngles = new Vector3(15f, 0f, 0f);
+
+            this.rightLeg.localEulerAngles = new Vector3(32f, 0f, 45f);
+            this.leftLeg.localEulerAngles = new Vector3(-32f, 0f, 45f);
+            this.rightLegJoint.localEulerAngles = new Vector3(-35f, 0f, -63f);
+            this.leftLegJoint.localEulerAngles = new Vector3(35f, 0f, -63f);
+
+            /*this.rightLegJoint.localEulerAngles = new Vector3(-35f, 0f, -48f);
+            this.leftLegJoint.localEulerAngles = new Vector3(35f, 0f, -48f);*/
+
+            this.rightLeg.localEulerAngles = new Vector3(16f, 0f, 45f);
+            this.leftLeg.localEulerAngles = new Vector3(-16f, 0f, 45f);
+            this.rightLegJoint.localEulerAngles = new Vector3(-17.5f, 0f, -48f);
+            this.leftLegJoint.localEulerAngles = new Vector3(17.5f, 0f, -48f);
+
+
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.eyes != null)
+        {
+            this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+
+        if (this.body != null)
+        {
+            this.body.localEulerAngles = new Vector3(0f, 0f, -27.5f);
+            //this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.4f, 0f);
+            this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.2f, 0f);
+        }
+    }
+
 
     //[ContextMenu("ElectricGuitar")]
     public void ElectricGuitar(int stage = 0)
@@ -9906,8 +9951,10 @@ public class TempPlayerAnimations : MonoBehaviour
             else if (stageId == 3)
             {
                 this.rightArm.localEulerAngles = new Vector3(0f, 0f, 115f);
+                //this.rightArm.localEulerAngles = new Vector3(0f, 0f, 80f);
                 this.leftArm.localEulerAngles = new Vector3(-20f, 0f, -35f);
                 this.rightArmJoint.localEulerAngles = new Vector3(0f, 0f, 30f);
+                //this.rightArmJoint.localEulerAngles = new Vector3(-10f, 0f, 10f);
                 this.leftArmJoint.localEulerAngles = new Vector3(15f, 0f, 0f);
 
                 this.rightLeg.localEulerAngles = new Vector3(0f, 0f, 10f);

@@ -13,6 +13,8 @@ public class CharacterIconSkins : MonoBehaviour
     //public Image emissionEye;
     public Image[] emissionEyes;
 
+    public IconLayer[] iconColorLayers;
+
     private void OnEnable()
     {
         if (this.skin != null)
@@ -32,12 +34,13 @@ public class CharacterIconSkins : MonoBehaviour
                 {
                     if (layer != null && this.skin.colors.Length >= iconLayer.colorId + 1)
                     {
-                        layer.color = this.skin.colors[iconLayer.colorId];
+                        //layer.color = this.skin.colors[iconLayer.colorId];
+                        layer.color = new Color(this.skin.colors[iconLayer.colorId].r, this.skin.colors[iconLayer.colorId].g, this.skin.colors[iconLayer.colorId].b, layer.color.a);
 
                         //REMOVE THIS WHEN UNKNOWN ENTITY NO LONGER HAS TRANSPARENT BASE COLOR BECAUSE OF THEIR GHOST!!
-                        Color c = layer.color;
+                        /*Color c = layer.color;
                         c.a = 1f;
-                        layer.color = c;
+                        layer.color = c;*/
                     }
                 }
             }
@@ -109,6 +112,18 @@ public class CharacterIconSkins : MonoBehaviour
                 // Apply the SDR color back to your material
                 material.SetColor("_BaseColor", sdrColor);*/
 
+            }
+
+            foreach (IconLayer iconColorLayer in this.iconColorLayers)
+            {
+                foreach (Image layer in iconColorLayer.layers)
+                {
+                    if (layer != null && this.skin.iconColors.Length >= iconColorLayer.colorId + 1)
+                    {
+                        layer.color = this.skin.iconColors[iconColorLayer.colorId];
+                        //layer.color = new Color(this.skin.iconColors[iconColorLayer.colorId].r, this.skin.iconColors[iconColorLayer.colorId].g, this.skin.iconColors[iconColorLayer.colorId].b, layer.color.a);
+                    }
+                }
             }
         }
 

@@ -84,6 +84,9 @@ public class OldMikeStartAnimations : Attack
         //this.PlayFire(true);
         this.user.LookAtTarget();
 
+        if (this.animations != null)
+            this.animations.RollAnimation();
+
         yield return new WaitForSeconds(0.01f);
         if (this.animations != null)
             this.animations.RollAnimation();

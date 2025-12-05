@@ -75,6 +75,14 @@ public class RoboJCapStartAnimation : Attack
         if (this.propeller != null)
             this.propeller.gameObject.SetActive(true);
 
+        /*if (this.animations != null)
+        {
+            this.animations.rightLeg.localEulerAngles = new Vector3(0f, 0f, -5f);
+            this.animations.leftLeg.localEulerAngles = new Vector3(0f, 0f, -5f);
+            this.animations.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, -5f);
+            this.animations.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, -5f);
+        }*/
+
         yield return new WaitForSeconds(0.01f);
         /*if (this.animations != null)
             this.animations.DarkJCapStartAnimation();*/
@@ -92,8 +100,14 @@ public class RoboJCapStartAnimation : Attack
             if (this.propeller != null)
                 this.propeller.transform.Rotate(0f, 1450f * Time.deltaTime, 0f);
 
+            /*if (currentTime >= 0.75f)
+                this.animations.SetDefaultPose();*/
+
             yield return null;
         }
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
 
         /*if (this.landingParticle != null)
         {

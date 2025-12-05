@@ -35,6 +35,11 @@ public class ItemThrowAttack : Attack
     public ThrowPotion harmingPotion;
 
     [Space]
+    //public MeteorRainSpawner meteorRainSpawner;
+    public MeteorRainSpawner meteorRainSpawnerP1;
+    public MeteorRainSpawner meteorRainSpawnerP2;
+
+    [Space]
     public FoodItem donut;
     public FoodItem donut2;
     public FoodItem donut3;
@@ -150,6 +155,8 @@ public class ItemThrowAttack : Attack
 
         yield return new WaitForSeconds(0.05f * throwSpeed);
 
+        //MAYBE HAVE ITEMS THAT ARE THROWN FORWARD? ADD AN ANIMATION FOR IT IF ADDED
+
         this.user.animations.ItemThrow(3);
 
         //THROW RANDOM ITEM HERE
@@ -188,7 +195,16 @@ public class ItemThrowAttack : Attack
 
         //this.ThrowSmoke();
 
-        this.ThrowRandomItem();
+        //this.ThrowMeteorRain();
+
+        //this.ThrowRandomItem();
+
+        int number = Random.Range(1, 101);
+
+        if (number <= 2)
+            this.ThrowRandomLegendaryItem();
+        else
+            this.ThrowRandomItem();
 
 
         yield return new WaitForSeconds(0.3f * throwSpeed);
@@ -313,6 +329,11 @@ public class ItemThrowAttack : Attack
             if (this.nothingSfx != null)
                 this.nothingSfx.Play();
         }*/
+    }
+
+    public void ThrowRandomLegendaryItem()
+    {
+        this.ThrowMeteorRain();
     }
 
 
@@ -677,6 +698,30 @@ public class ItemThrowAttack : Attack
         }
     }
 
+    public void ThrowMeteorRain()
+    {
+        MeteorRainSpawner meteorRainSpawnerPrefab = null;
+
+        if (this.user != null)
+        {
+            if (this.user.playerNumber == 1 && this.meteorRainSpawnerP1 != null)
+                meteorRainSpawnerPrefab = this.meteorRainSpawnerP1;
+            else if (this.user.playerNumber == 2 && this.meteorRainSpawnerP2)
+                meteorRainSpawnerPrefab = this.meteorRainSpawnerP2;
+        }
+
+        float forward = this.user.transform.forward.z;
+
+        if(meteorRainSpawnerPrefab != null)
+        {
+            meteorRainSpawnerPrefab = Instantiate(meteorRainSpawnerPrefab, new Vector3(this.user.transform.position.x + (forward * 0.8f), this.user.transform.position.y + 3, 0), this.user.transform.rotation);
+
+            if (this.user != null)
+                meteorRainSpawnerPrefab.owner = this.user;
+        }
+        
+    }
+
     //MAKE IT SO IT SUPPORTS MULTIPLE POTIONS
     //IMPROVE CODE PLS
     public void ThrowPotion()
@@ -749,9 +794,16 @@ public class ItemThrowAttack : Attack
 
             this.user.animations.ItemThrow(3);
 
-            this.ThrowRandomItem();
+            //this.ThrowRandomItem();
             //this.ThrowFood();
             //this.ThrowRandomItemBombAndFire();
+
+            int number = Random.Range(1, 101);
+
+            if (number <= 2)
+                this.ThrowRandomLegendaryItem();
+            else
+                this.ThrowRandomItem();
 
             yield return new WaitForSeconds(0.025f);
 

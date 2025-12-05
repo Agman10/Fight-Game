@@ -13,6 +13,7 @@ public class ArmageddonMeteor : MonoBehaviour
 
     public VisualEffect flame;
     public GameObject model;
+    public ParticleSystem flameEffect;
 
     public GameObject impactEffect;
     public GameObject impactEffectAir;
@@ -21,6 +22,8 @@ public class ArmageddonMeteor : MonoBehaviour
     public TestHitbox hitbox1;
     public TestHitbox hitbox2;
     public TestHitbox groundHitbox;
+
+    public CharacterSoundEffect explosionSfx;
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +115,8 @@ public class ArmageddonMeteor : MonoBehaviour
                 this.mainCollider.enabled = false;
 
             this.StartCoroutine(this.ExplodeCoroutine(grounded));
+
+            this.explosionSfx.PlaySound();
         }
     }
 
@@ -154,6 +159,9 @@ public class ArmageddonMeteor : MonoBehaviour
             this.model.gameObject.SetActive(false);
         if (this.flame != null)
             this.flame.Stop();
+
+        if (this.flameEffect != null)
+            this.flameEffect.Stop();
 
         //this.speedMultiplier = 0f;
         this.broken = true;
