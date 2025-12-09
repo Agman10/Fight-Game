@@ -201,7 +201,7 @@ public class ItemThrowAttack : Attack
 
         int number = Random.Range(1, 101);
 
-        if (number <= 2)
+        if (number <= 3)
             this.ThrowRandomLegendaryItem();
         else
             this.ThrowRandomItem();
@@ -277,7 +277,7 @@ public class ItemThrowAttack : Attack
             //this.ThrowHammer();
 
             int hammerNumber = Random.Range(1, 1001);
-            if (hammerNumber <= 900)
+            if (hammerNumber <= 800)
                 this.ThrowHammer();
             else
                 this.ThrowMetalPipe();
@@ -800,7 +800,7 @@ public class ItemThrowAttack : Attack
 
             int number = Random.Range(1, 101);
 
-            if (number <= 2)
+            if (number <= 3)
                 this.ThrowRandomLegendaryItem();
             else
                 this.ThrowRandomItem();
