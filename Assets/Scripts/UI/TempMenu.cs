@@ -29,7 +29,7 @@ public class TempMenu : MonoBehaviour
         if (UserInputManager.Instance != null)
             Destroy(UserInputManager.Instance.gameObject);
 
-        SceneManager.LoadSceneAsync("CharacterSelect");
+        SceneManager.LoadSceneAsync("CharacterAndStageSelect");
 
         if (GameModeManager.Instance != null)
         {
@@ -51,7 +51,7 @@ public class TempMenu : MonoBehaviour
         if (UserInputManager.Instance != null)
             Destroy(UserInputManager.Instance.gameObject);
 
-        SceneManager.LoadSceneAsync("CharacterSelect");
+        SceneManager.LoadSceneAsync("CharacterAndStageSelect");
 
         if (GameModeManager.Instance != null)
         {
@@ -72,7 +72,7 @@ public class TempMenu : MonoBehaviour
         if (UserInputManager.Instance != null)
             Destroy(UserInputManager.Instance.gameObject);
 
-        SceneManager.LoadSceneAsync("CharacterSelect");
+        SceneManager.LoadSceneAsync("CharacterAndStageSelect");
 
         if (GameModeManager.Instance != null)
         {

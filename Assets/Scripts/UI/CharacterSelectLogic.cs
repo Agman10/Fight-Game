@@ -20,6 +20,11 @@ public class CharacterSelectLogic : MonoBehaviour
     public bool quitting;
     public MusicTypeSelecter musicTypeSelecter;
 
+    public StageSelectLogic stageSelectLogic;
+    public GameObject characterSelectUI;
+    public GameObject stageSelectUI;
+    public GameObject allCharacterModels;
+
     public static CharacterSelectLogic Instance;
 
     [Space]
@@ -82,6 +87,9 @@ public class CharacterSelectLogic : MonoBehaviour
 
             if (GameModeManager.Instance.gameModeId == 1)
                 RenderSettings.skybox = this.fightBallSkybox;
+
+            if (this.stageSelectLogic != null)
+                this.stageSelectLogic.gameModeId = GameModeManager.Instance.gameModeId;
         }
     }
 
@@ -207,11 +215,23 @@ public class CharacterSelectLogic : MonoBehaviour
             }
             this.p1Cursor.lockedIn = true;
             this.p2Cursor.lockedIn = true;
+            if(this.gameModeId == 1)
+            {
+                this.StartCoroutine(this.StartGameCoroutine());
+            }
+            else
+            {
+                if (this.stageSelectLogic != null)
+                    this.StartCoroutine(this.OpenLevelSelectCoroutine());
+                else
+                {
+                    this.StartCoroutine(this.StartGameCoroutine());
+                }
+            }
 
-            this.StartCoroutine(this.StartGameCoroutine());
 
-            if (this.gameModeId == 0 && CharacterManager.Instance != null && this.musicTypeSelecter != null)
-                CharacterManager.Instance.musicTypeId = this.musicTypeSelecter.currentId;
+            /*if (this.gameModeId == 0 && CharacterManager.Instance != null && this.musicTypeSelecter != null)
+                CharacterManager.Instance.musicTypeId = this.musicTypeSelecter.currentId;*/
             //this.StartGame();
         }
     }
@@ -312,6 +332,124 @@ public class CharacterSelectLogic : MonoBehaviour
 
         //yield return new WaitForSeconds(1);
         this.StartGame();
+    }
+
+    private IEnumerator OpenLevelSelectCoroutine()
+    {
+        if (this.vsAI && CharacterManager.Instance != null && UserInputManager.Instance != null)
+        {
+            int p2CharId = CharacterManager.Instance.player2.characterId;
+            int p1CharId = CharacterManager.Instance.player1.characterId;
+
+            /*PlayerInput aiInput = Instantiate(this.characters[p2CharId].aiInput, UserInputManager.Instance.transform);
+            UserInputManager.Instance.p2Input = aiInput;*/
+            if (this.characters[p2CharId].aiInput != null)
+                UserInputManager.Instance.p2Input = this.characters[p2CharId].aiInput;
+            else
+                UserInputManager.Instance.p2Input = this.emtyAi;
+
+            if (this.vsAiId == 1)
+            {
+                if (this.characters[p1CharId].aiInput != null)
+                    UserInputManager.Instance.p1Input = this.characters[p1CharId].aiInput;
+                else
+                    UserInputManager.Instance.p1Input = this.emtyAi;
+            }
+
+            /*CharacterManager.Instance.vsAi = true;
+            CharacterManager.Instance.vsAiId = this.vsAiId;*/
+        }
+
+        if (CharacterManager.Instance != null)
+        {
+            CharacterManager.Instance.vsAi = this.vsAI;
+            CharacterManager.Instance.vsAiId = this.vsAiId;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.characterModelsP1 != null)
+        {
+            //this.characterModelsP1.Move();
+            this.characterModelsP1.MoveReverseCustomTime(0.25f);
+        }
+
+        if (this.characterModelsP2 != null)
+        {
+            //this.characterModelsP2.Move();
+            this.characterModelsP2.MoveReverseCustomTime(0.25f);
+        }
+
+        yield return new WaitForSeconds(0.4f);
+
+        if (this.p1Cursor != null)
+            this.p1Cursor.canMove = false;
+
+        if (this.p2Cursor != null)
+            this.p2Cursor.canMove = false;
+
+        if (this.characterSelectUI != null)
+            this.characterSelectUI.SetActive(false);
+
+        if (this.stageSelectUI != null)
+            this.stageSelectUI.SetActive(true);
+
+        if (this.stageSelectLogic != null)
+            this.stageSelectLogic.gameObject.SetActive(true);
+
+        if (this.allCharacterModels != null)
+            this.allCharacterModels.SetActive(false);
+
+        if (this.p1Cursor != null && this.p1Cursor.readyPanel != null)
+            this.p1Cursor.readyPanel.SetActive(false);
+
+        if (this.p2Cursor != null && this.p2Cursor.readyPanel != null)
+            this.p2Cursor.readyPanel.SetActive(false);
+    }
+
+    public void ReturnToCharacterSelect()
+    {
+        if (this.characterSelectUI != null)
+            this.characterSelectUI.SetActive(true);
+
+        if (this.stageSelectUI != null)
+            this.stageSelectUI.SetActive(false);
+
+        if (this.stageSelectLogic != null)
+            this.stageSelectLogic.gameObject.SetActive(false);
+
+        if (this.allCharacterModels != null)
+            this.allCharacterModels.SetActive(true);
+
+        if (this.p1Cursor != null)
+        {
+            this.p1Cursor.ready = false;
+            this.p1Cursor.lockedIn = false;
+        }
+
+        if (this.p2Cursor != null)
+        {
+            this.p2Cursor.ready = false;
+            this.p2Cursor.lockedIn = false;
+        }
+
+        this.StartCoroutine(this.ReturnToCharacterSelectCoroutine());
+
+    }
+
+    public IEnumerator ReturnToCharacterSelectCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.p1Cursor != null)
+        {
+            this.p1Cursor.canMove = true;
+        }
+
+        if (this.p2Cursor != null)
+        {
+            this.p2Cursor.canMove = true;
+        }
     }
 
     public void QuitToTitle()

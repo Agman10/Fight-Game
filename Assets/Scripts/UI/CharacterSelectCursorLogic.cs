@@ -50,8 +50,8 @@ public class CharacterSelectCursorLogic : MonoBehaviour
             this.input.BackInput += this.Back;
             this.input.QuitInput += this.Quit;
 
-            this.input.NextMusicTypeInput += this.NextMusicType;
-            this.input.PreviousMusicTypeInput += this.PreviousMusicType;
+            //this.input.NextMusicTypeInput += this.NextMusicType;
+            //this.input.PreviousMusicTypeInput += this.PreviousMusicType;
         }
         this.SelectCharacter(this.currentCharacterId);
 

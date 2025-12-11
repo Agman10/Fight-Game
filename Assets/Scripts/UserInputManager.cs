@@ -90,6 +90,11 @@ public class UserInputManager : MonoBehaviour
                 {
                     CharacterSelectLogic.Instance.p1Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
                     CharacterSelectLogic.Instance.p1Cursor.gameObject.SetActive(true);
+
+                    if (CharacterSelectLogic.Instance.stageSelectLogic != null)
+                    {
+                        CharacterSelectLogic.Instance.stageSelectLogic.inputP1 = playerInput.GetComponent<CharacterSelectInput>();
+                    }
                 }
 
             }
@@ -104,6 +109,11 @@ public class UserInputManager : MonoBehaviour
                 {
                     CharacterSelectLogic.Instance.p2Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
                     CharacterSelectLogic.Instance.p2Cursor.gameObject.SetActive(true);
+
+                    if (CharacterSelectLogic.Instance.stageSelectLogic != null)
+                    {
+                        CharacterSelectLogic.Instance.stageSelectLogic.inputP2 = playerInput.GetComponent<CharacterSelectInput>();
+                    }
                 }
             }
         }
@@ -155,6 +165,11 @@ public class UserInputManager : MonoBehaviour
                 CharacterSelectLogic.Instance.p2Cursor.input = playerInput.GetComponent<CharacterSelectInput>();
                 CharacterSelectLogic.Instance.p2Cursor.isAi = true;
                 CharacterSelectLogic.Instance.p2Cursor.gameObject.SetActive(true);
+
+                if(CharacterSelectLogic.Instance.stageSelectLogic != null)
+                {
+                    CharacterSelectLogic.Instance.stageSelectLogic.inputP1 = playerInput.GetComponent<CharacterSelectInput>();
+                }
             }
         }
 

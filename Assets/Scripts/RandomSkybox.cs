@@ -39,20 +39,46 @@ public class RandomSkybox : MonoBehaviour
     //CHANGE THIS TO START WHEN STAGE SELECT GETS IMPLEMENTED
     void OnEnable()
     {
+        if (this.gameMode == 0 && CharacterManager.Instance != null && CharacterManager.Instance.stageChosen)
+        {
+            //this.SetCurrentStage(CharacterManager.Instance.stageId);
+        }
+        else
+        {
+            if (this.randomSkybox)
+                this.LoadRandomSkybox();
+            else
+                this.SetSkybox(this.currentSkybox);
 
-        if (this.randomSkybox)
+            if (this.randomStage)
+                this.LoadRandomStage();
+            else if (this.currentStage > 0 && this.currentStage <= this.stages.Length - 1)
+                this.SetStage(this.currentStage);
+        }
+
+        /*if (this.randomSkybox)
             this.LoadRandomSkybox();
-        else 
+        else
             this.SetSkybox(this.currentSkybox);
 
         if (this.randomStage)
             this.LoadRandomStage();
         else if (this.currentStage > 0 && this.currentStage <= this.stages.Length - 1)
-            this.SetStage(this.currentStage);
+            this.SetStage(this.currentStage);*/
 
         //this.SetStage(2);
         //Debug.Log(this.stages.Length);
         //this.PullRandom();
+
+        //this.SetCurrentStage(21);
+    }
+
+    private void Start()
+    {
+        if(this.gameMode == 0 && CharacterManager.Instance != null && CharacterManager.Instance.stageChosen)
+        {
+            this.SetCurrentStage(CharacterManager.Instance.stageId);
+        }
     }
 
     // Update is called once per frame
@@ -736,6 +762,227 @@ public class RandomSkybox : MonoBehaviour
         
             
 
+    }
+
+
+
+
+
+
+
+    public void SetCurrentStage(int stageId)
+    {
+        if(this.stages.Length > 0)
+        {
+            foreach (GameObject stage in this.stages)
+            {
+                stage.SetActive(false);
+            }
+        }
+
+        this.SetStage(stageId);
+
+        if (stageId == 13)
+        {
+            if (this.invisBounceWalls != null)
+                this.invisBounceWalls.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (this.invisBounceWalls != null)
+                this.invisBounceWalls.gameObject.SetActive(false);
+        }
+
+        /*if (this.currentStage == 12)
+            Physics.gravity = new Vector3(0, -3.81f, 0);
+        else
+            Physics.gravity = new Vector3(0, -19.81f, 0);*/
+
+        /*if(stageId == 21)
+        {
+            if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+            {
+                GameManager.Instance.gameCamera.maxX = 10000f;
+            }
+        }*/
+
+        switch (stageId)
+        {
+            case 0:
+                this.SetMusic(0);
+                this.LoadRandomSkybox();
+                break;
+            case 1:
+                this.SetMusic(1);
+                this.LoadRandomSkybox();
+                break;
+            case 2:
+                this.SetMusic(2);
+                this.LoadRandomSkybox();
+                break;
+            case 3:
+                this.SetMusic(3);
+                this.SetSkybox(Random.Range(2, 4));
+
+                float graveyardSkyboxNumber = Random.Range(1, 101);
+                if (graveyardSkyboxNumber <= 2)
+                    this.SetSkybox(0);
+
+                /*float graveyardSkyboxNumber = Random.Range(1, 101);
+                if (graveyardSkyboxNumber <= 45)
+                    this.SetSkybox(2);
+                else if (graveyardSkyboxNumber > 45 && graveyardSkyboxNumber <= 90)
+                    this.SetSkybox(3);
+                else
+                    this.SetSkybox(7);*/
+
+                RenderSettings.ambientLight = new Color32(110, 110, 130, 255);
+                break;
+            case 4:
+                this.SetMusic(Random.Range(4, 6));
+                //this.SetSkybox(Random.Range(5, 7));
+                float skromeNumber = Random.Range(1, 101);
+                if (skromeNumber <= 75)
+                    this.SetSkybox(5);
+                else
+                    this.SetSkybox(6);
+                break;
+            case 5:
+                this.SetMusic(8);
+                this.LoadRandomSkybox();
+                break;
+            case 6:
+                this.SetMusic(9);
+                this.LoadRandomSkybox();
+                break;
+            case 7:
+                this.SetMusic(6);
+                this.SetSkybox(0);
+                /*if (this.moon != null)
+                    this.moon.SetActive(false);*/
+                break;
+            case 8:
+                this.SetMusic(7);
+                //this.SetSkybox(2);
+                /*if (this.moon != null)
+                    this.moon.SetActive(true);*/
+                this.SetSkybox(7);
+
+                /*float throneRoomSkyboxNumber = Random.Range(1, 101);
+                if (throneRoomSkyboxNumber <= 50)
+                    this.SetSkybox(2);
+                else
+                    this.SetSkybox(7);*/
+
+                //RenderSettings.ambientLight = new Color32(60, 50, 130, 255);
+                RenderSettings.ambientLight = new Color32(110, 110, 130, 255);
+                break;
+            case 9:
+                this.SetMusic(10);
+                this.SetSkybox(2);
+                if (this.moon != null)
+                    this.moon.SetActive(false);
+                RenderSettings.ambientLight = new Color32(125, 130, 180, 255);
+                break;
+            case 10:
+                this.SetMusic(11);
+                this.SetSkybox(8);
+                /*if (this.moon != null)
+                    this.moon.SetActive(false);*/
+                RenderSettings.ambientLight = new Color32(180, 135, 135, 255);
+                break;
+            case 11:
+                this.SetMusic(12);
+                //this.SetSkybox(0);
+
+                float number = Random.Range(1, 101);
+                if (number <= 70)
+                    this.SetSkybox(0);
+                else if (number > 70 && number <= 90)
+                    this.SetSkybox(4);
+                else
+                    this.SetSkybox(1);
+
+                /*if (this.moon != null)
+                    this.moon.SetActive(false);*/
+                //RenderSettings.ambientLight = new Color32(180, 135, 135, 255);
+                break;
+            case 12:
+                this.SetMusic(12);
+                this.SetSkybox(9);
+                /*if (this.moon != null)
+                    this.moon.SetActive(false);*/
+                //RenderSettings.ambientLight = new Color32(180, 135, 135, 255);
+                break;
+            case 13:
+                this.SetMusic(17);
+                this.SetSkybox(Random.Range(10, 15));
+                /*if (this.moon != null)
+                    this.moon.SetActive(false);*/
+                //RenderSettings.ambientLight = new Color32(180, 135, 135, 255);
+                break;
+            case 14:
+                this.SetMusic(13);
+                this.SetSkybox(15);
+                break;
+            case 15:
+                this.SetMusic(14);
+
+
+                this.SetSkybox(2);
+                if (this.moon != null)
+                    this.moon.SetActive(false);
+
+                this.rgbLightning = true;
+
+                //RenderSettings.ambientLight = new Color32(110, 110, 130, 255);
+                RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                this.numbb = 0f;
+                break;
+            case 16:
+                this.SetMusic(15);
+                this.SetSkybox(0);
+                this.directionalLight.color = new Color32(242, 249, 255, 255);
+                //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                break;
+            case 17:
+                this.SetMusic(15);
+                this.SetSkybox(0);
+                this.directionalLight.color = new Color32(242, 249, 255, 255);
+                //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                break;
+            case 18:
+                this.SetMusic(15);
+                this.SetSkybox(0);
+                this.directionalLight.color = new Color32(242, 249, 255, 255);
+                //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                break;
+            case 19:
+                this.SetMusic(15);
+                this.SetSkybox(0);
+                this.directionalLight.color = new Color32(242, 249, 255, 255);
+                //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                break;
+            case 20:
+                this.SetMusic(16);
+                this.SetSkybox(16);
+                //this.directionalLight.color = new Color32(242, 249, 255, 255);
+                this.directionalLight.color = new Color32(214, 214, 255, 255);
+                //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                //RenderSettings.ambientLight = new Color32(140, 140, 160, 255);
+                break;
+            case 21:
+                this.SetMusic(18);
+                this.SetSkybox(17);
+                if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+                {
+                    GameManager.Instance.gameCamera.maxX = 10000f;
+                }
+                break;
+            default:
+                this.SetMusic(12);
+                break;
+        }
     }
     /*public void PullRandom()
     {

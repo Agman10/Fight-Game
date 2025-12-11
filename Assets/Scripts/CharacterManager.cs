@@ -29,6 +29,10 @@ public class CharacterManager : MonoBehaviour
     public bool vsAi = false;
     public int vsAiId = 0;
 
+    [Space]
+    public bool stageChosen;
+    public int stageId = 0;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

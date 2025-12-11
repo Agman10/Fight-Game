@@ -838,6 +838,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator EndGameCoroutine()
     {
+        if (CharacterManager.Instance != null)
+            CharacterManager.Instance.stageChosen = false;
+
         yield return new WaitForSeconds(3f);
         /*if(this.tempSkyboxAndStageLogic != null && this.tempSkyboxAndStageLogic.songs.Length - 1 >= this.tempSkyboxAndStageLogic.currentMusic && this.tempSkyboxAndStageLogic.songs[this.tempSkyboxAndStageLogic.currentMusic] != null)
         {
