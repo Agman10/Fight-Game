@@ -334,6 +334,7 @@ public class GunShootAttack : Attack
         this.StopAllCoroutines();
         //this.Stop();
 
+        //make it so if you have no bullets you fail to shoot yourself
         this.shootSelf.Initiate();
 
         this.onGoing = false;

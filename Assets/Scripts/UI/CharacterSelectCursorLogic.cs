@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CharacterSelectCursorLogic : MonoBehaviour
 {
     public CharacterSelectLogic characterSelectLogic;
     public GameObject cursorPanelTransform;
     public Text characterNameText;
+    public TextMeshProUGUI nameText;
     public CharacterSelectInput input;
 
     public CharacterSelectCursorLogic rivalCursor;
@@ -38,6 +40,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
     public GameObject readyPanel;
     public GameObject skinSelectPanel;
     public Text skinIndexText;
+    public TextMeshProUGUI skinNumberText;
 
     public GameObject glowPlatform;
 
@@ -136,10 +139,15 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
                 this.cursorPanelTransform.transform.position = this.characterSelectLogic.characters[id].canvasPanel.transform.position;
 
-                if (this.characterNameText != null)
+                /*if (this.characterNameText != null)
                 {
                     this.characterNameText.text = this.characterSelectLogic.characters[id].name;
                     this.characterNameText.fontSize = this.characterSelectLogic.characters[id].fontSize;
+                }*/
+
+                if(this.nameText != null)
+                {
+                    this.nameText.text = this.characterSelectLogic.characters[id].name;
                 }
                     
             }
@@ -150,16 +158,24 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
                 this.cursorPanelTransform.transform.position = this.characterSelectLogic.randomCanvasPanel.transform.position;
 
-                if (this.characterNameText != null)
+                /*if (this.characterNameText != null)
                 {
                     this.characterNameText.text = "Random";
                     this.characterNameText.fontSize = 40;
 
-                    /*this.characterNameText.text = "Random   (Including secrets)";
+                    *//*this.characterNameText.text = "Random   (Including secrets)";
                     this.characterNameText.text = "Random      (Secrets only)";
-                    this.characterNameText.fontSize = 25;*/
+                    this.characterNameText.fontSize = 25;*//*
+                }*/
+
+                if (this.nameText != null)
+                {
+                    this.nameText.text = "Random";
+
+                    /*this.nameText.text = "Random   (Including secrets)";
+                    this.nameText.text = "Random      (Secrets only)";*/
                 }
-                    
+
             }
             else
             {
@@ -269,8 +285,11 @@ public class CharacterSelectCursorLogic : MonoBehaviour
             if (this.characterModels[this.currentCharacterId] != null)
                 this.characterModels[this.currentCharacterId].SetSkin(this.characterSelectLogic.characters[this.currentCharacterId].skins[this.currentSkinId]);
 
-            if (this.skinIndexText != null)
-                this.skinIndexText.text = (this.currentSkinId + 1).ToString();
+            /*if (this.skinIndexText != null)
+                this.skinIndexText.text = (this.currentSkinId + 1).ToString();*/
+
+            if (this.skinNumberText != null)
+                this.skinNumberText.text = (this.currentSkinId + 1).ToString();
         }
         else if (direction.x <= -1f)
         {
@@ -286,8 +305,11 @@ public class CharacterSelectCursorLogic : MonoBehaviour
             if (this.characterModels[this.currentCharacterId] != null)
                 this.characterModels[this.currentCharacterId].SetSkin(this.characterSelectLogic.characters[this.currentCharacterId].skins[this.currentSkinId]);
 
-            if (this.skinIndexText != null)
-                this.skinIndexText.text = (this.currentSkinId + 1).ToString();
+            /*if (this.skinIndexText != null)
+                this.skinIndexText.text = (this.currentSkinId + 1).ToString();*/
+
+            if (this.skinNumberText != null)
+                this.skinNumberText.text = (this.currentSkinId + 1).ToString();
         }
     }
 
@@ -299,8 +321,11 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
         this.characterSelectLogic.SetSkin(this.currentCharacterId, this.currentSkinId, this.isPlayer1);
 
-        if (this.skinIndexText != null)
-            this.skinIndexText.text = (this.currentSkinId + 1).ToString();
+        /*if (this.skinIndexText != null)
+            this.skinIndexText.text = (this.currentSkinId + 1).ToString();*/
+
+        if (this.skinNumberText != null)
+            this.skinNumberText.text = (this.currentSkinId + 1).ToString();
     }
 
     public void Select(bool selecting)
@@ -315,8 +340,12 @@ public class CharacterSelectCursorLogic : MonoBehaviour
                     this.selectingSkin = true;
                     if (this.skinSelectPanel != null)
                         this.skinSelectPanel.gameObject.SetActive(true);
-                    if (this.skinIndexText != null)
-                        this.skinIndexText.text = (this.currentSkinId + 1).ToString();
+
+                    /*if (this.skinIndexText != null)
+                        this.skinIndexText.text = (this.currentSkinId + 1).ToString();*/
+
+                    if (this.skinNumberText != null)
+                        this.skinNumberText.text = (this.currentSkinId + 1).ToString();
                 }
                 else
                 {

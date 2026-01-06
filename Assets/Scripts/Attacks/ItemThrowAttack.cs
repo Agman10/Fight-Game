@@ -38,6 +38,7 @@ public class ItemThrowAttack : Attack
     //public MeteorRainSpawner meteorRainSpawner;
     public MeteorRainSpawner meteorRainSpawnerP1;
     public MeteorRainSpawner meteorRainSpawnerP2;
+    public BigFireBall bigFireBall;
 
     [Space]
     public FoodItem donut;
@@ -197,6 +198,11 @@ public class ItemThrowAttack : Attack
 
         //this.ThrowMeteorRain();
 
+        //this.ThrowBigFireBall();
+
+
+        //this.ThrowRandomLegendaryItem();
+
         //this.ThrowRandomItem();
 
         int number = Random.Range(1, 101);
@@ -205,6 +211,8 @@ public class ItemThrowAttack : Attack
             this.ThrowRandomLegendaryItem();
         else
             this.ThrowRandomItem();
+
+
 
 
         yield return new WaitForSeconds(0.3f * throwSpeed);
@@ -333,7 +341,19 @@ public class ItemThrowAttack : Attack
 
     public void ThrowRandomLegendaryItem()
     {
-        this.ThrowMeteorRain();
+        int number = Random.Range(1, 3);
+        Debug.Log(number);
+
+        if (number == 1)
+        {
+            this.ThrowMeteorRain();
+        }
+        else
+        {
+            this.user.animations.ItemThrow(5);
+            this.ThrowBigFireBall();
+        }
+
     }
 
 
@@ -720,6 +740,18 @@ public class ItemThrowAttack : Attack
                 meteorRainSpawnerPrefab.owner = this.user;
         }
         
+    }
+
+    public void ThrowBigFireBall()
+    {
+        if (this.bigFireBall != null)
+        {
+            BigFireBall bigFireBallPrefab = this.bigFireBall;
+            bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3((this.transform.forward.z * 1.75f /*2.1f*/ /*1.5f*/) + this.transform.position.x, this.transform.position.y + 2.15f, 0), this.transform.rotation);
+            //bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3(this.groundTransform.position.x, this.groundTransform.position.y, 0), this.transform.rotation);
+            bigFireBallPrefab.SetOwner(this.user);
+            this.user.animations.ItemThrow(5);
+        }
     }
 
     //MAKE IT SO IT SUPPORTS MULTIPLE POTIONS

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FightBallLogic : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class FightBallLogic : MonoBehaviour
 
     public Text player1ScoreText;
     public Text player2ScoreText;
+
+    public TextMeshProUGUI p1ScoreText;
+    public TextMeshProUGUI p2ScoreText;
 
     public ParticleSystem p1GoalEffect;
     public ParticleSystem p2GoalEffect;
@@ -66,11 +70,17 @@ public class FightBallLogic : MonoBehaviour
         if (this.ball != null)
             this.ball.OnGoal += this.OnGoal;
 
-        if (this.player1ScoreText != null)
+        /*if (this.player1ScoreText != null)
             this.player1ScoreText.text = player1Score.ToString();
 
         if (this.player2ScoreText != null)
-            this.player2ScoreText.text = player2Score.ToString();
+            this.player2ScoreText.text = player2Score.ToString();*/
+
+        if (this.p1ScoreText != null)
+            this.p1ScoreText.text = this.player1Score.ToString();
+
+        if (this.p2ScoreText != null)
+            this.p2ScoreText.text = this.player2Score.ToString();
 
         /*if (this.music != null)
             this.music.Play();*/
@@ -115,8 +125,11 @@ public class FightBallLogic : MonoBehaviour
             if (isPlayer1)
             {
                 this.player1Score++;
-                if (this.player1ScoreText != null)
-                    this.player1ScoreText.text = player1Score.ToString();
+                /*if (this.player1ScoreText != null)
+                    this.player1ScoreText.text = player1Score.ToString();*/
+
+                if (this.p1ScoreText != null)
+                    this.p1ScoreText.text = this.player1Score.ToString();
 
                 if (this.player1Score >= this.maxScore)
                 {
@@ -135,8 +148,11 @@ public class FightBallLogic : MonoBehaviour
             else
             {
                 this.player2Score++;
-                if (this.player2ScoreText != null)
-                    this.player2ScoreText.text = player2Score.ToString();
+                /*if (this.player2ScoreText != null)
+                    this.player2ScoreText.text = player2Score.ToString();*/
+
+                if (this.p2ScoreText != null)
+                    this.p2ScoreText.text = this.player2Score.ToString();
 
                 if (this.player2Score >= this.maxScore)
                 {
