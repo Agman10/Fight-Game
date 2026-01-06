@@ -240,7 +240,16 @@ public class CharacterSelectLogic : MonoBehaviour
     {
         //SceneManager.LoadSceneAsync("TestStage");
 
-        if (GameModeManager.Instance != null && GameModeManager.Instance.gameModeId == 1)
+        /*if (GameModeManager.Instance != null && GameModeManager.Instance.gameModeId == 1)
+        {
+            SceneManager.LoadSceneAsync("TestFootBall");
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("TestStage");
+        }*/
+
+        if (this.gameModeId == 1)
         {
             SceneManager.LoadSceneAsync("TestFootBall");
         }

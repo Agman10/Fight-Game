@@ -42,6 +42,11 @@ public class HealthBars : MonoBehaviour
     public Text p1HealthNumbers;
     public Text p2HealthNumbers;
 
+    public TextMeshProUGUI p1HealthNumber;
+    public TextMeshProUGUI p2HealthNumber;
+    public TextMeshProUGUI p1SuperNumber;
+    public TextMeshProUGUI p2SuperNumber;
+
     [Space]
     public GameObject p1HalfSuperReady;
     public GameObject p1FullSuperReady;
@@ -94,8 +99,11 @@ public class HealthBars : MonoBehaviour
                     this.p1HealthFill.color = Color.Lerp(this.noHealthColor, this.highHealthColor, this.player1.health / this.player1.maxHealth);
             }
 
-            if (this.p1HealthNumbers != null)
-                this.p1HealthNumbers.text = this.player1.health.ToString();
+            /*if (this.p1HealthNumbers != null)
+                this.p1HealthNumbers.text = this.player1.health.ToString();*/
+
+            if (this.p1HealthNumber != null)
+                this.p1HealthNumber.text = this.player1.health.ToString();
         }
 
         if (this.player2 != null && this.p2HealthSlider != null)
@@ -113,8 +121,11 @@ public class HealthBars : MonoBehaviour
                     this.p2HealthFill.color = Color.Lerp(this.noHealthColor, this.highHealthColor, this.player2.health / this.player2.maxHealth);
             }
 
-            if (this.p2HealthNumbers != null)
-                this.p2HealthNumbers.text = this.player2.health.ToString();
+            /*if (this.p2HealthNumbers != null)
+                this.p2HealthNumbers.text = this.player2.health.ToString();*/
+
+            if (this.p2HealthNumber != null)
+                this.p2HealthNumber.text = this.player2.health.ToString();
         }
     }
 
@@ -142,6 +153,9 @@ public class HealthBars : MonoBehaviour
                 if (this.p1FullSuperReady != null)
                     this.p1FullSuperReady.SetActive(this.player1.superCharge >= this.player1.maxSuperCharge);
             }
+
+            if (this.p1SuperNumber != null)
+                this.p1SuperNumber.text = this.player1.superCharge.ToString();
         }
 
         if (this.player2 != null && this.p2ChargeSlider != null)
@@ -166,6 +180,9 @@ public class HealthBars : MonoBehaviour
                 if (this.p2FullSuperReady != null)
                     this.p2FullSuperReady.SetActive(this.player2.superCharge >= this.player2.maxSuperCharge);
             }
+
+            if (this.p2SuperNumber != null)
+                this.p2SuperNumber.text = this.player2.superCharge.ToString();
         }
     }
 

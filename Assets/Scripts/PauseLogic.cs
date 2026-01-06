@@ -14,6 +14,7 @@ public class PauseLogic : MonoBehaviour
     public bool lifeNumbersEnabled = false;
     public GameObject p1LifeNumbers;
     public GameObject p2LifeNumbers;
+    public GameObject[] healthAndSuperNumbers;
 
     private void OnEnable()
     {
@@ -98,11 +99,17 @@ public class PauseLogic : MonoBehaviour
     public void ShowHealthNumbers()
     {
         this.lifeNumbersEnabled = !this.lifeNumbersEnabled;
-        if (this.p1LifeNumbers != null)
+        /*if (this.p1LifeNumbers != null)
             this.p1LifeNumbers.SetActive(this.lifeNumbersEnabled);
 
         if (this.p2LifeNumbers != null)
-            this.p2LifeNumbers.SetActive(this.lifeNumbersEnabled);
+            this.p2LifeNumbers.SetActive(this.lifeNumbersEnabled);*/
+
+        foreach (GameObject healthAndSuperNumber in this.healthAndSuperNumbers)
+        {
+            if (healthAndSuperNumber != null)
+                healthAndSuperNumber.SetActive(this.lifeNumbersEnabled);
+        }
     }
 
     public void NextSkybox()

@@ -39,6 +39,7 @@ public class DebugInputs : MonoBehaviour
     public bool lifeNumbersEnabled = false;
     public GameObject p1LifeNumbers;
     public GameObject p2LifeNumbers;
+    public GameObject[] healthAndSuperNumbers;
 
 
     public int sceneIndex = 1;
@@ -206,8 +207,15 @@ public class DebugInputs : MonoBehaviour
     public void OnToggleLifeNumberInput(InputAction.CallbackContext ctx)
     {
         this.lifeNumbersEnabled = !this.lifeNumbersEnabled;
-        this.p1LifeNumbers.SetActive(this.lifeNumbersEnabled);
-        this.p2LifeNumbers.SetActive(this.lifeNumbersEnabled);
+        /*this.p1LifeNumbers.SetActive(this.lifeNumbersEnabled);
+        this.p2LifeNumbers.SetActive(this.lifeNumbersEnabled);*/
+
+        foreach(GameObject healthAndSuperNumber in this.healthAndSuperNumbers)
+        {
+            if (healthAndSuperNumber != null)
+                healthAndSuperNumber.SetActive(this.lifeNumbersEnabled);
+        }
+
         //bool boolean = ctx.ReadValueAsButton();
 
         
