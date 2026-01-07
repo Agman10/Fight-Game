@@ -380,25 +380,25 @@ public class RandomSkybox : MonoBehaviour
                     canHaveMoon = false;
             }
 
-            if (this.moon != null && canHaveMoon)
+            if (this.moon != null)
             {
-                if (skyboxId == 2 || skyboxId == 7)
+                if (skyboxId == 2 && canHaveMoon || skyboxId == 7 && canHaveMoon)
                     this.moon.SetActive(true);
                 else
                     this.moon.SetActive(false);
             }
 
-            if (this.hellMoon != null && canHaveMoon)
+            if (this.hellMoon != null)
             {
-                if (skyboxId == 8)
+                if (skyboxId == 8 && canHaveMoon)
                     this.hellMoon.SetActive(true);
                 else
                     this.hellMoon.SetActive(false);
             }
 
-            if (this.earth != null && canHaveMoon)
+            if (this.earth != null)
             {
-                if (skyboxId == 9)
+                if (skyboxId == 9 && canHaveMoon)
                     this.earth.SetActive(true);
                 else
                     this.earth.SetActive(false);
