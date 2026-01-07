@@ -110,11 +110,25 @@ public class FightBallLogic : MonoBehaviour
         }
 
         //this.StartCoroutine(this.SetBall());
+
+        this.StartCoroutine(this.RemoveStageRandomness());
     }
+
+    private IEnumerator RemoveStageRandomness()
+    {
+        yield return new WaitForSeconds(1f);
+        if (CharacterManager.Instance != null && CharacterManager.Instance.stageChosen)
+        {
+            CharacterManager.Instance.stageChosen = false;
+        }
+    }
+
     private void OnDisable()
     {
         if (this.ball != null)
             this.ball.OnGoal -= this.OnGoal;
+
+        this.StopAllCoroutines();
     }
 
     public void OnGoal(bool isPlayer1)

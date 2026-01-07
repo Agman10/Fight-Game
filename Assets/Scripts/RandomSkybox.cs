@@ -39,9 +39,10 @@ public class RandomSkybox : MonoBehaviour
     //CHANGE THIS TO START WHEN STAGE SELECT GETS IMPLEMENTED
     void OnEnable()
     {
-        if (this.gameMode == 0 && CharacterManager.Instance != null && CharacterManager.Instance.stageChosen)
+        if (/*this.gameMode == 0 && */CharacterManager.Instance != null && CharacterManager.Instance.stageChosen)
         {
             //this.SetCurrentStage(CharacterManager.Instance.stageId);
+            //Debug.Log("hello"); //for some reason if you start from fightball scene this gets undetected might not be a problem since its no reason to click stageChose,
         }
         else
         {
@@ -75,9 +76,17 @@ public class RandomSkybox : MonoBehaviour
 
     private void Start()
     {
-        if(this.gameMode == 0 && CharacterManager.Instance != null && CharacterManager.Instance.stageChosen)
+        /*if(this.gameMode == 0 && CharacterManager.Instance != null && CharacterManager.Instance.stageChosen)
         {
             this.SetCurrentStage(CharacterManager.Instance.stageId);
+        }*/
+
+        if (CharacterManager.Instance != null && CharacterManager.Instance.stageChosen)
+        {
+            if(this.gameMode == 1)
+                this.SetCurrentStageFightBall(CharacterManager.Instance.stageId);
+            else
+                this.SetCurrentStage(CharacterManager.Instance.stageId);
         }
     }
 
@@ -137,7 +146,7 @@ public class RandomSkybox : MonoBehaviour
     {
         float number = Random.Range(1, 101);
         //Debug.Log(Random.Range(2, 4));
-
+        //Debug.Log("load random stage");
         if(this.gameMode == 1)
         {
             if (number <= 25) //plain
@@ -358,7 +367,20 @@ public class RandomSkybox : MonoBehaviour
             this.OnSkyboxChanged?.Invoke(skyboxId);
             //RenderSettings.ambientLight = new Color32(180, 180, 180, 255);
 
-            if (this.moon != null)
+            bool canHaveMoon = true;
+
+            if (this.gameMode == 0)
+            {
+                if (this.currentStage == 9 || this.currentStage == 15)
+                    canHaveMoon = false;
+            }
+            else if (this.gameMode == 1)
+            {
+                if (this.currentStage == 1 || this.currentStage == 2)
+                    canHaveMoon = false;
+            }
+
+            if (this.moon != null && canHaveMoon)
             {
                 if (skyboxId == 2 || skyboxId == 7)
                     this.moon.SetActive(true);
@@ -366,7 +388,7 @@ public class RandomSkybox : MonoBehaviour
                     this.moon.SetActive(false);
             }
 
-            if (this.hellMoon != null)
+            if (this.hellMoon != null && canHaveMoon)
             {
                 if (skyboxId == 8)
                     this.hellMoon.SetActive(true);
@@ -374,7 +396,7 @@ public class RandomSkybox : MonoBehaviour
                     this.hellMoon.SetActive(false);
             }
 
-            if (this.earth != null)
+            if (this.earth != null && canHaveMoon)
             {
                 if (skyboxId == 9)
                     this.earth.SetActive(true);
@@ -425,6 +447,7 @@ public class RandomSkybox : MonoBehaviour
             {
                 this.songs[musicId].Play();
                 this.currentMusic = musicId;
+                //Debug.Log("hfdghdfhgjdghjf");
             }
             
 
@@ -450,13 +473,13 @@ public class RandomSkybox : MonoBehaviour
                 this.SetSkybox(this.currentSkybox + 1);
 
             }
-            if(this.moon != null)
+            /*if(this.moon != null)
             {
                 if (this.currentSkybox == 2 || this.currentSkybox == 7)
                     this.moon.SetActive(true);
                 else
                     this.moon.SetActive(false);
-            }
+            }*/
 
             /*if (this.directionalLight != null)
             {
@@ -984,6 +1007,51 @@ public class RandomSkybox : MonoBehaviour
                 break;
         }
     }
+
+    public void SetCurrentStageFightBall(int stageId)
+    {
+        if (this.stages.Length > 0)
+        {
+            foreach (GameObject stage in this.stages)
+            {
+                stage.SetActive(false);
+            }
+        }
+
+        this.SetStage(stageId);
+
+        switch (stageId)
+        {
+            case 0:
+                this.SetMusic(0);
+                this.LoadRandomSkybox();
+                break;
+            case 1:
+                this.SetMusic(1);
+
+                this.SetSkybox(2);
+
+                if (this.moon != null)
+                    this.moon.SetActive(false);
+                break;
+            case 2:
+                this.SetMusic(2);
+                this.LoadRandomSkybox();
+
+                if (this.moon != null)
+                    this.moon.SetActive(false);
+                break;
+            default:
+                this.SetMusic(0);
+                break;
+        }
+
+        /*if (CharacterManager.Instance != null)
+        {
+            CharacterManager.Instance.stageChosen = false;
+        }*/
+    }
+
     /*public void PullRandom()
     {
         for (int i = 0; i <= randomTests.Length - 1; i++)

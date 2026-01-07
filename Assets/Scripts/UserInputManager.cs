@@ -95,6 +95,11 @@ public class UserInputManager : MonoBehaviour
                     {
                         CharacterSelectLogic.Instance.stageSelectLogic.inputP1 = playerInput.GetComponent<CharacterSelectInput>();
                     }
+
+                    if (CharacterSelectLogic.Instance.stageSelectLogicFightBall != null)
+                    {
+                        CharacterSelectLogic.Instance.stageSelectLogicFightBall.inputP1 = playerInput.GetComponent<CharacterSelectInput>();
+                    }
                 }
 
             }
@@ -113,6 +118,11 @@ public class UserInputManager : MonoBehaviour
                     if (CharacterSelectLogic.Instance.stageSelectLogic != null)
                     {
                         CharacterSelectLogic.Instance.stageSelectLogic.inputP2 = playerInput.GetComponent<CharacterSelectInput>();
+                    }
+
+                    if (CharacterSelectLogic.Instance.stageSelectLogicFightBall != null)
+                    {
+                        CharacterSelectLogic.Instance.stageSelectLogicFightBall.inputP2 = playerInput.GetComponent<CharacterSelectInput>();
                     }
                 }
             }
@@ -169,6 +179,11 @@ public class UserInputManager : MonoBehaviour
                 if(CharacterSelectLogic.Instance.stageSelectLogic != null)
                 {
                     CharacterSelectLogic.Instance.stageSelectLogic.inputP1 = playerInput.GetComponent<CharacterSelectInput>();
+                }
+
+                if (CharacterSelectLogic.Instance.stageSelectLogicFightBall != null)
+                {
+                    CharacterSelectLogic.Instance.stageSelectLogicFightBall.inputP1 = playerInput.GetComponent<CharacterSelectInput>();
                 }
             }
         }

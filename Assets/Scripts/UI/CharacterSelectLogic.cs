@@ -25,6 +25,9 @@ public class CharacterSelectLogic : MonoBehaviour
     public GameObject stageSelectUI;
     public GameObject allCharacterModels;
 
+    public StageSelectLogic stageSelectLogicFightBall;
+    public GameObject stageSelectUIFightBall;
+
     public static CharacterSelectLogic Instance;
 
     [Space]
@@ -88,8 +91,8 @@ public class CharacterSelectLogic : MonoBehaviour
             if (GameModeManager.Instance.gameModeId == 1)
                 RenderSettings.skybox = this.fightBallSkybox;
 
-            if (this.stageSelectLogic != null)
-                this.stageSelectLogic.gameModeId = GameModeManager.Instance.gameModeId;
+            /*if (this.stageSelectLogic != null)
+                this.stageSelectLogic.gameModeId = GameModeManager.Instance.gameModeId;*/
         }
     }
 
@@ -215,7 +218,7 @@ public class CharacterSelectLogic : MonoBehaviour
             }
             this.p1Cursor.lockedIn = true;
             this.p2Cursor.lockedIn = true;
-            if(this.gameModeId == 1)
+            /*if (this.gameModeId == 1)
             {
                 this.StartCoroutine(this.StartGameCoroutine());
             }
@@ -227,7 +230,24 @@ public class CharacterSelectLogic : MonoBehaviour
                 {
                     this.StartCoroutine(this.StartGameCoroutine());
                 }
+            }*/
+
+            if (this.gameModeId == 1)
+            {
+                if (this.stageSelectLogicFightBall != null)
+                    this.StartCoroutine(this.OpenLevelSelectCoroutine());
+                else
+                    this.StartCoroutine(this.StartGameCoroutine());
             }
+            else
+            {
+                if (this.stageSelectLogic != null)
+                    this.StartCoroutine(this.OpenLevelSelectCoroutine());
+                else
+                    this.StartCoroutine(this.StartGameCoroutine());
+            }
+
+            
 
 
             /*if (this.gameModeId == 0 && CharacterManager.Instance != null && this.musicTypeSelecter != null)
@@ -400,11 +420,29 @@ public class CharacterSelectLogic : MonoBehaviour
         if (this.characterSelectUI != null)
             this.characterSelectUI.SetActive(false);
 
-        if (this.stageSelectUI != null)
+        /*if (this.stageSelectUI != null)
             this.stageSelectUI.SetActive(true);
 
         if (this.stageSelectLogic != null)
-            this.stageSelectLogic.gameObject.SetActive(true);
+            this.stageSelectLogic.gameObject.SetActive(true);*/
+
+        if (this.gameModeId == 1)
+        {
+            if (this.stageSelectUIFightBall != null)
+                this.stageSelectUIFightBall.SetActive(true);
+
+            if (this.stageSelectLogicFightBall != null)
+                this.stageSelectLogicFightBall.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (this.stageSelectUI != null)
+                this.stageSelectUI.SetActive(true);
+
+            if (this.stageSelectLogic != null)
+                this.stageSelectLogic.gameObject.SetActive(true);
+        }
+
 
         if (this.allCharacterModels != null)
             this.allCharacterModels.SetActive(false);
@@ -426,6 +464,14 @@ public class CharacterSelectLogic : MonoBehaviour
 
         if (this.stageSelectLogic != null)
             this.stageSelectLogic.gameObject.SetActive(false);
+
+
+        if (this.stageSelectUIFightBall != null)
+            this.stageSelectUIFightBall.SetActive(false);
+
+        if (this.stageSelectLogicFightBall != null)
+            this.stageSelectLogicFightBall.gameObject.SetActive(false);
+
 
         if (this.allCharacterModels != null)
             this.allCharacterModels.SetActive(true);
