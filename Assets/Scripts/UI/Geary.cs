@@ -716,6 +716,31 @@ public class Geary : MonoBehaviour
         }
     }
 
+    public void OnSelectMaxFightBallPoints()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 14)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 14;
+
+            if (this.evil)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            /*this.SetDefaultExpression();
+            this.SetRightEyebrow(0.4f, 0.63f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 80f);*/
+            this.SetExpression(3);
+            this.StartCoroutine(this.ShowText("Set the amount of goals you need in Fight Ball."));
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
 
     public void OnSelectUnavalaible()
     {

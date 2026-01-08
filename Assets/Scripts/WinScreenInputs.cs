@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class WinScreenInputs : MonoBehaviour
 {
-
+    public int gameSceneId;
 
 
     private void OnEnable()
@@ -69,7 +69,7 @@ public class WinScreenInputs : MonoBehaviour
     public void ReloadScene(bool reload)
     {
         if (reload)
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(this.gameSceneId);
     }
     public void QuitToTitle(bool quit)
     {

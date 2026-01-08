@@ -11,7 +11,7 @@ public class FightBallLogic : MonoBehaviour
     public TestPlayer player2;
 
     public bool gameIsOver;
-    public int maxScore = 10;
+    public int maxScore = 6;
     public int player1Score;
     public int player2Score;
 
@@ -64,6 +64,8 @@ public class FightBallLogic : MonoBehaviour
             }
 
         }*/
+
+        this.maxScore = PlayerPrefs.GetInt("MaxFightBallPoints", 6);
     }
     private void OnEnable()
     {
@@ -147,7 +149,7 @@ public class FightBallLogic : MonoBehaviour
 
                 if (this.player1Score >= this.maxScore)
                 {
-                    this.EndGame(true);
+                    this.EndGame(1/*true*/);
                 }
                 else
                 {
@@ -170,7 +172,7 @@ public class FightBallLogic : MonoBehaviour
 
                 if (this.player2Score >= this.maxScore)
                 {
-                    this.EndGame(false);
+                    this.EndGame(2/*false*/);
                 }
                 else
                 {
@@ -188,7 +190,7 @@ public class FightBallLogic : MonoBehaviour
                 /*if (this.music != null)
                     this.music.pitch = 1.1f;*/
 
-                if (this.tempRandomSkybox != null)
+                if (this.tempRandomSkybox != null && !this.gameIsOver)
                 {
                     foreach (AudioSource song in this.tempRandomSkybox.songs)
                     {
@@ -202,7 +204,7 @@ public class FightBallLogic : MonoBehaviour
                 /*if (this.music != null)
                     this.music.pitch = 1.3f;*/
 
-                if (this.tempRandomSkybox != null)
+                if (this.tempRandomSkybox != null && !this.gameIsOver)
                 {
                     foreach (AudioSource song in this.tempRandomSkybox.songs)
                     {
@@ -228,12 +230,12 @@ public class FightBallLogic : MonoBehaviour
             this.EndGame(false);*/
     }
 
-    public void EndGame(bool isPlayer1)
+    public void EndGame(int playerNumber = 0 /*bool isPlayer1*/)
     {
         if (!this.gameIsOver)
         {
             this.gameIsOver = true;
-            if (isPlayer1)
+            if (playerNumber == 1/*isPlayer1*/)
             {
                 if (this.player2 != null)
                 {
@@ -258,7 +260,7 @@ public class FightBallLogic : MonoBehaviour
                     }
                 }
             }
-            else
+            else if (playerNumber == 2)
             {
                 if (this.player1 != null)
                 {
@@ -283,10 +285,15 @@ public class FightBallLogic : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                //Draw Logic here
+            }
 
             /*if (this.music != null)
                 this.music.Stop();*/
-            if (this.tempRandomSkybox != null)
+
+            /*if (this.tempRandomSkybox != null)
             {
                 foreach (AudioSource song in this.tempRandomSkybox.songs)
                 {
@@ -294,13 +301,25 @@ public class FightBallLogic : MonoBehaviour
                         song.Stop();
                 }
             }
-                
 
             if (this.victoryBgm != null)
-                this.victoryBgm.Play();
+                this.victoryBgm.Play();*/
+
+            this.StartCoroutine(this.EndGameCoroutine(playerNumber));
         }
-        
     }
+
+    private IEnumerator EndGameCoroutine(int playerNumber = 0)
+    {
+        yield return new WaitForSeconds(3f);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.EndTheGame(playerNumber);
+        }
+
+
+    }
+
     IEnumerator RespawnBallCoroutine()
     {
         yield return new WaitForSeconds(2f);

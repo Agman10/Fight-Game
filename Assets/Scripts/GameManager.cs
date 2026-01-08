@@ -891,7 +891,12 @@ public class GameManager : MonoBehaviour
         }
 
 
-        SceneManager.LoadSceneAsync(3);
+        //SceneManager.LoadSceneAsync(3);
+
+        if (this.gameMode == 1)
+            SceneManager.LoadSceneAsync(4);
+        else
+            SceneManager.LoadSceneAsync(3);
     }
 
     IEnumerator EndGameTextCoroutine(bool isPlayer1)

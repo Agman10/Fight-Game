@@ -38,6 +38,11 @@ public class OptionsMenu : MonoBehaviour
     private bool timerInfinite = true;
     public Text timerText;
 
+    //maybe rename "MaxFightBallPoints" to just "MaxGoals"?
+    public Slider maxFightBallPointsSlider; 
+    private int maxFightBallPoints = 6;
+    public Text maxFightBallPointsText;
+
     private void Awake()
     {
         int number = Random.Range(0, 101);
@@ -87,6 +92,14 @@ public class OptionsMenu : MonoBehaviour
             else
                 this.timerText.text = "Infinite";
         }
+
+
+        this.maxFightBallPoints = PlayerPrefs.GetInt("MaxFightBallPoints", 6);
+        if (this.maxFightBallPointsSlider != null)
+            this.maxFightBallPointsSlider.value = this.maxFightBallPoints;
+
+        if (this.maxFightBallPointsText != null)
+            this.maxFightBallPointsText.text = this.maxFightBallPoints.ToString();
     }
 
     public void SelectLanguage()
@@ -327,6 +340,49 @@ public class OptionsMenu : MonoBehaviour
             else
             {
                 this.timerSlider.value = this.timerId;
+            }
+
+        }
+    }
+
+    public void OnSelectMaxFightBallPoints()
+    {
+        if (this.geary != null && !this.geary.disabled)
+            this.geary.OnSelectMaxFightBallPoints();
+    }
+
+    public void OnMaxFightBallPointsChange()
+    {
+        if (this.maxFightBallPointsSlider != null)
+        {
+            if (!this.geary.disabled)
+            {
+                //float maxWinsSliderValue = maxWinsSlider.value;
+                int maxWinsSliderValue = (int)maxFightBallPointsSlider.value;
+                if (maxWinsSliderValue >= 10)
+                {
+                    this.maxFightBallPointsSlider.value = 1;
+                    maxWinsSliderValue = 1;
+                }
+                else if (maxWinsSliderValue <= 0)
+                {
+                    this.maxFightBallPointsSlider.value = 9;
+                    maxWinsSliderValue = 9;
+                }
+
+
+                //this.maxWins = (int)maxWinsSliderValue;
+                this.maxFightBallPoints = maxWinsSliderValue;
+
+                if (this.maxFightBallPointsText != null)
+                    this.maxFightBallPointsText.text = this.maxFightBallPoints.ToString();
+
+                PlayerPrefs.SetInt("MaxFightBallPoints", this.maxFightBallPoints);
+                //PlayerPrefs.Save();
+            }
+            else
+            {
+                this.maxFightBallPointsSlider.value = this.maxFightBallPoints;
             }
 
         }
