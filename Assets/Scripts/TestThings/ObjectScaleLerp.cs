@@ -18,17 +18,21 @@ public class ObjectScaleLerp : MonoBehaviour
     {
         if (!this.preventOnEnable)
         {
-            this.objectToScale.localScale = this.startScale;
+            if (this.objectToScale != null)
+                this.objectToScale.localScale = this.startScale;
+
             this.StartCoroutine(this.ScaleUpCoroutine(this.duration));
         }
 
     }
     private void OnDisable()
     {
+        this.StopAllCoroutines();
         if (!this.preventOnEnable)
         {
-            this.StopAllCoroutines();
-            this.objectToScale.localScale = this.endScale;
+            //this.StopAllCoroutines();
+            if (this.objectToScale != null)
+                this.objectToScale.localScale = this.endScale;
         }
 
     }
@@ -95,5 +99,17 @@ public class ObjectScaleLerp : MonoBehaviour
 
         if (disable)
             this.gameObject.SetActive(false);
+    }
+
+    public void SetStartScale()
+    {
+        if (this.objectToScale != null)
+            this.objectToScale.localScale = this.startScale;
+    }
+
+    public void SetEndScale()
+    {
+        if (this.objectToScale != null)
+            this.objectToScale.localScale = this.endScale;
     }
 }

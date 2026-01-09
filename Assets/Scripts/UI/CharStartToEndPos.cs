@@ -99,4 +99,14 @@ public class CharStartToEndPos : MonoBehaviour
         }
         this.transform.localPosition = this.startPos;
     }
+
+    public void SetStartPos()
+    {
+        this.transform.localPosition = this.startPos;
+    }
+
+    public void SetEndPos()
+    {
+        this.transform.localPosition = this.endPos;
+    }
 }

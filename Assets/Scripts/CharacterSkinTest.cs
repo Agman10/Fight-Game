@@ -37,6 +37,13 @@ public class CharacterSkinTest : MonoBehaviour
         
     }
 
+    [ContextMenu("UpdateSkin")]
+    public void UpdateSkin()
+    {
+        if (this.skin != null)
+            this.ChangeSkin(this.skin);
+    }
+
     public void SetSkin(SO_Skin skin)
     {
         if (skin != null)

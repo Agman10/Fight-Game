@@ -20,6 +20,9 @@ public class ExorcismSuper : Attack
 
     public GameObject godLight;
 
+    public CharStartToEndPos[] crossMovers;
+    public ObjectScaleLerp[] crossScalers;
+
     public override void OnHit()
     {
         base.OnHit();
@@ -174,6 +177,18 @@ public class ExorcismSuper : Attack
             beamPrefab.SetOwner(this.user);
         }
 
+        foreach (CharStartToEndPos crossMover in this.crossMovers)
+        {
+            if (crossMover != null)
+                crossMover.Move();
+        }
+
+        foreach (ObjectScaleLerp crossScaler in this.crossScalers)
+        {
+            if (crossScaler != null)
+                crossScaler.ScaleUp();
+        }
+
 
         testTime = 0f;
         time = 0.5f;
@@ -192,15 +207,31 @@ public class ExorcismSuper : Attack
 
             this.bible.transform.localPosition = new Vector3(this.bible.transform.localPosition.x, bibleStartPosY + (newY * 0.01f), this.bible.transform.localPosition.z);
 
-            if (this.crosses != null)
-                this.crosses.transform.Rotate(new Vector3(0f, 200 * Time.deltaTime, 0f));
+            /*if (this.crosses != null)
+                this.crosses.transform.Rotate(new Vector3(0f, 200 * Time.deltaTime, 0f));*/
             yield return null;
         }
 
         //yield return new WaitForSeconds(1f);
 
         if (this.crosses != null)
+        {
             this.crosses.SetActive(false);
+            this.crosses.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        foreach (CharStartToEndPos crossMover in this.crossMovers)
+        {
+            if (crossMover != null)
+                crossMover.SetStartPos();
+        }
+
+        foreach (ObjectScaleLerp crossScaler in this.crossScalers)
+        {
+            if (crossScaler != null)
+                crossScaler.SetStartScale();
+        }
+
 
         if (this.bible != null)
         {
@@ -210,6 +241,15 @@ public class ExorcismSuper : Attack
 
         if (this.godLight != null)
             this.godLight.SetActive(false);
+
+        if (this.animations != null)
+        {
+            this.animations.SetDefaultPose();
+            this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 45f, 0f);
+        }
+            
+
+        yield return new WaitForSeconds(0.05f);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
@@ -223,6 +263,18 @@ public class ExorcismSuper : Attack
 
         if (this.crosses != null)
             this.crosses.SetActive(false);
+
+        foreach (CharStartToEndPos crossMover in this.crossMovers)
+        {
+            if (crossMover != null)
+                crossMover.SetStartPos();
+        }
+
+        foreach (ObjectScaleLerp crossScaler in this.crossScalers)
+        {
+            if (crossScaler != null)
+                crossScaler.SetStartScale();
+        }
 
         if (this.bible != null)
         {

@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4978703148137307895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7358569787561974976}
+  m_Layer: 0
+  m_Name: HitboxOrigin (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7358569787561974976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4978703148137307895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6655085103761702663}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6655085102814653359
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6655085103521866196}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: HitboxOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,6 +206,7 @@ Transform:
   m_Children:
   - {fileID: 6655085103543515261}
   - {fileID: 6655085103521866196}
+  - {fileID: 7358569787561974976}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -346,10 +377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eebe9763539c32b428c4751370eaf510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
-  stun: 0.1
-  horizontalKnockback: 500
-  verticalKnockback: 500
+  damage: 200
+  stun: 1.85
+  horizontalKnockback: 700
+  verticalKnockback: 950
   explosionKnockback: 1
   continousDamage: 0
   damageDelay: 0.1
@@ -370,6 +401,9 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 6655085103521866196}
   isSuper: 1
+  knockDown: 1
+  knockDownImpactDuration: 0.5
+  knockDownSitDuration: 0.5
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -379,3 +413,4 @@ MonoBehaviour:
     pitch: {x: 1, y: 1}
     startTime: 0
   hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
