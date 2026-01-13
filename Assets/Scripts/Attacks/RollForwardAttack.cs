@@ -193,8 +193,10 @@ public class RollForwardAttack : Attack
                     }
                     else
                     {
-                        player.TakeDamage(this.user.transform.position, this.damage, 0.2f, this.transform.forward.z * 600, 900);
                         player.OnHit?.Invoke();
+                        //player.TakeDamage(this.user.transform.position, this.damage, 0.2f, this.transform.forward.z * 600, 900);
+                        player.TakeDamage(this.user.transform.position, this.damage, 0.2f, this.transform.forward.z * 600, 900, true, true, true, false, true, false, false, false, 0f, 0.5f, this.user, true);
+                        //player.OnHit?.Invoke();
                         player.OnHitFromPlayer?.Invoke(this.user);
                         this.user.GiveSuperCharge(this.superCharge);
                         player.GiveSuperCharge(this.superCharge / 2);

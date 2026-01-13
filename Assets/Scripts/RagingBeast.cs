@@ -214,7 +214,10 @@ public class RagingBeast : Attack
             player.rb.constraints = RigidbodyConstraints.FreezeAll;
 
             if (player.animations != null)
-                player.animations.body.localPosition = new Vector3(0f, 1.95f, 0f);
+            {
+                player.animations.KnifePunishmentHit();
+                player.animations.body.localPosition = new Vector3(player.animations.body.localPosition.x, 1.95f, player.animations.body.localPosition.z);
+            }
 
             this.StartCoroutine(this.RagingBeastCoroutine(player));
         }

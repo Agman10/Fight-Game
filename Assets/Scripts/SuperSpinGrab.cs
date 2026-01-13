@@ -135,7 +135,11 @@ public class SuperSpinGrab : Attack
             this.grabbedPlayer = player;
 
             if (player.animations != null)
+            {
                 player.animations.SetDefaultPose();
+                player.animations.SetEyes(2);
+            }
+                
 
             this.user.rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             player.rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
@@ -212,7 +216,8 @@ public class SuperSpinGrab : Attack
         //player.AddKnockback(this.belongsTo.transform.forward.z * 1000, 1000);
         //player.TakeDamage(this.belongsTo.transform.position, 20);
         player.ragdoll.transform.localEulerAngles = new Vector3(0, 0, 0);
-        player.TakeDamage(this.user.transform.position, this.damage, 1.1f, this.user.transform.forward.z * 1000f, 1000f);
+        //player.TakeDamage(this.user.transform.position, this.damage, 1.1f, this.user.transform.forward.z * 1000f, 1000f);
+        player.TakeDamage(this.user.transform.position, this.damage, 1.1f, this.user.transform.forward.z * 1000f, 1000f, true, true, true, false, true, false, false, true, 0f, 0.25f, this.user, false);
         this.user.GiveSuperCharge(this.superChargeAmount);
         player.GiveSuperCharge(this.superChargeAmount / 2f);
 

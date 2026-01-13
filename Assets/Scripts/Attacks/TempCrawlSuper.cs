@@ -415,7 +415,8 @@ public class TempCrawlSuper : Attack
 
             if (player.animations != null)
             {
-                player.animations.SetDefaultPose();
+                //player.animations.SetDefaultPose();
+                player.animations.KnifePunishmentHit();
                 player.animations.body.transform.localPosition = new Vector3(0f, 1.95f, 0f);
             }
                 
@@ -554,6 +555,7 @@ public class TempCrawlSuper : Attack
             
 
         player.TakeDamage(this.user.transform.position, 0f, 0.35f, 0f, 0f, false, false, false, false, true, true, true);
+        //player.TakeDamage(this.user.transform.position, 0f, 0.35f, 0f, 0f, false, false, false, false, true, true, true, false, 0f, 0.5f, this.user, true);
 
         if (player.dead)
         {

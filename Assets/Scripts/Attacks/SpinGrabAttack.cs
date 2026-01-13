@@ -368,7 +368,9 @@ public class SpinGrabAttack : Attack
 
             //player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 4), player.transform.position.y - 1f, 0f), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
             //player.TakeDamage(new Vector3(this.user.transform.position.x, player.transform.position.y - 0.5f, 0f), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
-            player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 6), player.transform.position.y - 0.5f, 0f), this.damage, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
+
+            //player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 6), player.transform.position.y - 0.5f, 0f), this.damage, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
+            player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 6), player.transform.position.y - 0.5f, 0f), this.damage, 1.3f, this.user.transform.forward.z * 1200f, 1200f, true, true, true, false, true, false, false, true, 0f, 0.25f, this.user, false);
         }
         else
         {
@@ -378,7 +380,8 @@ public class SpinGrabAttack : Attack
 
             //player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 1), player.transform.position.y - 0.5f, 0f), 10f, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
 
-            player.TakeDamage(new Vector3(this.user.transform.position.x, player.transform.position.y - 0.5f, 0f), this.damage, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
+            //player.TakeDamage(new Vector3(this.user.transform.position.x, player.transform.position.y - 0.5f, 0f), this.damage, 1.3f, this.user.transform.forward.z * 1200f, 1200f);
+            player.TakeDamage(new Vector3(this.user.transform.position.x, player.transform.position.y - 0.5f, 0f), this.damage, 1.3f, this.user.transform.forward.z * 1200f, 1200f, true, true, true, false, true, false, false, true, 0f, 0.25f, this.user, false);
         }
         if (player.soundEffects != null)
             player.soundEffects.hitSound.PlaySound();

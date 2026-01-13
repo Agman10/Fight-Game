@@ -57,10 +57,27 @@ public class HitAnimationLogic : MonoBehaviour
         this.Stop();
     }
 
+    /*public void OnAttack()
+    {
+        if (this.onGoing)
+            this.Stop();
+    }*/
+
     public void TriggerHitAnimation()
     {
-        if (this.user != null && this.animations != null /*&& this.user.attackStuns.Count <= 0*/)
+        if (this.user != null && this.animations != null && !this.user.knockbackInvounrability && !this.user.countering /*&& this.user.attackStuns.Count <= 0*/)
             this.StartCoroutine(this.HitAnimationCoroutine());
+
+
+        /*if (this.user != null && this.animations != null && !this.user.countering)
+        {
+            if (this.user.knockbackInvounrability)
+                this.StartCoroutine(this.HitAnimationEyesOnlyCoroutine());
+            else
+                this.StartCoroutine(this.HitAnimationCoroutine());
+        }*/
+            
+        //Debug.Log("hitAnim");
     }
 
     private IEnumerator HitAnimationCoroutine()
@@ -80,6 +97,23 @@ public class HitAnimationLogic : MonoBehaviour
 
         this.onGoing = false;
         //this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    private IEnumerator HitAnimationEyesOnlyCoroutine()
+    {
+        this.onGoing = true;
+
+        this.animations.SetEyes(2);
+
+        while (this.user.stuns.Count > 0)
+        {
+            yield return null;
+        }
+
+        if (!this.user.dead)
+            this.animations.SetEyes(0);
+
+        this.onGoing = false;
     }
 
     public void Stop()

@@ -157,7 +157,7 @@ public class TestPlayer : MonoBehaviour
     }
 
 
-    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false, bool super = false, bool knockDown = false, float impactStunDuration = 0f, float knockDownSitDuration = 0.5f, TestPlayer damageOwner = null/*, bool delayDeath = false*/)
+    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false, bool super = false, bool knockDown = false, float impactStunDuration = 0f, float knockDownSitDuration = 0.5f, TestPlayer damageOwner = null/*, bool delayDeath = false*/, bool triggerHitAnim = false)
     {
         if(this.damageMitigation != 0f && amount > 0f)
         {
@@ -260,8 +260,10 @@ public class TestPlayer : MonoBehaviour
             if (this.health >= this.maxHealth)
                 this.health = this.maxHealth;
         }
-        if (knockDown)
+        if (knockDown && this.knockDownLogic != null)
             this.KnockDown(horizontalKnockback, verticalKnockback, stun, impactStunDuration, knockDownSitDuration);
+        else if (triggerHitAnim && this.hitAnimLogic != null)
+            this.TriggerHitAnim();
         /*else
             this.TriggerHitAnim();*/
         

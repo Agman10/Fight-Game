@@ -183,8 +183,15 @@ public class FlamingGrab : Attack
             this.user.rb.constraints = RigidbodyConstraints.FreezeAll;
             player.rb.constraints = RigidbodyConstraints.FreezeAll;
 
+            /*if (player.animations != null)
+                player.animations.body.localPosition = new Vector3(0f, 1.95f, 0f);*/
+
             if (player.animations != null)
-                player.animations.body.localPosition = new Vector3(0f, 1.95f, 0f);
+            {
+                player.animations.KnifePunishmentHit();
+                player.animations.body.localPosition = new Vector3(player.animations.body.localPosition.x, 1.95f, player.animations.body.localPosition.z);
+            }
+                
 
             this.StartCoroutine(this.FlameGrabCoroutine(player));
             //this.StartCoroutine(this.PunchBarageCoroutine(player));
@@ -274,7 +281,7 @@ public class FlamingGrab : Attack
         player.preventDeath = false;
         player.knockbackInvounrability = false;
         player.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-        player.TakeDamage(this.user.transform.position, this.damagePerTick, 0.5f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true);
+        player.TakeDamage(this.user.transform.position, this.damagePerTick, 0.5f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false, true, true, 0f, 0.5f);
 
         if (player.soundEffects != null)
             player.soundEffects.PlayHitSound();
@@ -287,6 +294,7 @@ public class FlamingGrab : Attack
         }
 
         player.attackStuns.Remove(this.gameObject);
+        this.victim = null;
 
         //this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
         //player.TakeDamage(this.user.transform.position, 0f);
@@ -311,11 +319,11 @@ public class FlamingGrab : Attack
 
         this.user.knockbackInvounrability = false;
 
-        if (!player.dead)
+        /*if (!player.dead)
         {
             player.animations.SetDefaultPose();
             //player.ragdoll.transform.localPosition = new Vector3(0f, 1.95f, 0f);
-        }
+        }*/
 
 
         this.user.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;

@@ -156,6 +156,7 @@ MonoBehaviour:
   avoidOnHitInvoke: 0
   avoidDamagingPlayer: 0
   fireProperty: 1
+  electricProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 0
   preventDeath: 0
@@ -163,13 +164,20 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
+  triggerHitAnim: 1
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!1 &1569255751176923961
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +302,7 @@ MonoBehaviour:
   avoidOnHitInvoke: 0
   avoidDamagingPlayer: 0
   fireProperty: 1
+  electricProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 1
   preventDeath: 0
@@ -301,13 +310,20 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 1
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.4
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!1 &1569255751502682448
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,6 +708,7 @@ MonoBehaviour:
   avoidOnHitInvoke: 0
   avoidDamagingPlayer: 0
   fireProperty: 1
+  electricProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 1
   preventDeath: 0
@@ -699,13 +716,20 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!1 &4524722367327219332
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,6 +854,7 @@ MonoBehaviour:
   avoidOnHitInvoke: 0
   avoidDamagingPlayer: 0
   fireProperty: 1
+  electricProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 1
   preventDeath: 0
@@ -837,13 +862,20 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!1 &6024925297505248147
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +1000,7 @@ MonoBehaviour:
   avoidOnHitInvoke: 0
   avoidDamagingPlayer: 0
   fireProperty: 1
+  electricProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 1
   preventDeath: 0
@@ -975,13 +1008,20 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!1 &7060237416606652915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   speed: 12
+  lifeTime: 5
   hitbox1: {fileID: 1569255751170732328}
   hitbox2: {fileID: 1569255751176923967}
   impactEffect: {fileID: 2702059959944033808, guid: cfe0f5e993c408b499835c69daa2c5ff, type: 3}
@@ -1781,6 +1822,7 @@ MonoBehaviour:
   avoidOnHitInvoke: 0
   avoidDamagingPlayer: 0
   fireProperty: 1
+  electricProperty: 0
   physicsKnockbackMultiplier: 1
   changeTargetDir: 1
   preventDeath: 0
@@ -1788,13 +1830,20 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
+  explosionHitboxOrigin: {fileID: 0}
   customHitSound:
     sound: {fileID: 0}
     pitch: {x: 1, y: 1}
     startTime: 0
+  hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!1 &8612239269910225046
 GameObject:
   m_ObjectHideFlags: 0

@@ -1558,6 +1558,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -2619,6 +2620,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -3206,6 +3208,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 1
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -3513,6 +3516,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 0
   hitSoundCooldown: 0
@@ -3820,6 +3824,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -4531,6 +4536,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -5212,6 +5218,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 1
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -6760,6 +6767,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -12477,6 +12485,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 0
   hitSoundCooldown: 0
@@ -12862,6 +12871,7 @@ MonoBehaviour:
   isSuper: 0
   hitbox1: {fileID: 3233912420286157513}
   hitbox2: {fileID: 1927798590295946791}
+  superEndlagTime: 0.05
 --- !u!1 &3176595779973566305
 GameObject:
   m_ObjectHideFlags: 0
@@ -13142,6 +13152,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -18424,6 +18435,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -18719,6 +18731,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -19200,6 +19213,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -19758,6 +19772,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -25067,6 +25082,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 1
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -25617,6 +25633,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -26051,6 +26068,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -26061,6 +26079,52 @@ MonoBehaviour:
     startTime: 0
   hitEffectTransformOrigin: {fileID: 0}
   hitEffectRandomPos: 0
+--- !u!1 &4311197569714387025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3537326670484791705}
+  - component: {fileID: 1771045378201518032}
+  m_Layer: 6
+  m_Name: HitAnimationLogic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3537326670484791705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311197569714387025}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7680032590235696772}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1771045378201518032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4311197569714387025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d660eb99a8bc184186c0dc365ea36d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  user: {fileID: 7680032590235696775}
+  animations: {fileID: 439077734487545134}
+  onGoing: 0
 --- !u!1 &4314521865063626894
 GameObject:
   m_ObjectHideFlags: 0
@@ -26716,6 +26780,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -27521,6 +27586,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -28016,6 +28082,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -28258,6 +28325,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -28903,9 +28971,10 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 4301312755664733242}
   isSuper: 1
-  knockDown: 0
+  knockDown: 1
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -29449,6 +29518,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -29931,6 +30001,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -31128,6 +31199,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 1
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -31646,6 +31718,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 0
   hitSoundCooldown: 0
@@ -32208,6 +32281,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -32691,6 +32765,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -33269,6 +33344,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -34431,6 +34507,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -39346,6 +39423,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -39491,6 +39569,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 1
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -40169,6 +40248,7 @@ Transform:
   - {fileID: 8989713301447369607}
   - {fileID: 1872700897636305961}
   - {fileID: 3724045807265473505}
+  - {fileID: 3537326670484791705}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -40227,7 +40307,7 @@ MonoBehaviour:
   attackStuns: []
   sleepLogic: {fileID: 9142221607944393828}
   knockDownLogic: {fileID: 9096779765024538762}
-  hitAnimLogic: {fileID: 0}
+  hitAnimLogic: {fileID: 1771045378201518032}
   tempOpponent: {fileID: 0}
   tempBall: {fileID: 0}
   tempLookAtBall: 0
@@ -40320,6 +40400,7 @@ MonoBehaviour:
   bloodPuddle: {fileID: 7624408218770712930}
   dress: {fileID: 0}
   eyesPosTransform: {fileID: 0}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!114 &1281475547882687256
@@ -41813,6 +41894,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -41958,6 +42040,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 0
   hitSoundCooldown: 0
@@ -42184,6 +42267,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -42538,6 +42622,7 @@ MonoBehaviour:
   knockDown: 0
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
+  triggerHitAnim: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -43649,14 +43734,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38dcc8e9a6ebc540b22bd34e28315f2, type: 3}
---- !u!4 &3116191876135977897 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3385893640656328864, guid: d38dcc8e9a6ebc540b22bd34e28315f2, type: 3}
-  m_PrefabInstance: {fileID: 415435436028599049}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &3553993168814142020 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3788017286532360525, guid: d38dcc8e9a6ebc540b22bd34e28315f2, type: 3}
+  m_PrefabInstance: {fileID: 415435436028599049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3116191876135977897 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3385893640656328864, guid: d38dcc8e9a6ebc540b22bd34e28315f2, type: 3}
   m_PrefabInstance: {fileID: 415435436028599049}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &742917587133218025
@@ -43716,14 +43801,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35b0524630bc5054bacf364ca3033a1f, type: 3}
---- !u!198 &7702892460900787102 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6965226367473524599, guid: 35b0524630bc5054bacf364ca3033a1f, type: 3}
-  m_PrefabInstance: {fileID: 742917587133218025}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7702892460900787096 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6965226367473524593, guid: 35b0524630bc5054bacf364ca3033a1f, type: 3}
+  m_PrefabInstance: {fileID: 742917587133218025}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7702892460900787102 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6965226367473524599, guid: 35b0524630bc5054bacf364ca3033a1f, type: 3}
   m_PrefabInstance: {fileID: 742917587133218025}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1073509381144143009
@@ -44172,19 +44257,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e10f19b1c0ded444d98439c70d2f0ad5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
---- !u!1 &8168382453294392005 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4731108457813221709, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
-  m_PrefabInstance: {fileID: 3527350414320649096}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4732867209543670093 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8168737138873539269, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
-  m_PrefabInstance: {fileID: 3527350414320649096}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6662454697248768221 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7820045263632696149, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
+--- !u!4 &6662454695210416613 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7820045264597465709, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
   m_PrefabInstance: {fileID: 3527350414320649096}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6662454695210416612 stripped
@@ -44192,9 +44267,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7820045264597465708, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
   m_PrefabInstance: {fileID: 3527350414320649096}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6662454695210416613 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7820045264597465709, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
+--- !u!1 &6662454697248768221 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7820045263632696149, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
+  m_PrefabInstance: {fileID: 3527350414320649096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4732867209543670093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8168737138873539269, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
+  m_PrefabInstance: {fileID: 3527350414320649096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8168382453294392005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4731108457813221709, guid: b840f3b9ac7efcb47823515d7fef3ceb, type: 3}
   m_PrefabInstance: {fileID: 3527350414320649096}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4897317234082712181
@@ -44368,14 +44453,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
---- !u!1 &8348622328969176180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3796025007154477637, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
-  m_PrefabInstance: {fileID: 5148304213610798641}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3985772134942960388 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8080088595173995829, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
+--- !u!4 &3820778416153955168 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8247307931658032465, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
   m_PrefabInstance: {fileID: 5148304213610798641}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5987913623311763131 stripped
@@ -44383,9 +44463,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1471310182407690378, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
   m_PrefabInstance: {fileID: 5148304213610798641}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3820778416153955168 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8247307931658032465, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
+--- !u!1 &3985772134942960388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8080088595173995829, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
+  m_PrefabInstance: {fileID: 5148304213610798641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8348622328969176180 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3796025007154477637, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
   m_PrefabInstance: {fileID: 5148304213610798641}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5258719229453207615

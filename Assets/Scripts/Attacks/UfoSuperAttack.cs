@@ -128,15 +128,20 @@ public class UfoSuperAttack : Attack
         if (this.startBeam != null)
             this.startBeam.SetActive(true);
 
+        if (this.animations != null)
+            this.animations.RoadRollerRiseUp();
+
         yield return new WaitForSeconds(0.1f);
 
-        if (this.animations != null)
-            this.animations.SetDefaultPose();
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
 
         this.user.rb.isKinematic = true;
 
+        //FIX IT FOR FIGHTBALL FOR ASPECT RATIO 16:10 (MAKE THE UFO GO HIGHER UP IN FIGHT BALL)
+
         float currentTime = 0;
-        float duration = 0.4f;
+        float duration = 0.6f;
         //float targetVolume = 0.1f;
         float targetPositionY = 11f;
         float startPositionY = this.user.transform.position.y;
@@ -161,6 +166,8 @@ public class UfoSuperAttack : Attack
 
         if(this.animations != null)
         {
+            this.animations.SetDefaultPose();
+
             if (this.animations.body != null)
                 this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 90f, 0f);
 
@@ -462,8 +469,47 @@ public class UfoSuperAttack : Attack
 
         this.shipActive = false;
 
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
+
+        this.user.LookAtTarget();
+        if (this.animations != null)
+            this.animations.DemonCradle(5);
+        if (this.user.movement != null && Mathf.Abs(this.user.movement.playerInput.moveInput.x) > 0f)
+        {
+            //this.user.AddKnockback(this.user.movement.playerInput.moveInput.x * 300f, 0f);
+            this.user.rb.velocity = new Vector3(this.user.movement.playerInput.moveInput.x * (this.user.movement.moveSpeed * 0.5f), this.user.rb.velocity.y, 0f);
+        }
+        yield return new WaitForSeconds(0.01f);
+        this.user.LookAtTarget();
+        if (this.animations != null)
+            this.animations.DemonCradle(5);
+        yield return new WaitForSeconds(0.01f);
+
+        float waitTime = 2f;
+        while (waitTime > 0f && Mathf.Abs(this.user.rb.velocity.y) > 0f)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
+
+        if (this.animations != null)
+            this.animations.RoadRollerEndLand();
+        waitTime = 0.1f;
+        while (waitTime > 0f)
+        {
+            waitTime -= Time.deltaTime;
+            this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
+            yield return null;
+        }
+
         if (this.animations != null)
             this.animations.SetDefaultPose();
+
+
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
@@ -504,6 +550,20 @@ public class UfoSuperAttack : Attack
             player.rb.isKinematic = true;
 
             player.attackStuns.Add(this.gameObject);
+
+            if (player.animations != null)
+            {
+                player.animations.KnifePunishmentHit();
+                //player.animations.KnifePunishmentFalling(0);
+                if (player.animations.rightArmJoint != null)
+                    player.animations.rightArmJoint.localEulerAngles = new Vector3(-20f, player.animations.rightArmJoint.localEulerAngles.y, player.animations.rightArmJoint.localEulerAngles.z);
+
+                if (player.animations.leftArmJoint != null)
+                    player.animations.leftArmJoint.localEulerAngles = new Vector3(10f, player.animations.leftArmJoint.localEulerAngles.y, 15f);
+
+                if (player.animations.body != null)
+                    player.animations.body.localPosition = new Vector3(player.animations.body.localPosition.x, player.animations.body.localPosition.y, player.transform.forward.z * 0.05f);
+            }
 
             this.StopAllCoroutines();
             this.StartCoroutine(this.CapturingCoroutine(player));
@@ -607,7 +667,7 @@ public class UfoSuperAttack : Attack
 
         player.transform.position = new Vector3(this.user.transform.position.x, 10f, 0);
 
-        player.AddStun(1f);
+        //player.AddStun(1f);
 
         this.StopGrab(player);
 
@@ -627,6 +687,42 @@ public class UfoSuperAttack : Attack
             this.ufoModel.SetActive(false);
 
         this.shipActive = false;
+
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
+
+        if (this.animations != null)
+            this.animations.DemonCradle(5);
+        if (this.user.movement != null && Mathf.Abs(this.user.movement.playerInput.moveInput.x) > 0f)
+        {
+            //this.user.AddKnockback(this.user.movement.playerInput.moveInput.x * 300f, 0f);
+            this.user.rb.velocity = new Vector3(this.user.movement.playerInput.moveInput.x * (this.user.movement.moveSpeed * 0.5f), this.user.rb.velocity.y, 0f);
+        }
+        yield return new WaitForSeconds(0.05f);
+        this.user.LookAtTarget();
+        if (this.animations != null)
+            this.animations.DemonCradle(5);
+        yield return new WaitForSeconds(0.01f);
+
+        float waitTime = 2f;
+        while (waitTime > 0f && Mathf.Abs(this.user.rb.velocity.y) > 0f)
+        {
+            waitTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
+
+        if (this.animations != null)
+            this.animations.RoadRollerEndLand();
+        waitTime = 0.1f;
+        while (waitTime > 0f)
+        {
+            waitTime -= Time.deltaTime;
+            this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
+            yield return null;
+        }
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
@@ -657,7 +753,8 @@ public class UfoSuperAttack : Attack
 
             //player.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, true, false, false);
 
-            this.capturedPlayer.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, true, false, false, true, false, true);
+            //this.capturedPlayer.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, true, false, false, true, false, true);
+            this.capturedPlayer.TakeDamage(this.user.transform.position, 0f, 0.9f, 0f, 0f, false, true, false, false, true, false, true, false, 0, 0.5f, this.user, true);
 
             if (!player.dead)
             {
@@ -671,7 +768,7 @@ public class UfoSuperAttack : Attack
                     player.soundEffects.PlayHitSound();*/
             }
 
-            player.animations.SetDefaultPose();
+            //player.animations.SetDefaultPose();
             //player.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, true, false, true);
 
 

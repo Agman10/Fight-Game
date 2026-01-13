@@ -183,7 +183,12 @@ public class SuperPainDrill : Attack
             player.rb.constraints = RigidbodyConstraints.FreezeAll;
 
             if (player.animations != null)
-                player.animations.body.localPosition = new Vector3(0f, 1.95f, 0f);
+            {
+                //player.animations.body.localPosition = new Vector3(0f, 1.95f, 0f);
+                player.animations.KnifePunishmentHit();
+                player.animations.body.localPosition = new Vector3(player.animations.body.localPosition.x, 1.95f, player.animations.body.localPosition.z);
+            }
+                
 
             this.StartCoroutine(this.FlameGrabCoroutine(player));
             //this.StartCoroutine(this.PunchBarageCoroutine(player));
@@ -367,7 +372,7 @@ public class SuperPainDrill : Attack
         player.knockbackInvounrability = false;
         player.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         if (player.health > 0f)
-            player.TakeDamage(new Vector3(this.user.transform.position.x, -1f, 0), 2.5f, 0.5f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false , true);
+            player.TakeDamage(new Vector3(this.user.transform.position.x, -1f, 0), 2.5f, 0.5f, this.user.transform.forward.z * 1000f, 1000f, true, true, false, false, true, false , true, true, 0f, 0.5f);
         else
             player.TakeDamage(this.user.transform.position, 2.5f, 0.5f, this.user.transform.forward.z * 0f, 0f, true, true, false, false, true, false, true);
 
@@ -376,13 +381,15 @@ public class SuperPainDrill : Attack
         if (player.soundEffects != null)
             player.soundEffects.PlayHitSound();
 
+        this.victim = null;
+
         //this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, false);
 
-        if (!player.dead)
+        /*if (!player.dead)
         {
             player.animations.SetDefaultPose();
             //player.ragdoll.transform.localPosition = new Vector3(0f, 1.95f, 0f);
-        }
+        }*/
 
         
 
@@ -411,7 +418,7 @@ public class SuperPainDrill : Attack
         this.user.attackStuns.Remove(this.gameObject);
         //player.attackStuns.Remove(this.gameObject);
         this.onGoing = false;
-        this.victim = null;
+        //this.victim = null;
         //this.user.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, true);
     }
 

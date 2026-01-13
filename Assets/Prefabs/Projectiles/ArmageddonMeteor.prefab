@@ -4937,6 +4937,10 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
+  triggerHitAnim: 1
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -4946,6 +4950,7 @@ MonoBehaviour:
     pitch: {x: 1, y: 1}
     startTime: 0
   hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!114 &7206194067050683271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19765,6 +19770,10 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
+  triggerHitAnim: 1
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -19774,6 +19783,7 @@ MonoBehaviour:
     pitch: {x: 1, y: 1}
     startTime: 0
   hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!114 &7348381149049665584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39411,11 +39421,16 @@ MonoBehaviour:
   broken: 0
   flame: {fileID: 8719131000310189834}
   model: {fileID: 8719130999042775672}
+  flameEffect: {fileID: 0}
   impactEffect: {fileID: 8719130999314503133}
   impactEffectAir: {fileID: 4507994072499865204}
   hitbox1: {fileID: 8719130999193090802}
   hitbox2: {fileID: 2761348277831380457}
   groundHitbox: {fileID: 9114821439819364255}
+  explosionSfx:
+    sound: {fileID: 0}
+    pitch: {x: 1, y: 1}
+    startTime: 0
 --- !u!135 &8719130999128410953
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -44627,6 +44642,10 @@ MonoBehaviour:
   preventMomentumStop: 0
   hitboxOrigin: {fileID: 0}
   isSuper: 1
+  knockDown: 0
+  knockDownImpactDuration: 0
+  knockDownSitDuration: 0.5
+  triggerHitAnim: 1
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -44636,6 +44655,7 @@ MonoBehaviour:
     pitch: {x: 1, y: 1}
     startTime: 0
   hitEffectTransformOrigin: {fileID: 0}
+  hitEffectRandomPos: 0
 --- !u!1 &8719130999314503133
 GameObject:
   m_ObjectHideFlags: 0

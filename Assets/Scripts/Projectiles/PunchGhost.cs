@@ -71,7 +71,7 @@ public class PunchGhost : MonoBehaviour
             this.transform.TransformDirection(1f, 0f, 0f),
             out boxHit,
             this.transform.rotation,
-            1.6f,
+            1.45f/*1.6f*/,
             this.layerMask))
         {
             TestPlayer player = boxHit.transform.gameObject.GetComponent<TestPlayer>();
