@@ -14,6 +14,8 @@ public class GoalUiLogic : MonoBehaviour
     public GameObject perfectP1;
     public GameObject perfectP2;
 
+    public GameObject goText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,11 @@ public class GoalUiLogic : MonoBehaviour
         this.StartCoroutine(this.PerfectCoroutine(isP1));
     }
 
+    public void GoText()
+    {
+        this.StartCoroutine(this.GoCoroutine());
+    }
+
     public void RemoveAllText()
     {
         if (this.goalP1 != null)
@@ -65,6 +72,9 @@ public class GoalUiLogic : MonoBehaviour
 
         if (this.perfectP2 != null)
             this.perfectP2.SetActive(false);
+
+        if (this.goText != null)
+            this.goText.SetActive(false);
     }
 
     private IEnumerator GoalCoroutine(bool isP1 = true)
@@ -136,5 +146,16 @@ public class GoalUiLogic : MonoBehaviour
 
             this.perfectP2.SetActive(false);
         }
+    }
+
+    private IEnumerator GoCoroutine()
+    {
+        if (this.goText != null)
+            this.goText.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (this.goText != null)
+            this.goText.SetActive(false);
     }
 }

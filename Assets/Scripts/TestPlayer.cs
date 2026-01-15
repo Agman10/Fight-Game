@@ -69,6 +69,8 @@ public class TestPlayer : MonoBehaviour
     public SkelletonBody skelletonBody;
     public HitEffectLogic hitEffectLogic;
 
+    public StatusEffectHandler statusEffectHandler;
+
     [HideInInspector] public float hits;
     [HideInInspector] public float hitsTimer = 0f;
 

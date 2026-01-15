@@ -15,6 +15,7 @@ public class EntranceAnimationHandler : MonoBehaviour
 
     public RoundTimer roundTimer;
     public KOUiLogic koUiLogic;
+    public GoalUiLogic goalUiLogic;
     // Start is called before the first frame update
     void Start()
     {
@@ -118,6 +119,9 @@ public class EntranceAnimationHandler : MonoBehaviour
 
                 if (this.koUiLogic != null)
                     this.koUiLogic.FightText();
+
+                if (this.goalUiLogic != null)
+                    this.goalUiLogic.GoText();
             }
         }
     }
