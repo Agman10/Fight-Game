@@ -12,6 +12,10 @@ public class PotionSmoke : MonoBehaviour
 
     public float damage = -20f;
 
+    public bool isStatusEffect;
+    public float statusEffectDuration = 5f;
+    public StatusEffectHitbox statusEffectHitbox;
+
     //THIS WILL GIVE STATUS EFFECT
     //THE STATUS EFFECT LAST LONGER THE FURTHER IN THE HITBOX YOU ARE
     //WILL ALSO HAVE INSTANT HEALING, DAMAGE, SUPER METER
@@ -25,8 +29,17 @@ public class PotionSmoke : MonoBehaviour
             this.hitSphere.damage = this.damage;
         }
 
+        if (this.statusEffectHitbox != null)
+        {
+            //this.hitSphere.gameObject.SetActive(true);
+            this.statusEffectHitbox.duration = this.statusEffectDuration;
+        }
+
         this.sphereCollider = this.GetComponent<SphereCollider>();
-        this.StartCoroutine(this.TestGrowHitbox());
+        if (this.isStatusEffect)
+            this.StartCoroutine(this.GrowStatusEffectHitbox());
+        else
+            this.StartCoroutine(this.TestGrowHitbox());
     }
 
     private void OnDisable()
@@ -37,7 +50,14 @@ public class PotionSmoke : MonoBehaviour
             this.hitSphere.transform.localScale = new Vector3(1f, 1f, 1f);
             this.hitSphere.damage = this.damage;
         }
-            
+
+        if (this.statusEffectHitbox != null)
+        {
+            this.statusEffectHitbox.gameObject.SetActive(false);
+            this.statusEffectHitbox.transform.localScale = new Vector3(1f, 1f, 1f);
+            this.statusEffectHitbox.duration = this.statusEffectDuration;
+        }
+
     }
 
 
@@ -67,9 +87,13 @@ public class PotionSmoke : MonoBehaviour
 
 
         this.hitSphere.transform.localScale = new Vector3(startScale, startScale, startScale);
-        yield return new WaitForSeconds(0.05f);
-        //yield return new WaitForSeconds(0.1f);
         this.hitSphere.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        //yield return new WaitForSeconds(0.001f);
+
+        //yield return new WaitForSeconds(0.1f);
+
+        //this.hitSphere.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.01f);
         float currentTime = 0f;
         float duration = 0.2f;
@@ -116,6 +140,71 @@ public class PotionSmoke : MonoBehaviour
         this.gameObject.SetActive(false);
 
     }
+
+    private IEnumerator GrowStatusEffectHitbox()
+    {
+        float startScale = 1.5f;
+
+
+        this.statusEffectHitbox.transform.localScale = new Vector3(startScale, startScale, startScale);
+        this.statusEffectHitbox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        //yield return new WaitForSeconds(0.001f);
+
+        //yield return new WaitForSeconds(0.1f);
+
+        //this.statusEffectHitbox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.01f);
+        float currentTime = 0f;
+        float duration = 0.2f;
+        //float targetVolume = 0.1f;
+        float targetScale = 4f;
+        //float startScale = 1.5f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (this.statusEffectHitbox != null)
+            {
+                this.statusEffectHitbox.transform.localScale = new Vector3(Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration));
+                //this.hitSphere.damage = Mathf.Round(Mathf.Lerp(this.damage, this.damage * 0.25f, currentTime / duration));
+
+                //this.statusEffectHitbox.duration = Mathf.Lerp(this.statusEffectDuration, this.statusEffectDuration * 0.25f, currentTime / duration);
+                this.statusEffectHitbox.duration = Mathf.Round(Mathf.Lerp(this.statusEffectDuration, this.statusEffectDuration * 0.25f, currentTime / duration) * 10000) * 0.0001f;
+                //Debug.Log(this.hitSphere.damage);
+            }
+            yield return null;
+        }
+
+        currentTime = 0f;
+        duration = 0.3f;
+        //float targetVolume = 0.1f;
+        targetScale = 6f;
+        startScale = 4f;
+
+        float minDuration = 0.5f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            if (this.statusEffectHitbox != null)
+            {
+                this.statusEffectHitbox.transform.localScale = new Vector3(Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration), Mathf.Lerp(startScale, targetScale, currentTime / duration));
+                //this.hitSphere.damage = Mathf.Round(Mathf.Lerp(this.damage * 0.25f, minDuration, currentTime / duration));
+
+                //this.statusEffectHitbox.duration = Mathf.Lerp(this.statusEffectDuration * 0.25f, minDuration, currentTime / duration);
+                this.statusEffectHitbox.duration = Mathf.Round(Mathf.Lerp(this.statusEffectDuration * 0.25f, minDuration, currentTime / duration) * 10000) * 0.0001f;
+                //Debug.Log(this.hitSphere.damage);
+            }
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.05f);
+        this.statusEffectHitbox.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1f);
+        this.gameObject.SetActive(false);
+
+    }
+
     /*private void OnTriggerEnter(Collider other)
     {
         TestPlayer player = other.GetComponent<TestPlayer>();
@@ -151,20 +240,20 @@ public class PotionSmoke : MonoBehaviour
                 *//*Debug.Log(percent);
                 Debug.Log(distance);*/
 
-                /*Debug.Log("percentX: " + percentX);
-                Debug.Log("percentY: " + percentY);
-                Debug.Log("percentTotal: " + percentTotal);*//*
+    /*Debug.Log("percentX: " + percentX);
+    Debug.Log("percentY: " + percentY);
+    Debug.Log("percentTotal: " + percentTotal);*//*
 
-                //float percent2 = Mathf.InverseLerp(Mathf.PI* 2.5f, 1f, distance);
-                //float percent2 = Mathf.Lerp((2.5f / distance) - distance, 1f, distance);
-                //float percent2 = Mathf.Lerp((2.5f / distance) - distance, 1f, distance);
-                float percent2 = Mathf.InverseLerp(5f, 0f, distance);
+    //float percent2 = Mathf.InverseLerp(Mathf.PI* 2.5f, 1f, distance);
+    //float percent2 = Mathf.Lerp((2.5f / distance) - distance, 1f, distance);
+    //float percent2 = Mathf.Lerp((2.5f / distance) - distance, 1f, distance);
+    float percent2 = Mathf.InverseLerp(5f, 0f, distance);
 
-                Debug.Log("distance: " + distance);
-                Debug.Log("percent2: " + percent2);
-                Debug.Log("percentTotal: " + percentTotal);
+    Debug.Log("distance: " + distance);
+    Debug.Log("percent2: " + percent2);
+    Debug.Log("percentTotal: " + percentTotal);
 
-            }
-        }
-    }*/
+}
+}
+}*/
 }

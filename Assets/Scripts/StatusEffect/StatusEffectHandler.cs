@@ -6,6 +6,9 @@ public class StatusEffectHandler : MonoBehaviour
 {
     public TestPlayer user;
     public StatusEffect poison;
+    public StatusEffect regeneration;
+    public StatusEffect superRegeneration;
+    public StatusEffect superDrain;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,13 +58,60 @@ public class StatusEffectHandler : MonoBehaviour
         {
             this.poison.RemoveStatusEffect();
         }
+
+        if (this.regeneration != null)
+        {
+            this.regeneration.RemoveStatusEffect();
+        }
+
+        if (this.superRegeneration != null)
+        {
+            this.superRegeneration.RemoveStatusEffect();
+        }
+
+        if (this.superDrain != null)
+        {
+            this.superDrain.RemoveStatusEffect();
+        }
+    }
+
+    public void GiveStatusEffect(int effectId = 0, float time = 1)
+    {
+        if (effectId == 0)
+            this.GivePoison(time);
+        else if (effectId == 1)
+            this.GiveRegeneration(time);
+        else if (effectId == 2)
+            this.GiveSuperRegeneration(time);
+        else if (effectId == 3)
+            this.GiveSuperDrain(time);
     }
 
     
-    public void GivePoison(float time = 5f)
+    public void GivePoison(float time = 1f)
     {
         if (this.poison != null)
             this.poison.GiveStatusEffect(time);
+
+        //Debug.Log(time);
+    }
+
+    public void GiveRegeneration(float time = 1f)
+    {
+        if (this.regeneration != null)
+            this.regeneration.GiveStatusEffect(time);
+    }
+
+    public void GiveSuperRegeneration(float time = 1f)
+    {
+        if (this.superRegeneration != null)
+            this.superRegeneration.GiveStatusEffect(time);
+    }
+
+    public void GiveSuperDrain(float time = 1f)
+    {
+        if (this.superDrain != null)
+            this.superDrain.GiveStatusEffect(time);
     }
 
     [ContextMenu("TestPoison")]

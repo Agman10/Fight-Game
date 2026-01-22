@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5577837663355912002
+--- !u!1001 &7232770331121233845
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,47 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3020897633416980478, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
       propertyPath: damage
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032070944240199177, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
-      propertyPath: stun
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032070944240199177, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
-      propertyPath: doHitSound
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032070944240199177, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
-      propertyPath: ragdollForce
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3032070944240199177, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
-      propertyPath: triggerHitAnim
+    - target: {fileID: 3020897633416980478, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
+      propertyPath: isStatusEffect
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032070944240199177, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
-      propertyPath: changeTargetDir
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032070944240199177, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
-      propertyPath: avoidOnHitInvoke
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032070944240199177, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
-      propertyPath: verticalKnockback
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3032070944240199177, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
-      propertyPath: horizontalKnockback
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3119045449804056052, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2de051773624d9d42b8124c20db35400, type: 2}
+      objectReference: {fileID: 2100000, guid: d8c7fb07dab1ad344871a789821db0cd, type: 2}
     - target: {fileID: 3296981401521580151, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
       propertyPath: m_Name
-      value: PotionSmokeHarming
+      value: PotionSmokeRegeneration
       objectReference: {fileID: 0}
     - target: {fileID: 7436806834697120000, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
       propertyPath: m_RootOrder
@@ -94,6 +66,10 @@ PrefabInstance:
     - target: {fileID: 7436806834697120000, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230273781403270746, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}
+      propertyPath: effectId
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb679b776e603e44a92bd91d04e79bfa, type: 3}

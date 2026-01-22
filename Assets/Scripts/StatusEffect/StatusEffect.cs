@@ -7,6 +7,7 @@ public abstract class StatusEffect : MonoBehaviour
     public TestPlayer user;
     public bool onGoing;
     public float effectTime;
+    public ParticleSystem effectParticle;
 
     public virtual void OnEnable()
     {
@@ -41,6 +42,8 @@ public abstract class StatusEffect : MonoBehaviour
         this.effectTime = time;
         this.onGoing = true;
         this.StartCoroutine(this.StatusEffectTimerCoroutine());
+        if (this.effectParticle != null)
+            this.effectParticle.Play();
     }
 
     public virtual void RemoveStatusEffect()
@@ -48,6 +51,8 @@ public abstract class StatusEffect : MonoBehaviour
         this.StopAllCoroutines();
         this.onGoing = false;
         this.effectTime = 0f;
+        if (this.effectParticle != null)
+            this.effectParticle.Stop();
 
     }
 
@@ -55,6 +60,8 @@ public abstract class StatusEffect : MonoBehaviour
     {
         while (this.effectTime > 0f && this.onGoing)
         {
+            //this will be different depending on if it does damage/healing/other compared to if it does something like resistance/strength then the timer will tick down here
+
             //this.effectTime -= Time.deltaTime;
             yield return null;
         }
