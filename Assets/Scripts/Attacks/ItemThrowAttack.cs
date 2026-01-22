@@ -34,6 +34,8 @@ public class ItemThrowAttack : Attack
     public ThrowPotion healingPotion;
     public ThrowPotion harmingPotion;
 
+    public SleepSpellProjectile sleepSpellProjectile;
+
     [Space]
     //public MeteorRainSpawner meteorRainSpawner;
     public MeteorRainSpawner meteorRainSpawnerP1;
@@ -200,6 +202,7 @@ public class ItemThrowAttack : Attack
 
         //this.ThrowBigFireBall();
 
+        //this.ThrowSleepSpell();
 
         //this.ThrowRandomLegendaryItem();
 
@@ -273,6 +276,10 @@ public class ItemThrowAttack : Attack
             else if (fireBallNumber > 550 && fireBallNumber <= 650)
             {
                 this.ThrowPotion();
+            }
+            else if (fireBallNumber > 650 && fireBallNumber <= 700)
+            {
+                this.ThrowSleepSpell();
             }
             else
             {
@@ -750,6 +757,18 @@ public class ItemThrowAttack : Attack
             bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3((this.transform.forward.z * 1.75f /*2.1f*/ /*1.5f*/) + this.transform.position.x, this.transform.position.y + 2.15f, 0), this.transform.rotation);
             //bigFireBallPrefab = Instantiate(bigFireBallPrefab, new Vector3(this.groundTransform.position.x, this.groundTransform.position.y, 0), this.transform.rotation);
             bigFireBallPrefab.SetOwner(this.user);
+            this.user.animations.ItemThrow(5);
+        }
+    }
+
+    public void ThrowSleepSpell()
+    {
+        if(this.sleepSpellProjectile != null)
+        {
+            SleepSpellProjectile sleepSpellPrefab = this.sleepSpellProjectile;
+            sleepSpellPrefab = Instantiate(sleepSpellPrefab, new Vector3((this.transform.forward.z * 1.75f /*2.1f*/ /*1.5f*/) + this.transform.position.x, this.transform.position.y + 2.15f, 0), this.transform.rotation);
+            sleepSpellPrefab.SetOwner(this.user);
+            sleepSpellPrefab.sleepTime = 3f;
             this.user.animations.ItemThrow(5);
         }
     }

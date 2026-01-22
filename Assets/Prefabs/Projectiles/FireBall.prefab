@@ -288,12 +288,20 @@ MonoBehaviour:
   fire: {fileID: 3001869371664577170, guid: 6cbe02f6dde68b44490eaed300160cc6, type: 3}
   belongsTo: {fileID: 0}
   damage: 5
+  superChargeAmount: 5
   flame: {fileID: 2796423417271597762}
   model: {fileID: 2796423416989102763}
   hitEffect: {fileID: 0}
   stun: 0.05
   horizontalKnockack: 0
   verticalKnockack: 100
+  hitEffectYOffset: 0
+  yVelocity: 0
+  doHitAnim: 1
+  destroySfx:
+    sound: {fileID: 0}
+    pitch: {x: 1, y: 1}
+    startTime: 0
 --- !u!135 &2796423417487575970
 SphereCollider:
   m_ObjectHideFlags: 0

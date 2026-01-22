@@ -25,6 +25,8 @@ public class FireBall : MonoBehaviour
 
     public float yVelocity = 0f;
 
+    public bool doHitAnim;
+
     [Space]
     //public AudioSource destroySound;
     public CharacterSoundEffect destroySfx;
@@ -145,13 +147,14 @@ public class FireBall : MonoBehaviour
                 //this.gameObject.SetActive(false);
                 this.Disable();
 
+                player.OnHit?.Invoke();
                 //player.TakeDamage(this.transform.position, this.damage);
-                player.TakeDamage(this.transform.position, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockack, this.verticalKnockack);
+                player.TakeDamage(this.transform.position, this.damage, this.stun, this.transform.forward.z * this.horizontalKnockack, this.verticalKnockack, true, true , false, false, true, false, false, false, 0f, 0.5f, this.belongsTo, this.doHitAnim);
 
                 if (player.soundEffects != null)
                     player.soundEffects.PlayHitSound();
                 //player.TakeDamage(this.transform.position, this.damage, 0.1f, this.transform.forward.z * 300f, 300f);
-                player.OnHit?.Invoke();
+                //player.OnHit?.Invoke();
                 if (this.belongsTo != null)
                 {
                     this.belongsTo.GiveSuperCharge(this.superChargeAmount);

@@ -56,7 +56,7 @@ public class MolotovProjectile : Projectile
         {
             if (this.owner == null || player != this.owner)
             {
-                player.TakeDamage(this.transform.position, 5f, 0.2f, this.transform.forward.z * 10f, 100f);
+                player.TakeDamage(this.transform.position, 5f, 0.2f, this.transform.forward.z * 10f, 100f, true, true, false, false, true, false, false, false, 0f, 0.5f, this.owner, true);
                 this.BreakBottle();
 
                 if (this.owner != null)

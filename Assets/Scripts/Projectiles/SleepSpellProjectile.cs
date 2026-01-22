@@ -48,4 +48,12 @@ public class SleepSpellProjectile : MonoBehaviour
             }
         }
     }
+
+    public void SetOwner(TestPlayer user)
+    {
+        if (user != null)
+        {
+            this.belongsTo = user;
+        }
+    }
 }

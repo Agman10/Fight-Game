@@ -65,7 +65,7 @@ public class HitAnimationLogic : MonoBehaviour
 
     public void TriggerHitAnimation()
     {
-        if (this.user != null && this.animations != null && !this.user.knockbackInvounrability && !this.user.countering /*&& this.user.attackStuns.Count <= 0*/)
+        if (this.user != null && this.animations != null && !this.user.knockbackInvounrability && !this.user.countering && !this.user.dead/*&& this.user.attackStuns.Count <= 0*/)
             this.StartCoroutine(this.HitAnimationCoroutine());
 
 
