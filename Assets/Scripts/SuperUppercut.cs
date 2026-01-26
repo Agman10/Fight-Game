@@ -179,6 +179,7 @@ public class SuperUppercut : Attack
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -125f, 0f);
         yield return new WaitForSeconds(0.015f);
         this.animations.SetDefaultPose();
+        this.animations.DemonCradle(5);
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * 180f, 0f);
         yield return new WaitForSeconds(0.015f);
 
@@ -286,6 +287,7 @@ public class SuperUppercut : Attack
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -125f, 0f);
         yield return new WaitForSeconds(0.015f);
         this.animations.SetDefaultPose();
+        this.animations.DemonCradle(5);
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * 180f, 0f);
         yield return new WaitForSeconds(0.015f);
 
@@ -385,6 +387,7 @@ public class SuperUppercut : Attack
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -125f, 0f);
         yield return new WaitForSeconds(0.015f);
         this.animations.SetDefaultPose();
+        this.animations.DemonCradle(5);
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * 180f, 0f);
         yield return new WaitForSeconds(0.015f);
 
@@ -396,12 +399,22 @@ public class SuperUppercut : Attack
         yield return new WaitForSeconds(0.015f);
         this.animations.body.localEulerAngles = new Vector3(0f, 0f, 0f);
 
+        /*float waitTime = 0.6f;
+        while (Mathf.Abs(this.user.transform.position.y) >= 0.05f*//*Mathf.Abs(this.user.rb.velocity.y) > 0f*//* && waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            //Debug.Log(waitTime);
+            yield return null;
+        }
+        this.animations.RoadRollerEndLand();*/
+
         yield return new WaitForSeconds(this.endLag1);
 
         this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
 
 
         yield return new WaitForSeconds(this.endLag2);
+        this.animations.SetDefaultPose();
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }

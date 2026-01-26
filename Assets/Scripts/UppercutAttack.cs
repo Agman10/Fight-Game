@@ -445,7 +445,8 @@ public class UppercutAttack : Attack
         yield return new WaitForSeconds(0.015f);
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -125f, 0f);
         yield return new WaitForSeconds(0.015f);
-        this.animations.SetDefaultPose();
+        //this.animations.SetDefaultPose();
+        this.animations.DemonCradle(5);
         this.animations.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * 180f, 0f);
         yield return new WaitForSeconds(0.015f);
         
@@ -496,13 +497,31 @@ public class UppercutAttack : Attack
         while (Mathf.Abs(this.user.rb.velocity.y) > 0f && waitTime > 0)
         {
             waitTime -= Time.deltaTime;
+            Debug.Log(waitTime);
             yield return null;
         }
         //yield return new WaitForSeconds(0.3f);
         
         this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
 
-        yield return new WaitForSeconds(0.25f);
+        if (this.animations != null && Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            this.animations.RoadRollerEndLand();
+
+        //yield return new WaitForSeconds(0.25f);
+
+        waitTime = 0.1f;
+        while (waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            this.user.rb.velocity = new Vector3(0, this.user.rb.velocity.y, 0);
+            yield return null;
+        }
+
+        this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.15f);
+
+        //yield return new WaitForSeconds(0.25f);
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
 

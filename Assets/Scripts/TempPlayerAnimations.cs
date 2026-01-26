@@ -11936,6 +11936,49 @@ public class TempPlayerAnimations : MonoBehaviour
         this.SetEyes(2);
     }
 
+    public void DressHitPose()
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            this.rightArm.localEulerAngles = new Vector3(-6f, 0f, 30f);
+            this.leftArm.localEulerAngles = new Vector3(5f, 0f, 30f);
+            this.rightArmJoint.localEulerAngles = new Vector3(-30f, 0f, 5f);
+            this.leftArmJoint.localEulerAngles = new Vector3(30f, 0f, 5f);
+
+            this.rightLeg.localEulerAngles = new Vector3(16f, 0f, 30f);
+            this.leftLeg.localEulerAngles = new Vector3(-15f, 0f, 30f);
+            this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.eyes != null)
+        {
+            this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+            this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.body != null)
+        {
+            this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+            this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 90f, -10f);
+        }
+
+        if (this.dress != null)
+        {
+            //make it for witch this.dress.localPosition = new Vector3(0f, 0.03f, 0f);
+            this.dress.localPosition = new Vector3(0f, 0.12f, 0f);
+            this.dress.localEulerAngles = new Vector3(0f, 0f, -1f);
+        }
+
+        this.SetEyes(2);
+    }
+
     public void KnifePunishmentStart()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)

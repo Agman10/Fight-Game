@@ -447,12 +447,47 @@ public class SuperKickBarrage : Attack
 
 
         yield return new WaitForSeconds(animSpeed);
+        float startRotation = this.animations.body.localEulerAngles.y;
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        if (this.animations != null)
+            this.animations.DemonCradle(5);
+
+
+        this.user.animations.body.transform.localEulerAngles = new Vector3(this.user.animations.body.transform.localEulerAngles.x, startRotation, this.user.animations.body.transform.localEulerAngles.z);
+        float currentTime = 0;
+        float duration = 0.05f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.user.animations.body.transform.localEulerAngles = new Vector3(
+                this.user.animations.body.transform.localEulerAngles.x,
+                Mathf.Lerp(startRotation, 0f, currentTime / duration),
+                this.user.animations.body.transform.localEulerAngles.z);
+            yield return null;
+        }
+
+
+        float waitTime = 0.6f;
+        while (Mathf.Abs(this.user.transform.position.y) >= 0.05f/*Mathf.Abs(this.user.rb.velocity.y) > 0f*/ && waitTime > 0)
+        {
+            waitTime -= Time.deltaTime;
+            //Debug.Log(waitTime);
+            yield return null;
+        }
+
+        if (this.animations != null && Mathf.Abs(this.user.transform.position.y) <= 0.05f)
+            this.animations.RoadRollerEndLand();
+
+        yield return new WaitForSeconds(0.1f);
 
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
-        yield return new WaitForSeconds(0.25f);
+        //yield return new WaitForSeconds(0.25f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);

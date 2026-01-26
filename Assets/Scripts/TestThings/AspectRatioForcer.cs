@@ -7,6 +7,15 @@ public class AspectRatioForcer : MonoBehaviour
     // Use this for initialization
     public bool forceOnEnable;
 
+    //private float cameraBaseFov;
+
+    /*private void Awake()
+    {
+        Camera camera = GetComponent<Camera>();
+        this.cameraBaseFov = camera.fieldOfView;
+
+        Debug.Log(this.cameraBaseFov);
+    }*/
     void Start()
     {
         //this.FixAspect();
@@ -27,17 +36,21 @@ public class AspectRatioForcer : MonoBehaviour
         float windowaspect = (float)Screen.width / (float)Screen.height;
 
         float scaleheight = windowaspect / targetaspect;
+        //float scaleheight = targetaspect / windowaspect;
 
         Camera camera = GetComponent<Camera>();
         float baseFov = camera.fieldOfView;
+        //float baseFov = this.cameraBaseFov;
 
         //Debug.Log(scaleheight);
 
-        if(camera != null && scaleheight != 1f)
+        if(camera != null && scaleheight < 1f)
         {
             camera.fieldOfView = baseFov * ((scaleheight * 0.1f) + 1f);
+            //camera.fieldOfView = baseFov * ((1 - scaleheight) + 1f);
 
             //Debug.Log((scaleheight * 0.1f) + 1f);
+            //Debug.Log((1 - scaleheight) + 1f);
         }
     }
 

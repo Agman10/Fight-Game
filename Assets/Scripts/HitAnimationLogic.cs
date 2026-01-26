@@ -86,6 +86,7 @@ public class HitAnimationLogic : MonoBehaviour
         this.onGoing = true;
 
         this.animations.KnifePunishmentHit();
+        //this.animations.DressHitPose();
 
         while (this.user.stuns.Count > 0)
         {
