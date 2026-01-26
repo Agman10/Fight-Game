@@ -159,7 +159,7 @@ public class TestPlayer : MonoBehaviour
     }
 
 
-    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false, bool super = false, bool knockDown = false, float impactStunDuration = 0f, float knockDownSitDuration = 0.5f, TestPlayer damageOwner = null/*, bool delayDeath = false*/, bool triggerHitAnim = false)
+    public void TakeDamage(Vector3 position, float amount = 1f, float stun = 0f, float horizontalKnockback = 0f, float verticalKnockback = 0f, bool ragdollForce = true, bool ghost = true, bool changeDir = false, bool dontKill = false, bool stopMomentumOnStun = true, bool preventDeathSound = false, bool super = false, bool knockDown = false, float impactStunDuration = 0f, float knockDownSitDuration = 0.5f, TestPlayer damageOwner = null/*, bool delayDeath = false*/, bool triggerHitAnim = false, int hitAnimId = 0)
     {
         if(this.damageMitigation != 0f && amount > 0f)
         {
@@ -265,7 +265,7 @@ public class TestPlayer : MonoBehaviour
         if (knockDown && this.knockDownLogic != null)
             this.KnockDown(horizontalKnockback, verticalKnockback, stun, impactStunDuration, knockDownSitDuration);
         else if (triggerHitAnim && this.hitAnimLogic != null)
-            this.TriggerHitAnim();
+            this.TriggerHitAnim(hitAnimId);
         /*else
             this.TriggerHitAnim();*/
         
@@ -333,10 +333,10 @@ public class TestPlayer : MonoBehaviour
             this.knockDownLogic.KnockDown(xForce, yForce, stunTime, impactStunDuration, sitDuration);
     }
 
-    public void TriggerHitAnim()
+    public void TriggerHitAnim(int hitAnimId = 0)
     {
         if (this.hitAnimLogic != null)
-            this.hitAnimLogic.TriggerHitAnimation();
+            this.hitAnimLogic.TriggerHitAnimation(hitAnimId);
     }
 
     public void Die(Vector3 position, bool ragdollforce = true, bool ghost = true, bool ragdoll = true, bool preventDeathSound = false, int deathType = 0/*bool super = false*/)

@@ -63,10 +63,16 @@ public class HitAnimationLogic : MonoBehaviour
             this.Stop();
     }*/
 
-    public void TriggerHitAnimation()
+    public void TriggerHitAnimation(int hitAnimId = 0)
     {
         if (this.user != null && this.animations != null && !this.user.knockbackInvounrability && !this.user.countering && !this.user.dead/*&& this.user.attackStuns.Count <= 0*/)
-            this.StartCoroutine(this.HitAnimationCoroutine());
+        {
+            if(hitAnimId == 1 && this.user.characterId == 5)
+                this.StartCoroutine(this.HitAnimationCoroutine(1));
+            else
+                this.StartCoroutine(this.HitAnimationCoroutine(0));
+        }
+            
 
 
         /*if (this.user != null && this.animations != null && !this.user.countering)
@@ -80,13 +86,15 @@ public class HitAnimationLogic : MonoBehaviour
         //Debug.Log("hitAnim");
     }
 
-    private IEnumerator HitAnimationCoroutine()
+    private IEnumerator HitAnimationCoroutine(int hitAnimId = 0)
     {
         //this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
 
-        this.animations.KnifePunishmentHit();
-        //this.animations.DressHitPose();
+        if (hitAnimId == 1)
+            this.animations.DressHitPose();
+        else
+            this.animations.KnifePunishmentHit();
 
         while (this.user.stuns.Count > 0)
         {
