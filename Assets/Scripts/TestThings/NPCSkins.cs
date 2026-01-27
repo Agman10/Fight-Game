@@ -105,6 +105,7 @@ public class NPCSkins : MonoBehaviour
                             mat.SetColor("Color_83cbc8d686554d0f9aced64306129077", colors[multiColor.colorIndex1]);
                             mat.SetColor("Color_1", colors[multiColor.colorIndex2]);
                             mat.SetColor("Color_42f013fb876e4189a051c4bba88d09bc", colors[multiColor.colorIndex3]);
+                            mat.SetColor("Color_D", colors[multiColor.colorIndex4]);
                         }
                     }
                 }

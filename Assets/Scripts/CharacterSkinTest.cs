@@ -166,6 +166,7 @@ public class CharacterSkinTest : MonoBehaviour
                             mat.SetColor("Color_83cbc8d686554d0f9aced64306129077", skinData.colors[multiColor.colorIndex1]);
                             mat.SetColor("Color_1", skinData.colors[multiColor.colorIndex2]);
                             mat.SetColor("Color_42f013fb876e4189a051c4bba88d09bc", skinData.colors[multiColor.colorIndex3]);
+                            mat.SetColor("Color_D", skinData.colors[multiColor.colorIndex4]);
                         }
                     }
                 }
@@ -184,4 +185,5 @@ public class MultiColorMaterials
     public int colorIndex1;
     public int colorIndex2;
     public int colorIndex3;
+    public int colorIndex4;
 }
