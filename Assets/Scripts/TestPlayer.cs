@@ -275,7 +275,9 @@ public class TestPlayer : MonoBehaviour
 
     public void AddStun(float lenght = 0.5f, bool stopMomentum = true)
     {
-        this.stuns.Add(lenght);
+        if (lenght > 0)
+            this.stuns.Add(lenght);
+
         if (stopMomentum)
             this.rb.velocity = Vector3.zero;
 
