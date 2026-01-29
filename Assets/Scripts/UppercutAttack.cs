@@ -497,7 +497,7 @@ public class UppercutAttack : Attack
         while (Mathf.Abs(this.user.rb.velocity.y) > 0f && waitTime > 0)
         {
             waitTime -= Time.deltaTime;
-            Debug.Log(waitTime);
+            //Debug.Log(waitTime);
             yield return null;
         }
         //yield return new WaitForSeconds(0.3f);

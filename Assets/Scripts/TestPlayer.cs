@@ -20,6 +20,7 @@ public class TestPlayer : MonoBehaviour
     public int playerNumber;
 
     public bool hasBeenHit = false;
+    public bool grounded;
 
     [Range(-1f, 1f)]
     public float damageMitigation = 0f;
