@@ -10,6 +10,7 @@ public class JoeCounterAttack : Attack
     public bool countering;
     public TestHitbox hitbox;
     public TestHitbox hitboxNoDamage;
+    public float counterStartDurationMultiplier = 1f;
 
     public AudioSource counterSfx;
     public AudioSource punchSfx;
@@ -106,15 +107,15 @@ public class JoeCounterAttack : Attack
 
         this.animations.JoeCounter(0, distance);
 
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.15f * this.counterStartDurationMultiplier);
 
         this.animations.JoeCounter(1, distance);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f * this.counterStartDurationMultiplier);
 
         this.animations.JoeCounter(2, distance);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f * this.counterStartDurationMultiplier);
 
 
         this.animations.JoeCounter(3, distance);

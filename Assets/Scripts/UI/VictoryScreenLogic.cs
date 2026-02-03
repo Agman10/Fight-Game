@@ -85,4 +85,15 @@ public class VictoryScreenLogic : MonoBehaviour
             }
         }*/
     }
+
+    public void SkipTextScrolling()
+    {
+        if (this.winnerCharacterId <= this.winnerCharacterQuotes.Length - 1 && this.winnerCharacterQuotes.Length >= 1 && this.winnerCharacterId >= 0 && this.loserCharacterId >= 0)
+        {
+            if (this.winnerCharacterQuotes[this.winnerCharacterId])
+            {
+                this.winnerCharacterQuotes[this.winnerCharacterId].SkipTextScrolling();
+            }
+        }
+    }
 }

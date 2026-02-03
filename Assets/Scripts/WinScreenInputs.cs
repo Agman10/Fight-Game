@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class WinScreenInputs : MonoBehaviour
 {
     public int gameSceneId;
+    public VictoryScreenLogic victoryScreenLogic;
 
 
     private void OnEnable()
@@ -68,13 +69,23 @@ public class WinScreenInputs : MonoBehaviour
 
     public void ReloadScene(bool reload)
     {
+        this.SkipTextScrolling();
+
         if (reload)
             SceneManager.LoadScene(this.gameSceneId);
     }
     public void QuitToTitle(bool quit)
     {
+        this.SkipTextScrolling();
+
         if (quit)
             SceneManager.LoadScene("Menu");
+    }
+
+    public void SkipTextScrolling()
+    {
+        if (this.victoryScreenLogic != null)
+            this.victoryScreenLogic.SkipTextScrolling();
     }
     // Start is called before the first frame update
     void Start()

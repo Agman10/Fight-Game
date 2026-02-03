@@ -7,6 +7,7 @@ public class JCapTaunts : Attack
 {
     public TempPlayerAnimations animations;
     public bool onGoing;
+    public Transform chest;
 
     public VisualEffect handFlame;
 
@@ -113,6 +114,9 @@ public class JCapTaunts : Attack
         }
 
         this.PlayHandFlame(false);
+
+        if (this.chest != null)
+            this.chest.localEulerAngles = new Vector3(0f, 0f, 0f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
@@ -342,7 +346,8 @@ public class JCapTaunts : Attack
             {
                 this.animations.HappyJumping(animStageId);
             }
-
+            if (animStageId == 1 || animStageId == 5)
+                this.Bounce();
 
             animStageId += 1;
             amount -= 1;
@@ -356,5 +361,101 @@ public class JCapTaunts : Attack
         //this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    public void Bounce()
+    {
+        if(this.chest != null)
+        {
+            this.StartCoroutine(this.BounceCoroutine());
+        }
+    }
+    private IEnumerator BounceCoroutine()
+    {
+        /*this.chest.localEulerAngles = new Vector3(0f, 0f, -1f);
+        yield return new WaitForSeconds(0.1f);
+        this.chest.localEulerAngles = new Vector3(0f, 0f, 1f);
+        yield return new WaitForSeconds(0.05f);
+        this.chest.localEulerAngles = new Vector3(0f, 0f, 0f);*/
+
+        /*this.chest.localEulerAngles = new Vector3(0f, 0f, -1f);
+        yield return new WaitForSeconds(0.05f);
+        this.chest.localEulerAngles = new Vector3(0f, 0f, 0.5f);
+        yield return new WaitForSeconds(0.05f);
+        this.chest.localEulerAngles = new Vector3(0f, 0f, 0f);*/
+
+        /*this.chest.localEulerAngles = new Vector3(0f, 0f, 0f);
+        yield return new WaitForSeconds(0.05f);
+        this.chest.localEulerAngles = new Vector3(0f, 0f, -0.5f);
+        yield return new WaitForSeconds(0.05f);
+        this.chest.localEulerAngles = new Vector3(0f, 0f, 0.5f);
+        yield return new WaitForSeconds(0.05f);
+        this.chest.localEulerAngles = new Vector3(0f, 0f, 0f);*/
+
+
+        /*this.chest.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        float currentTime = 0;
+        float duration = 0.05f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.chest.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(0f, 1f, currentTime / duration));
+            yield return null;
+        }
+
+        currentTime = 0;
+        duration = 0.1f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.chest.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(1f, -1f, currentTime / duration));
+            yield return null;
+        }
+
+        currentTime = 0;
+        duration = 0.05f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.chest.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(-1f, 0f, currentTime / duration));
+            yield return null;
+        }
+        this.chest.localEulerAngles = new Vector3(0f, 0f, 0f);*/
+
+
+        float multiplier = 1f;
+
+        this.chest.localEulerAngles = new Vector3(0f, 0f, -1f * multiplier);
+        yield return new WaitForSeconds(0.01f);
+        //yield return new WaitForSeconds(0.025f);
+
+        float currentTime = 0;
+        float duration = 0.1f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.chest.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(-1f * multiplier, 1f * multiplier, currentTime / duration));
+            yield return null;
+        }
+
+        currentTime = 0;
+        duration = 0.05f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.chest.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(1f * multiplier, -0.5f * multiplier, currentTime / duration));
+            //this.chest.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(1f, 0f, currentTime / duration));
+            yield return null;
+        }
+        currentTime = 0;
+        duration = 0.025f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.chest.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(-0.5f * multiplier, 0f, currentTime / duration));
+            yield return null;
+        }
+        this.chest.localEulerAngles = new Vector3(0f, 0f, 0f);
     }
 }

@@ -9,6 +9,7 @@ public class CharacterVictoryScreen : MonoBehaviour
     public Text victoryQuoteText;
     public float textTypeDelay = 0.05f;
     private string currentText = "";
+    public string fullVictoryText = "";
     public VictoryPoseAndQuote[] defaultVictoryQuotes;
     public VictoryPoseAndQuoteList[] specificQuotes;
     // Start is called before the first frame update
@@ -68,6 +69,7 @@ public class CharacterVictoryScreen : MonoBehaviour
 
     IEnumerator ShowText(string fullText)
     {
+        this.SetFullText(fullText);
         yield return new WaitForSeconds(0.2f);
         float extraWaitTime = 0f;
         for (int i = 0; i < fullText.Length + 1; i++)
@@ -114,6 +116,28 @@ public class CharacterVictoryScreen : MonoBehaviour
             pose.transform.localEulerAngles = new Vector3(0, Mathf.Lerp(start, targetRotation, currentTime / duration), 0);
             yield return null;
         }
+    }
+
+    public void SetFullText(string fullText)
+    {
+        string symbol1 = "§";
+        string symbol2 = "½";
+
+        fullText = fullText.Replace(symbol1, "");
+        fullText = fullText.Replace(symbol2, "");
+
+        this.fullVictoryText = fullText;
+    }
+
+    public void SkipTextScrolling()
+    {
+        this.StopAllCoroutines();
+
+        if (this.currentText != null)
+            this.currentText = this.fullVictoryText;
+
+        if (this.victoryQuoteText != null)
+            this.victoryQuoteText.text = this.fullVictoryText;
     }
 }
 
