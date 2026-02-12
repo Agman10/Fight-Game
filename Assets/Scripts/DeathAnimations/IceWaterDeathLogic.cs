@@ -35,7 +35,7 @@ public class IceWaterDeathLogic : MonoBehaviour
     {
         if(this.user != null && this.user.animations != null && this.iceCube != null)
         {
-            this.iceCube.SetActive(true);
+            //this.iceCube.SetActive(true);
             this.user.animations.SetDefaultPose();
             this.user.animations.IceCubeFreezePose();
             this.PlayWaterSplash();
@@ -47,6 +47,7 @@ public class IceWaterDeathLogic : MonoBehaviour
     private IEnumerator IceCubeCoroutine(float yPos = -2.45f)
     {
         yield return new WaitForSeconds(0.5f);
+        this.iceCube.SetActive(true);
 
         float currentTime = 0;
         float duration = 0.5f;

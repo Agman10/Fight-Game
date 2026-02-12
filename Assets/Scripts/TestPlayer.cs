@@ -487,6 +487,14 @@ public class TestPlayer : MonoBehaviour
             if (this.rb != null)
             {
                 this.rb.isKinematic = true;
+
+                /*this.rb.isKinematic = false;
+                this.rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+                
+                this.rb.velocity = new Vector3(0f, 0f, 0f);
+
+                this.rb.mass = 10f;
+                this.rb.drag = 2f;*/
             }
 
             if(this.iceWaterDeathLogic != null)
@@ -536,6 +544,9 @@ public class TestPlayer : MonoBehaviour
             this.rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 
             this.rb.velocity = new Vector3(0f, 0f, 0f);
+
+            /*this.rb.mass = 1f;
+            this.rb.drag = 0f;*/
         }
 
         if (this.ragdoll != null)
