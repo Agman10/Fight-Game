@@ -7,31 +7,27 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Night 1
-  m_Shader: {fileID: -6465566751694194690, guid: d8c8237de8a73bc468b909568c59ad74, type: 3}
+  m_Name: WaterSplash
+  m_Shader: {fileID: -6465566751694194690, guid: a62a43ed547675d46bd7eb60781ee511, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3003
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Cubemap_94f3d7a56acc4945951222e66b02d231:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_ed035bb206dc4c43ac09959fbe4e46ae:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CameraOpaqueTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -84,15 +80,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_0ab708aad6f44dcd817bfa42314ab36a: 8.13
-    - Vector1_1: 0.25
-    - Vector1_14e02e62881b4d4dbba5fe7cd6ceaccc: 0
-    - Vector1_2: 0.25
-    - Vector1_5e9b159e5a1545bea405b3de085a36a9: 0.25
-    - Vector1_6524b84093bf41958373f0f588124253: 0.25
-    - Vector1_842af1d9c5a245fb8cd034c74abc5bb9: 0
-    - Vector1_96f37e8d22044b708a01761b5553cee6: 34.1
-    - Vector1_a44bb02273c04889b5ed8cd42da9b643: 0
+    - Vector1_223ccf78c1424f408a9cedc25f48fb32: 0.5
+    - Vector1_5f9f70b4026441ee8f0c6a906416919d: 0
+    - Vector1_5fc956f5081b4ff8aabb34d740dd7fcd: 1
+    - Vector1_63ac183819b1451cb86e211ff7a377e6: 1
+    - Vector1_906d4956cff84e21b0bc5fa12c17de21: 0
+    - Vector1_cf7eaca3f8dd4978a330c8384eccbc30: 0
+    - Vector1_d9c4b4545a5246909df1e6f02dd63eaa: 1
+    - Vector1_e3c44b1dc66c48ce85c419bc2f03faf4: 0.3
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -120,18 +115,14 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_23fc7273e5c748d380f2258ea956d45d: {r: 0.37527272, g: 0.39677274, b: 0.43, a: 1}
-    - Color_40f8aa201ab14b8a86dc7f83eaf4c236: {r: 1, g: 1, b: 1, a: 0}
-    - Vector2_24c46ec18af0454c9e91e5cbad2645a8: {r: 0, g: 0, b: 0, a: 0}
+    - Color_0929413e849746a38c6db720159ab6d7: {r: 0, g: 0.2999999, b: 1, a: 0.47843137}
+    - Color_7022ee03b5e44f1aaf226a0eb8093b59: {r: 0.28400004, g: 0.60284376, b: 1, a: 0.80784315}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorGround: {r: 0.068627454, g: 0.07647059, b: 0.1, a: 1}
-    - _ColorMid: {r: 0, g: 0.030392157, b: 0.12156863, a: 1}
-    - _ColorSky: {r: 0.011764705, g: 0.03529412, b: 0.105882354, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3874507823961684705
+--- !u!114 &7247257400449140385
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

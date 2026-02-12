@@ -464,6 +464,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 1
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -1292,6 +1293,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -2889,6 +2891,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -5407,6 +5410,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -6130,6 +6134,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -7285,6 +7290,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -7593,6 +7599,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -13315,6 +13322,7 @@ Transform:
   - {fileID: 3092131981313724946}
   - {fileID: 1699399999317054731}
   - {fileID: 1181809809981075846}
+  - {fileID: 1381218761212035471}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13357,6 +13365,7 @@ MonoBehaviour:
   countering: 0
   playerNumber: 0
   hasBeenHit: 0
+  grounded: 0
   damageMitigation: 0
   rb: {fileID: 1531666215169699509}
   ragdoll: {fileID: 1249795978987507330}
@@ -13374,6 +13383,7 @@ MonoBehaviour:
   sleepLogic: {fileID: 4983084779130615280}
   knockDownLogic: {fileID: 5141689769168311563}
   hitAnimLogic: {fileID: 2907037184845735744}
+  iceWaterDeathLogic: {fileID: 1381218761212035470}
   tempOpponent: {fileID: 0}
   tempBall: {fileID: 0}
   tempLookAtBall: 0
@@ -13596,6 +13606,7 @@ MonoBehaviour:
     colorIndex1: 0
     colorIndex2: 1
     colorIndex3: 3
+    colorIndex4: 0
   - renderers:
     - {fileID: 8935144037804502431}
     - {fileID: 3515564794407935808}
@@ -13604,12 +13615,14 @@ MonoBehaviour:
     colorIndex1: 1
     colorIndex2: 0
     colorIndex3: 0
+    colorIndex4: 0
   - renderers:
     - {fileID: 4730561059299124338}
     - {fileID: 6678871843174274193}
     colorIndex1: 0
     colorIndex2: 1
     colorIndex3: 0
+    colorIndex4: 0
 --- !u!1 &2439750566892572704
 GameObject:
   m_ObjectHideFlags: 0
@@ -13841,6 +13854,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -14493,6 +14507,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -15127,6 +15142,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -20314,6 +20330,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 0
   hitSoundCooldown: 0
@@ -43214,6 +43231,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 0
   hitSoundCooldown: 0
@@ -43393,6 +43411,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -44319,6 +44338,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -44726,6 +44746,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -51691,6 +51712,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -52126,6 +52148,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 0
   hitSoundCooldown: 0
@@ -52596,6 +52619,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 1
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -57822,6 +57846,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -58079,6 +58104,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -73914,6 +73940,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -74224,6 +74251,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -88599,6 +88627,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -88949,6 +88978,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -94132,6 +94162,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -95307,6 +95338,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -97041,6 +97073,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -103563,6 +103596,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -105098,6 +105132,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 1
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -105325,6 +105360,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -105471,6 +105507,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 1
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -105751,6 +105788,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 1
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -106466,15 +106504,96 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bea931fcf37225b46a32d103082a9228, type: 3}
+--- !u!4 &3045756020375666077 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1765148468190996287, guid: bea931fcf37225b46a32d103082a9228, type: 3}
+  m_PrefabInstance: {fileID: 3619666888069929634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &3045756020375666083 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1765148468190996225, guid: bea931fcf37225b46a32d103082a9228, type: 3}
   m_PrefabInstance: {fileID: 3619666888069929634}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3045756020375666077 stripped
+--- !u!1001 &3805400463508897563
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 624724093452232149}
+    m_Modifications:
+    - target: {fileID: 2874541939940742374, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888074, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_Name
+      value: IceWaterDeath
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874541941526888085, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 8673499878638748540}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+--- !u!114 &1381218761212035470 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2874541941526888085, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+  m_PrefabInstance: {fileID: 3805400463508897563}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a4de374b1e5194dac04beae06e72aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1381218761212035471 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1765148468190996287, guid: bea931fcf37225b46a32d103082a9228, type: 3}
-  m_PrefabInstance: {fileID: 3619666888069929634}
+  m_CorrespondingSourceObject: {fileID: 2874541941526888084, guid: c16f426c8b6f4b54baff10d41d053578, type: 3}
+  m_PrefabInstance: {fileID: 3805400463508897563}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3989467976838778533
 PrefabInstance:
@@ -106928,14 +107047,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f68a77c48e3c6446b6dd61ea1251e6c, type: 3}
---- !u!4 &4560266020595294606 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8881129004323584144, guid: 9f68a77c48e3c6446b6dd61ea1251e6c, type: 3}
-  m_PrefabInstance: {fileID: 4902531096547023134}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &1596093731731972340 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 5922018849034697194, guid: 9f68a77c48e3c6446b6dd61ea1251e6c, type: 3}
+  m_PrefabInstance: {fileID: 4902531096547023134}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4560266020595294606 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8881129004323584144, guid: 9f68a77c48e3c6446b6dd61ea1251e6c, type: 3}
   m_PrefabInstance: {fileID: 4902531096547023134}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5381447025033682355
@@ -107229,14 +107348,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bea931fcf37225b46a32d103082a9228, type: 3}
---- !u!198 &5313709455519167930 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1765148468190996225, guid: bea931fcf37225b46a32d103082a9228, type: 3}
-  m_PrefabInstance: {fileID: 5890998262781170363}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5313709455519167876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1765148468190996287, guid: bea931fcf37225b46a32d103082a9228, type: 3}
+  m_PrefabInstance: {fileID: 5890998262781170363}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5313709455519167930 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1765148468190996225, guid: bea931fcf37225b46a32d103082a9228, type: 3}
   m_PrefabInstance: {fileID: 5890998262781170363}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6233900864036468626
@@ -107438,11 +107557,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
---- !u!1 &7836754330999007229 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3796025007154477637, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
-  m_PrefabInstance: {fileID: 6372468311858486712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3034261717002422505 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8247307931658032465, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
@@ -107456,6 +107570,11 @@ GameObject:
 --- !u!1 &5477691039622972722 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1471310182407690378, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
+  m_PrefabInstance: {fileID: 6372468311858486712}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7836754330999007229 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3796025007154477637, guid: 32f8766f0de2a574493668c91fdbf904, type: 3}
   m_PrefabInstance: {fileID: 6372468311858486712}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6608782091473648643

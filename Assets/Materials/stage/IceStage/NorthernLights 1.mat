@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7748650814250916474
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: waterbigCold 1
-  m_Shader: {fileID: -6465566751694194690, guid: ad6cb53fa15c1ee4da511003d6646009, type: 3}
+  m_Name: NorthernLights 1
+  m_Shader: {fileID: -6465566751694194690, guid: b0da5db0725b3a44aad27f8c1ebd1d8f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -24,10 +37,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _CameraOpaqueTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -63,6 +72,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_db40757f13a340f4917ac624705315bf_Texture_1:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -80,10 +93,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_5f9f70b4026441ee8f0c6a906416919d: -0.8
-    - Vector1_63ac183819b1451cb86e211ff7a377e6: 1.5
-    - Vector1_cf7eaca3f8dd4978a330c8384eccbc30: 0.04
-    - Vector1_e3c44b1dc66c48ce85c419bc2f03faf4: 8
+    - Vector1_1964e13c40d342a78c3dbd1c1b3ed67c: 0.9
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -111,23 +121,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_0929413e849746a38c6db720159ab6d7: {r: 0.003921569, g: 0.5137253, b: 1, a: 0.57254905}
-    - Color_7022ee03b5e44f1aaf226a0eb8093b59: {r: 0.1334902, g: 0.29287487, b: 0.7254902, a: 0.49019608}
+    - Color_05036c4b884044718c69b557268476e5: {r: 0.15003923, g: 0.045105897, b: 0.21176471, a: 1}
+    - Vector2_4e2cf54d0c1342549b9be031d716099e: {r: 0, g: 0.1, b: 0, a: 0}
+    - Vector2_b2aa17c7a35748cea06d5077a777413a: {r: 4, g: 0.1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &7247257400449140385
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4

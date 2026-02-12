@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7287723290723736807
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,26 +20,19 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Night 1
-  m_Shader: {fileID: -6465566751694194690, guid: d8c8237de8a73bc468b909568c59ad74, type: 3}
+  m_Name: PenguinArms
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Cubemap_94f3d7a56acc4945951222e66b02d231:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_ed035bb206dc4c43ac09959fbe4e46ae:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -84,15 +90,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_0ab708aad6f44dcd817bfa42314ab36a: 8.13
-    - Vector1_1: 0.25
-    - Vector1_14e02e62881b4d4dbba5fe7cd6ceaccc: 0
-    - Vector1_2: 0.25
-    - Vector1_5e9b159e5a1545bea405b3de085a36a9: 0.25
-    - Vector1_6524b84093bf41958373f0f588124253: 0.25
-    - Vector1_842af1d9c5a245fb8cd034c74abc5bb9: 0
-    - Vector1_96f37e8d22044b708a01761b5553cee6: 34.1
-    - Vector1_a44bb02273c04889b5ed8cd42da9b643: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -120,27 +117,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_23fc7273e5c748d380f2258ea956d45d: {r: 0.37527272, g: 0.39677274, b: 0.43, a: 1}
-    - Color_40f8aa201ab14b8a86dc7f83eaf4c236: {r: 1, g: 1, b: 1, a: 0}
-    - Vector2_24c46ec18af0454c9e91e5cbad2645a8: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorGround: {r: 0.068627454, g: 0.07647059, b: 0.1, a: 1}
-    - _ColorMid: {r: 0, g: 0.030392157, b: 0.12156863, a: 1}
-    - _ColorSky: {r: 0.011764705, g: 0.03529412, b: 0.105882354, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3874507823961684705
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4

@@ -14991,7 +14991,8 @@ public class TempPlayerAnimations : MonoBehaviour
 
         if (this.body != null)
         {
-            this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+            //this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+            this.body.localPosition = new Vector3(0f, 1.95f, this.transform.forward.z * 0f);
             this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 90f, 0f);
         }
 

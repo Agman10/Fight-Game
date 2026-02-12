@@ -60,6 +60,7 @@ public class TestPlayer : MonoBehaviour
     public SleepLogic sleepLogic;
     public KnockDownLogic knockDownLogic;
     public HitAnimationLogic hitAnimLogic;
+    public IceWaterDeathLogic iceWaterDeathLogic;
     //public bool sleeping = false;
 
     //Remove this later
@@ -458,8 +459,8 @@ public class TestPlayer : MonoBehaviour
         
     }
 
-    [ContextMenu("FreezeToDeath")]
-    public void FreezeToDeath()
+    //[ContextMenu("FreezeToDeath")]
+    public void IceWaterDeath(float yPos = -2.45f)
     {
         if (!this.dead)
         {
@@ -467,7 +468,11 @@ public class TestPlayer : MonoBehaviour
             this.health = 0f;
             this.OnDeath?.Invoke();
             //this.OnKO?.Invoke(false);
-            this.OnKO?.Invoke(0, this.playerNumber);
+            this.OnKO?.Invoke(5, this.playerNumber);
+            this.hasBeenHit = true;
+
+            /*if (this.soundEffects != null)
+                this.soundEffects.PlayDeathSound();*/
 
             if (this.hitboxes != null)
             {
@@ -484,7 +489,12 @@ public class TestPlayer : MonoBehaviour
                 this.rb.isKinematic = true;
             }
 
-            if (this.ragdoll != null)
+            if(this.iceWaterDeathLogic != null)
+            {
+                this.iceWaterDeathLogic.FreezeToDeath(yPos);
+            }
+
+            /*if (this.ragdoll != null)
             {
                 this.ragdoll.transform.localEulerAngles = new Vector3(0f, this.transform.forward.z * 90f, 0f);
             }
@@ -493,7 +503,7 @@ public class TestPlayer : MonoBehaviour
                 this.animations.SetFreezePose();
 
             if (this.iceCube != null)
-                this.iceCube.SetActive(true);
+                this.iceCube.SetActive(true);*/
         }
 
     }
