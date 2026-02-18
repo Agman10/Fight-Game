@@ -24,6 +24,7 @@ public class RandomSkybox : MonoBehaviour
     public GameObject moon;
     public GameObject hellMoon;
     public GameObject earth;
+    public GameObject aurora;
 
     public GameObject invisBounceWalls;
     [Space]
@@ -215,8 +216,31 @@ public class RandomSkybox : MonoBehaviour
             }
             else if (number > 30 && number <= 35) //tower
             {
-                this.SetStage(2);
-                this.SetMusic(2);
+                /*this.SetStage(2);
+                this.SetMusic(2);*/
+
+                float fallOffNumber = Random.Range(1, 101);
+
+                if(fallOffNumber <= 50) //Antarctic
+                {
+                    this.SetMusic(19);
+                    //this.SetSkybox(17);
+
+                    float skyboxNumber = Random.Range(1, 101);
+                    if (skyboxNumber <= 50)
+                        this.SetSkybox(18);
+                    else if (skyboxNumber > 50 && skyboxNumber <= 75)
+                        this.SetSkybox(0);
+                    else if (skyboxNumber > 75 && skyboxNumber <= 90)
+                        this.SetSkybox(1);
+                    else
+                        this.SetSkybox(4);
+                }
+                else //Skyscraper
+                {
+                    this.SetStage(2);
+                    this.SetMusic(2);
+                }
             }
             else if (number > 35 && number <= 50) //graveyard
             {
@@ -404,11 +428,19 @@ public class RandomSkybox : MonoBehaviour
                     this.earth.SetActive(false);
             }
 
+            if(this.aurora != null)
+            {
+                if (skyboxId == 18)
+                    this.aurora.SetActive(true);
+                else
+                    this.aurora.SetActive(false);
+            }
+
             if (this.directionalLight != null)
             {
                 if(skyboxId == 1)
                     this.directionalLight.color = new Color32(255, 204, 174, 255);
-                else if (skyboxId == 2)
+                else if (skyboxId == 2 || skyboxId == 18)
                     this.directionalLight.color = new Color32(219, 214, 255, 255);
                 else if (skyboxId == 3)
                     this.directionalLight.color = new Color32(214, 235, 255, 255);
@@ -776,6 +808,20 @@ public class RandomSkybox : MonoBehaviour
                         GameManager.Instance.gameCamera.maxX = 10000f;
                     }
                     break;
+                case 22:
+                    this.SetMusic(19);
+                    //this.SetSkybox(17);
+
+                    float skyboxNumber = Random.Range(1, 101);
+                    if (skyboxNumber <= 50)
+                        this.SetSkybox(18);
+                    else if (skyboxNumber > 50 && skyboxNumber <= 75)
+                        this.SetSkybox(0);
+                    else if (skyboxNumber > 75 && skyboxNumber <= 90)
+                        this.SetSkybox(1);
+                    else
+                        this.SetSkybox(4);
+                    break;
                 default:
                     this.SetMusic(12);
                     break;
@@ -1001,6 +1047,20 @@ public class RandomSkybox : MonoBehaviour
                 {
                     GameManager.Instance.gameCamera.maxX = 10000f;
                 }
+                break;
+            case 22:
+                this.SetMusic(19);
+                //this.SetSkybox(17);
+
+                float skyboxNumber = Random.Range(1, 101);
+                if (skyboxNumber <= 50)
+                    this.SetSkybox(18);
+                else if (skyboxNumber > 50 && skyboxNumber <= 75)
+                    this.SetSkybox(0);
+                else if (skyboxNumber > 75 && skyboxNumber <= 90)
+                    this.SetSkybox(1);
+                else
+                    this.SetSkybox(4);
                 break;
             default:
                 this.SetMusic(12);

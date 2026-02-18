@@ -207,7 +207,11 @@ public class RagingBeast : Attack
                 this.hitbox.gameObject.SetActive(false);
 
             if (this.animations != null)
+            {
+                this.animations.SetDefaultPose();
                 this.animations.SetGrabbingPose();
+            }
+                
 
             this.user.rb.isKinematic = true;
             this.user.rb.constraints = RigidbodyConstraints.FreezeAll;
