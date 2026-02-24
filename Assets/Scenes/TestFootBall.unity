@@ -14795,6 +14795,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -20673,6 +20674,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -37087,6 +37089,7 @@ MonoBehaviour:
   countering: 0
   playerNumber: 0
   hasBeenHit: 0
+  grounded: 0
   damageMitigation: 0
   rb: {fileID: 0}
   ragdoll: {fileID: 0}
@@ -37104,6 +37107,7 @@ MonoBehaviour:
   sleepLogic: {fileID: 0}
   knockDownLogic: {fileID: 0}
   hitAnimLogic: {fileID: 0}
+  iceWaterDeathLogic: {fileID: 0}
   tempOpponent: {fileID: 0}
   tempBall: {fileID: 0}
   tempLookAtBall: 0
@@ -38085,6 +38089,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5860325986641784676, guid: 8c7e9927178c08f4888d5968b9c1b7d4, type: 3}
+      propertyPath: isPlayer1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013856048663087749, guid: 8c7e9927178c08f4888d5968b9c1b7d4, type: 3}
       propertyPath: isPlayer1
       value: 0
       objectReference: {fileID: 0}
@@ -96951,6 +96959,7 @@ MonoBehaviour:
   moon: {fileID: 1013503139}
   hellMoon: {fileID: 0}
   earth: {fileID: 0}
+  aurora: {fileID: 0}
   invisBounceWalls: {fileID: 0}
   songs:
   - {fileID: 1660965746}

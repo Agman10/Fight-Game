@@ -17,6 +17,10 @@ public class SuperLaserHumpAttack : Attack
 
     public CharacterSoundEffect laserSfx;
 
+    public float cooldownTimer = 0f;
+    public ParticleSystem failSmoke;
+    public GameObject failExclamation;
+
     private float normalDamage;
     private float normalStun;
     private float normalKnockDownImpactDuration;
@@ -57,6 +61,9 @@ public class SuperLaserHumpAttack : Attack
 
     private void Update()
     {
+        if (this.cooldownTimer > 0)
+            this.cooldownTimer -= Time.deltaTime;
+
         if (this.onGoing)
         {
             if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
@@ -81,9 +88,22 @@ public class SuperLaserHumpAttack : Attack
             {
                 if (this.user.superCharge >= this.user.maxSuperCharge * 0.5f)
                 {
-                    this.user.GiveSuperCharge(-this.user.maxSuperCharge * 0.5f);
+                    /*this.user.GiveSuperCharge(-this.user.maxSuperCharge * 0.5f);
                     this.user.AddStun(0.2f, true);
-                    this.StartCoroutine(this.TemplateCoroutine());
+                    this.StartCoroutine(this.TemplateCoroutine());*/
+                    //this.StartCoroutine(this.FailLaserCoroutine());
+
+                    if (this.cooldownTimer <= 0f)
+                    {
+                        this.user.GiveSuperCharge(-this.user.maxSuperCharge * 0.5f);
+                        this.user.AddStun(0.2f, true);
+                        this.StartCoroutine(this.TemplateCoroutine());
+                    }
+                    else
+                    {
+                        this.user.AddStun(0.2f, true);
+                        this.StartCoroutine(this.FailLaserCoroutine());
+                    }
                 }
             }
 
@@ -124,6 +144,8 @@ public class SuperLaserHumpAttack : Attack
 
         if (this.animations != null)
             this.animations.StupidDance(3);
+
+        this.cooldownTimer = 1.25f;
 
         //this.laserSfx.PlaySound();
 
@@ -233,6 +255,79 @@ public class SuperLaserHumpAttack : Attack
             this.laser.transform.localScale = new Vector3(1f, 1f, 1f);
         }
         this.SetNormalDamage();
+
+        if (this.failExclamation != null)
+            this.failExclamation.SetActive(false);
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    private IEnumerator FailLaserCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        if (this.animations != null)
+            this.animations.StupidDance(1);
+
+        yield return new WaitForSeconds(0.05f);
+
+        if (this.animations != null)
+            this.animations.StupidDance(0);
+
+        yield return new WaitForSeconds(0.4f);
+
+        if (this.animations != null)
+            this.animations.StupidDance(1);
+
+        //this.laserSfx.PlaySound();
+
+        yield return new WaitForSeconds(0.05f);
+
+        if (this.animations != null)
+            this.animations.StupidDance(3);
+
+        if (this.failSmoke != null)
+            this.failSmoke.Play();
+
+        yield return new WaitForSeconds(0.05f);
+        this.animations.SetEyes(-1);
+
+        if (this.failExclamation != null)
+            this.failExclamation.SetActive(true);
+
+        //this.laserSfx.PlaySound();
+
+        /*if (this.objectToScale != null)
+            this.objectToScale.gameObject.SetActive(true);*/
+
+        //yield return new WaitForSeconds(0.45f);
+
+        //yield return new WaitForSeconds(0.35f);
+
+        yield return new WaitForSeconds(0.1f);
+        //this.SetWeakDamage();
+        yield return new WaitForSeconds(0.15f);
+
+        /*if (this.objectToScale != null)
+            this.objectToScale.ScaleDown2(0.05f, true);*/
+        //yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
+        if (this.failExclamation != null)
+            this.failExclamation.SetActive(false);
+
+        if (this.animations != null)
+            this.animations.StupidDance(1);
+
+
+
+        yield return new WaitForSeconds(0.05f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.2f);
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
