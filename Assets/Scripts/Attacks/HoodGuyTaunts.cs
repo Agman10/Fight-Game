@@ -6,6 +6,7 @@ public class HoodGuyTaunts : Attack
 {
     public TempPlayerAnimations animations;
     public bool onGoing;
+    public TestHitbox buttHitbox;
 
     public override void OnEnable()
     {
@@ -101,6 +102,9 @@ public class HoodGuyTaunts : Attack
         //this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
+
+        if (this.buttHitbox != null)
+            this.buttHitbox.gameObject.SetActive(false);
     }
 
     private IEnumerator NeutralTauntCoroutine()
@@ -409,6 +413,8 @@ public class HoodGuyTaunts : Attack
             else
                 animId = 0;
 
+            if (this.buttHitbox != null)
+                this.buttHitbox.gameObject.SetActive(animId == 1);
 
             /*if (animId == 0)
             {
@@ -430,6 +436,10 @@ public class HoodGuyTaunts : Attack
 
             yield return null;
         }
+
+        if (this.buttHitbox != null)
+            this.buttHitbox.gameObject.SetActive(false);
+
         //yield return new WaitForSeconds(1f);
 
         if (this.animations != null)

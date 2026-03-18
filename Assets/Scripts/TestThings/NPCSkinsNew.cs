@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPCSkinsNew : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class NPCSkinsNew : MonoBehaviour
     public SkinRenderers[] skinRenderers;
     public MultiColorMaterials[] multiColoredMats;
     public SkinRenderers[] emissionRenderers;
+
+    public IconLayer[] iconLayers;
 
     private void OnEnable()
     {
@@ -59,6 +62,8 @@ public class NPCSkinsNew : MonoBehaviour
             }
 
             this.CheckMultiColorMats();
+
+            this.ChangeIconColors();
         }
     }
 
@@ -85,6 +90,27 @@ public class NPCSkinsNew : MonoBehaviour
                             mat.SetColor("Color_D", colors[multiColor.colorIndex4]);
                         }
                     }
+                }
+            }
+        }
+    }
+
+    public void ChangeIconColors()
+    {
+        foreach (IconLayer iconLayer in this.iconLayers)
+        {
+            foreach (Image layer in iconLayer.layers)
+            {
+                if (layer != null && this.colors.Length >= iconLayer.colorId + 1)
+                {
+                    //layer.color = this.skin.colors[iconLayer.colorId];
+                    //layer.color = new Color(this.colors[iconLayer.colorId].r, this.colors[iconLayer.colorId].g, this.colors[iconLayer.colorId].b, layer.color.a);
+                    layer.color = this.colors[iconLayer.colorId];
+
+                    //REMOVE THIS WHEN UNKNOWN ENTITY NO LONGER HAS TRANSPARENT BASE COLOR BECAUSE OF THEIR GHOST!!
+                    /*Color c = layer.color;
+                    c.a = 1f;
+                    layer.color = c;*/
                 }
             }
         }
