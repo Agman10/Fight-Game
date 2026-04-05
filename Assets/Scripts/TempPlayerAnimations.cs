@@ -936,6 +936,8 @@ public class TempPlayerAnimations : MonoBehaviour
             //this.body.localPosition = new Vector3(0f, 1.5f, 0f);
             this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.45f, 0f);
         }
+
+        this.SetEyes(0);
     }
     
     public void SetSpinKickAnimPose()
@@ -1137,6 +1139,8 @@ public class TempPlayerAnimations : MonoBehaviour
             //this.body.localPosition = new Vector3(0f, 1.7f, 0f);
             this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.25f, 0f);
         }
+
+        this.SetEyes(0);
     }
     public void SetSpinKickAnimPose2End2()
     {
@@ -1223,6 +1227,8 @@ public class TempPlayerAnimations : MonoBehaviour
             //this.body.localPosition = new Vector3(0f, 1.48f, 0f);
             this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.47f, 0f);
         }
+
+        this.SetEyes(0);
     }
 
     public void SetPunchUppercutStartAnim2()
@@ -1320,6 +1326,8 @@ public class TempPlayerAnimations : MonoBehaviour
             this.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -150f, -12f);
             this.body.localPosition = new Vector3(0f, this.defaultYPos, 0f);
         }
+
+        this.SetEyes(0);
     }
 
     //[ContextMenu("RazorKick2")]
@@ -2302,6 +2310,8 @@ public class TempPlayerAnimations : MonoBehaviour
             //this.body.localPosition = new Vector3(0f, 1.56f, 0f);
             this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.39f, 0f);
         }
+
+        this.SetEyes(0);
     }
 
     public void JokeSuperFireBall(int stageId = 0)
@@ -2811,6 +2821,8 @@ public class TempPlayerAnimations : MonoBehaviour
             this.body.localPosition = new Vector3(0f, this.defaultYPos - 0.39f, 0f);
             //this.body.localPosition = new Vector3(0f, 1.56f, 0f);
         }
+
+        this.SetEyes(0);
     }
 
     //[ContextMenu("ShootPoseCrouch2")]

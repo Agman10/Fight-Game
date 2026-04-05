@@ -21,6 +21,7 @@ public class SuperSpinGrab : Attack
     public float upwardForce = 1000f;
     public float downwardForce = 500f;
     public float grabStunLength = 0.6f;
+    public float grabMissStunLength = 0.45f;
     public float grabSpeed = 0.2f;
 
     public float grabHitEndLag = 0.4f;
@@ -117,7 +118,8 @@ public class SuperSpinGrab : Attack
                 this.user.rb.AddForce(0, 300, 0);
 
             this.tryGrabbing = true;
-            this.user.AddStun(this.grabStunLength, true /*stopMomentum*/);
+            //this.user.AddStun(this.grabStunLength, true /*stopMomentum*/);
+            this.user.AddStun(0.2f, true /*stopMomentum*/);
             this.StartCoroutine(this.TryGrabbingCorutine(this.grabSpeed));
         }
     }
@@ -302,6 +304,9 @@ public class SuperSpinGrab : Attack
             this.animations.SetGrabbingStartPose();
             yield return new WaitForSeconds(0.1f);
             this.animations.SetDefaultPose();
+
+            yield return new WaitForSeconds(this.grabMissStunLength);
+
             this.tryGrabbing = false;
             this.user.attackStuns.Remove(this.gameObject);
         }

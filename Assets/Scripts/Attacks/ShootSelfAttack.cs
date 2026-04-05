@@ -17,6 +17,7 @@ public class ShootSelfAttack : Attack
 
     public AudioSource loadingSfx;
     public AudioSource shootSfx;
+    public AudioSource emptyMagSfx;
 
     public override void OnHit()
     {
@@ -69,6 +70,7 @@ public class ShootSelfAttack : Attack
             {
                 this.user.AddStun(0.2f, true);
                 this.StartCoroutine(this.TemplateCoroutine());
+                //this.StartCoroutine(this.EmptyMagCoroutine());
             }
 
             /*if (this.user.superCharge >= this.user.maxSuperCharge * 0.5f)
@@ -141,6 +143,50 @@ public class ShootSelfAttack : Attack
             //gunModelPrefab = Instantiate(gunModelPrefab, this.gun.transform.position, this.gun.transform.rotation);
             gunModelPrefab = Instantiate(gunModelPrefab, new Vector3(this.user.transform.position.x + (this.transform.forward.z * -0.97f), this.user.transform.position.y + 2.28f, -0.35f), this.user.transform.rotation/*Quaternion.Euler(0f, this.user.transform.rotation.y, 0f)*/);
         }
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+    }
+
+    private IEnumerator EmptyMagCoroutine()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        this.canBeCanceled = true;
+
+        if (this.animations != null)
+            this.animations.ShootSelf();
+
+        this.EnableGun(true);
+
+        if (this.loadingSfx != null)
+        {
+            this.loadingSfx.time = 0.04f;
+            this.loadingSfx.Play();
+        }
+
+
+        yield return new WaitForSeconds(0.2f);
+        this.EnableGun(true);
+        //yield return new WaitForSeconds(0.3f);
+
+        yield return new WaitForSeconds(0.6f);
+
+        //play empty mag sound here
+        if (this.emptyMagSfx != null)
+        {
+            this.emptyMagSfx.Play();
+        }
+
+        /*yield return new WaitForSeconds(0.1f);
+        if (this.animations != null)
+            this.animations.SetEyes(5);*/
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+        this.EnableGun(false);
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }

@@ -337,6 +337,15 @@ public class GunShootAttack : Attack
         //make it so if you have no bullets you fail to shoot yourself
         this.shootSelf.Initiate();
 
+        /*if (this.bullets <= 0)
+        {
+
+        }
+        else
+        {
+            this.shootSelf.Initiate();
+        }*/
+
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
     }
