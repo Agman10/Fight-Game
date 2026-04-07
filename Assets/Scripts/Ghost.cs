@@ -59,6 +59,10 @@ public class Ghost : MonoBehaviour
         }
         else
         {
+            /*float test = Mathf.Sin(Time.time * 4f);
+            Debug.Log(test);
+            this.transform.position = this.transform.position + new Vector3(0f, (this.speed + test) * Time.deltaTime, 0f);*/
+
             this.transform.position = this.transform.position + new Vector3(0f, this.speed * Time.deltaTime, 0f);
 
             this.timer += 1 * Time.deltaTime;

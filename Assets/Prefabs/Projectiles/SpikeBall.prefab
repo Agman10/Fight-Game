@@ -905,6 +905,7 @@ GameObject:
   - component: {fileID: 1755015641311831273}
   - component: {fileID: 1145410194945261222}
   - component: {fileID: 3405295576483934565}
+  - component: {fileID: 1020333831230537265}
   m_Layer: 6
   m_Name: Hitbox (1)
   m_TagString: Untagged
@@ -1028,6 +1029,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 1
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -1051,6 +1053,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1020333831230537265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3092007268919015491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb4069b3b8067346807e49305127635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitbox: {fileID: 3405295576483934565}
 --- !u!1 &3227206690172018849
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,6 +1239,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 1
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 0
   hitSoundCooldown: 0

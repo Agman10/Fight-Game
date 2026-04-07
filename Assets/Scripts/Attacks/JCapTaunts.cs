@@ -424,7 +424,7 @@ public class JCapTaunts : Attack
         this.chest.localEulerAngles = new Vector3(0f, 0f, 0f);*/
 
 
-        float multiplier = 1f;
+        float multiplier = 1.25f;
 
         this.chest.localEulerAngles = new Vector3(0f, 0f, -1f * multiplier);
         yield return new WaitForSeconds(0.01f);

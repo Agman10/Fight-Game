@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 5322042982598991630}
   - component: {fileID: 7487509171062548274}
   - component: {fileID: 4425208276987053047}
+  - component: {fileID: 2166653727865016606}
   m_Layer: 0
   m_Name: Hitsphere1
   m_TagString: Untagged
@@ -169,6 +170,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 1
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -179,6 +181,19 @@ MonoBehaviour:
     startTime: 0
   hitEffectTransformOrigin: {fileID: 0}
   hitEffectRandomPos: 0
+--- !u!114 &2166653727865016606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067246205657296979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb4069b3b8067346807e49305127635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitbox: {fileID: 7487509171062548274}
 --- !u!1 &5473462007394695313
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +331,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 0
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
@@ -462,6 +478,7 @@ MonoBehaviour:
   knockDownImpactDuration: 0
   knockDownSitDuration: 0.5
   triggerHitAnim: 1
+  hitAnimId: 0
   preventDeathSound: 0
   doHitSound: 1
   hitSoundCooldown: 0
