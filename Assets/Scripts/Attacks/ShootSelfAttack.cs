@@ -147,6 +147,22 @@ public class ShootSelfAttack : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
+    public void InitiateEmptyMag()
+    {
+        base.Initiate();
+        if (this.user != null)
+        {
+
+
+            if (Mathf.Abs(this.user.rb.velocity.y) <= 0f)
+            {
+                this.user.AddStun(0.2f, true);
+                //this.StartCoroutine(this.TemplateCoroutine());
+                this.StartCoroutine(this.EmptyMagCoroutine());
+            }
+        }
+    }
+
     private IEnumerator EmptyMagCoroutine()
     {
         this.user.attackStuns.Add(this.gameObject);
@@ -177,9 +193,9 @@ public class ShootSelfAttack : Attack
             this.emptyMagSfx.Play();
         }
 
-        /*yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f);
         if (this.animations != null)
-            this.animations.SetEyes(5);*/
+            this.animations.SetEyes(4);
 
         yield return new WaitForSeconds(0.5f);
 

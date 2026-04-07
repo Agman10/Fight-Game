@@ -379,7 +379,7 @@ public class SuperKnifePunishmentAttack : Attack
         {
             //this.StopGrab(player);
             this.RemovePlayer(player);
-            player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 5), player.transform.position.y + -2.5f, 0f), 0, 0f, 0f, 0f, true, false, false, false, true, false, true);
+            player.TakeDamage(new Vector3(player.transform.position.x + (player.transform.forward.z * 5), player.transform.position.y + -2.5f, 0f), 0, 0f, 0f, 0f, true, true, false, false, true, false, true);
 
             /*this.animations.BookStart();
 

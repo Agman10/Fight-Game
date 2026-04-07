@@ -20,10 +20,12 @@ public class GunShootAttack : Attack
     public Attack fireBallThrow;
 
     public Attack shootSelf;
+    public ShootSelfAttack shootSelfAttack;
 
     [Space]
-    private int bullets = 17;
-    private int maxBullets = 17;
+    private int bullets = 10;
+    private int maxBullets = 10;
+    //private int maxBullets = 17;
     public GameObject magazineHole;
     public GameObject magazineTransform;
     public GameObject magazineRb;
@@ -49,6 +51,11 @@ public class GunShootAttack : Attack
         base.OnDisable();
         if (this.user != null)
             this.user.OnDisableItems -= this.DisableItem;
+    }
+
+    public override void OnDeath()
+    {
+        this.bullets = this.maxBullets;
     }
 
     public override void OnHit()
@@ -335,16 +342,16 @@ public class GunShootAttack : Attack
         //this.Stop();
 
         //make it so if you have no bullets you fail to shoot yourself
-        this.shootSelf.Initiate();
+        //this.shootSelf.Initiate();
 
-        /*if (this.bullets <= 0)
+        if (this.bullets <= 0)
         {
-
+            this.shootSelfAttack.InitiateEmptyMag();
         }
         else
         {
-            this.shootSelf.Initiate();
-        }*/
+            this.shootSelfAttack.Initiate();
+        }
 
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
