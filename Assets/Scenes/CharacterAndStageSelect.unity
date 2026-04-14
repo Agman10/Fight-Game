@@ -32085,7 +32085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &607803695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32093,16 +32093,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607803694}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 910721513}
-  m_RootOrder: 4
+  m_Father: {fileID: 672875856}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -380}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &607803696
@@ -35996,6 +35996,43 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5305045364097251082, guid: f6df3c34b4c23e54b84114d69dee1c44, type: 3}
   m_PrefabInstance: {fileID: 102225442}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &672875855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 672875856}
+  m_Layer: 5
+  m_Name: GimmickObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &672875856
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672875855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 607803695}
+  - {fileID: 1457634653}
+  m_Father: {fileID: 910721513}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -380}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &673563846 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7234160604262640420, guid: 83da0a227a3289b45a647c8d0105714c, type: 3}
@@ -38448,7 +38485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameModeId: 0
-  vsAi: 0
+  vsAi: 1
   vsAiId: 0
 --- !u!4 &702407300
 Transform:
@@ -49395,7 +49432,7 @@ RectTransform:
   - {fileID: 877195654}
   - {fileID: 1258134501}
   m_Father: {fileID: 910721513}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -50607,8 +50644,7 @@ RectTransform:
   - {fileID: 186878145}
   - {fileID: 1686666303}
   - {fileID: 1619019299}
-  - {fileID: 607803695}
-  - {fileID: 1457634653}
+  - {fileID: 672875856}
   - {fileID: 894686932}
   m_Father: {fileID: 430546783}
   m_RootOrder: 2
@@ -79260,7 +79296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1457634653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79268,17 +79304,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457634652}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 910721513}
-  m_RootOrder: 5
+  m_Father: {fileID: 672875856}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -500}
-  m_SizeDelta: {x: 549.4, y: 200}
+  m_AnchoredPosition: {x: 0, y: -120}
+  m_SizeDelta: {x: 550, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1457634654
 MonoBehaviour:
@@ -80734,12 +80770,16 @@ MonoBehaviour:
   fader: {fileID: 1878391346}
   readyText: {fileID: 1938634439}
   musicTypeSelecter: {fileID: 0}
+  gimmickObject: {fileID: 0}
+  gimmickTypeText: {fileID: 0}
   stages:
   - stageId: 0
     name: Plains
     randomChance: 100
     canvasPanel: {fileID: 1624363701}
     previewImage: {fileID: 21300000, guid: 6016eee2d69a66549b9a6aa67f02ad9d, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 1
     left: -1
     up: 2
@@ -80749,6 +80789,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 1412548877}
     previewImage: {fileID: 21300000, guid: 858ed9c7723b2db49bec3dc2431d784a, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 2
     left: 0
     up: -1
@@ -80758,6 +80800,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 1021386798}
     previewImage: {fileID: 21300000, guid: db9e456f79743354a8ab3679feee858f, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: -1
     left: 1
     up: 1
@@ -100147,12 +100191,16 @@ MonoBehaviour:
   fader: {fileID: 1760189819}
   readyText: {fileID: 696193293}
   musicTypeSelecter: {fileID: 894686933}
+  gimmickObject: {fileID: 672875855}
+  gimmickTypeText: {fileID: 1457634654}
   stages:
   - stageId: 0
     name: Plains
     randomChance: 75
     canvasPanel: {fileID: 729732158}
     previewImage: {fileID: 21300000, guid: 862b8126ed95e7a45a97a4e965af424a, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 1
     left: -1
     up: 18
@@ -100162,6 +100210,8 @@ MonoBehaviour:
     randomChance: 75
     canvasPanel: {fileID: 5265743}
     previewImage: {fileID: 21300000, guid: d0f06d194897fc54c935976f49907ecb, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 2
     left: 0
     up: 20
@@ -100171,6 +100221,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 2085842895}
     previewImage: {fileID: 21300000, guid: 579d8327440439248bc8ea762d0dfb15, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 3
     left: 1
     up: 22
@@ -100180,6 +100232,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 2086031328}
     previewImage: {fileID: 21300000, guid: 175c834071a0015459f18ad1ecda5165, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 4
     left: 2
     up: -1
@@ -100189,6 +100243,8 @@ MonoBehaviour:
     randomChance: 25
     canvasPanel: {fileID: 1577077098}
     previewImage: {fileID: 21300000, guid: 2a0285b7be701844bbeb89a50de35c41, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 5
     left: 3
     up: 0
@@ -100198,6 +100254,8 @@ MonoBehaviour:
     randomChance: 25
     canvasPanel: {fileID: 2027619113}
     previewImage: {fileID: 21300000, guid: 412ea7c43b60caa4fb07fde4d6cc514e, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 6
     left: 4
     up: 1
@@ -100207,6 +100265,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 1691714127}
     previewImage: {fileID: 21300000, guid: d4a1ab754a1a5194781af0705d2ce85d, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 7
     left: 5
     up: 1
@@ -100216,6 +100276,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 1065153600}
     previewImage: {fileID: 21300000, guid: 9fd767e24d3f5bd4dab06e9cd9674f5f, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 8
     left: 6
     up: 2
@@ -100225,6 +100287,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 842059362}
     previewImage: {fileID: 21300000, guid: dcccbd081732e56409b65e3ba925f66d, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 9
     left: 7
     up: 3
@@ -100234,6 +100298,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 280043144}
     previewImage: {fileID: 21300000, guid: aa00106fad56da446ba744b0d4117838, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 10
     left: 8
     up: 4
@@ -100243,6 +100309,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 679791998}
     previewImage: {fileID: 21300000, guid: 17ad71beebf28714a804d978cb212cc8, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 11
     left: 9
     up: 5
@@ -100252,6 +100320,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 270212450}
     previewImage: {fileID: 21300000, guid: 5757d9f1e71b92645814f65a9ba2d723, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 12
     left: 10
     up: 6
@@ -100261,6 +100331,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 188302191}
     previewImage: {fileID: 21300000, guid: b45aefbc169e3a647bb255c636c52789, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 13
     left: 11
     up: 7
@@ -100270,6 +100342,8 @@ MonoBehaviour:
     randomChance: 25
     canvasPanel: {fileID: 2003892639}
     previewImage: {fileID: 21300000, guid: 653b4655c805ff64a84a9a8d2a9857bf, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 14
     left: 12
     up: 8
@@ -100279,6 +100353,8 @@ MonoBehaviour:
     randomChance: 25
     canvasPanel: {fileID: 1586022264}
     previewImage: {fileID: 21300000, guid: 4895028929517f146a2607204cb782b6, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 15
     left: 13
     up: 9
@@ -100288,6 +100364,8 @@ MonoBehaviour:
     randomChance: 25
     canvasPanel: {fileID: 991254137}
     previewImage: {fileID: 21300000, guid: b04c8643b1c8ffa4cac8a657354deaea, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 16
     left: 14
     up: 11
@@ -100297,6 +100375,8 @@ MonoBehaviour:
     randomChance: 25
     canvasPanel: {fileID: 1869603285}
     previewImage: {fileID: 21300000, guid: 0952fe02e9763cd4196e9c48d043d33e, type: 3}
+    gimmickType: 
+    hasGimmick: 0
     right: 17
     left: 15
     up: 12
@@ -100306,6 +100386,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 753134277}
     previewImage: {fileID: 21300000, guid: c1736097eaabc50419193a86e3b1b5eb, type: 3}
+    gimmickType: Ring Out
+    hasGimmick: 1
     right: 18
     left: 16
     up: 13
@@ -100315,6 +100397,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 1620005692}
     previewImage: {fileID: 21300000, guid: 397bf30a571dd664fa04298c8ed61cb2, type: 3}
+    gimmickType: Low Gravity
+    hasGimmick: 1
     right: 19
     left: 17
     up: 13
@@ -100324,6 +100408,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 12798160}
     previewImage: {fileID: 21300000, guid: fb9040e5cfe94de4a916ac74a8267a89, type: 3}
+    gimmickType: Bouncy Walls
+    hasGimmick: 1
     right: 20
     left: 18
     up: 14
@@ -100333,6 +100419,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 2146069287}
     previewImage: {fileID: 21300000, guid: fbfab787d76865848af106758e4e4d71, type: 3}
+    gimmickType: Sea Mines and Ring Out
+    hasGimmick: 1
     right: 21
     left: 19
     up: 15
@@ -100342,6 +100430,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 661357293}
     previewImage: {fileID: 21300000, guid: 011dcc83783f11541bd67cfc6476d506, type: 3}
+    gimmickType: Infinite Length
+    hasGimmick: 1
     right: 22
     left: 20
     up: 16
@@ -100351,6 +100441,8 @@ MonoBehaviour:
     randomChance: 100
     canvasPanel: {fileID: 1897494249}
     previewImage: {fileID: 21300000, guid: 357469e6628554048a3c45784aa82ae2, type: 3}
+    gimmickType: Ring Out
+    hasGimmick: 1
     right: -1
     left: 21
     up: 16
@@ -100358,7 +100450,7 @@ MonoBehaviour:
   randomCanvasPanel: {fileID: 920952067}
   randomPreview: {fileID: 720969038}
   randomRight: 0
-  randomLeft: 21
+  randomLeft: 22
   randomUp: 17
   randomDown: 3
 --- !u!4 &1916131333

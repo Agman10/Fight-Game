@@ -24,6 +24,8 @@ public class StageSelectLogic : MonoBehaviour
     public GameObject readyText;
 
     public MusicTypeSelecter musicTypeSelecter;
+    public GameObject gimmickObject;
+    public TextMeshProUGUI gimmickTypeText;
 
 
     public StageButton[] stages;
@@ -218,6 +220,24 @@ public class StageSelectLogic : MonoBehaviour
             if (this.stageNameText != null)
                 this.stageNameText.text = this.stages[id].name;
 
+            if (this.stages[id].hasGimmick)
+            {
+                if(this.gimmickObject != null && this.gimmickTypeText != null)
+                {
+                    this.gimmickObject.SetActive(true);
+
+                    this.gimmickTypeText.text = this.stages[id].gimmickType;
+                }
+            }
+            else
+            {
+                if (this.gimmickObject != null)
+                    this.gimmickObject.SetActive(false);
+
+                if (this.gimmickTypeText != null)
+                    this.gimmickTypeText.text = "";
+            }
+
             if (this.randomPreview != null)
                 this.randomPreview.SetActive(false);
         }
@@ -234,6 +254,13 @@ public class StageSelectLogic : MonoBehaviour
 
             if (this.randomPreview != null)
                 this.randomPreview.SetActive(true);
+
+
+            if (this.gimmickObject != null)
+                this.gimmickObject.SetActive(false);
+
+            if (this.gimmickTypeText != null)
+                this.gimmickTypeText.text = "";
         }
 
         
@@ -378,6 +405,8 @@ public class StageButton
     
     public GameObject canvasPanel;
     public Sprite previewImage;
+    public string gimmickType;
+    public bool hasGimmick;
 
     [Space]
     public int right;

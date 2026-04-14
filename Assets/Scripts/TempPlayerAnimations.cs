@@ -15011,6 +15011,42 @@ public class TempPlayerAnimations : MonoBehaviour
         this.SetEyes(2);
     }
 
+    public void BurningButtPose()
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            this.rightArm.localEulerAngles = new Vector3(10f, 0f, -30f);
+            this.leftArm.localEulerAngles = new Vector3(-10f, 0f, -30f);
+            this.rightArmJoint.localEulerAngles = new Vector3(-45f, 0f, 15f);
+            this.leftArmJoint.localEulerAngles = new Vector3(45f, 0f, 15f);
+
+            this.rightLeg.localEulerAngles = new Vector3(0f, 15f, 50f);
+            this.leftLeg.localEulerAngles = new Vector3(0f, -25f, 85f);
+            this.rightLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.leftLegJoint.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.upperBody != null && this.lowerBody != null)
+        {
+            this.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.lowerBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.eyes != null)
+        {
+            this.eyes.localPosition = new Vector3(0f, this.defaultEyeYHeight, 0f);
+            this.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+        }
+
+        if (this.body != null)
+        {
+            this.body.localPosition = new Vector3(0f, this.defaultYPos - 0f, this.transform.forward.z * 0f);
+            this.body.localEulerAngles = new Vector3(this.transform.forward.z * 0f, this.transform.forward.z * 5f, 15f);
+        }
+
+        this.SetEyes(2);
+    }
+
 
 
 

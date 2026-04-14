@@ -97,6 +97,11 @@ public class CharacterVictoryScreen : MonoBehaviour
 
                 this.victoryQuoteText.text = this.currentText;
                 yield return new WaitForSeconds(this.textTypeDelay + extraWaitTime);
+
+                /*if (fullText.Substring(i, 1) == " ")
+                    yield return new WaitForSeconds(0f);
+                else
+                    yield return new WaitForSeconds(this.textTypeDelay + extraWaitTime);*/
             }
 
 
