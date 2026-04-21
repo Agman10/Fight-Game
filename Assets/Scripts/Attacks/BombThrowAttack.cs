@@ -38,6 +38,12 @@ public class BombThrowAttack : Attack
         base.OnHit();
         if (!this.user.dead && this.onGoing)
         {
+            if (this.holdingBomb)
+                this.ThrowBomb(true);
+            else if (this.holdingGrenade)
+                this.ThrowGrenade(true);
+            else if (this.holdingFlashbang)
+                this.ThrowFlashbang(true);
             this.Stop();
             /*if (this.animations != null)
                 this.animations.SetDefaultPose();*/
@@ -83,6 +89,10 @@ public class BombThrowAttack : Attack
     {
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
         if (this.animations != null)
             this.animations.SetStartThrowBombPose();
 
@@ -121,6 +131,7 @@ public class BombThrowAttack : Attack
             this.user.AddStun(0.1f, true);*/
 
         yield return new WaitForSeconds(time / 2);
+        //yield return new WaitForSeconds(2f);
 
         /*if (Mathf.Abs(this.user.rb.velocity.y) <= 0f && Mathf.Abs(this.user.rb.velocity.x) > 0f)
             this.user.AddStun(0.1f, true);*/
@@ -237,12 +248,12 @@ public class BombThrowAttack : Attack
         if (this.flashbangModel != null)
             this.flashbangModel.SetActive(false);
 
-        if (this.holdingBomb)
+        /*if (this.holdingBomb)
             this.ThrowBomb(true);
         else if (this.holdingGrenade)
             this.ThrowGrenade(true);
         else if (this.holdingFlashbang)
-            this.ThrowFlashbang(true);
+            this.ThrowFlashbang(true);*/
 
         this.holdingBomb = false;
         this.holdingGrenade = false;

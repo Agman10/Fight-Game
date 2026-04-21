@@ -14,6 +14,9 @@ public class SO_PreFightDialogue : ScriptableObject
 [Serializable]
 public class DialogueLine
 {
+    public float dialogueStayTime = 1f;
     [TextArea(2, 6)] public string charDialogue1;
+    public float dialogueSpeed1 = 0.05f;
     [TextArea(2, 6)] public string charDialogue2;
+    public float dialogueSpeed2 = 0.05f;
 }

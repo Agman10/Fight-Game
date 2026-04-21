@@ -519,8 +519,9 @@ public class TestPlayer : MonoBehaviour
     [ContextMenu("Reset")]
     public void ResetPlayer()
     {
-        this.OnHit?.Invoke();
+        
         this.OnReset?.Invoke();
+        this.OnHit?.Invoke();
         this.dead = false;
         this.health = this.maxHealth;
         this.preventDeath = false;

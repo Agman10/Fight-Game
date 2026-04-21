@@ -199,8 +199,8 @@ public class TestPreFightDialogue : MonoBehaviour
                     this.StartCoroutine(this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index));*/
 
 
-                IEnumerator p1DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue1, p1Index);
-                IEnumerator p2DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index);
+                IEnumerator p1DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue1, p1Index, this.preFightDialogue.dialogueLines[i].dialogueSpeed1);
+                IEnumerator p2DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index, this.preFightDialogue.dialogueLines[i].dialogueSpeed2);
 
                 if (this.preFightDialogue.dialogueLines[i].charDialogue1.Length > 0)
                     this.StartCoroutine(p1DialogueCoroutine);
@@ -232,7 +232,8 @@ public class TestPreFightDialogue : MonoBehaviour
                     this.ShowFullText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index);
 
                 float currentTime = 0;
-                float duration = 1f;
+                //float duration = 1f;
+                float duration = this.preFightDialogue.dialogueLines[i].dialogueStayTime;
                 while (currentTime < duration && !this.skipButtonDown)
                 {
                     currentTime += Time.deltaTime;
@@ -309,7 +310,7 @@ public class TestPreFightDialogue : MonoBehaviour
         
     }
 
-    IEnumerator ShowText(string fullText, int playerNumber)
+    IEnumerator ShowText(string fullText, int playerNumber, float dialogueSpeed = 0.05f)
     {
         //yield return new WaitForSeconds(0.2f);
         if (playerNumber == 2)
@@ -376,7 +377,8 @@ public class TestPreFightDialogue : MonoBehaviour
                 else
                     this.p1Text.text = this.currentP1Text;
 
-                yield return new WaitForSeconds(0.05f + extraWaitTime);
+                //yield return new WaitForSeconds(0.05f + extraWaitTime);
+                yield return new WaitForSeconds(dialogueSpeed + extraWaitTime);
             }
 
 
