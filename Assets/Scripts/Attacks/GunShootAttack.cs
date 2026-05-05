@@ -56,6 +56,11 @@ public class GunShootAttack : Attack
     public override void OnDeath()
     {
         this.bullets = this.maxBullets;
+        this.reloading = false;
+        this.hasNoMagaznine = false;
+
+        if (this.magazineHole != null)
+            this.magazineHole.gameObject.SetActive(false);
     }
 
     public override void OnHit()
