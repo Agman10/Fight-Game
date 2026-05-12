@@ -1778,7 +1778,7 @@ public class TempPlayerAnimations : MonoBehaviour
 
         this.SetEyes(0);
     }
-
+    //[ContextMenu("RagingBeastStartPose")]
     public void RagingBeastStartPose()
     {
         if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null && this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)

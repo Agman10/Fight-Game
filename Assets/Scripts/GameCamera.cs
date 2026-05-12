@@ -23,6 +23,11 @@ public class GameCamera : MonoBehaviour
     {
         this.mainCamera = this.GetComponent<Camera>();
     }
+    private void OnEnable()
+    {
+        //this.StartCamera();
+        //this.StartCoroutine(this.StartCamCoroutine());
+    }
 
     void Update()
     {
@@ -53,6 +58,25 @@ public class GameCamera : MonoBehaviour
         
         
         //transform.LookAt(center);
+    }
+
+    private IEnumerator StartCamCoroutine()
+    {
+        yield return new WaitForSeconds(0.01f);
+        this.StartCamera();
+    }
+    public void StartCamera()
+    {
+        if (this.player1 != null && this.player2 != null)
+        {
+            float centerX = (this.p2ExtraWidth - this.p1ExtraWidth) / 2.0f;
+            if (this.player1.position.x > this.player2.position.x)
+                centerX = (this.p1ExtraWidth - this.p2ExtraWidth) / 2.0f;
+
+            //Debug.Log(centerX);
+            this.posX = Mathf.Clamp(centerX, -this.maxX, this.maxX);
+            this.transform.position = new Vector3(this.posX, this.transform.position.y, this.transform.position.z);
+        }
     }
 
     /*private void Start()

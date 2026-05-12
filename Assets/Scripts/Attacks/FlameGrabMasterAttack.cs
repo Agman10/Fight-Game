@@ -378,7 +378,7 @@ public class FlameGrabMasterAttack : Attack
                 xForward = 1.75f;
                 yUp = 1.4f;
             }
-            else if (charId == 9)
+            else if (charId == 9 || charId == 11)
             {
                 //player.transform.position = new Vector3(pos.x + (this.user.transform.forward.z * 1.6f), pos.y + 0.74f, 0f);
 
