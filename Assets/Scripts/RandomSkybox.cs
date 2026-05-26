@@ -27,6 +27,7 @@ public class RandomSkybox : MonoBehaviour
     public GameObject aurora;
 
     public GameObject invisBounceWalls;
+    public GameObject finalJusticeBackground;
     [Space]
     public AudioSource[] songs;
     public int currentMusic;
@@ -349,6 +350,9 @@ public class RandomSkybox : MonoBehaviour
                 this.SetMusic(16);
                 this.SetSkybox(16);
                 this.directionalLight.color = new Color32(214, 214, 255, 255);
+
+                if (this.finalJusticeBackground != null)
+                    this.finalJusticeBackground.SetActive(true);
             }
         }
         
@@ -600,6 +604,17 @@ public class RandomSkybox : MonoBehaviour
         {
             if (this.invisBounceWalls != null)
                 this.invisBounceWalls.gameObject.SetActive(false);
+        }
+
+        if (this.currentStage == 20)
+        {
+            if (this.finalJusticeBackground != null)
+                this.finalJusticeBackground.SetActive(true);
+        }
+        else
+        {
+            if (this.finalJusticeBackground != null)
+                this.finalJusticeBackground.SetActive(false);
         }
 
         foreach (AudioSource music in songs)
@@ -860,6 +875,17 @@ public class RandomSkybox : MonoBehaviour
         {
             if (this.invisBounceWalls != null)
                 this.invisBounceWalls.gameObject.SetActive(false);
+        }
+
+        if (this.currentStage == 20)
+        {
+            if (this.finalJusticeBackground != null)
+                this.finalJusticeBackground.SetActive(true);
+        }
+        else
+        {
+            if (this.finalJusticeBackground != null)
+                this.finalJusticeBackground.SetActive(false);
         }
 
         /*if (this.currentStage == 12)

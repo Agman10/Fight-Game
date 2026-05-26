@@ -927,7 +927,7 @@ RectTransform:
   m_Children:
   - {fileID: 1305051889}
   m_Father: {fileID: 1988990156}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2032,9 +2032,11 @@ MonoBehaviour:
   frowningEyes: {fileID: 763283620}
   angryEyes: {fileID: 2121580842}
   boredEyes: {fileID: 0}
+  sleepEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 2133488321}
   eyesPosTransform: {fileID: 883508715}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!1 &69052676
@@ -9149,7 +9151,7 @@ RectTransform:
   m_Children:
   - {fileID: 1473589843}
   m_Father: {fileID: 1988990156}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13248,7 +13250,7 @@ RectTransform:
   m_Children:
   - {fileID: 1217039800}
   m_Father: {fileID: 1988990156}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15347,9 +15349,11 @@ MonoBehaviour:
   frowningEyes: {fileID: 1297288831}
   angryEyes: {fileID: 936210692}
   boredEyes: {fileID: 0}
+  sleepEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
   eyesPosTransform: {fileID: 0}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!1 &433330071
@@ -16742,6 +16746,81 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482423400}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &482617682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 482617683}
+  - component: {fileID: 482617685}
+  - component: {fileID: 482617684}
+  m_Layer: 5
+  m_Name: Image (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &482617683
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482617682}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1988990156}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 420, y: 595.5}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &482617684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482617682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.28235295, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &482617685
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482617682}
+  m_CullTransparentMesh: 1
 --- !u!1 &483972959
 GameObject:
   m_ObjectHideFlags: 0
@@ -24481,7 +24560,7 @@ RectTransform:
   m_Children:
   - {fileID: 1945067244}
   m_Father: {fileID: 1988990156}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24765,9 +24844,11 @@ MonoBehaviour:
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
   boredEyes: {fileID: 0}
+  sleepEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
   eyesPosTransform: {fileID: 0}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!1 &710454432
@@ -25022,7 +25103,7 @@ RectTransform:
   m_Children:
   - {fileID: 428434042}
   m_Father: {fileID: 1988990156}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -30166,9 +30247,11 @@ MonoBehaviour:
   frowningEyes: {fileID: 500807506}
   angryEyes: {fileID: 1237086431}
   boredEyes: {fileID: 0}
+  sleepEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 796507655}
   eyesPosTransform: {fileID: 1340645640}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!1 &716361830
@@ -64039,9 +64122,11 @@ MonoBehaviour:
   frowningEyes: {fileID: 24603553}
   angryEyes: {fileID: 7749739}
   boredEyes: {fileID: 0}
+  sleepEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 1091548798}
   eyesPosTransform: {fileID: 644754139}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!1 &1238536101
@@ -86761,7 +86846,7 @@ Transform:
   m_Children:
   - {fileID: 716171342}
   m_Father: {fileID: 1988990156}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1580473582
 PrefabInstance:
@@ -91345,7 +91430,7 @@ RectTransform:
   m_Children:
   - {fileID: 651503899272913371}
   m_Father: {fileID: 1988990156}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -99482,9 +99567,11 @@ MonoBehaviour:
   frowningEyes: {fileID: 0}
   angryEyes: {fileID: 0}
   boredEyes: {fileID: 0}
+  sleepEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
   eyesPosTransform: {fileID: 0}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!1 &1969285144
@@ -100848,6 +100935,7 @@ RectTransform:
   m_Children:
   - {fileID: 2115300826}
   - {fileID: 1285507654}
+  - {fileID: 482617683}
   - {fileID: 8608750827732246855}
   - {fileID: 1694217877}
   - {fileID: 1580418026}
@@ -116564,6 +116652,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   rb: {fileID: 651503899272913373}
   canBeAttacked: 0
+  twistUpperBody: 0
   rightArm: {fileID: 0}
   rightArmJoint: {fileID: 0}
   leftArm: {fileID: 0}
@@ -127035,9 +127124,11 @@ MonoBehaviour:
   frowningEyes: {fileID: 8064136593581566661}
   angryEyes: {fileID: 5627287091867065}
   boredEyes: {fileID: 0}
+  sleepEyes: {fileID: 0}
   bloodPuddle: {fileID: 0}
   dress: {fileID: 0}
   eyesPosTransform: {fileID: 0}
+  belt: {fileID: 0}
   wingRight: {fileID: 0}
   wingLeft: {fileID: 0}
 --- !u!1 &7279374408564744221
@@ -128603,7 +128694,7 @@ Transform:
   m_Children:
   - {fileID: 605639122264335889}
   m_Father: {fileID: 1988990156}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &8619527620679401230
 MeshRenderer:
