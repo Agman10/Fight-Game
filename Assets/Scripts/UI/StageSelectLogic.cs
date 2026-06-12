@@ -15,6 +15,9 @@ public class StageSelectLogic : MonoBehaviour
     public TextMeshProUGUI stageNameText;
     public int gameModeId;
     public CharacterSelectLogic characterSelectLogic;
+    public VersusScreenLogic versusScreenLogic;
+    public GameObject versusUI;
+    public GameObject stageSelectUI;
 
     public bool canMove;
     public bool starting;
@@ -292,7 +295,19 @@ public class StageSelectLogic : MonoBehaviour
         if (this.gameModeId == 0 && CharacterManager.Instance != null && this.musicTypeSelecter != null)
             CharacterManager.Instance.musicTypeId = this.musicTypeSelecter.currentId;
 
-        this.StartCoroutine(this.StartGameCoroutine());
+        //this.StartCoroutine(this.StartGameCoroutine());
+        this.StartCoroutine(this.StartGameCoroutine2());
+
+        
+
+        /*if (this.versusUI != null)
+            this.versusUI.SetActive(true);
+
+        if (this.versusScreenLogic != null)
+            this.versusScreenLogic.gameObject.SetActive(true);
+
+        if (this.stageSelectUI != null)
+            this.stageSelectUI.SetActive(false);*/
     }
 
     public int GetRandomStage()
@@ -308,6 +323,23 @@ public class StageSelectLogic : MonoBehaviour
         /*foreach (int id in stagepool)
             Debug.Log(id);*/
         return stagepool[Random.Range(0, stagepool.Count)];
+    }
+
+    private IEnumerator StartGameCoroutine2()
+    {
+        this.starting = true;
+        if (this.readyText != null)
+            this.readyText.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+        if (this.versusUI != null)
+            this.versusUI.SetActive(true);
+
+        if (this.versusScreenLogic != null)
+            this.versusScreenLogic.gameObject.SetActive(true);
+
+        if (this.stageSelectUI != null)
+            this.stageSelectUI.SetActive(false);
     }
 
     private IEnumerator StartGameCoroutine()

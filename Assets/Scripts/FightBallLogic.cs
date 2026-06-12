@@ -311,7 +311,7 @@ public class FightBallLogic : MonoBehaviour
 
     private IEnumerator EndGameCoroutine(int playerNumber = 0)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         if (GameManager.Instance != null)
         {
             GameManager.Instance.EndTheGame(playerNumber);
