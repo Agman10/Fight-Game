@@ -15,6 +15,10 @@ public class TestPreFightDialogue : MonoBehaviour
 
     public int p1Id;
     public int p2Id;
+    public SO_Skin p1Skin;
+    public SO_Skin p2Skin;
+    public CharacterIconManager p1Icon;
+    public CharacterIconManager p2Icon;
 
     public bool P1InProgress;
     public bool P2InProgress;
@@ -58,6 +62,16 @@ public class TestPreFightDialogue : MonoBehaviour
         if (this.playerInput != null)
         {
             this.playerInput.PunchInput += this.Skip;
+        }
+
+        if(this.p1Icon != null)
+        {
+            this.p1Icon.InstantiateIconPrefab(this.p1Id, this.p1Skin);
+        }
+
+        if (this.p2Icon != null)
+        {
+            this.p2Icon.InstantiateIconPrefab(this.p2Id, this.p2Skin);
         }
     }
 
