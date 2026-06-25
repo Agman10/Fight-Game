@@ -213,8 +213,8 @@ public class TestPreFightDialogue : MonoBehaviour
                     this.StartCoroutine(this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index));*/
 
 
-                IEnumerator p1DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue1, p1Index, this.preFightDialogue.dialogueLines[i].dialogueSpeed1);
-                IEnumerator p2DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index, this.preFightDialogue.dialogueLines[i].dialogueSpeed2);
+                IEnumerator p1DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue1, p1Index/*, this.preFightDialogue.dialogueLines[i].dialogueSpeed1*/);
+                IEnumerator p2DialogueCoroutine = this.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2, p2Index/*, this.preFightDialogue.dialogueLines[i].dialogueSpeed2*/);
 
                 if (this.preFightDialogue.dialogueLines[i].charDialogue1.Length > 0)
                     this.StartCoroutine(p1DialogueCoroutine);
