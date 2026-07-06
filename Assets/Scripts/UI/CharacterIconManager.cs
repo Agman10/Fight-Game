@@ -54,18 +54,24 @@ public class CharacterIconManager : MonoBehaviour
 
     public void InstantiateIconPrefab(int characterId, SO_Skin skinData)
     {
-        if(this.characterIcons[characterId] != null)
+        if(this.characterIcons.Length >= characterId + 1 && characterId >= 0)
         {
-            CharacterIconSkins iconPrefab = this.characterIcons[characterId];
+            if (this.characterIcons[characterId] != null)
+            {
+                CharacterIconSkins iconPrefab = this.characterIcons[characterId];
 
-            iconPrefab = Instantiate(iconPrefab, this.transform);
-            iconPrefab.SetSkin(skinData);
+                iconPrefab = Instantiate(iconPrefab, this.transform);
+                iconPrefab.SetSkin(skinData);
+            }
+            else
+            {
+                this.InstantiatePlaceholder();
+            }
         }
         else
         {
             this.InstantiatePlaceholder();
         }
-        
     }
 
     public void InstantiatePlaceholder()

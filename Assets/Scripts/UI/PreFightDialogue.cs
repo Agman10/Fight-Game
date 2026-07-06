@@ -199,6 +199,8 @@ public class PreFightDialogue : MonoBehaviour
                 this.p1Typewriter.ShowText(p1Dialogue);
                 this.p2Typewriter.ShowText(p2Dialogue);
 
+                //maybe add an option for text to stay if empty
+
                 /*this.p1Typewriter.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue1);
                 this.p2Typewriter.ShowText(this.preFightDialogue.dialogueLines[i].charDialogue2);*/
 
@@ -270,7 +272,12 @@ public class PreFightDialogue : MonoBehaviour
             }
             else if (this.preFightDialogue.characterId1 != this.preFightDialogue.characterId2 && this.p1Id != this.p2Id)
             {
-                return true;
+                if (this.p1Id == this.preFightDialogue.characterId1 && this.p2Id == this.preFightDialogue.characterId2 || 
+                    this.p1Id == this.preFightDialogue.characterId2 && this.p2Id == this.preFightDialogue.characterId1)
+                    return true;
+                else
+                    return false;
+                //return true;
             }
             else
             {
