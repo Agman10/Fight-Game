@@ -271,6 +271,8 @@ public class SummonLightningCloudAttack : Attack
                         lightningPos = pos + this.user.transform.forward.z * 3f;
                     else if (this.user.input.moveInput.y < 0)
                         lightningPos = pos + this.user.transform.forward.z;
+                    else if (this.user.input.moveInput.y > 0)
+                        lightningPos = pos + this.user.transform.forward.z * 10.5f;
                     else
                         lightningPos = pos + this.user.transform.forward.z * 7f;
                 }
@@ -282,6 +284,8 @@ public class SummonLightningCloudAttack : Attack
                         lightningPos = cameraPos - 7f;
                     else if (this.user.input.moveInput.y < 0)
                         lightningPos = pos + this.user.transform.forward.z;
+                    else if (this.user.input.moveInput.y > 0)
+                        lightningPos = pos + this.user.transform.forward.z * 10.5f;
                     else
                         lightningPos = pos + this.user.transform.forward.z * 7f;
                 }
@@ -309,6 +313,8 @@ public class SummonLightningCloudAttack : Attack
                         lightningPos = pos + this.user.transform.forward.z * 4f;
                     else if (this.user.input.moveInput.y < 0)
                         lightningPos = pos + this.user.transform.forward.z;
+                    else if (this.user.input.moveInput.y > 0)
+                        lightningPos = pos + this.user.transform.forward.z * 12f; //for future make it so it is alway in between no input and right input
                     else if (this.user.input.transform.position.x > -1f)
                         lightningPos = (10f + pos) / 2f; //pos + this.user.transform.forward.z;
                     else
@@ -322,6 +328,8 @@ public class SummonLightningCloudAttack : Attack
                         lightningPos = -10f;
                     else if (this.user.input.moveInput.y < 0)
                         lightningPos = pos + this.user.transform.forward.z;
+                    else if (this.user.input.moveInput.y > 0)
+                        lightningPos = pos + this.user.transform.forward.z * 12f; //same thing as the other comment with the same input
                     else if (this.user.input.transform.position.x < 1f)
                         lightningPos = (-10f + pos) / 2f; /*pos + this.user.transform.forward.z;*/
                     else

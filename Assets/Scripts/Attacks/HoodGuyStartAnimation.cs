@@ -20,6 +20,9 @@ public class HoodGuyStartAnimation : Attack
     public GameObject pipe;
     public AnimationCurve pipeJumpCurve;
 
+    public InterdimensionalDoor door;
+    public InterdimensionalDoor currentDoor;
+
     //public float fallDuration = 0.2f;
     //public VisualEffect fire;
     //public GameObject landingParticle;
@@ -61,6 +64,8 @@ public class HoodGuyStartAnimation : Attack
                     this.StartCoroutine(this.ThrowP2());
                 else
                     this.StartCoroutine(this.ThrowP1());
+
+                //this.StartCoroutine(this.VsSelfDoor());
             }
             else
             {
@@ -101,6 +106,8 @@ public class HoodGuyStartAnimation : Attack
             }
         }
     }
+
+    
 
     private IEnumerator TemplateCoroutine2()
     {
@@ -243,6 +250,9 @@ public class HoodGuyStartAnimation : Attack
 
         if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
             GameManager.Instance.gameCamera.cameraIsLocked = false;
+
+        if (this.currentDoor != null)
+            this.currentDoor.gameObject.SetActive(false);
 
         this.PlaySmoke(false);
 
@@ -484,6 +494,187 @@ public class HoodGuyStartAnimation : Attack
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
 
+        this.user.EntranceDone();
+    }
+
+    private IEnumerator VsSelfDoor()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+
+        this.user.rb.isKinematic = true;
+        this.user.transform.position = new Vector3(this.user.transform.position.x * -1f, 0f, 0f);
+        //this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
+
+        //this.user.LookAtTarget();
+        this.user.LookAtCenter();
+
+        yield return new WaitForSeconds(0.01f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        //this.user.transform.position = new Vector3(this.user.transform.position.x * -1f, 0f, 0f);
+        this.user.LookAtTarget();
+
+        //this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
+
+        float currentTime = 0;
+        float duration = 0.4f;
+        float targetPosition = 0f;
+        float start = this.transform.position.y;
+        /*float targetPosition = this.user.animations.defaultYPos;
+        float start = this.user.animations.body.transform.localPosition.y;*/
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            //this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+            yield return null;
+        }
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+
+
+        if (this.door != null)
+        {
+            InterdimensionalDoor doorPrefab = this.door;
+
+            doorPrefab = Instantiate(doorPrefab, new Vector3(this.user.transform.position.x, this.user.transform.position.y, 1.2f), Quaternion.Euler(0, 0, 0));
+
+            doorPrefab.SetOwner(this.user);
+
+            this.currentDoor = doorPrefab;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+        this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * -90f, 0f);
+        /*if (this.openSfx != null)
+            this.openSfx.Play();*/
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.currentDoor != null)
+        {
+            this.currentDoor.doorLid.transform.localEulerAngles = new Vector3(0f, 110f, 0f);
+        }
+
+
+
+        yield return new WaitForSeconds(0.1f);
+        if (this.animations != null)
+        {
+            this.animations.body.localPosition = new Vector3(0f, this.animations.defaultYPos, this.user.transform.forward.z * 0.5f);
+            this.animations.DoorWalk(1);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.animations != null)
+        {
+            this.animations.body.localPosition = new Vector3(0f, this.animations.defaultYPos, this.user.transform.forward.z * 1f);
+            this.animations.DoorWalk(2);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        /*if (this.closeSfx != null)
+            this.closeSfx.Play();*/
+
+        if (this.currentDoor != null)
+            this.currentDoor.doorLid.transform.localEulerAngles = new Vector3(0f, 38f, 0f);
+
+        if (this.animations != null)
+        {
+            this.animations.body.localPosition = new Vector3(0f, this.animations.defaultYPos, this.user.transform.forward.z * 1f);
+            this.animations.DoorWalk(0);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.currentDoor != null)
+            this.currentDoor.doorLid.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        this.animations.body.localScale = Vector3.zero;
+
+        yield return new WaitForSeconds(0.1f);
+        this.user.transform.position = new Vector3(this.user.transform.position.x * -1f, 0f, 0f);
+        //this.user.LookAtCenter();
+        this.animations.body.localScale = Vector3.zero;
+
+        yield return new WaitForSeconds(0.5f);
+
+        /*if (this.closeSfx != null)
+            this.closeSfx.Play();*/
+
+        if (this.currentDoor != null)
+        {
+            this.currentDoor.doorLid.transform.localEulerAngles = new Vector3(0f, 110f, 0f);
+        }
+
+        if (this.animations != null)
+        {
+            this.user.LookAtCenter();
+            this.animations.body.localPosition = new Vector3(0f, this.animations.defaultYPos, this.user.transform.forward.z * 1f);
+            this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 90f, 0f);
+
+            this.animations.DoorWalk(3);
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+
+        if (this.animations != null)
+        {
+            this.animations.body.localPosition = new Vector3(0f, this.animations.defaultYPos, this.user.transform.forward.z * 0.5f);
+            //this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 90f, 0f);
+
+            this.animations.DoorWalk(1);
+        }
+
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.animations != null)
+        {
+            this.animations.body.localPosition = new Vector3(0f, this.animations.defaultYPos, 0f);
+            //this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 90f, 0f);
+
+            this.animations.DoorWalk(2);
+        }
+
+        /*if (this.closeSfx != null)
+            this.closeSfx.Play();*/
+
+        yield return new WaitForSeconds(0.1f);
+
+        if (this.animations != null)
+        {
+            //this.animations.body.localPosition = new Vector3(0f, this.animations.defaultYPos, 0f);
+            //this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * 90f, 0f);
+
+            this.animations.DoorWalk(0);
+        }
+
+        if (this.currentDoor != null)
+            this.currentDoor.doorLid.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+        //yield return new WaitForSeconds(1f);
+
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.currentDoor != null)
+            this.currentDoor.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.2f);
+
+        this.user.rb.isKinematic = false;
+
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
         this.user.EntranceDone();
     }
 
