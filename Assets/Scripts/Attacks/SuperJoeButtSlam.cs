@@ -217,7 +217,7 @@ public class SuperJoeButtSlam : Attack
         this.animations.JoeButtSlam(1);
         player.animations.JoeButtSlamLaying(1);
 
-        player.TakeDamage(this.user.transform.position, 23f, 0f, 0f, 0f, false, true, false, true);
+        player.TakeDamage(this.user.transform.position, 23f, 0f, 0f, 0f, false, true, false, true, true, false, true);
         player.soundEffects.PlayHitSound();
 
 
@@ -230,7 +230,7 @@ public class SuperJoeButtSlam : Attack
         {
             this.user.rb.isKinematic = false;
             player.preventDeath = false;
-            player.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, true, false, false);
+            player.TakeDamage(this.user.transform.position, 0f, 0f, 0f, 0f, false, true, false, false, true, false, true);
 
             yield return new WaitForSeconds(0.025f);
 
@@ -363,7 +363,7 @@ public class SuperJoeButtSlam : Attack
                 this.user.rb.isKinematic = true;
                 player.rb.isKinematic = true;
 
-                player.TakeDamage(this.user.transform.position, 5f, 0f, 0f, 0f, false, true, false, true);
+                player.TakeDamage(this.user.transform.position, 5f, 0f, 0f, 0f, false, true, false, true, true, false, true);
                 player.soundEffects.PlayHitSound();
 
                 player.animations.JoeButtSlamLaying(0);

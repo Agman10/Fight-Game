@@ -210,7 +210,7 @@ public class ItemThrowAttack : Attack
 
         int number = Random.Range(1, 101);
 
-        if (number <= 3)
+        if (number <= 2)
             this.ThrowRandomLegendaryItem();
         else
             this.ThrowRandomItem();
@@ -243,6 +243,10 @@ public class ItemThrowAttack : Attack
             if (bombNumber <= 550)
             {
                 this.ThrowBomb();
+            }
+            else if (bombNumber > 550 && bombNumber <= 600)
+            {
+                this.ThrowFlashBang();
             }
             else
             {
@@ -851,7 +855,7 @@ public class ItemThrowAttack : Attack
 
             int number = Random.Range(1, 101);
 
-            if (number <= 3)
+            if (number <= 2)
                 this.ThrowRandomLegendaryItem();
             else
                 this.ThrowRandomItem();

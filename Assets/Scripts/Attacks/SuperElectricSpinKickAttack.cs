@@ -161,7 +161,9 @@ public class SuperElectricSpinKickAttack : Attack
         {
             time -= Time.deltaTime;
             if (this.animations != null)
-                this.animations.body.transform.Rotate(new Vector3(0, this.spinRotationSpeed * Time.deltaTime, 0));
+                this.animations.body.transform.Rotate(new Vector3(0f, this.user.transform.forward.z * this.spinRotationSpeed * Time.deltaTime, 0f));
+
+            //this.animations.body.transform.Rotate(new Vector3(0, this.spinRotationSpeed * Time.deltaTime, 0));
 
             //this.user.ragdoll.transform.Rotate(new Vector3(0, this.spinRotationSpeed * Time.deltaTime, 0));
             this.user.rb.velocity = new Vector3(this.user.transform.forward.z * this.forwardVelocity, this.upwardVelocity, 0);
@@ -271,7 +273,9 @@ public class SuperElectricSpinKickAttack : Attack
         {
             time -= Time.deltaTime;
             if (this.animations != null)
-                this.animations.body.transform.Rotate(new Vector3(0, this.spinRotationSpeed * Time.deltaTime, 0));
+                this.animations.body.transform.Rotate(new Vector3(0f, this.user.transform.forward.z * this.spinRotationSpeed * Time.deltaTime, 0f));
+
+            //this.animations.body.transform.Rotate(new Vector3(0, this.spinRotationSpeed * Time.deltaTime, 0));
 
             this.user.rb.velocity = new Vector3(this.user.transform.forward.z * this.forwardVelocity, this.upwardVelocity, 0);
 

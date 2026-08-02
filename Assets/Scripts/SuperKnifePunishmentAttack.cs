@@ -31,7 +31,7 @@ public class SuperKnifePunishmentAttack : Attack
     public override void OnHit()
     {
         base.OnHit();
-        if (!this.user.dead && this.onGoing)
+        if (!this.user.dead && this.onGoing && this.grabbedPlayer == null)
         {
             this.Stop();
             /*if (this.animations != null)
@@ -167,6 +167,7 @@ public class SuperKnifePunishmentAttack : Attack
             player.LookAtTarget();
 
             this.grabbedPlayer.preventDeath = true;
+            this.user.preventDeath = true;
 
             player.lookAtPlayer();
 
@@ -513,6 +514,7 @@ public class SuperKnifePunishmentAttack : Attack
             this.ghost.SetActive(false);
 
         this.user.knockbackInvounrability = false;
+        this.user.preventDeath = false;
 
         this.user.rb.isKinematic = false;
 
@@ -570,6 +572,7 @@ public class SuperKnifePunishmentAttack : Attack
             player.attackStuns.Remove(this.gameObject);
 
             this.grabbedPlayer.preventDeath = false;
+            this.user.preventDeath = false;
 
             if (!player.dead)
             {
@@ -608,6 +611,7 @@ public class SuperKnifePunishmentAttack : Attack
             player.attackStuns.Remove(this.gameObject);
 
             this.grabbedPlayer.preventDeath = false;
+            this.user.preventDeath = false;
 
             if (!player.dead)
             {

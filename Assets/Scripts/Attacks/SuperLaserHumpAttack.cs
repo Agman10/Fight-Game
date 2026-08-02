@@ -12,6 +12,11 @@ public class SuperLaserHumpAttack : Attack
     public GameObject laser;
 
     public TestHitbox hitbox;
+    public TestHitbox knockbackHitbox;
+
+    public float laserDuration = 0.2f;
+    public float startDuration = 0.4f;
+    public float cooldownDuration = 1.25f;
 
     public Transform hitboxOrigin;
 
@@ -133,7 +138,8 @@ public class SuperLaserHumpAttack : Attack
         if (this.animations != null)
             this.animations.StupidDance(0);
 
-        yield return new WaitForSeconds(0.4f);
+        //yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(this.startDuration);
 
         if (this.animations != null)
             this.animations.StupidDance(1);
@@ -145,7 +151,8 @@ public class SuperLaserHumpAttack : Attack
         if (this.animations != null)
             this.animations.StupidDance(3);
 
-        this.cooldownTimer = 1.25f;
+        //this.cooldownTimer = 1.25f;
+        this.cooldownTimer = this.cooldownDuration;
 
         //this.laserSfx.PlaySound();
 
@@ -175,7 +182,9 @@ public class SuperLaserHumpAttack : Attack
 
         //yield return new WaitForSeconds(0.35f);
 
-        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(this.laserDuration);
+        //yield return new WaitForSeconds(0.4f); //for longer laser duration
         this.SetWeakDamage();
         yield return new WaitForSeconds(0.15f);
 
@@ -202,6 +211,8 @@ public class SuperLaserHumpAttack : Attack
             this.laser.SetActive(false);
             this.laser.transform.localScale = new Vector3(1f, 1f, 1f);
         }
+        if (this.knockbackHitbox != null)
+            this.knockbackHitbox.gameObject.SetActive(true);
         this.SetNormalDamage();
         //yield return new WaitForSeconds(0.1f);
         yield return new WaitForSeconds(0.05f);
@@ -238,12 +249,15 @@ public class SuperLaserHumpAttack : Attack
 
     public void SetNormalDamage()
     {
-        this.hitbox.damage = this.normalDamage;
-        this.hitbox.stun = this.normalStun;
-        this.hitbox.knockDownImpactDuration = this.normalKnockDownImpactDuration;
-        this.hitbox.knockDownSitDuration = this.normalKnockDownSitDuration;
-        this.hitbox.horizontalKnockback = this.normalHorizontalKnockback;
-        this.hitbox.verticalKnockback = this.normalVerticalKnockback;
+        if (this.hitbox != null)
+        {
+            this.hitbox.damage = this.normalDamage;
+            this.hitbox.stun = this.normalStun;
+            this.hitbox.knockDownImpactDuration = this.normalKnockDownImpactDuration;
+            this.hitbox.knockDownSitDuration = this.normalKnockDownSitDuration;
+            this.hitbox.horizontalKnockback = this.normalHorizontalKnockback;
+            this.hitbox.verticalKnockback = this.normalVerticalKnockback;
+        }
     }
 
     public override void Stop()

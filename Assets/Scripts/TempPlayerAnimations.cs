@@ -1080,7 +1080,8 @@ public class TempPlayerAnimations : MonoBehaviour
 
         if (this.body != null)
         {
-            this.body.localEulerAngles = new Vector3(0f, 0f, 0f);
+            //this.body.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.body.localEulerAngles = new Vector3(0f, this.transform.forward.z * -135f, 0f);
             this.body.localPosition = new Vector3(0f, this.defaultYPos, 0f);
         }
     }
@@ -10152,7 +10153,8 @@ public class TempPlayerAnimations : MonoBehaviour
             this.body.localPosition = new Vector3(this.transform.forward.z  * -0.33f, this.defaultYPos - 0.12f, 0f);
         }
 
-        this.SetEyes(0);
+        //this.SetEyes(0);
+        this.SetEyes(3);
     }
 
     //[ContextMenu("Zero")]

@@ -271,6 +271,7 @@ public class JoeExplosiveSuperGrab : Attack
             /*if (this.dotsParticle != null)
                 this.dotsParticle.Stop();*/
 
+            this.grabbedPlayer = null;
             if (!player.dead)
             {
                 player.rb.isKinematic = false;
@@ -292,7 +293,7 @@ public class JoeExplosiveSuperGrab : Attack
             }
             this.user.rb.isKinematic = false;
 
-            this.grabbedPlayer = null;
+            //this.grabbedPlayer = null;
         }
     }
 

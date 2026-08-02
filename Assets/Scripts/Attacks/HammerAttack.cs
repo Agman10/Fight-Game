@@ -12,6 +12,9 @@ public class HammerAttack : Attack
     public TestHitbox backHitbox;
     public GameObject impactEffect;
 
+    public GameObject hammerTrail;
+    public Transform[] trailTransforms;
+
     private float baseDamage;
     private float baseSuperCharge;
 
@@ -198,6 +201,12 @@ public class HammerAttack : Attack
         //Debug.Log(extraDamage);
         //Debug.Log(extraCharge);
 
+        if (this.hammerTrail != null)
+        {
+            this.hammerTrail.SetActive(true);
+            this.SetHammerTrailPos(0);
+            yield return new WaitForSeconds(0.00001f);
+        }
 
         if (this.animations != null)
             this.animations.HammerAttack(1);
@@ -208,6 +217,15 @@ public class HammerAttack : Attack
             this.hammer.gameObject.transform.localPosition = new Vector3(-0.15f, 1.42f, 0f);
             this.hammer.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 162f);
         }
+
+        if (this.hammerTrail != null)
+        {
+            this.SetHammerTrailPos(1);
+            yield return new WaitForSeconds(0.00001f);
+            this.SetHammerTrailPos(2);
+        }
+
+        
 
         this.user.rb.isKinematic = true;
 
@@ -241,6 +259,8 @@ public class HammerAttack : Attack
             this.hammer.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 20f);
         }
 
+        this.SetHammerTrailPos(3);
+
         if (this.impactEffect != null)
         {
             GameObject impactEffectPrefab = this.impactEffect;
@@ -258,6 +278,16 @@ public class HammerAttack : Attack
 
         /*if (this.hitbox != null)
             this.hitbox.gameObject.SetActive(true);*/
+
+        if (this.hammerTrail != null)
+        {
+            yield return new WaitForSeconds(0.00001f);
+            this.SetHammerTrailPos(4);
+            yield return new WaitForSeconds(0.00001f);
+            this.SetHammerTrailPos(5);
+            yield return new WaitForSeconds(0.00001f);
+            this.SetHammerTrailPos(6);
+        }
 
         yield return new WaitForSeconds(0.1f);
 
@@ -280,6 +310,12 @@ public class HammerAttack : Attack
             this.hammer.gameObject.SetActive(false);
             this.hammer.gameObject.transform.localPosition = new Vector3(-1.2f, 0.205f, 0f);
             this.hammer.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 246f);
+        }
+
+        if (this.hammerTrail != null)
+        {
+            this.hammerTrail.SetActive(false);
+            this.SetHammerTrailPos(0);
         }
 
         this.user.rb.isKinematic = false;
@@ -312,7 +348,13 @@ public class HammerAttack : Attack
             this.DisableItem();
         }
 
-        if(this.backHitbox != null)
+        if (this.hammerTrail != null)
+        {
+            this.hammerTrail.SetActive(false);
+            this.SetHammerTrailPos(0);
+        }
+
+        if (this.backHitbox != null)
         {
             this.backHitbox.gameObject.SetActive(false);
         }
@@ -323,6 +365,14 @@ public class HammerAttack : Attack
         this.user.attackStuns.Remove(this.gameObject);
     }
 
+    public void SetHammerTrailPos(int trailId)
+    {
+        if(this.hammerTrail != null && this.trailTransforms.Length >= trailId + 1 && this.trailTransforms[trailId] != null)
+        {
+            this.hammerTrail.transform.localPosition = this.trailTransforms[trailId].localPosition;
+        }
+    }
+
     public void DisableItem()
     {
         if (this.hammer != null)
@@ -331,5 +381,12 @@ public class HammerAttack : Attack
             this.hammer.gameObject.transform.localPosition = new Vector3(-1.2f, 0.205f, 0f);
             this.hammer.gameObject.transform.localEulerAngles = new Vector3(0f, 0f, 246f);
         }
+
+        /*if (this.hammerTrail != null)
+        {
+            this.hammerTrail.SetActive(false);
+            this.SetHammerTrailPos(0);
+        }*/
+        
     }
 }

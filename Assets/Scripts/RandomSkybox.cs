@@ -149,6 +149,7 @@ public class RandomSkybox : MonoBehaviour
         float number = Random.Range(1, 101);
         //Debug.Log(Random.Range(2, 4));
         //Debug.Log("load random stage");
+        //Debug.Log("number: " + number);
         if(this.gameMode == 1)
         {
             if (number <= 25) //plain
@@ -224,6 +225,7 @@ public class RandomSkybox : MonoBehaviour
 
                 if(fallOffNumber <= 50) //Antarctic
                 {
+                    this.SetStage(22);
                     this.SetMusic(19);
                     //this.SetSkybox(17);
 
@@ -484,6 +486,7 @@ public class RandomSkybox : MonoBehaviour
                 this.songs[musicId].Play();
                 this.currentMusic = musicId;
                 //Debug.Log("hfdghdfhgjdghjf");
+                //Debug.Log("music id: " + musicId);
             }
             
 

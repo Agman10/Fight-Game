@@ -15,6 +15,7 @@ public class MikeBallerStartAnimation : Attack
     public GameObject propellerBlade;*/
 
     public GameObject exclamationMark;
+    public GameObject rageSymbol;
 
     public AudioSource rollSfx;
     public AudioSource jumpSfx;
@@ -62,6 +63,7 @@ public class MikeBallerStartAnimation : Attack
             else if (this.user.characterId == 3 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 3 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
                 this.StartCoroutine(this.VsMikeCoroutine());
+                //this.StartCoroutine(this.TestRage());
             }
             else
             {
@@ -252,6 +254,9 @@ public class MikeBallerStartAnimation : Attack
 
         if (this.exclamationMark != null)
             this.exclamationMark.SetActive(false);
+
+        if (this.rageSymbol != null)
+            this.rageSymbol.SetActive(false);
 
         if (this.rollSfx != null)
             this.rollSfx.Stop();
@@ -465,6 +470,9 @@ public class MikeBallerStartAnimation : Attack
 
         //SYNCED HERE!!!
 
+        if (this.rageSymbol != null)
+            this.rageSymbol.SetActive(true);
+
         if (this.animations != null)
             this.animations.MikeBallerAngry();
 
@@ -494,6 +502,9 @@ public class MikeBallerStartAnimation : Attack
 
         //yield return new WaitForSeconds(1f);
 
+        if (this.rageSymbol != null)
+            this.rageSymbol.SetActive(false);
+
         if (this.animations != null)
             this.animations.SetDefaultPose();
 
@@ -509,6 +520,62 @@ public class MikeBallerStartAnimation : Attack
 
         //this.user.rb.isKinematic = false;
         //Debug.Log("baller");
+        this.onGoing = false;
+        this.user.attackStuns.Remove(this.gameObject);
+
+        this.user.EntranceDone();
+    }
+
+    private IEnumerator TestRage()
+    {
+        this.user.attackStuns.Add(this.gameObject);
+        this.onGoing = true;
+        this.user.rb.isKinematic = true;
+        this.user.LookAtTarget();
+
+        yield return new WaitForSeconds(0.01f);
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.rageSymbol != null)
+            this.rageSymbol.SetActive(true);
+
+        if (this.animations != null)
+            this.animations.MikeBallerAngry();
+
+        float time = 1f;
+        float time2 = 0f;
+        int laughId = 1;
+        while (time > 0)
+        {
+            time -= Time.deltaTime;
+
+            time2 += Time.deltaTime;
+
+            if (time2 > 0.025f)
+            {
+                time2 = 0f;
+                if (this.animations != null)
+                    this.animations.MikeBallerAngry(laughId);
+
+                if (laughId == 0)
+                    laughId = 1;
+                else
+                    laughId = 0;
+            }
+
+            yield return null;
+        }
+
+        if (this.rageSymbol != null)
+            this.rageSymbol.SetActive(false);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.1f);
+
+        this.user.rb.isKinematic = false;
         this.onGoing = false;
         this.user.attackStuns.Remove(this.gameObject);
 

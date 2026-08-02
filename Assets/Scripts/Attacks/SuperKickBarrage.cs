@@ -414,7 +414,9 @@ public class SuperKickBarrage : Attack
         {
             time -= Time.deltaTime;
             if (this.animations != null)
-                this.animations.body.transform.Rotate(new Vector3(0, -2000f * Time.deltaTime, 0));
+                this.animations.body.transform.Rotate(new Vector3(0f, this.user.transform.forward.z * 2000f * Time.deltaTime, 0f));
+
+            //this.animations.body.transform.Rotate(new Vector3(0, -2000f * Time.deltaTime, 0));
 
             //this.user.rb.velocity = new Vector3(0f, 12f, 0);
 
@@ -433,7 +435,9 @@ public class SuperKickBarrage : Attack
         {
             time -= Time.deltaTime;
             if (this.animations != null)
-                this.animations.body.transform.Rotate(new Vector3(0, -2000f * Time.deltaTime, 0));
+                this.animations.body.transform.Rotate(new Vector3(0f, this.user.transform.forward.z * 2000f * Time.deltaTime, 0f));
+
+            //this.animations.body.transform.Rotate(new Vector3(0, -2000f * Time.deltaTime, 0));
 
             yield return null;
         }

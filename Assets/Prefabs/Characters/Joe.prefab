@@ -47067,7 +47067,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3447100906151892352}
-  - component: {fileID: 1064789729236643086}
+  - component: {fileID: 4471161607695409960}
   m_Layer: 0
   m_Name: Kick
   m_TagString: Untagged
@@ -47093,7 +47093,7 @@ Transform:
   m_Father: {fileID: 6680171171879883500}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1064789729236643086
+--- !u!114 &4471161607695409960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47102,7 +47102,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2603926824624515231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5874ba49bdb53964bb8556b8b63b2714, type: 3}
+  m_Script: {fileID: 11500000, guid: d343afbefd7cb1545ac4eb81f02efea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 6680171171879883503}
@@ -75103,6 +75103,7 @@ MonoBehaviour:
   upwardForce: 800
   downwardForce: 800
   grabStunLength: 1.1
+  grabMissStunLength: 0.45
   grabSpeed: 0.3
   grabHitEndLag: 0.6
   legFire1: {fileID: 7023818979293107309}
@@ -108131,7 +108132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 24585215498740793}
-  - component: {fileID: 2634886434373408548}
+  - component: {fileID: 5677486198560877427}
   m_Layer: 6
   m_Name: Punch
   m_TagString: Untagged
@@ -108156,7 +108157,7 @@ Transform:
   m_Father: {fileID: 6680171171879883500}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2634886434373408548
+--- !u!114 &5677486198560877427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108165,7 +108166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6439218294606647122}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77798b9b16d50c4469e0817ebdf443dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 732fa267b8218f842a3bf4b0f58ad89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 6680171171879883503}
@@ -108962,8 +108963,8 @@ MonoBehaviour:
   animations: {fileID: 0}
   punchHitbox: {fileID: 5168269852282535046}
   kickHitbox: {fileID: 5984166487517750330}
-  punch: {fileID: 2634886434373408548}
-  kick: {fileID: 1064789729236643086}
+  punch: {fileID: 5677486198560877427}
+  kick: {fileID: 4471161607695409960}
   neutralSpecial: {fileID: 8236644072027088448}
   forwardSpecial: {fileID: 6440936097606387268}
   backwardSpecial: {fileID: 5926796243003042137}

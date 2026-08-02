@@ -22,6 +22,9 @@ public class HoodGuyStartAnimation : Attack
 
     public InterdimensionalDoor door;
     public InterdimensionalDoor currentDoor;
+    public GameObject confusion;
+    public AudioSource openSfx;
+    public AudioSource closeSfx;
 
     //public float fallDuration = 0.2f;
     //public VisualEffect fire;
@@ -60,12 +63,19 @@ public class HoodGuyStartAnimation : Attack
 
             if (this.user.tempOpponent != null && this.user.tempOpponent.characterId == 5 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
-                if (this.user.playerNumber == 2)
-                    this.StartCoroutine(this.ThrowP2());
+                if(GameManager.Instance.randomNumber >= 750)
+                {
+                    this.StartCoroutine(this.VsSelfDoor());
+                }
                 else
-                    this.StartCoroutine(this.ThrowP1());
+                {
+                    if (this.user.playerNumber == 2)
+                        this.StartCoroutine(this.ThrowP2());
+                    else
+                        this.StartCoroutine(this.ThrowP1());
 
-                //this.StartCoroutine(this.VsSelfDoor());
+                    //todo make an alternate version of this when p2 gets too big then p1 gets exclamation mark over then p2 turns to normal size and sound is reversed
+                }
             }
             else
             {
@@ -253,6 +263,9 @@ public class HoodGuyStartAnimation : Attack
 
         if (this.currentDoor != null)
             this.currentDoor.gameObject.SetActive(false);
+
+        if (this.confusion != null)
+            this.confusion.SetActive(false);
 
         this.PlaySmoke(false);
 
@@ -503,7 +516,10 @@ public class HoodGuyStartAnimation : Attack
         this.onGoing = true;
 
         this.user.rb.isKinematic = true;
-        this.user.transform.position = new Vector3(this.user.transform.position.x * -1f, 0f, 0f);
+        //this.user.transform.position = new Vector3(this.user.transform.position.x * -1f, 0f, 0f);
+
+        //this.user.transform.position = new Vector3(this.user.transform.position.x * -1.25f, 0f, 0f);
+        this.user.transform.position = new Vector3(this.user.transform.position.x * -1.3f, 0f, 0f);
         //this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
 
         //this.user.LookAtTarget();
@@ -516,14 +532,81 @@ public class HoodGuyStartAnimation : Attack
         //this.user.transform.position = new Vector3(this.user.transform.position.x * -1f, 0f, 0f);
         this.user.LookAtTarget();
 
+        float currentTime = 0;
+        float duration = 0.5f;
+        float targetPosition = this.user.transform.forward.z * -7f;
+        float start = this.user.transform.position.x;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            this.user.transform.position = new Vector3(Mathf.Lerp(start, targetPosition, currentTime / duration), this.user.transform.position.y, 0f);
+            //this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
+
+            float testTime = (this.user.transform.forward.z) * currentTime;
+
+            float newY = Mathf.Sin(testTime * 12 * 1.5f);
+
+            if (this.animations != null)
+            {
+
+                this.animations.rightLeg.localEulerAngles = new Vector3(0f, 0f, newY * -30);
+                this.animations.leftLeg.localEulerAngles = new Vector3(0f, 0f, newY * 30);
+
+                this.animations.rightArm.localEulerAngles = new Vector3(20f, 0f, newY * 22.5f);
+                this.animations.leftArm.localEulerAngles = new Vector3(-20f, 0f, newY * -22.5f);
+
+                //this.animations.rightLeg.localEulerAngles = new Vector3(0f, 0f, newY * -40);
+                //this.animations.rightArm.localEulerAngles = new Vector3(20f, 0f, newY * 30f);
+
+                //this.animations.eyes.localEulerAngles = new Vector3(0f, newY * 5f, 0f);
+            }
+            yield return null;
+        }
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+        if (this.animations != null)
+        {
+
+            this.animations.rightLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.animations.leftLeg.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+            this.animations.rightArm.localEulerAngles = new Vector3(20f, 0f, 0f);
+            this.animations.leftArm.localEulerAngles = new Vector3(-20f, 0f, 0f);
+
+            //this.player.animations.eyes.localEulerAngles = new Vector3(0f, newY * 5, 0f);
+        }
+
+
         //this.user.animations.body.transform.localPosition = new Vector3(0f, this.user.animations.defaultYPos - 5f, 0f);
 
-        float currentTime = 0;
+        yield return new WaitForSeconds(0.4f);
+        //yield return new WaitForSeconds(0.6f);
+
+        if (this.confusion != null)
+            this.confusion.SetActive(true);
+
+        //yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
+        this.animations.eyes.localEulerAngles = new Vector3(0f, 15f, 0f);
+        this.animations.upperBody.localEulerAngles = new Vector3(0f, 5f, 0f);
+        yield return new WaitForSeconds(0.2f);
+        this.animations.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+        this.animations.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+        yield return new WaitForSeconds(0.1f);
+        this.animations.eyes.localEulerAngles = new Vector3(0f, -15f, 0f);
+        this.animations.upperBody.localEulerAngles = new Vector3(0f, -5f, 0f);
+        yield return new WaitForSeconds(0.2f);
+        this.animations.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+        this.animations.upperBody.localEulerAngles = new Vector3(0f, 0f, 0f);
+        yield return new WaitForSeconds(0.1f);
+
+       //yield return new WaitForSeconds(0.4f);
+        if (this.confusion != null)
+            this.confusion.SetActive(false);
+
+        /*float currentTime = 0;
         float duration = 0.4f;
         float targetPosition = 0f;
         float start = this.transform.position.y;
-        /*float targetPosition = this.user.animations.defaultYPos;
-        float start = this.user.animations.body.transform.localPosition.y;*/
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
@@ -531,7 +614,7 @@ public class HoodGuyStartAnimation : Attack
             //this.user.animations.body.transform.localPosition = new Vector3(0f, Mathf.Lerp(start, targetPosition, currentTime / duration), 0f);
             yield return null;
         }
-        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);*/
 
 
         if (this.door != null)
@@ -547,8 +630,10 @@ public class HoodGuyStartAnimation : Attack
 
         yield return new WaitForSeconds(0.2f);
         this.animations.body.localEulerAngles = new Vector3(0f, this.user.transform.forward.z * -90f, 0f);
-        /*if (this.openSfx != null)
-            this.openSfx.Play();*/
+
+        if (this.openSfx != null && this.user.playerNumber == 1)
+            this.openSfx.Play();
+
         yield return new WaitForSeconds(0.1f);
 
         if (this.currentDoor != null)
@@ -608,6 +693,8 @@ public class HoodGuyStartAnimation : Attack
         {
             this.currentDoor.doorLid.transform.localEulerAngles = new Vector3(0f, 110f, 0f);
         }
+        if (this.closeSfx != null && this.user.playerNumber == 1)
+            this.closeSfx.Play();
 
         if (this.animations != null)
         {
