@@ -95,7 +95,8 @@ public class OldMikeStartAnimations : Attack
             this.electricity.Play();
 
         float currentTime = 0;
-        float duration = this.fallDuration;
+        //float duration = this.fallDuration;
+        float duration = 0.2f;
         //float targetVolume = 0.1f;
         float targetPosition = 0f;
         //float targetPosition = -1f;
@@ -104,8 +105,11 @@ public class OldMikeStartAnimations : Attack
         {
             currentTime += Time.deltaTime;
             this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
+            /*if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0f, 0f, *//*this.transform.forward.z * *//*-3000f * Time.deltaTime));*/
+
             if (this.animations != null)
-                this.animations.body.transform.Rotate(new Vector3(0f, 0f, /*this.transform.forward.z * */-3000f * Time.deltaTime));
+                this.animations.body.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(0f, -1080f, currentTime / duration));
 
             yield return null;
         }
@@ -148,8 +152,11 @@ public class OldMikeStartAnimations : Attack
 
 
 
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
         if (this.animations != null)
-            this.animations.SetDefaultPose();
+            this.animations.RoadRollerEndLand();
 
         if (this.landingParticle != null)
         {
@@ -169,7 +176,13 @@ public class OldMikeStartAnimations : Attack
 
 
         //yield return new WaitForSeconds(1f - this.fallDuration - 0.2f);
-        yield return new WaitForSeconds(1f - this.fallDuration);
+
+        yield return new WaitForSeconds(0.15f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.65f);
+        //yield return new WaitForSeconds(1f - this.fallDuration);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();

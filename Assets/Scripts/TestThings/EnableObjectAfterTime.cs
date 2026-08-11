@@ -6,10 +6,18 @@ public class EnableObjectAfterTime : MonoBehaviour
 {
     public float duration = 0.2f;
     public GameObject objectToEnable;
+    public bool disableObjectOnDisable = false;
 
     private void OnEnable()
     {
         this.StartCoroutine(this.EnableObjectCoroutine());
+    }
+    private void OnDisable()
+    {
+        if (this.objectToEnable != null && this.disableObjectOnDisable)
+        {
+            this.objectToEnable.SetActive(false);
+        }
     }
 
     private IEnumerator EnableObjectCoroutine()

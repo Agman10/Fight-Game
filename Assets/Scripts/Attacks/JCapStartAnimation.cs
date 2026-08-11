@@ -65,9 +65,15 @@ public class JCapStartAnimation : Attack
         //this.PlayFire(true);
         this.user.LookAtTarget();
 
+        if (this.animations != null)
+            this.animations.JCapFallingStartAnimation();
+
         yield return new WaitForSeconds(0.01f);
         /*if (this.animations != null)
             this.animations.DarkJCapStartAnimation();*/
+
+        if (this.animations != null)
+            this.animations.JCapFallingStartAnimation();
 
         float currentTime = 0;
         float duration = this.fallDuration;

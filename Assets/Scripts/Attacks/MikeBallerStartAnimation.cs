@@ -62,6 +62,7 @@ public class MikeBallerStartAnimation : Attack
             }
             else if (this.user.characterId == 3 && this.user.tempOpponent != null && this.user.tempOpponent.characterId == 3 && GameManager.Instance != null && GameManager.Instance.gameMode == 0)
             {
+                //this needs to be more polished
                 this.StartCoroutine(this.VsMikeCoroutine());
                 //this.StartCoroutine(this.TestRage());
             }
@@ -96,12 +97,16 @@ public class MikeBallerStartAnimation : Attack
         //this.PlayFire(true);
         this.user.LookAtTarget();
 
+        if (this.animations != null)
+            this.animations.RollAnimation();
+
         yield return new WaitForSeconds(0.01f);
         if (this.animations != null)
             this.animations.RollAnimation();
 
         float currentTime = 0;
-        float duration = this.fallDuration;
+        //float duration = this.fallDuration;
+        float duration = 0.4f;
         //float targetVolume = 0.1f;
         float targetPosition = 0f;
         //float targetPosition = -1f;
@@ -110,8 +115,11 @@ public class MikeBallerStartAnimation : Attack
         {
             currentTime += Time.deltaTime;
             this.user.transform.position = new Vector3(this.user.transform.position.x, Mathf.Lerp(start, targetPosition, currentTime / duration), 0);
+            /*if (this.animations != null)
+                this.animations.body.transform.Rotate(new Vector3(0f, 0f, *//*this.transform.forward.z * *//*-3000f * Time.deltaTime));*/
+
             if (this.animations != null)
-                this.animations.body.transform.Rotate(new Vector3(0f, 0f, /*this.transform.forward.z * */-3000f * Time.deltaTime));
+                this.animations.body.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(0f, -1080f, currentTime / duration));
 
             yield return null;
         }
@@ -152,8 +160,11 @@ public class MikeBallerStartAnimation : Attack
 
 
 
+        /*if (this.animations != null)
+            this.animations.SetDefaultPose();*/
+
         if (this.animations != null)
-            this.animations.SetDefaultPose();
+            this.animations.RoadRollerEndLand();
 
         if (this.landingParticle != null)
         {
@@ -173,7 +184,12 @@ public class MikeBallerStartAnimation : Attack
 
 
         //yield return new WaitForSeconds(1f - this.fallDuration - 0.2f);
-        yield return new WaitForSeconds(1f - this.fallDuration);
+        yield return new WaitForSeconds(0.15f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+
+        yield return new WaitForSeconds(0.45f);
+        //yield return new WaitForSeconds(1f - this.fallDuration);
 
         if (this.animations != null)
             this.animations.SetDefaultPose();
@@ -224,19 +240,28 @@ public class MikeBallerStartAnimation : Attack
             this.animations.body.transform.localPosition = new Vector3(Mathf.Lerp(start, targetPosition, currentTime / duration), 0.8f, 0);
             if (this.animations != null)
             {
-                this.animations.body.transform.Rotate(new Vector3(0f, 0f, /*this.transform.forward.z * */-2000f * Time.deltaTime));
+                //this.animations.body.transform.Rotate(new Vector3(0f, 0f, /*this.transform.forward.z * */-2000f * Time.deltaTime));
+                this.animations.body.localEulerAngles = new Vector3(0f, 0f, Mathf.Lerp(0f, -1080f, currentTime / duration));
             }
                 
 
             yield return null;
         }
-        if (this.animations != null)
+        /*if (this.animations != null)
             this.animations.SetDefaultPose();
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.3f);*/
 
-        /*if (this.animations != null)
-            this.animations.SetDefaultPose();*/
+        if (this.animations != null)
+            this.animations.RoadRollerEndLand();
+
+        yield return new WaitForSeconds(0.1f);
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
+        yield return new WaitForSeconds(0.2f);
+
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
 
         this.user.rb.isKinematic = false;
         this.onGoing = false;

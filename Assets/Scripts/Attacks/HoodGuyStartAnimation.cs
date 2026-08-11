@@ -100,6 +100,10 @@ public class HoodGuyStartAnimation : Attack
 
                     //Debug.Log(numberr);
                 }
+                /*else if (number == 3)
+                {
+                    this.StartCoroutine(this.SmokeStartAnimation());
+                }*/
                 else
                 {
                     this.StartCoroutine(this.TemplateCoroutine2());

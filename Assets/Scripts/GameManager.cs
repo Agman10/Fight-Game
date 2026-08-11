@@ -967,6 +967,27 @@ public class GameManager : MonoBehaviour
             this.animationPlaceholder.SetActive(enable);
     }
 
+    public void TurnScreenWhite()
+    {
+        if (this.gameCamera != null && this.gameCamera.mainCamera != null)
+        {
+            this.gameCamera.mainCamera.cullingMask = 0;
+            this.gameCamera.mainCamera.clearFlags = CameraClearFlags.SolidColor;
+            this.gameCamera.mainCamera.backgroundColor = Color.white;
+        }
+    }
+
+    public void TurnScreenNormal()
+    {
+        if (this.gameCamera != null && this.gameCamera.mainCamera != null)
+        {
+            this.gameCamera.mainCamera.cullingMask = this.normalCameraLayers;
+            this.gameCamera.mainCamera.clearFlags = CameraClearFlags.Skybox;
+            this.gameCamera.mainCamera.backgroundColor = Color.black;
+        }
+    }
+
+
     public void PauseMusic()
     {
         if (CharacterManager.Instance != null && CharacterManager.Instance.musicTypeId != 0 && this.gameMode == 0 && this.characterThemePlayer != null)

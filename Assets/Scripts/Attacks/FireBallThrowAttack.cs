@@ -72,6 +72,8 @@ public class FireBallThrowAttack : Attack
         this.user.attackStuns.Add(this.gameObject);
         this.onGoing = true;
 
+        if (this.animations != null)
+            this.animations.SetDefaultPose();
 
         if (this.animations != null)
         {

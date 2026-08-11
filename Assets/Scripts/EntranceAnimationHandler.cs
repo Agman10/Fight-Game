@@ -50,8 +50,14 @@ public class EntranceAnimationHandler : MonoBehaviour
             this.player1.attackStuns.Add(this.gameObject);
             this.player2.attackStuns.Add(this.gameObject);
 
+            this.player1.preventDeath = true;
+            this.player2.preventDeath = true;
+
             /*if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
                 GameManager.Instance.gameCamera.cameraIsLocked = true;*/
+
+            /*if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
+                GameManager.Instance.gameCamera.StartCamera();*/
 
             this.player1.OnDeath += this.RemovePlayers;
             this.player2.OnDeath += this.RemovePlayers;
@@ -91,6 +97,9 @@ public class EntranceAnimationHandler : MonoBehaviour
         {
             this.player1.attackStuns.Remove(this.gameObject);
             this.player2.attackStuns.Remove(this.gameObject);
+
+            this.player1.preventDeath = false;
+            this.player2.preventDeath = false;
 
             /*this.P1Ready = true;
             this.P2Ready = true;*/
@@ -170,6 +179,9 @@ public class EntranceAnimationHandler : MonoBehaviour
 
         this.player1.attackStuns.Remove(this.gameObject);
         this.player2.attackStuns.Remove(this.gameObject);
+
+        this.player1.preventDeath = false;
+        this.player2.preventDeath = false;
 
         /*this.P1Ready = true;
         this.P2Ready = true;*/

@@ -166,6 +166,13 @@ public class DemonTaunts : Attack
         if (this.animations != null)
             this.animations.SpinTaunt(0);
 
+        if (this.animations != null && this.animations.eyes != null)
+        {
+            this.animations.eyes.localEulerAngles = new Vector3(0f, 0f, 0f);
+            this.animations.eyes.localPosition = new Vector3(0f, this.animations.defaultEyeYHeight, 0f);
+        }
+            
+
         float currentTime = 0;
         //float duration = 0.6f;
         float duration = 0.45f;
