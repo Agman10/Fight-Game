@@ -187,7 +187,8 @@ public class RoadRoller : MonoBehaviour
                 this.explosionSfx.Play();
             }
 
-            this.StartCoroutine(this.DisableCoroutine());
+            if (this.gameObject.active)
+                this.StartCoroutine(this.DisableCoroutine());
         }
         
     }

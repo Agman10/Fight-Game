@@ -63,6 +63,16 @@ public class NinjaTeleport : Attack
             teleportEffectPrefab = Instantiate(teleportEffectPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.Euler(0, 0, 0));
         }*/
 
+        /*this.animations.body.transform.localScale = new Vector3(0f, 0f, 0f);
+        yield return new WaitForSeconds(0.001f);
+        this.animations.body.transform.localScale = new Vector3(1f, 1f, this.transform.forward.z * 1f);
+        yield return new WaitForSeconds(0.001f);
+        this.animations.body.transform.localScale = new Vector3(0f, 0f, 0f);
+        yield return new WaitForSeconds(0.001f);
+        this.animations.body.transform.localScale = new Vector3(1f, 1f, this.transform.forward.z * 1f);*/
+
+
+
         if (this.teleportSfx != null)
             this.teleportSfx.Play();
 

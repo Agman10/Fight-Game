@@ -9,6 +9,7 @@ public class GrandFlame : MonoBehaviour
     public TestHitbox hitBox;
     public TestHitbox hitBox2;
     public TestHitbox selfDamageHitbox;
+    public ObjectScaleLerp grandCrossLight;
     public MoveAndTeleportObject[] fireBalls;
     public TestHitbox[] fireBallHitboxes;
     public TestPlayer owner;
@@ -24,6 +25,8 @@ public class GrandFlame : MonoBehaviour
 
         if (this.flameSfx != null)
             this.flameSfx.Play();
+
+        //this.EnableAllFireballs();
     }
     private void OnDisable()
     {
@@ -82,6 +85,9 @@ public class GrandFlame : MonoBehaviour
         if (this.hitBox2 != null)
             this.hitBox2.gameObject.SetActive(true);
 
+        if (this.grandCrossLight != null)
+            this.grandCrossLight.ScaleDown2(0.1f, true);
+
         foreach (TestHitbox fireBallHitbox in this.fireBallHitboxes)
         {
             if (fireBallHitbox != null)
@@ -137,6 +143,15 @@ public class GrandFlame : MonoBehaviour
                     fireBallHitbox.belongsTo = user;
                 }
             }
+        }
+    }
+
+    public void EnableAllFireballs()
+    {
+        foreach (MoveAndTeleportObject fireball in this.fireBalls)
+        {
+            if (fireball != null)
+                fireball.gameObject.SetActive(true);
         }
     }
 }

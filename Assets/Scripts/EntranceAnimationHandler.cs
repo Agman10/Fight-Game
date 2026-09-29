@@ -53,11 +53,11 @@ public class EntranceAnimationHandler : MonoBehaviour
             this.player1.preventDeath = true;
             this.player2.preventDeath = true;
 
-            /*if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
-                GameManager.Instance.gameCamera.cameraIsLocked = true;*/
+            if (GameManager.Instance != null && GameManager.Instance.gameCamera != null && GameManager.Instance.gameMode != 1)
+                GameManager.Instance.gameCamera.cameraIsLocked = true;
 
-            /*if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
-                GameManager.Instance.gameCamera.StartCamera();*/
+            if (GameManager.Instance != null && GameManager.Instance.gameCamera != null && GameManager.Instance.gameMode != 1)
+                GameManager.Instance.gameCamera.StartCamera();
 
             this.player1.OnDeath += this.RemovePlayers;
             this.player2.OnDeath += this.RemovePlayers;
@@ -113,8 +113,8 @@ public class EntranceAnimationHandler : MonoBehaviour
             this.player1.OnEntranceDone -= this.EntranceDone;
             this.player2.OnEntranceDone -= this.EntranceDone;
 
-            /*if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
-                GameManager.Instance.gameCamera.cameraIsLocked = false;*/
+            if (GameManager.Instance != null && GameManager.Instance.gameCamera != null && GameManager.Instance.gameMode != 1)
+                GameManager.Instance.gameCamera.cameraIsLocked = false;
 
             //Debug.Log("RemovePlayers");
 
@@ -194,6 +194,9 @@ public class EntranceAnimationHandler : MonoBehaviour
 
         this.player1.OnEntranceDone -= this.EntranceDone;
         this.player2.OnEntranceDone -= this.EntranceDone;
+
+        if (GameManager.Instance != null && GameManager.Instance.gameCamera != null && GameManager.Instance.gameMode != 1)
+            GameManager.Instance.gameCamera.cameraIsLocked = false;
 
 
         if (!this.player1.dead && !this.player2.dead)
