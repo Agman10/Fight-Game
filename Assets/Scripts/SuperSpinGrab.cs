@@ -238,7 +238,16 @@ public class SuperSpinGrab : Attack
         yield return new WaitForSeconds(0.5f);
         this.MidGrab(player);
         //yield return new WaitForSeconds(0.3f);
-        yield return new WaitUntil(this.PlayerOnGround);
+        //yield return new WaitUntil(this.PlayerOnGround);
+
+        float currentTime = 0;
+        float duration = 7f;
+        while (!this.PlayerOnGround() && currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
         this.StopGrab(player);
 
         if(this.animations != null)

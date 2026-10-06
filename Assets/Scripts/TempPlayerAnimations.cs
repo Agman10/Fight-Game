@@ -484,6 +484,36 @@ public class TempPlayerAnimations : MonoBehaviour
         //this.SetEyes(0);
     }
 
+    public void CustomArmsPose(Vector3 rightArmRot, Vector3 rightArmJointRot, Vector3 leftArmRot, Vector3 leftArmJointRot)
+    {
+        if (this.rightArm != null && this.rightArmJoint != null && this.leftArm != null && this.leftArmJoint != null)
+        {
+            this.rightArm.localEulerAngles = new Vector3(rightArmRot.x, rightArmRot.y, rightArmRot.z);
+            this.rightArmJoint.localEulerAngles = new Vector3(rightArmJointRot.x, rightArmJointRot.y, rightArmJointRot.z);
+
+            this.leftArm.localEulerAngles = new Vector3(leftArmRot.x, leftArmRot.y, leftArmRot.z);
+            this.leftArmJoint.localEulerAngles = new Vector3(leftArmJointRot.x, leftArmJointRot.y, leftArmJointRot.z);
+        }
+    }
+
+    public void CustomLegsPose(Vector3 rightLegRot, Vector3 rightLegJointRot, Vector3 leftLegRot, Vector3 leftLegJointRot)
+    {
+        if (this.rightLeg != null && this.rightLegJoint != null && this.leftLeg != null && this.leftLegJoint != null)
+        {
+            this.rightLeg.localEulerAngles = new Vector3(rightLegRot.x, rightLegRot.y, rightLegRot.z);
+            this.rightLegJoint.localEulerAngles = new Vector3(rightLegJointRot.x, rightLegJointRot.y, rightLegJointRot.z);
+
+            this.leftLeg.localEulerAngles = new Vector3(leftLegRot.x, leftLegRot.y, leftLegRot.z);
+            this.leftLegJoint.localEulerAngles = new Vector3(leftLegJointRot.x, leftLegJointRot.y, leftLegJointRot.z);
+        }
+    }
+
+    public void CustomBodyPose(Vector3 position, Vector3 rotation)
+    {
+        this.body.localPosition = new Vector3(position.x, this.defaultYPos + position.y, this.transform.forward.z * position.z);
+        this.body.localEulerAngles = new Vector3(this.transform.forward.z * rotation.x, this.transform.forward.z * rotation.y, rotation.z);
+    }
+
     [ContextMenu("Jump")]
     public void Jump()
     {

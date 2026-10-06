@@ -9,6 +9,7 @@ public class AnimateTest : MonoBehaviour
     private void OnEnable()
     {
         this.StartCoroutine(this.AnimateCoroutine());
+        //this.StartCoroutine(this.AnimateCoroutine2());
     }
 
     private void OnDisable()
@@ -48,6 +49,28 @@ public class AnimateTest : MonoBehaviour
         }
 
         this.StartCoroutine(this.AnimateCoroutine());
+    }
+
+    private IEnumerator AnimateCoroutine2()
+    {
+        int amount = this.animationGameObjects.Length;
+
+        for (int i = 0; i < amount; i++)
+        {
+            foreach (AnimationGameObject animationGameObject in this.animationGameObjects)
+            {
+                if (animationGameObject.animGameObject != null)
+                    animationGameObject.animGameObject.SetActive(false);
+            }
+
+            if (this.animationGameObjects[i].animGameObject != null)
+                this.animationGameObjects[i].animGameObject.SetActive(true);
+
+
+            yield return new WaitForSeconds(this.animationGameObjects[i].duration);
+        }
+
+        this.StartCoroutine(this.AnimateCoroutine2());
     }
 }
 

@@ -18,6 +18,8 @@ public class VersusScreenLogic : MonoBehaviour
     public GameObject gameText;
     public GameObject ballText;
 
+    public GameObject loadingText;
+
     public AudioSource music;
     public int gameModeId;
 
@@ -114,6 +116,8 @@ public class VersusScreenLogic : MonoBehaviour
 
     public void LoadScene()
     {
+        if (this.loadingText != null)
+            this.loadingText.SetActive(true);
 
         if (this.gameModeId == 1)
         {

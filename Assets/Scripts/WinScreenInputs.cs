@@ -73,6 +73,9 @@ public class WinScreenInputs : MonoBehaviour
 
         if (reload)
             SceneManager.LoadScene(this.gameSceneId);
+
+        /*if (reload)
+            SceneManager.LoadSceneAsync(this.gameSceneId);*/
     }
     public void QuitToTitle(bool quit)
     {

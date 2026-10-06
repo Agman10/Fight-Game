@@ -30,6 +30,15 @@ public class HitEffectLogic : MonoBehaviour
         }
     }
 
+    public void SpawnHitEffect(Vector3 pos)
+    {
+        if (this.hitEffect != null)
+        {
+            GameObject hitEffectPrefab = this.hitEffect;
+            hitEffectPrefab = Instantiate(hitEffectPrefab, new Vector3(pos.x, pos.y, pos.z), Quaternion.Euler(0, 0, 0));
+        }
+    }
+
     private IEnumerator DoHitEffectCoroutine(float yPos, float forwardZ)
     {
         yield return new WaitForSeconds(0.05f);

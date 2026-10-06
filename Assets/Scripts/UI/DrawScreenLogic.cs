@@ -14,6 +14,8 @@ public class DrawScreenLogic : MonoBehaviour
     public GameObject textPanel;
 
     public Text winnerHeader;
+    public GameObject winnerText;
+    public GameObject drawText;
 
     public VictoryScreenSound victoryScreenSound;
 
@@ -27,6 +29,12 @@ public class DrawScreenLogic : MonoBehaviour
 
         if (this.winnerHeader != null)
             this.winnerHeader.text = "DRAW";
+
+        if (this.winnerText != null)
+            this.winnerText.SetActive(false);
+
+        if (this.drawText != null)
+            this.drawText.SetActive(true);
 
         if (CharacterManager.Instance != null)
         {

@@ -16,6 +16,8 @@ public class TempMenu : MonoBehaviour
     private bool starting;
     public UnityEngine.InputSystem.PlayerInput playerInput;
 
+    public GameObject LoadingScreen;
+
     [Space]
     public bool backing;
     public Action<bool> BackInput;
@@ -69,6 +71,8 @@ public class TempMenu : MonoBehaviour
         //SceneManager.LoadScene("Loading");
 
         this.DisableEventSystem();
+
+        this.EnableLoadingScreen();
     }
 
     public void StartFightBall()
@@ -89,6 +93,8 @@ public class TempMenu : MonoBehaviour
         //SceneManager.LoadScene("Loading");
 
         this.DisableEventSystem();
+
+        this.EnableLoadingScreen();
     }
 
     public void StartVsAi(int vsId)
@@ -112,6 +118,8 @@ public class TempMenu : MonoBehaviour
         //SceneManager.LoadScene("Loading");
 
         this.DisableEventSystem();
+
+        this.EnableLoadingScreen();
     }
 
 
@@ -120,6 +128,8 @@ public class TempMenu : MonoBehaviour
         SceneManager.LoadScene("Settings");
 
         this.DisableEventSystem();
+
+        //this.EnableLoadingScreen();
     }
 
     public void QuitGame()
@@ -133,6 +143,8 @@ public class TempMenu : MonoBehaviour
         SceneManager.LoadScene("zTestSceneHowToPlay");
 
         this.DisableEventSystem();
+
+        //this.EnableLoadingScreen();
     }
 
     public void SelectMainMode()
@@ -193,5 +205,11 @@ public class TempMenu : MonoBehaviour
             this.eventSystem.SetActive(false);
 
         this.starting = true;
+    }
+
+    public void EnableLoadingScreen()
+    {
+        if (this.LoadingScreen != null)
+            this.LoadingScreen.SetActive(true);
     }
 }
