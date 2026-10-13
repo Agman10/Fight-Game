@@ -741,6 +741,122 @@ public class Geary : MonoBehaviour
         }
     }
 
+    public void OnSelectVolumeType(int volumeTypeId)
+    {
+        if (!this.dialougeLocked)
+        {
+            this.StopAllCoroutines();
+            
+
+            this.SetExpression(0);
+            this.SetRightEyebrow(0.4f, 0.52f, 0.2f, 85f);
+            this.SetLeftEyebrow(-0.4f, 0.53f, 0.2f, 82f);
+
+            this.StartCoroutine(this.Blink());
+
+            if (volumeTypeId == 0 && this.currentDialogueId != 15) //master
+            {
+                this.currentDialogueId = 15;
+                this.StartCoroutine(this.ShowText("So you want to change the master volume?"));
+            }
+            else if (volumeTypeId == 1 && this.currentDialogueId != 16) //SFX
+            {
+                this.currentDialogueId = 16;
+                this.StartCoroutine(this.ShowText("So you want to change the sound effects volume?"));
+            }
+            else if (volumeTypeId == 2 && this.currentDialogueId != 17) //Music
+            {
+                this.currentDialogueId = 17;
+                this.StartCoroutine(this.ShowText("So you want to change the music volume?"));
+            }
+            else if (volumeTypeId == 3 && this.currentDialogueId != 18) //Voice
+            {
+                this.currentDialogueId = 18;
+
+                this.StartCoroutine(this.ShowText("So you want to change the voice volume?"));
+            }
+
+
+
+
+        }
+    }
+
+    public void OnChangeVoiceVolume()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 19)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 19;
+
+            if (this.evil)
+            {
+                this.SetExpression(10, false, false);
+                this.StartCoroutine(this.ShowText("Yeah... We don't have voice acting right now since the developer doesn't know how to prioritize right."));
+            }
+            else
+            {
+                this.SetExpression(9, true, false);
+                this.StartCoroutine(this.ShowText("I gotta be honest.½ We haven't implemented voice acting yet.½ This is just a placeholder...§ Sorry"));
+            }
+
+
+
+
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+    public void OnSelectDefaultVolume()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 20)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 20;
+
+            this.SetExpression(0);
+            this.SetRightEyebrow(0.4f, 0.55f, 0.2f, 84f);
+            this.SetLeftEyebrow(-0.4f, 0.52f, 0.2f, 81f);
+            if (this.evil)
+            {
+                this.StartCoroutine(this.ShowText("Change The volume settings to default?"));
+            }
+            else
+            {
+                this.StartCoroutine(this.ShowText("Change The volume settings to default?"));
+            }
+
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
+    public void OnClickDefaultVolume()
+    {
+        if (!this.dialougeLocked && this.currentDialogueId != 21)
+        {
+            this.StopAllCoroutines();
+            this.currentDialogueId = 21;
+
+            
+            if (this.evil)
+            {
+                this.SetExpression(2);
+                this.StartCoroutine(this.ShowText("I don't feel like doing it."));
+            }
+            else
+            {
+                /*this.SetExpression(0);
+                this.SetRightEyebrow(0.4f, 0.52f, 0.2f, 85f);
+                this.SetLeftEyebrow(-0.4f, 0.53f, 0.2f, 82f);*/
+
+                this.SetExpression(0);
+                this.StartCoroutine(this.ShowText("Here you go."));
+            }
+
+            this.StartCoroutine(this.Blink());
+        }
+    }
+
 
     public void OnSelectUnavalaible()
     {

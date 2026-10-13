@@ -27,7 +27,17 @@ public class SpikeBomb : MonoBehaviour
 
         if (player != null || ragdoll != null)
         {
-            this.Explode();
+            if (GameManager.Instance != null && GameManager.Instance.entranceAnimationHandler != null)
+            {
+                if (GameManager.Instance.entranceAnimationHandler.done)
+                    this.Explode();
+            }
+            else
+            {
+                this.Explode();
+            }
+
+            
         }
     }
 

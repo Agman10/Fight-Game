@@ -755,7 +755,8 @@ public class RandomSkybox : MonoBehaviour
                     //RenderSettings.ambientLight = new Color32(180, 135, 135, 255);
                     break;
                 case 12:
-                    this.SetMusic(12);
+                    //this.SetMusic(12);
+                    this.SetMusic(20);
                     this.SetSkybox(9);
                     /*if (this.moon != null)
                         this.moon.SetActive(false);*/
@@ -1006,7 +1007,8 @@ public class RandomSkybox : MonoBehaviour
                 //RenderSettings.ambientLight = new Color32(180, 135, 135, 255);
                 break;
             case 12:
-                this.SetMusic(12);
+                //this.SetMusic(12);
+                this.SetMusic(20);
                 this.SetSkybox(9);
                 /*if (this.moon != null)
                     this.moon.SetActive(false);*/

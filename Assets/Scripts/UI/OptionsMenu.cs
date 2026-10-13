@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 
 public class OptionsMenu : MonoBehaviour
 {
     public Geary geary;
     public GameObject eventSystem;
+
+    public bool gearyIsEvil = false;
 
     [Space]
     public Image fader;
@@ -43,6 +46,24 @@ public class OptionsMenu : MonoBehaviour
     private int maxFightBallPoints = 6;
     public Text maxFightBallPointsText;
 
+    [Space]
+    public float masterVolume = 100f;
+    public float sfxVolume = 100f;
+    public float musicVolume = 100f;
+
+    public TextMeshProUGUI masterVolumeText;
+    public TextMeshProUGUI sfxVolumeText;
+    public TextMeshProUGUI musicVolumeText;
+
+    public AudioMixer audioMixer;
+    //public AudioMixerGroup masterMixer;
+    public Slider masterVolumeSlider;
+    //public AudioMixerGroup sfxMixer;
+    public Slider sfxVolumeSlider;
+    //public AudioMixerGroup musicMixer;
+    public Slider musicVolumeSlider;
+    public Slider voiceVolumeSlider;
+
     private void Awake()
     {
         int number = Random.Range(0, 101);
@@ -54,6 +75,7 @@ public class OptionsMenu : MonoBehaviour
 
             this.music = this.evilMusic;
             this.music.Play();
+            this.gearyIsEvil = true;
 
             RenderSettings.skybox = this.evilSkybox;
             
@@ -63,7 +85,8 @@ public class OptionsMenu : MonoBehaviour
             this.music.Play();
         }
 
-        
+        //this.masterMixer = audioMixer.FindMatchingGroups("Master")[0];
+
 
         this.LoadPlayerPrefs();
     }
@@ -100,6 +123,66 @@ public class OptionsMenu : MonoBehaviour
 
         if (this.maxFightBallPointsText != null)
             this.maxFightBallPointsText.text = this.maxFightBallPoints.ToString();
+
+
+        this.masterVolume = PlayerPrefs.GetFloat("MasterVolume", 100);
+        this.sfxVolume = PlayerPrefs.GetFloat("SfxVolume", 100);
+        this.musicVolume = PlayerPrefs.GetFloat("MusicVolume", 100);
+
+        if (this.masterVolumeSlider != null)
+            this.masterVolumeSlider.value = this.masterVolume;
+
+        if (this.sfxVolumeSlider != null)
+            this.sfxVolumeSlider.value = this.sfxVolume;
+
+        if (this.musicVolumeSlider != null)
+            this.musicVolumeSlider.value = this.musicVolume;
+
+
+
+        if (this.masterVolumeText != null)
+            this.masterVolumeText.text = this.masterVolume.ToString("F0");
+
+        if (this.sfxVolumeText != null)
+            this.sfxVolumeText.text = this.sfxVolume.ToString("F0");
+
+        if (this.musicVolumeText != null)
+            this.musicVolumeText.text = this.musicVolume.ToString("F0");
+
+        /*if (this.masterVolumeSlider != null && this.audioMixer)
+        {
+            this.masterVolumeSlider.value = this.masterVolume;
+            //this.masterMixer.audioMixer.SetFloat("Master", Mathf.Log10(this.masterVolume * 0.01f) * 20);
+            this.audioMixer.SetFloat("Master", Mathf.Log10(this.masterVolume * 0.01f) * 20);
+
+        }
+
+
+        if (this.sfxVolumeSlider != null && this.audioMixer)
+        {
+            this.sfxVolumeSlider.value = this.sfxVolume;
+            //this.sfxMixer.audioMixer.SetFloat("SFX", Mathf.Log10(this.sfxVolume * 0.01f) * 20);
+            this.audioMixer.SetFloat("SFX", Mathf.Log10(this.sfxVolume * 0.01f) * 20);
+        }
+
+
+        if (this.musicVolumeSlider != null && this.audioMixer)
+        {
+            this.musicVolumeSlider.value = this.musicVolume;
+            //this.musicMixer.audioMixer.SetFloat("Music", Mathf.Log10(this.musicVolume * 0.01f) * 20);
+            this.audioMixer.SetFloat("Music", Mathf.Log10(this.musicVolume * 0.01f) * 20);
+        }*/
+
+    }
+
+    private void Start()
+    {
+        if (this.audioMixer)
+        {
+            this.audioMixer.SetFloat("Master", Mathf.Log10(this.masterVolume * 0.01f) * 20);
+            this.audioMixer.SetFloat("SFX", Mathf.Log10(this.sfxVolume * 0.01f) * 20);
+            this.audioMixer.SetFloat("Music", Mathf.Log10(this.musicVolume * 0.01f) * 20);
+        }
     }
 
     public void SelectLanguage()
@@ -427,6 +510,175 @@ public class OptionsMenu : MonoBehaviour
     {
         if (this.geary != null && !this.geary.disabled)
             this.geary.OnSelectBack();
+    }
+
+    public void OnSelectVolumeType(int volumeTypeId)
+    {
+        if(this.geary != null && !this.geary.disabled)
+        {
+            this.geary.OnSelectVolumeType(volumeTypeId);
+        }
+
+        /*if (this.geary != null && !this.geary.disabled)
+            this.geary.OnSelectVolume();
+
+        if (this.slider != null)
+            this.sliderValue = this.slider.value;*/
+    }
+
+    public void OnVolumeChangeType(int volumeTypeId)
+    {
+        /*if (this.geary != null && !this.geary.disabled)
+            this.geary.OnVolumeChange();*/
+
+        if (this.geary != null /*&& !this.geary.disabled*/)
+        {
+            /*if (this.slider != null)
+                this.sliderValue = this.slider.value;*/
+
+            int randomNumber = Random.Range(0, 101);
+            //Debug.Log(randomNumber);
+
+            if(volumeTypeId == 0 && this.masterVolumeSlider != null && this.audioMixer /*&& this.masterMixer != null*/)
+            {
+                if (this.geary.disabled)
+                {
+                    this.masterVolumeSlider.value = this.masterVolume;
+                }
+                else
+                {
+                    if (this.gearyIsEvil)
+                        this.masterVolumeSlider.value = randomNumber;
+                }
+                
+
+                this.masterVolume = this.masterVolumeSlider.value;
+                if (this.masterVolume <= 0)
+                    this.masterVolume = 0.01f;
+
+                //this.masterMixer.audioMixer.SetFloat("Master", Mathf.Log10(this.masterVolume * 0.01f) * 20);
+                this.audioMixer.SetFloat("Master", Mathf.Log10(this.masterVolume * 0.01f) * 20);
+                //this.audioMixer.SetFloat("Master", Mathf.Log10(this.masterVolume * 0.01f) * 20);
+                //PlayerPrefs.SetFloat("MasterVolume", Mathf.Log10(this.masterVolume * 0.01f) * 20);
+                PlayerPrefs.SetFloat("MasterVolume", this.masterVolume);
+
+                if (this.masterVolumeText != null)
+                    this.masterVolumeText.text = this.masterVolume.ToString("F0");
+            }
+            else if (volumeTypeId == 1 && this.sfxVolumeSlider != null && this.audioMixer /*&& this.sfxMixer != null*/)
+            {
+                if (this.geary.disabled)
+                {
+                    this.sfxVolumeSlider.value = this.sfxVolume;
+                }
+                else
+                {
+                    if (this.gearyIsEvil)
+                        this.sfxVolumeSlider.value = randomNumber;
+                }
+
+                
+
+                this.sfxVolume = this.sfxVolumeSlider.value;
+                if (this.sfxVolume <= 0)
+                    this.sfxVolume = 0.01f;
+
+                //this.sfxMixer.audioMixer.SetFloat("SFX", Mathf.Log10(this.sfxVolume * 0.01f) * 20);
+                this.audioMixer.SetFloat("SFX", Mathf.Log10(this.sfxVolume * 0.01f) * 20);
+                PlayerPrefs.SetFloat("SfxVolume", this.sfxVolume);
+
+                if (this.sfxVolumeText != null)
+                    this.sfxVolumeText.text = this.sfxVolume.ToString("F0");
+            }
+            else if (volumeTypeId == 2 && this.musicVolumeSlider != null && this.audioMixer /*&& this.musicMixer != null*/)
+            {
+                if (this.geary.disabled)
+                {
+                    this.musicVolumeSlider.value = this.musicVolume;
+                }
+                else
+                {
+                    if (this.gearyIsEvil)
+                        this.musicVolumeSlider.value = randomNumber;
+                }
+
+                
+
+                this.musicVolume = this.musicVolumeSlider.value;
+                if (this.musicVolume <= 0)
+                    this.musicVolume = 0.01f;
+
+                //this.sfxMixer.audioMixer.SetFloat("Music", Mathf.Log10(this.musicVolume * 0.01f) * 20);
+                this.audioMixer.SetFloat("Music", Mathf.Log10(this.musicVolume * 0.01f) * 20);
+                PlayerPrefs.SetFloat("MusicVolume", this.musicVolume);
+
+                if (this.musicVolumeText != null)
+                    this.musicVolumeText.text = this.musicVolume.ToString("F0");
+            }
+            else if (volumeTypeId == 3)
+            {
+                if (this.voiceVolumeSlider != null)
+                    this.voiceVolumeSlider.value = 0;
+
+                this.geary.OnChangeVoiceVolume();
+            }
+        }
+        else
+        {
+            /*Debug.Log(this.slider.value);
+            if (this.slider != null)
+                this.slider.value = this.sliderValue;*/
+        }
+
+    }
+
+    public void OnSelectDefaultVolume()
+    {
+        if (this.geary != null && !this.geary.disabled)
+        {
+            this.geary.OnSelectDefaultVolume();
+        }
+    }
+
+    public void OnClickDefaultVolume()
+    {
+        if (this.geary != null && !this.geary.disabled)
+        {
+            this.geary.OnClickDefaultVolume();
+
+            if (!this.gearyIsEvil && this.audioMixer != null)
+            {
+                float defaultValue = 100;
+
+                this.audioMixer.SetFloat("Master", Mathf.Log10(defaultValue * 0.01f) * 20);
+                PlayerPrefs.SetFloat("MasterVolume", defaultValue);
+
+                this.audioMixer.SetFloat("SFX", Mathf.Log10(defaultValue * 0.01f) * 20);
+                PlayerPrefs.SetFloat("SfxVolume", defaultValue);
+
+                this.audioMixer.SetFloat("Music", Mathf.Log10(defaultValue * 0.01f) * 20);
+                PlayerPrefs.SetFloat("MusicVolume", defaultValue);
+
+                if (this.masterVolumeSlider != null)
+                    this.masterVolumeSlider.value = defaultValue;
+
+                if (this.sfxVolumeSlider != null)
+                    this.sfxVolumeSlider.value = defaultValue;
+
+                if (this.musicVolumeSlider != null)
+                    this.musicVolumeSlider.value = defaultValue;
+
+
+                if (this.masterVolumeText != null)
+                    this.masterVolumeText.text = defaultValue.ToString("F0");
+
+                if (this.sfxVolumeText != null)
+                    this.sfxVolumeText.text = defaultValue.ToString("F0");
+
+                if (this.musicVolumeText != null)
+                    this.musicVolumeText.text = defaultValue.ToString("F0");
+            }
+        }
     }
 
 
