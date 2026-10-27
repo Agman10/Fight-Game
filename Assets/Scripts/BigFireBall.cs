@@ -24,6 +24,8 @@ public class BigFireBall : MonoBehaviour
     public GameObject model;
     public Action OnPlayerCollision;
 
+    public SoundEffect explodeSfx;
+
     private void OnEnable()
     {
         this.OnPlayerCollision += this.PlayerCollisionInvoke;
@@ -134,8 +136,12 @@ public class BigFireBall : MonoBehaviour
             impactPrefab = Instantiate(impactPrefab, new Vector3(this.transform.position.x, this.transform.position.y, 0f), Quaternion.Euler(0, 0, 0));
         }
 
+        this.explodeSfx.PlaySound();
+
         yield return new WaitForSeconds(0.1f);
         this.EnableHitbox(2);
+
+        //this.explodeSfx.PlaySound();
 
         yield return new WaitForSeconds(0.8f);
         this.gameObject.SetActive(false);
@@ -200,6 +206,8 @@ public class BigFireBall : MonoBehaviour
             this.model.gameObject.SetActive(false);
         if (this.flame != null)
             this.flame.Stop();
+
+        this.explodeSfx.PlaySound();
 
         this.speedMultiplier = 0f;
 

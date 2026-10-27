@@ -6,10 +6,15 @@ public class AnimateTest : MonoBehaviour
 {
     public AnimationGameObject[] animationGameObjects;
 
+    public bool exactFrame = false;
+
     private void OnEnable()
     {
-        this.StartCoroutine(this.AnimateCoroutine());
-        //this.StartCoroutine(this.AnimateCoroutine2());
+        //this.StartCoroutine(this.AnimateCoroutine());
+        if (this.exactFrame)
+            this.StartCoroutine(this.AnimateCoroutine2());
+        else
+            this.StartCoroutine(this.AnimateCoroutine());
     }
 
     private void OnDisable()

@@ -73,32 +73,50 @@ public class ViolentMikeStartAnimation : Attack
         if (this.animations != null)
             this.animations.ViolentBalletStartAnim(0);
 
-        this.user.transform.position = new Vector3(this.user.transform.position.x, 50f, 0f);
+        //this.user.transform.position = new Vector3(this.user.transform.position.x, 50f, 0f);
+
+        if (this.animations != null)
+            this.animations.body.localScale = new Vector3(0f, 0f, 0f);
 
 
 
         yield return new WaitForSeconds(0.01f);
-        this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
+        /*this.user.transform.position = new Vector3(this.user.transform.position.x, 0f, 0f);
 
         if (this.animations != null)
-            this.animations.body.gameObject.SetActive(false);
+            this.animations.body.gameObject.SetActive(false);*/
+
+        if (this.animations != null)
+            this.animations.body.localScale = new Vector3(0f, 0f, 0f);
 
         if (this.animations != null)
             this.animations.ViolentBalletStartAnim(0);
 
         yield return new WaitForSeconds(0.15f);
+
         if (this.animations != null)
-            this.animations.body.gameObject.SetActive(true);
+            this.animations.body.localScale = new Vector3(1f, 1f, this.user.transform.forward.z);
+
+        /*if (this.animations != null)
+            this.animations.body.gameObject.SetActive(true);*/
+
         yield return new WaitForSeconds(0.05f);
+        /*if (this.animations != null)
+            this.animations.body.gameObject.SetActive(false);*/
+
         if (this.animations != null)
-            this.animations.body.gameObject.SetActive(false);
+            this.animations.body.localScale = new Vector3(0f, 0f, 0f);
+
         yield return new WaitForSeconds(0.3f);
 
 
         //yield return new WaitForSeconds(0.5f);
 
+        /*if (this.animations != null)
+            this.animations.body.gameObject.SetActive(true);*/
+
         if (this.animations != null)
-            this.animations.body.gameObject.SetActive(true);
+            this.animations.body.localScale = new Vector3(1f, 1f, this.user.transform.forward.z);
 
         yield return new WaitForSeconds(0.2f);
 
@@ -269,8 +287,11 @@ public class ViolentMikeStartAnimation : Attack
         if (this.electricity != null)
             this.electricity.gameObject.SetActive(false);
 
+        /*if (this.animations != null)
+            this.animations.body.gameObject.SetActive(true);*/
+
         if (this.animations != null)
-            this.animations.body.gameObject.SetActive(true);
+            this.animations.body.localScale = new Vector3(1f, 1f, this.user.transform.forward.z);
 
 
         if (GameManager.Instance != null && GameManager.Instance.gameCamera != null)
