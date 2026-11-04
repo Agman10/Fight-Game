@@ -36,6 +36,8 @@ public class CharacterSelectCursorLogic : MonoBehaviour
 
     public MusicTypeSelecter musicTypeSelecter;
 
+    public SoundEffect moveSfx;
+
     [Space]
     public GameObject readyPanel;
     public GameObject skinSelectPanel;
@@ -116,6 +118,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
     {
         if(this.characterSelectLogic != null)
         {
+            this.moveSfx.PlaySound();
             foreach (CharacterSkinTest charactermodel in this.characterModels)
             {
                 charactermodel.gameObject.SetActive(false);
@@ -273,6 +276,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
     {
         if (direction.x >= 1f)
         {
+            this.moveSfx.PlaySound();
             if (this.currentSkinId < this.characterSelectLogic.characters[this.currentCharacterId].skins.Length - 1)
             {
                 this.currentSkinId++;
@@ -293,6 +297,7 @@ public class CharacterSelectCursorLogic : MonoBehaviour
         }
         else if (direction.x <= -1f)
         {
+            this.moveSfx.PlaySound();
             if (this.currentSkinId > 0)
             {
                 this.currentSkinId--;

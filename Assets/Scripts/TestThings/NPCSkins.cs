@@ -14,6 +14,9 @@ public class NPCSkins : MonoBehaviour
     [Space]
     public bool useMultiColorMats;
     public MultiColorMaterials[] multiColoredMats;
+
+    [Space]
+    public SkinRenderers[] otherRenderers;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +74,20 @@ public class NPCSkins : MonoBehaviour
                             material.SetColor("Color_83cbc8d686554d0f9aced64306129077", this.colors[0]);
                             material.SetColor("Color_1", this.colors[1]);
                         }
+                    }
+                }
+            }
+
+            for (int i = 0; i <= this.otherRenderers.Length - 1; i++)
+            {
+                foreach (Renderer rend in this.otherRenderers[i].renderers)
+                {
+                    if (i > this.colors.Length - 1 || rend == null)
+                        continue;
+                    foreach (Material material in rend.materials)
+                    {
+                        material.SetColor("_BaseColor", this.colors[i]);
+                        //material.SetColor("_BaseColor", new Color(this.colors[i].r, this.colors[i].g, this.colors[i].b, material.color.a));
                     }
                 }
             }
